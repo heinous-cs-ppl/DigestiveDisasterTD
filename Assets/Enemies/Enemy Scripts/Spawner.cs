@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
-
 public class Spawner : MonoBehaviour
 {
     public EnemyData[] enemies;
 
-    // keeps track of the next enemy index
+    // keeps track of the next enemy index (what enemies to spawn)
     private int i = 0;
 
     // timer

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class pathfollow : MonoBehaviour
 {   // index of the spawnpoint
-    public int spawnIndex;
+    private int spawnIndex;
 
     // another class to get the spawnpoints
     private FindSpawnpoint spawnpointFind;
@@ -22,6 +22,9 @@ public class pathfollow : MonoBehaviour
     // index of most recently visited gameobject
     private int currentNode = 0;
 
+    // most recently visited gameobject
+    private GameObject currNodeObj;
+
     // speed of the enemy (from the Enemy Info script attached to the enemy prefab)
     private float speed;
 
@@ -30,6 +33,7 @@ public class pathfollow : MonoBehaviour
 
     // position of the next node to be visited in the path
     Vector2 nextNodePos;
+
     // Start is called before the first frame update
     void Start()
     {   
@@ -59,24 +63,26 @@ public class pathfollow : MonoBehaviour
             return;
         }
         nextNodePos = path[nodeIndex].position;
+
+        // transform.position refers to the Vector of the "current game object" - the enemy this script belongs to
         transform.position = Vector2.MoveTowards(transform.position, nextNodePos, speed * Time.deltaTime);
     }
-    // Update is called once per frame
 
+    // get a list of every spawnpoint
     void getSpawnpoint()
     {
-        // get a list of every spawnpoint
+        // GetSpawnpoints returns an array of GameObject corresponding to the spawnpoint
         spawnpointFind = new FindSpawnpoint();
-        // GetSpawnpoints returns an array of Vector2 that hold the positions of every spawnpoint
         spawnpoints = spawnpointFind.GetSpawnpoints();
         
         // get the spawnpoint of the current enemy
         spawnpoint = spawnpoints[spawnIndex];
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if(currentNode == pathNodeCount)
+        if(currentNode == pathNodeCount && )
         {
             // reached the end of the path
             return;
