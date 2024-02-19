@@ -41,7 +41,7 @@ public class Turret : MonoBehaviour
             target = null;
         } else {
 
-            // If an enemy is in range, fire 
+            // If an enemy is in range, fire at set rate
             timeUntilFire += Time.deltaTime;
 
             // If the time until fire is larger then 1/bps 
