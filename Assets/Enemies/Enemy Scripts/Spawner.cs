@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Spawner : MonoBehaviour
-{
+public class Spawner : MonoBehaviour {
     public EnemyData[] enemies;
 
     // keeps track of the next enemy index (what enemies to spawn)
@@ -14,23 +13,25 @@ public class Spawner : MonoBehaviour
     // holds the current enemy data
     private EnemyData cur;
     
+    // array of every spawnpoint
+    private Transform[] spawnpoints;
+    
     // holds the index of the spawnpoint (since they are indexed in an array)
     private int spawnIndex;
 
     // holds the spawn point of the next enemy
-    private Vector2 nextSpawnPoint;
-    
-    // another class to get the spawnpoints
-    private FindSpawnpoint spawnpointFind;
-
-    // array of every spawnpoint
-    private Vector2[] spawnpoints;
+    private Transform spawnPoint;
 
     // int to keep track of number of times the spawn has been repeated
     private int repeatCount = 0;
 
-    void Start()
-    {
+    // This will be set to true in start if LevelManager was given paths to work with
+    private bool paths = false;
+
+    void Start() {
+        // If this runs LevelManager has paths to work with. This flag is to avoid a vacuous console error
+        if (LevelManager.instance.spawnObjs.Length > 0) paths = true;
+
         // get the first enemy in the list
         cur = enemies[i];
         
@@ -38,23 +39,20 @@ public class Spawner : MonoBehaviour
         spawnIndex = cur.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
         
         // get a list of every spawnpoint's position
-        spawnpointFind = new FindSpawnpoint();
-        // GetSpawnpoints returns an array of Vector2 that hold the positions of every spawnpoint
-        spawnpoints = spawnpointFind.GetSpawnpointPositions();
-        // get the spawnpoint of the first enemy
-        nextSpawnPoint = spawnpoints[spawnIndex];
+        spawnpoints = LevelManager.instance.spawnObjTransforms;
 
+        // get the spawnpoint of the first enemy
+        if (paths) spawnPoint = spawnpoints[spawnIndex];
     }
 
-    void Update()
-    {   
+    void Update() {   
         if(i >= enemies.Length){
             return;
         }
         t += Time.deltaTime;
         if(t >= cur.spawnDelay){
             
-            Instantiate(cur.enemy, nextSpawnPoint, Quaternion.identity);
+            Instantiate(cur.enemy, spawnPoint.position, Quaternion.identity);
             repeatCount++;
             // reset the timer for the next spawn
             t = 0;
@@ -69,7 +67,7 @@ public class Spawner : MonoBehaviour
                     cur = enemies[i];
 
                     spawnIndex = cur.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
-                    nextSpawnPoint = spawnpoints[spawnIndex];
+                    spawnPoint = spawnpoints[spawnIndex];
                     
                 }
             }

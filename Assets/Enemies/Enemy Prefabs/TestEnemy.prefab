@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca41e066170c0443b8dce11341474dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIndex: 0
 --- !u!114 &4838809105904487661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +113,4 @@ MonoBehaviour:
   health: 15
   spawnPointIndex: 0
   damage: 15
-  speed: 10
+  speed: 5
