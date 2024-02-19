@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5760139248048277314}
-  bulletSpeed: 5
+  bulletSpeed: 10
   bulletDamage: 1
+  bulletLifetime: 1
 --- !u!58 &4898349547868796542
 CircleCollider2D:
   m_ObjectHideFlags: 0

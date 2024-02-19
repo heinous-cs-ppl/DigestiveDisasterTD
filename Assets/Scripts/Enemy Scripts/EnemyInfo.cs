@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
-    public int totalHealth;
-    private int currentHealth;
+    public int health;
     public int spawnPointIndex;
     public int damage;
     public float speed;
@@ -12,9 +11,9 @@ public class EnemyInfo : MonoBehaviour
 
     // Calculating damage done to enemy
     public void takeDamage(int dmg){
-        currentHealth -= dmg;
+        health -= dmg;
 
-        if (currentHealth <= 0){
+        if (health <= 0){
             Destroy(gameObject);
         }
     } 
