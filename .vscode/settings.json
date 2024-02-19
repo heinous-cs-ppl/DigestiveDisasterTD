@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DigestiveDisasterTD.sln"
+    "dotnet.defaultSolution": "DigestiveGame.sln"
 }
