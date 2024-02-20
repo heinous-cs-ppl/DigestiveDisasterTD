@@ -9,16 +9,22 @@ public class Bullet : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
 
-    [Header("Attributes")]
-    [SerializeField] private float bulletSpeed = 5f; 
-    [SerializeField] private int bulletDamage = 1;
-    [SerializeField] private float bulletLifetime = 1;
+    // attributes (defined in StudentInfo.cs)
+    private float bulletSpeed; 
+    private int bulletDamage;
+    private float bulletLifetime;
+
     private Transform target;
 
     private float curLifetime = 0;
 
     private Vector2 direction;
 
+    public void SetAttributes(float speed, int damage, float lifetime) {
+        bulletSpeed = speed;
+        bulletDamage = damage;
+        bulletLifetime = lifetime;
+    }
     public void SetTarget(Transform _target){
         target = _target;
     }

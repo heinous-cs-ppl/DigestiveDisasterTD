@@ -13,15 +13,32 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Transform firingPoint;
 
-    [Header("Attribute")]
-    [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private float rotationSpeed = 200f;
+    // attributes (defined in StudentInfo.cs)
+    private float targetingRange;
+    private float rotationSpeed;
 
-    [SerializeField] private float bps = 1f; // Bullets Per Second
+    // attributes for the bullets (also defined in StudentInfo.cs)
+    private float bulletSpeed; 
+    private int bulletDamage;
+    private float bulletLifetime;
+
+    private float bps = 1f; // Bullets Per Second
+
 
     private Transform target; 
     private float timeUntilFire; 
 
+
+    private void Start() {
+        StudentInfo student = GetComponent<StudentInfo>();
+        targetingRange = student.range;
+        rotationSpeed = student.rotationSpeed;
+        bps = student.bps;
+
+        bulletSpeed = student.bulletSpeed;
+        bulletDamage = student.damage;
+        bulletLifetime = student.bulletLifetime;
+    }
 
     // Updates the turret gun to aim at food
     private void Update(){
@@ -59,12 +76,13 @@ public class Turret : MonoBehaviour
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target); 
+        bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
     }
 
     // Finds the closest target available
     private void FindTarget(){
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2) transform.position, 0f, enemyMask);
-        
+
         //
         if (hits.Length > 0){
             target = hits[0].transform;
