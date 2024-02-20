@@ -2,7 +2,7 @@
 
 ## Contributing with Feature Branch and Merging
 
-For every single feature, create a branch and only commit/push to that branch until that feature is done and ready to merge.
+For every single feature, create a branch off of main and only commit/push to that branch until that feature is done and ready to merge.
 
 Once the feature is done and ready to be merged to main:
 
