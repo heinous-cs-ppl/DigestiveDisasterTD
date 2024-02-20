@@ -16,7 +16,7 @@ Once the feature is done and ready to be merged to main:
 8. Push to GitHub's main with `git push`
 9. Delete your feature branch with `git branch -d <your-feature-branch>` (all your feature commits are on main so it is now safe)
 
-Once the feature branch changes are ready to merge, _merge main into feature_ and resolve any conflict that may arise. Once main is merged into feature successfully, then merge feature into main and push main. This ensures that all merge conflicts happen in your feature branch and all pushes to the main branch have no conflict.
+The reason for merging main into feature first is to ensure that all merge conflicts happen in your feature branch and all pushes to the main branch have no conflict.
 
 ## Unity Version
 
