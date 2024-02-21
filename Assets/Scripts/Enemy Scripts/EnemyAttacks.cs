@@ -33,7 +33,6 @@ public class EnemyAttacks : MonoBehaviour
         Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(transform.position, triggerRadius, studentMask);
         if(studentsInRange.Length > 0) {
             // there is an enemy in the range of food
-            Debug.Log("found turret");
             // get an array of students in the damage radius
             Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(transform.position, damageRadius, studentMask);
             // damage all of the students in the radius
