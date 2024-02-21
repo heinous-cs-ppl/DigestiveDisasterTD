@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using Unity.VisualScripting;
 
-public class Turret : MonoBehaviour
+public class PurifyTurret : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint;
@@ -74,7 +74,7 @@ public class Turret : MonoBehaviour
     // function to actually fire a projectile
     private void Shoot(){
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
-        Bullets bulletScript = bulletObj.GetComponent<Bullets>();
+        PurifyBullet bulletScript = bulletObj.GetComponent<PurifyBullet>();
         bulletScript.SetTarget(target); 
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
     }
