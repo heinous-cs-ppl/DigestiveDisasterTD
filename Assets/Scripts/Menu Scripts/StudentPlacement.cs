@@ -60,9 +60,7 @@ public class StudentPlacement : MonoBehaviour
                     // disable placing
                     canPlace = false;
                     // destroy the preview if it exists
-                    if(studentPreview) {
-                        Destroy(studentPreview);
-                    }
+                    if(studentPreview) Destroy(studentPreview);
                 }
             }
         }
