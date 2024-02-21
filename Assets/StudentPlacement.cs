@@ -12,6 +12,10 @@ public class StudentPlacement : MonoBehaviour
         {
             // get cursor position
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // round the cursor position so the student always gets placed in the middle of the tile
+            cursorPosition.x = Mathf.Ceil(cursorPosition.x) - 0.5f;
+            cursorPosition.y = Mathf.Ceil(cursorPosition.y) - 0.5f;
             // create student at cursor position
             Instantiate(student, cursorPosition, Quaternion.identity);
 
