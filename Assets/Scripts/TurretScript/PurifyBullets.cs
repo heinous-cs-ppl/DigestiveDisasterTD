@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullets : MonoBehaviour
+public class PurifyBullet : MonoBehaviour
 {
 
     [Header("References")]
@@ -43,8 +43,7 @@ public class Bullets : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other){
         // Take health from Enemy
-        other.gameObject.GetComponent<EnemyInfo>().takeDamage(bulletDamage);
+        other.gameObject.GetComponent<EnemyInfo>().purifyDamage(bulletDamage);
         Destroy(gameObject);
     }
-    
 }
