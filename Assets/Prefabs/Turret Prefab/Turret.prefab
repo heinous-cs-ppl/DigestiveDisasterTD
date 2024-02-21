@@ -223,7 +223,7 @@ MonoBehaviour:
   rotationSpeed: 200
   bps: 1
   bulletSpeed: 5
-  bulletLifetime: 1
+  bulletLifetime: 2
 --- !u!1 &4095718559786198405
 GameObject:
   m_ObjectHideFlags: 0

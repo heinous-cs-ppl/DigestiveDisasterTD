@@ -22,7 +22,7 @@ public class PurifyTurret : MonoBehaviour
     private int bulletDamage;
     private float bulletLifetime;
 
-    public float bps = 1f; // Bullets Per Second
+    private float bps; // Bullets Per Second
 
 
     private Transform target; 

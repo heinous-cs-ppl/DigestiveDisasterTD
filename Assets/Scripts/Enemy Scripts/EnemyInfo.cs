@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour
 {
     public int hp = 10;
-    public int purifyHp = 2;
+    public int purifyHp = 1;
     public int spawnPointIndex = 0;
     public int damage = 5;
     public float speed = 2f;
@@ -27,13 +27,18 @@ public class EnemyInfo : MonoBehaviour
     public void purifyDamage(int dmg) {
         purifyHp -= dmg;
         if (purifyHp <= 0) {
-            // Will call on a random buff if an enemy dies due to purification
-            GetComponent<LootBag>().InstantiateLoot(transform.position);
-            EnemyDeath();
+            purify();
         }
     }
 
     public void EnemyDeath() {
+        Destroy(gameObject);
+    }
+
+    public void purify() {
+        // give the player a purified meal
+        PurifyManager.GainMeal();
+        UIManager.UpdateMealCount();
         Destroy(gameObject);
     }
 }
