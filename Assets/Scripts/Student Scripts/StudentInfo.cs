@@ -27,6 +27,8 @@ public class StudentInfo : MonoBehaviour
     [HideInInspector] public bool buffed = false;
 
     private Turret turret;
+
+    private Coroutine timerOn;
     private void Start() {
         currentHp = maxHp;
 
@@ -52,6 +54,10 @@ public class StudentInfo : MonoBehaviour
 
     // handles buffs when student is fed purified food
     public void Feed() {
+        if (buffed) {
+            RefreshBuff();
+            return;
+        }
         buffed = true;
         // heal the student for 30% of their max hp (rounded up because I'm generous)
         currentHp = (int) (currentHp + Mathf.Ceil(maxHp * 0.3f));
@@ -70,13 +76,23 @@ public class StudentInfo : MonoBehaviour
         turret.SetBulletAttributes(this);
         Debug.Log("Buffed student");
         // delay
-        StartCoroutine(BuffTimer());
+        timerOn = StartCoroutine(BuffTimer());
     }
 
     private IEnumerator BuffTimer() {
         // wait for timer before removing buffs
         yield return new WaitForSeconds(buffTime);
         RevertBuffs();
+    }
+
+    private void RefreshBuff()
+    {
+        // stop the current timer
+        if (timerOn != null) StopCoroutine(timerOn);
+
+        Debug.Log("refreshed buff");
+        // start a new timer
+        timerOn = StartCoroutine(BuffTimer());
     }
 
     private void RevertBuffs() {
@@ -89,7 +105,7 @@ public class StudentInfo : MonoBehaviour
 
         turret.SetStudentAttributes(this);
         turret.SetBulletAttributes(this);
-        
+
         Debug.Log("Removed buffs");
     }
 }
