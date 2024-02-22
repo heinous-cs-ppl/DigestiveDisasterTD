@@ -1707,6 +1707,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   student: {fileID: 2436313744661315829, guid: 15d8bf7bec2042341bfa0455e558cbbe, type: 3}
   studentSprite: {fileID: 21300000, guid: ea941dedd01731c4b8a4e2c75e39fb9a, type: 3}
+  studentLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &878500627
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,6 +2099,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   student: {fileID: 5847128244897676795, guid: 298a1fd86bb124740864a0a8c7db9c68, type: 3}
   studentSprite: {fileID: 21300000, guid: 6792ecad72ed81e4da3c52dde8a90a1b, type: 3}
+  studentLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1059707856
 MonoBehaviour:
   m_ObjectHideFlags: 0
