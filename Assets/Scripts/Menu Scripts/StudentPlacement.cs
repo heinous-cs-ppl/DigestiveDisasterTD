@@ -45,8 +45,8 @@ public class StudentPlacement : MonoBehaviour
                 studentPreview.transform.position = cursorPosition;
 
                 if (Input.GetMouseButtonDown(0)) {
-                    // create student at cursor position on mouse click
-                    Instantiate(student, cursorPosition, Quaternion.identity);
+                    // create student at cursor position on mouse click, the student will be selected by default
+                    StudentManager.Select(Instantiate(student, cursorPosition, Quaternion.identity));
 
                     // disable placing once the student has been placed
                     canPlace = false;
