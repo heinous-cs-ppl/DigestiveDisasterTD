@@ -26,6 +26,7 @@ public class StudentInfo : MonoBehaviour
     private float buffTime = 10f;
     [HideInInspector] public bool buffed = false;
 
+    private Turret turret;
     private void Start() {
         currentHp = maxHp;
 
@@ -34,6 +35,8 @@ public class StudentInfo : MonoBehaviour
         originalBps = bps;
         originalBulletSpeed = bulletSpeed;
         originalBulletLifetime = bulletLifetime;
+
+        turret = GetComponent<Turret>();
     }
 
     public void TakeDamage(int dmg) {
@@ -62,6 +65,9 @@ public class StudentInfo : MonoBehaviour
         range *= 1.3f;
         bulletSpeed *= 1.3f;
         bulletLifetime *= 1.3f;
+
+        turret.SetStudentAttributes(this);
+        turret.SetBulletAttributes(this);
         Debug.Log("Buffed student");
         // delay
         StartCoroutine(BuffTimer());
@@ -80,6 +86,10 @@ public class StudentInfo : MonoBehaviour
         bulletSpeed = originalBulletSpeed;
         bulletLifetime = originalBulletLifetime;
         buffed = false;
+
+        turret.SetStudentAttributes(this);
+        turret.SetBulletAttributes(this);
+        
         Debug.Log("Removed buffs");
     }
 }

@@ -31,10 +31,18 @@ public class Turret : MonoBehaviour
 
     private void Start() {
         StudentInfo student = GetComponent<StudentInfo>();
+
+        SetStudentAttributes(student);
+        SetBulletAttributes(student);
+    }
+
+    public void SetStudentAttributes(StudentInfo student) {
         targetingRange = student.range;
         rotationSpeed = student.rotationSpeed;
         bps = student.bps;
+    }
 
+    public void SetBulletAttributes(StudentInfo student) {
         bulletSpeed = student.bulletSpeed;
         bulletDamage = student.damage;
         bulletLifetime = student.bulletLifetime;

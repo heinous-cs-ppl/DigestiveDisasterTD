@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4127753987378004647}
   m_Layer: 8
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Student
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -218,13 +218,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d51f27c39ff404c82acdc32eb5e2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
+  maxHp: 10
+  currentHp: 0
   damage: 1
   range: 7
   rotationSpeed: 200
   bps: 1
   bulletSpeed: 5
   bulletLifetime: 2
+  buffed: 0
 --- !u!114 &4127753987378004647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,9 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415f89af0fb92bb41a3c605d29329342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  studentLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1 &4095718559786198405
 GameObject:
   m_ObjectHideFlags: 0
