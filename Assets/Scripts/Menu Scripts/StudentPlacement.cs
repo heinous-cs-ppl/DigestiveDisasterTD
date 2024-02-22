@@ -9,6 +9,8 @@ public class StudentPlacement : MonoBehaviour
     private GameObject map;
     private Bounds mapBounds;
 
+    public LayerMask studentLayer;
+
     void Start() {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
@@ -45,14 +47,22 @@ public class StudentPlacement : MonoBehaviour
                 studentPreview.transform.position = cursorPosition;
 
                 if (Input.GetMouseButtonDown(0)) {
-                    // create student at cursor position on mouse click, the student will be selected by default
-                    StudentManager.Select(Instantiate(student, cursorPosition, Quaternion.identity));
+                    // check if there is a student at the cursor's position
+                    Debug.Log("detected click: " + cursorPosition.x + ", " + cursorPosition.y);
+                    RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
+                    if (hit) {
+                        Debug.Log("There's already a student here");
+                    } else {
+                        // create student at cursor position on mouse click, the student will be selected by default
+                        StudentManager.Select(Instantiate(student, cursorPosition, Quaternion.identity));
 
-                    // disable placing once the student has been placed
-                    canPlace = false;
+                        // disable placing once the student has been placed
+                        canPlace = false;
 
-                    // destroy the preview
-                    Destroy(studentPreview);
+                        // destroy the preview
+                        Destroy(studentPreview);
+                    }
+                    
                 }
             } else {
                 // if the player clicks somewhere not on the map
