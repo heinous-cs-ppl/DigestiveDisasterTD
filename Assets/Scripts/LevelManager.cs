@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
-    // Use this reference to access stuff from this class
-    public static LevelManager instance;   
+    /********************* References *********************/
+    public static LevelManager instance;        // Use this reference to access stuff from this class
+    public GameObject spawner;
 
     // Number of starting paths or number of spawnpoints - each of these points is the parent of the rest of it's path
     public GameObject[] spawnObjs;      // given in object inspector
 
+    // Array of wave game objects
+    public GameObject[] waves;          // Wave prefabs given in Unity Inspector - these contain info about enemies
+
     [HideInInspector]
-    public Transform[] spawnObjTransforms;
+    public Transform[] spawnObjTransforms;      // transform version of spawnObjs
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake() {
