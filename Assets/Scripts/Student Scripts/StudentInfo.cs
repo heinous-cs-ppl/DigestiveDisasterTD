@@ -52,17 +52,17 @@ public class StudentInfo : MonoBehaviour
 
     // handles buffs when student is fed purified food
     public void Feed() {
-        if (buffed) {
-            RefreshBuff();
-            return;
-        }
-        buffed = true;
         // heal the student for 30% of their max hp (rounded up because I'm generous)
         currentHp = (int) (currentHp + Mathf.Ceil(maxHp * 0.3f));
         // don't allow the hp to exceed the max
         if(currentHp > maxHp) currentHp = maxHp;
 
+        if (buffed) {
+            RefreshBuff();
+            return;
+        }
         
+        buffed = true;
         // increase bps, damage, range, bullet speed, bullet lifetime by 30%
         bps *= 1.3f;
         damage = (int) Mathf.Ceil(damage * 1.3f);
