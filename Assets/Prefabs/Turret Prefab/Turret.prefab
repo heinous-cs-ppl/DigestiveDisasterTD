@@ -227,6 +227,7 @@ MonoBehaviour:
   bulletSpeed: 5
   bulletLifetime: 1
   buffed: 0
+  turret: {fileID: 4919567867377686460}
 --- !u!114 &4127753987378004647
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,9 +41,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7926969335158366595}
   - component: {fileID: 9168019561572817806}
-  - component: {fileID: 8150367565544947911}
   - component: {fileID: 7528640564342919454}
   - component: {fileID: 7072680247207814495}
+  - component: {fileID: 3328366097059150213}
   m_Layer: 8
   m_Name: TurretPurify
   m_TagString: Student
@@ -103,24 +103,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.55
---- !u!114 &8150367565544947911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5847128244897676795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad31712a86f7ab4eb691081b2314038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretRotationPoint: {fileID: 1844498410395141363}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  bulletPrefab: {fileID: 8208342251038316243, guid: 983d8821814711a48b2ea08e6d99d388, type: 3}
-  firingPoint: {fileID: 6815504381293445546}
 --- !u!114 &7528640564342919454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +124,7 @@ MonoBehaviour:
   bulletSpeed: 5
   bulletLifetime: 1
   buffed: 0
+  turret: {fileID: 3328366097059150213}
 --- !u!114 &7072680247207814495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +137,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415f89af0fb92bb41a3c605d29329342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3328366097059150213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5847128244897676795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f243617bc15ce478bace4100f0a45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretRotationPoint: {fileID: 1844498410395141363}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 8208342251038316243, guid: 983d8821814711a48b2ea08e6d99d388, type: 3}
+  firingPoint: {fileID: 6815504381293445546}
 --- !u!1 &6416164920234304673
 GameObject:
   m_ObjectHideFlags: 0

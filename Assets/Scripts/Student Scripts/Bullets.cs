@@ -11,7 +11,7 @@ public class Bullets : MonoBehaviour
 
     // attributes (defined in StudentInfo.cs)
     private float bulletSpeed; 
-    private int bulletDamage;
+    protected int bulletDamage;
     private float bulletLifetime;
 
     private Transform target;

@@ -26,7 +26,7 @@ public class StudentInfo : MonoBehaviour
     private float buffTime = 10f;
     [HideInInspector] public bool buffed = false;
 
-    private Turret turret;
+    public Turret turret;
 
     private Coroutine timerOn;
     private void Start() {
@@ -37,8 +37,6 @@ public class StudentInfo : MonoBehaviour
         originalBps = bps;
         originalBulletSpeed = bulletSpeed;
         originalBulletLifetime = bulletLifetime;
-
-        turret = GetComponent<Turret>();
     }
 
     public void TakeDamage(int dmg) {
