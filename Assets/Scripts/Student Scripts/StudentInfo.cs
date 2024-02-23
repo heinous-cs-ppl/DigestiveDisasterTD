@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StudentInfo : MonoBehaviour
 {
+    public int cost = 100;
     [Header("Student Attributes")]
     public int maxHp = 10;
     [HideInInspector] public int currentHp;
@@ -61,7 +62,7 @@ public class StudentInfo : MonoBehaviour
             RefreshBuff();
             return;
         }
-        
+
         buffed = true;
         // increase bps, damage, range, bullet speed, bullet lifetime by 30%
         bps *= 1.3f;

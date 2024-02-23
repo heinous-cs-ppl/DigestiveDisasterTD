@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurifyManager : MonoBehaviour
+public class PurifyManager
 {
     private static int purifiedMealCount = 0;
 

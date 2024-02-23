@@ -9,6 +9,7 @@ public class EnemyInfo : MonoBehaviour
     public int damage = 5;
     public float speed = 2f;
     public float attackRadius = 0.55f;
+    public int moneyDrop = 10;
 
     public GameObject[] buffs;
 
@@ -32,6 +33,9 @@ public class EnemyInfo : MonoBehaviour
     }
 
     public void EnemyDeath() {
+        MoneyManager.AddMoney(moneyDrop);
+        UIManager.UpdateMoney();
+
         Destroy(gameObject);
     }
 
@@ -39,6 +43,10 @@ public class EnemyInfo : MonoBehaviour
         // give the player a purified meal
         PurifyManager.GainMeal();
         UIManager.UpdateMealCount();
+
+        MoneyManager.AddMoney(moneyDrop);
+        UIManager.UpdateMoney();
+
         Destroy(gameObject);
     }
 }
