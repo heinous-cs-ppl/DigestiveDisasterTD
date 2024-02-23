@@ -10,7 +10,7 @@ public class StudentInfo : MonoBehaviour
     [HideInInspector] public int currentHp;
     public int damage = 1;
     public float range = 3f;
-    public float rotationSpeed = 200f;
+    public float rotationSpeed = 1000f;
     [Header("Bullet Attributes")]
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;

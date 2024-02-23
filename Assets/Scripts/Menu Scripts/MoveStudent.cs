@@ -1,28 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class StudentPlacement : MonoBehaviour
+public class MoveStudent : MonoBehaviour
 {
-    [SerializeField] private GameObject student;
-    [SerializeField] private Sprite studentSprite;
+    bool moving = false;
     private GameObject studentPreview;
-    private bool canPlace = false;
+
+    private GameObject student;
+    private Sprite studentSprite;
+    public LayerMask studentLayer;
+
     private GameObject map;
     private Bounds mapBounds;
-    public LayerMask studentLayer;
-    private StudentInfo studentInfo;
-
+    private int moveCost = 50;
     void Start() {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
+    }
+    public void SetMoving() {
+        if (MoneyManager.GetMoneyCount() >= moveCost) {
+            student = StudentManager.selected;
+            studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
 
-        studentInfo = student.GetComponent<StudentInfo>();
+            moving = true;
+        }
     }
 
-    void Update()
-    {
-        // check for mouse click and if player can place the student
-        if (canPlace) {
+    void Update() {
+        if(moving) {
             // get cursor position
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
@@ -50,15 +57,14 @@ public class StudentPlacement : MonoBehaviour
                 }
                 // set the position of the student preview to the cursor's position
                 studentPreview.transform.position = cursorPosition;
-
                 if (Input.GetMouseButtonDown(0)) {
                     Place(cursorPosition);
                 }
             } else {
                 // if the player clicks somewhere not on the map
                 if (Input.GetMouseButtonDown(0)) {
-                    // disable placing
-                    canPlace = false;
+                    // disable moving
+                    moving = false;
                     // destroy the preview if it exists
                     if(studentPreview) Destroy(studentPreview);
                 }
@@ -66,31 +72,25 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 
-    // called when the button is clicked
-    public void StartPlacementMode() {
-        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost) {
-            canPlace = true;
-        }
-    }
-
-    private void Place(Vector2 position) {
-        // check if there is a student at the cursor's position
-        Debug.Log("detected click: " + position.x + ", " + position.y);
-        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, studentLayer);
+    private void Place(Vector2 pos) {
+        // check if there is a student at the position
+        Debug.Log("detected click: " + pos.x + ", " + pos.y);
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 1f, studentLayer);
         if (!(hit)) {
-            // create student at cursor position on mouse click, the student will be selected by default
-            StudentManager.Select(Instantiate(student, position, Quaternion.identity));
-
-            // do money related actions
-            MoneyManager.TakeMoney(studentInfo.cost);
+            // set the position of the student to the position
+            student.transform.position = pos;
+            // add cost for moving student here
+            MoneyManager.TakeMoney(moveCost);
             UIManager.UpdateMoney();
 
-            // disable placing once the student has been placed
-            canPlace = false;
+            // disable moving once the student has been placed
+            moving = false;
 
             // destroy the preview
             Destroy(studentPreview);
 
         } else Debug.Log("There's already a student here");
     }
+
+    
 }
