@@ -34,7 +34,7 @@ public class StudentManager : MonoBehaviour
     }
 
     public static void DrawRange(float range) {
-        rangeCircle.transform.localScale = new Vector2(range, range);
+        rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
         rangeCircle.transform.position = selected.transform.position;
     }
 
