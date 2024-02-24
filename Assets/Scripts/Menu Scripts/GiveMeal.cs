@@ -14,6 +14,8 @@ public class GiveMeal : MonoBehaviour
             UIManager.UpdateMealCount();
             // give buffs to the selected student
             selected.GetComponent<StudentInfo>().Feed();
+            // "reselect" the selected student to redraw the range circle (I'm lazy)
+            StudentManager.Select(StudentManager.selected);
         } else Debug.Log("No purified meals");
     }
 }
