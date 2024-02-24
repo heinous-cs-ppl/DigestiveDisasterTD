@@ -118,7 +118,7 @@ MonoBehaviour:
   maxHp: 10
   currentHp: 0
   damage: 1
-  range: 7
+  range: 3
   rotationSpeed: 1000
   bps: 1
   bulletSpeed: 5

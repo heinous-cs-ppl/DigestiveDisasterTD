@@ -74,6 +74,9 @@ public class StudentPlacement : MonoBehaviour
             // create student at cursor position on mouse click, the student will be selected by default
             StudentManager.Select(Instantiate(student, position, Quaternion.identity));
 
+            // hide the student hiring UI
+            UIManager.HideStudentHiringUI();
+
             // do money related actions
             MoneyManager.TakeMoney(studentInfo.cost);
             UIManager.UpdateMoney();
@@ -93,6 +96,13 @@ public class StudentPlacement : MonoBehaviour
         if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost) {
             canPlace = true;
             StudentManager.placing = true;
+        } else {
+            // give the money a red flash
         }
+
+        // deselect the selected student
+        StudentManager.Deselect();
+        // show UI for hiring a student
+        UIManager.ShowStudentHiringUI(student, studentSprite);
     }
 }
