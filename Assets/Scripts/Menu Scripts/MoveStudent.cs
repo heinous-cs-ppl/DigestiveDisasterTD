@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveStudent : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class MoveStudent : MonoBehaviour
     private GameObject map;
     private Bounds mapBounds;
     private int moveCost = 50;
+
+    private float flashDuration = 0.5f;
+    private int numberOfFlashes = 2;
+    private Image moneyImage;
     void Start() {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
+
+        moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
     }
     public void SetMoving() {
         if (MoneyManager.GetMoneyCount() >= moveCost) {
@@ -26,6 +33,8 @@ public class MoveStudent : MonoBehaviour
 
             moving = true;
             StudentManager.moving = true;
+        } else {
+            StartCoroutine(FlashSprite());
         }
     }
 
@@ -98,5 +107,23 @@ public class MoveStudent : MonoBehaviour
         } else Debug.Log("There's already a student here");
     }
 
-    
+    IEnumerator FlashSprite() {
+        for (int i = 0; i < numberOfFlashes; i++) {
+            // gradually change the sprite color to red
+            float elapsedTime = 0f;
+            while (elapsedTime < flashDuration) {
+                moneyImage.color = Color.Lerp(Color.white, Color.red, elapsedTime / flashDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // gradually change the sprite color back to its original color
+            elapsedTime = 0f;
+            while (elapsedTime < flashDuration) {
+                moneyImage.color = Color.Lerp(Color.red, Color.white, elapsedTime / flashDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+    }
 }

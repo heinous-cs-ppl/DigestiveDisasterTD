@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 public class StudentPlacement : MonoBehaviour
 {
@@ -11,12 +13,19 @@ public class StudentPlacement : MonoBehaviour
     public LayerMask studentLayer;
     private StudentInfo studentInfo;
 
+    private float flashDuration = 0.5f;
+    private int numberOfFlashes = 2;
+    private Image moneyImage;
+
     void Start() {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
 
         studentInfo = student.GetComponent<StudentInfo>();
+
+        moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
+        
     }
 
     void Update()
@@ -62,6 +71,8 @@ public class StudentPlacement : MonoBehaviour
                     StudentManager.placing = false;
                     // destroy the preview if it exists
                     if(studentPreview) Destroy(studentPreview);
+
+                    UIManager.HideStudentHiringUI();
                 }
             }
         }
@@ -97,12 +108,32 @@ public class StudentPlacement : MonoBehaviour
             canPlace = true;
             StudentManager.placing = true;
         } else {
-            // give the money a red flash
+            StartCoroutine(FlashSprite());
         }
 
         // deselect the selected student
         StudentManager.Deselect();
         // show UI for hiring a student
         UIManager.ShowStudentHiringUI(student, studentSprite);
+    }
+
+    IEnumerator FlashSprite() {
+        for (int i = 0; i < numberOfFlashes; i++) {
+            // gradually change the sprite color to red
+            float elapsedTime = 0f;
+            while (elapsedTime < flashDuration) {
+                moneyImage.color = Color.Lerp(Color.white, Color.red, elapsedTime / flashDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // gradually change the sprite color back to its original color
+            elapsedTime = 0f;
+            while (elapsedTime < flashDuration) {
+                moneyImage.color = Color.Lerp(Color.red, Color.white, elapsedTime / flashDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StudentManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class StudentManager : MonoBehaviour
         selected = student;
         // show selection UI
         UIManager.ShowStudentSelectedUI();
+        // hide hiring student UI
+        UIManager.HideStudentHiringUI();
 
         // draw the student's range so it's clear which student is selected
         float range = selected.GetComponent<StudentInfo>().range;
@@ -28,6 +31,11 @@ public class StudentManager : MonoBehaviour
 
     public static void Deselect() {
         selected = null;
+
+        // there's a bug I can't be bothered to fix properly for now
+        GameObject.Find("Purify Icon").GetComponent<Image>().color = Color.white;
+        GameObject.Find("Money Icon").GetComponent<Image>().color = Color.white;
+
         // hide selection UI
         UIManager.HideStudentSelectedUI();
         rangeCircle.transform.localScale = Vector2.zero;
