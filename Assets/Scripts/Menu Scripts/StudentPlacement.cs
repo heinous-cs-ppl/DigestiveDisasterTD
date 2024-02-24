@@ -59,6 +59,7 @@ public class StudentPlacement : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) {
                     // disable placing
                     canPlace = false;
+                    StudentManager.placing = false;
                     // destroy the preview if it exists
                     if(studentPreview) Destroy(studentPreview);
                 }
@@ -66,16 +67,8 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 
-    // called when the button is clicked
-    public void StartPlacementMode() {
-        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost) {
-            canPlace = true;
-        }
-    }
-
     private void Place(Vector2 position) {
         // check if there is a student at the cursor's position
-        Debug.Log("detected click: " + position.x + ", " + position.y);
         RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, studentLayer);
         if (!(hit)) {
             // create student at cursor position on mouse click, the student will be selected by default
@@ -87,10 +80,19 @@ public class StudentPlacement : MonoBehaviour
 
             // disable placing once the student has been placed
             canPlace = false;
+            StudentManager.placing = false;
 
             // destroy the preview
             Destroy(studentPreview);
 
         } else Debug.Log("There's already a student here");
+    }
+
+    // called when the button is clicked
+    public void StartPlacementMode() {
+        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost) {
+            canPlace = true;
+            StudentManager.placing = true;
+        }
     }
 }

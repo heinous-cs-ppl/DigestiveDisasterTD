@@ -25,6 +25,7 @@ public class MoveStudent : MonoBehaviour
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
 
             moving = true;
+            StudentManager.moving = true;
         }
     }
 
@@ -65,6 +66,7 @@ public class MoveStudent : MonoBehaviour
                 if (Input.GetMouseButtonDown(0)) {
                     // disable moving
                     moving = false;
+                    StudentManager.moving = false;
                     // destroy the preview if it exists
                     if(studentPreview) Destroy(studentPreview);
                 }
@@ -85,9 +87,13 @@ public class MoveStudent : MonoBehaviour
 
             // disable moving once the student has been placed
             moving = false;
+            StudentManager.moving = false;
 
             // destroy the preview
             Destroy(studentPreview);
+
+            // "reselect" the selected student to redraw the range circle (I'm lazy)
+            StudentManager.Select(StudentManager.selected);
 
         } else Debug.Log("There's already a student here");
     }

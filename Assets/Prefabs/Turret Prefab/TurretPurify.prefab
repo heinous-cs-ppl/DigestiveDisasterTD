@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 7926969335158366595}
   - component: {fileID: 9168019561572817806}
   - component: {fileID: 7528640564342919454}
-  - component: {fileID: 7072680247207814495}
   - component: {fileID: 3328366097059150213}
   m_Layer: 8
   m_Name: TurretPurify
@@ -126,18 +125,6 @@ MonoBehaviour:
   bulletLifetime: 1
   buffed: 0
   turret: {fileID: 3328366097059150213}
---- !u!114 &7072680247207814495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5847128244897676795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415f89af0fb92bb41a3c605d29329342, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3328366097059150213
 MonoBehaviour:
   m_ObjectHideFlags: 0
