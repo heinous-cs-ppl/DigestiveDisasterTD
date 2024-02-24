@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
     /********************* References *********************/
-    public static LevelManager instance;        // Use this reference to access stuff from this class
+    public static LevelManager instance;                // Use this reference to access stuff from this class
+    
+    [Header("References")]
     public GameObject spawner;
+    [SerializeField] private GameObject plotsParent;    // The parent object of all plots
+    public LayerMask plotLayer;
+    [SerializeField] private GameObject vacuousStudent;
 
     // Number of starting paths or number of spawnpoints - each of these points is the parent of the rest of it's path
     public GameObject[] spawnObjs;      // given in object inspector
@@ -13,8 +18,9 @@ public class LevelManager : MonoBehaviour {
     // Array of wave game objects
     public GameObject[] waves;          // Wave prefabs given in Unity Inspector - these contain info about enemies
 
-    [HideInInspector]
-    public Transform[] spawnObjTransforms;      // transform version of spawnObjs
+    // Transform version of spawnObjs
+    [HideInInspector] public Transform[] spawnObjTransforms;      
+
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake() {
@@ -65,5 +71,78 @@ public class LevelManager : MonoBehaviour {
             }
         }
         return nextPathLeg;
+    }
+
+    /* Calculates an array of all plots that do not have a student on them, then randomly selects a few of these plots to place vacuous students
+        on, assigning them to be occupied by a vacuous student so that nothing can be placed on these plots before the vacuous students make it on. */
+    public Plot[] AssignVacuousStudents() {
+        int plotCount = plotsParent.transform.childCount;
+        Plot[] plots = new Plot[plotCount];
+
+        // Get list of all plots
+        for (int i = 0; i < plotCount; i++) {
+            plots[i] = plotsParent.transform.GetChild(i).gameObject.GetComponent<Plot>();
+        }
+
+
+        // Find out how many free plots exist
+        int free = 0;
+        foreach (Plot plot in plots) {
+            if (plot.student == null) {
+                free++;
+            }
+        }
+
+        if (free > 0) {
+            // Now initialize and fill an array with these free plots
+            Plot[] freeplots = new Plot[free];
+            for (int i=0, p=0; i < plotCount; i++) {
+                if (plots[i].student == null) {
+                    freeplots[p] = plots[i];
+                    p++;
+                }
+            }
+
+            // Randomly select a how many plots plots will get vacuous students
+            int numVac = Random.Range(2, Mathf.Min(6, free+1));    // 2 to 5 vacuous students can come at most
+            int[] vacPlotIdxs = new int[numVac];
+            Plot[] vacPlots = new Plot[numVac];
+
+            // Randomly select the indices of the freeplots to place vacuous students on
+            for (int i = 0; i < numVac; i++) {
+                bool dupes = true;
+                while (dupes) {
+                    vacPlotIdxs[i] = Random.Range(0, free);
+                    dupes = false;
+
+                    // Check if a duplicate index was generated
+                    for (int j = 0; j < i; j++) {
+                        if (vacPlotIdxs[j] == vacPlotIdxs[i]) {
+                            dupes = true;
+                        }
+                    }
+                }
+            }
+
+            // Get the plot objects and set to be occupied
+            for (int i = 0; i < numVac; i++) {
+                vacPlots[i] = freeplots[vacPlotIdxs[i]];
+                vacPlots[i].student = vacuousStudent;
+            }
+            return vacPlots;
+        }
+        return null;
+    }
+
+    public void SpawnVacuousStudents() {
+        // Assign vacuous students to plots
+        Plot[] vac = AssignVacuousStudents();
+
+        // Spawn the vacuous students on the plots if there is space
+        if (vac != null) {
+            foreach (Plot plot in vac) {
+                Instantiate(vacuousStudent, plot.transform.position, Quaternion.identity);
+            }
+        }
     }
 }

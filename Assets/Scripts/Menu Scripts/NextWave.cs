@@ -5,8 +5,8 @@ using UnityEngine;
 public class NextWave : MonoBehaviour
 {
     public void ButtonClicked() {
-        // Call NewWave() in the script belonging to the game Spawner
-        Spawner spawner = LevelManager.instance.spawner.GetComponent<Spawner>();
-        spawner.NewWave();
+        // Call NewWave in Spawner to check if the wave is current wave is done spawning
+        Spawner spawnerInstance = LevelManager.instance.spawner.GetComponent<Spawner>();
+        spawnerInstance.NewWave();
     }
 }

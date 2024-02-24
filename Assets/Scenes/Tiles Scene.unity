@@ -3487,6 +3487,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1647877350}
   plotsParent: {fileID: 1292816131}
+  plotLayer:
+    serializedVersion: 2
+    m_Bits: 1
   vacuousStudent: {fileID: 2436313744661315829, guid: 5dda5530003b91543803f71c5ba9e235, type: 3}
   spawnObjs:
   - {fileID: 808091963}

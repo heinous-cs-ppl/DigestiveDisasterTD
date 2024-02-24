@@ -47,7 +47,10 @@ public class StudentInfo : MonoBehaviour
     }
 
     public void StudentDeath() {
+        RaycastHit2D plothit = Physics2D.Raycast(transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+        Plot plot = plothit.transform.gameObject.GetComponent<Plot>();
         Destroy(gameObject);
+        plot.student = null;
     }
 
     // handles buffs when student is fed purified food
@@ -70,11 +73,14 @@ public class StudentInfo : MonoBehaviour
         bulletSpeed *= 1.3f;
         bulletLifetime *= 1.3f;
 
-        turret.SetStudentAttributes(this);
-        turret.SetBulletAttributes(this);
+        // Vacuous students don't have a turret
+        if (turret != null) {
+            turret.SetStudentAttributes(this);
+            turret.SetBulletAttributes(this);
+            // delay
+            timerOn = StartCoroutine(BuffTimer());
+        }
         Debug.Log("Buffed student");
-        // delay
-        timerOn = StartCoroutine(BuffTimer());
     }
 
     private IEnumerator BuffTimer() {
@@ -101,8 +107,10 @@ public class StudentInfo : MonoBehaviour
         bulletLifetime = originalBulletLifetime;
         buffed = false;
 
-        turret.SetStudentAttributes(this);
-        turret.SetBulletAttributes(this);
+        if (turret != null) {
+            turret.SetStudentAttributes(this);
+            turret.SetBulletAttributes(this);
+        }
 
         Debug.Log("Removed buffs");
     }

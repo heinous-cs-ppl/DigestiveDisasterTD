@@ -28,18 +28,21 @@ public class Spawner : MonoBehaviour {
     // holds the spawn point of the next enemy
     private Transform spawnPoint;
 
-
-    private bool paths = false;     // This will be set to true in start if LevelManager was given paths to work with
+    // private bool paths = false;     // This will be set to true in start if LevelManager was given paths to work with
 
 
     /* Returns an array of struct defined in Wave.cs */
-    Wave.WavePart[] getWaveInfo(GameObject waveObj) {
+    private Wave.WavePart[] getWaveInfo(GameObject waveObj) {
         return waveObj.GetComponent<Wave>().waveEnc;  
     }
 
     /* This function gets called by the user clicking a button, via NextWave.cs */
     public void NewWave() {        
+        // Check if the current wave is done spawning, and if there are more waves
         if (waveIdx < (waves-1) && i >= curWaveInfo.Length) {
+            // Spawn random vacuous students
+            LevelManager.instance.SpawnVacuousStudents();
+
             // Get new wave information
             waveIdx++;
             curWaveInfo = getWaveInfo(LevelManager.instance.waves[waveIdx]);
@@ -63,20 +66,23 @@ public class Spawner : MonoBehaviour {
     }
 
     void Start() {
-        // If this runs LevelManager has stuff to work with. These flags are to avoid vacuous console errors
-        if (LevelManager.instance.spawnObjs.Length > 0) paths = true;
+        // If this runs LevelManager has stuff to work with. This flag is to avoid vacuous console errors
+        if (LevelManager.instance.spawnObjs.Length > 0) {
+            // Spawn Vacuous students randomly
+            LevelManager.instance.SpawnVacuousStudents();
 
-        // get the first enemy in the list
-        curEnemy = curWaveInfo[i];
-        
-        // get the index of the spawnpoint for the first enemy
-        spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
-        
-        // get a list of every spawnpoint's position
-        spawnpoints = LevelManager.instance.spawnObjTransforms;
+            // get the first enemy in the list
+            curEnemy = curWaveInfo[i];
+            
+            // get the index of the spawnpoint for the first enemy
+            spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
+            
+            // get a list of every spawnpoint's position
+            spawnpoints = LevelManager.instance.spawnObjTransforms;
 
-        // get the spawnpoint of the first enemy
-        if (paths) spawnPoint = spawnpoints[spawnIndex];
+            // get the spawnpoint of the first enemy
+            spawnPoint = spawnpoints[spawnIndex];
+        } 
     }
 
     void Update() {   
