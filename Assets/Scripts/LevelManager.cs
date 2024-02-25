@@ -145,4 +145,9 @@ public class LevelManager : MonoBehaviour {
             }
         }
     }
+
+    public static void GameOver() {
+        Time.timeScale = 0;
+        UIManager.ShowGameOverUI();
+    }
 }

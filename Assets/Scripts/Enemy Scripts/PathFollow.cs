@@ -67,6 +67,7 @@ public class PathFollow : MonoBehaviour {
             Transform lastNodeTransformObj = path[currentNode-1];   // The last node in path currently
             if (lastNodeTransformObj.childCount == 0) {
                 // reached the end of the path
+                LevelManager.GameOver();
                 Destroy(gameObject);
                 return;
             }
@@ -78,7 +79,7 @@ public class PathFollow : MonoBehaviour {
         // move the enemy towards the current node in the path
         MoveToNode(currentNode);
         
-        if(Vector2.Distance((Vector2)transform.position, nextNodePos) < 0.1f) {
+        if(Vector2.Distance((Vector2)transform.position, nextNodePos) < 0.01f) {
             // if the enemy has reached the current node in the path 
             // update the current node to the next node
             currentNode++;
