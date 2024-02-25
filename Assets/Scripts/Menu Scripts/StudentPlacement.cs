@@ -87,6 +87,12 @@ public class StudentPlacement : MonoBehaviour
 
                 Place(cursorPosition);
             }
+        } else if(Input.GetMouseButtonDown(0) && canPlace) {
+            Debug.Log("clicked off map");
+            canPlace = false;
+            StudentManager.placing = false;
+
+            Destroy(studentPreview);
         }
         // else if (!(cursorPosition.x >= sideUIdim[0] && cursorPosition.x <= sideUIdim[1] && cursorPosition.y <= sideUIdim[2] 
         //             && cursorPosition.y >= sideUIdim[3]) && StudentManager.placementSelected == null) {
@@ -118,14 +124,14 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 
-    public IEnumerator DeselectStudent() {
-        yield return new WaitForSeconds(0.05f);
+    // public IEnumerator DeselectStudent() {
+    //     yield return new WaitForSeconds(0.05f);
 
-        Debug.Log("deselect student now");
-        StudentManager.Deselect();
-        canPlace = false;
-        Destroy(studentPreview);
-    }
+    //     Debug.Log("deselect student now");
+    //     StudentManager.Deselect();
+    //     canPlace = false;
+    //     Destroy(studentPreview);
+    // }
 
     private void Place(Vector2 position) {
         // check if there is a student at the cursor's position
@@ -151,10 +157,19 @@ public class StudentPlacement : MonoBehaviour
 
                 // destroy the preview
                 Destroy(studentPreview);
-            } else Debug.Log("There's no plot here");
-            
+            } else {
+                Debug.Log("There's no plot here");
+                canPlace = false;
+                StudentManager.placing = false;
+                Destroy(studentPreview);
+            }
 
-        } else Debug.Log("There's already a student here");
+        } else {
+            Debug.Log("There's already a student here");
+            canPlace = false;
+            StudentManager.placing = false;
+            Destroy(studentPreview);
+        }
     }
 
     // called when the button is clicked
