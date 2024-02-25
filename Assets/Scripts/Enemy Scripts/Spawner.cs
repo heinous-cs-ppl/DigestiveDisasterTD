@@ -30,6 +30,8 @@ public class Spawner : MonoBehaviour {
 
     // private bool paths = false;     // This will be set to true in start if LevelManager was given paths to work with
 
+    private bool startFirstWave = false;
+
 
     /* Returns an array of struct defined in Wave.cs */
     private Wave.WavePart[] getWaveInfo(GameObject waveObj) {
@@ -39,6 +41,10 @@ public class Spawner : MonoBehaviour {
     /* This function gets called by the user clicking a button, via NextWave.cs */
     public void NewWave() {        
         // Check if the current wave is done spawning, and if there are more waves
+        if (!(startFirstWave)) {
+            startFirstWave = true;
+            return;
+        }
         if (waveIdx < (waves-1) && i >= curWaveInfo.Length) {
             // Spawn random vacuous students
             LevelManager.instance.SpawnVacuousStudents();
@@ -87,32 +93,34 @@ public class Spawner : MonoBehaviour {
 
     void Update() {   
         // Keep doing nothing at end of wave.
-        if(i >= curWaveInfo.Length){
-            return;
-        }
+        if (startFirstWave) {
+            if(i >= curWaveInfo.Length){
+                return;
+            }
 
-        t += Time.deltaTime;
-        if(t >= curEnemy.spawnDelay){    
-            Instantiate(curEnemy.enemy, spawnPoint.position, Quaternion.identity);
-            repeatCount++;
-            // reset the timer for the next spawn
-            t = 0;
-            if(repeatCount > curEnemy.repeats){
-                // if the spawn has been repeated sufficiently, move to the next spawn in the array
-                repeatCount = 0;
+            t += Time.deltaTime;
+            if(t >= curEnemy.spawnDelay){    
+                Instantiate(curEnemy.enemy, spawnPoint.position, Quaternion.identity);
+                repeatCount++;
+                // reset the timer for the next spawn
                 t = 0;
-                i++;
-                if(i < curWaveInfo.Length)
-                {
-                    // if there are still more enemies in the array
-                    curEnemy = curWaveInfo[i];
+                if(repeatCount > curEnemy.repeats){
+                    // if the spawn has been repeated sufficiently, move to the next spawn in the array
+                    repeatCount = 0;
+                    t = 0;
+                    i++;
+                    if(i < curWaveInfo.Length)
+                    {
+                        // if there are still more enemies in the array
+                        curEnemy = curWaveInfo[i];
 
-                    spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
-                    spawnPoint = spawnpoints[spawnIndex];
-                    
+                        spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
+                        spawnPoint = spawnpoints[spawnIndex];
+                        
+                    }
                 }
             }
-        }
+        }   
     }
 }
 
