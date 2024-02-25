@@ -24,26 +24,26 @@ public class Plot : MonoBehaviour {
     }
 
     // Wait for a few frames before placing student so that code in StudentPlacement executes first
-    private IEnumerator PlaceStudent() {
-        yield return new WaitForSeconds(0.05f);
-        Debug.Log("Place student here" + name);
-        StudentManager.Select(Instantiate(selectedStu, transform.position, Quaternion.identity), gameObject);
-    }
+    // private IEnumerator PlaceStudent() {
+    //     yield return new WaitForSeconds(0.05f);
+    //     Debug.Log("Place student here" + name);
+    //     StudentManager.Select(Instantiate(selectedStu, transform.position, Quaternion.identity));
+    // }
 
-    /* If the plot is clicked */
+    // /* If the plot is clicked */
     private void OnMouseDown() {
-        // If no student is selected, select the student on this tile
-        if (selectedStu == null) {
-            StudentManager.selected = student;
-            return;
-        }
+    //     // // If no student is selected, select the student on this tile
+    //     // if (selectedStu == null) {
+    //     //     StudentManager.selected = student;
+    //     //     return;
+    //     // }
 
         // Place student if seat is empty
-        if (student == null) {
-            StudentPlacement.plotPlaced = true;
-            // Wait for some code in StudentPlacement to run first
-            StartCoroutine(PlaceStudent());
-        }
+        // if (student == null && selectedStu != null) {
+        //     StudentPlacement.plotPlaced = true;
+        //     // Wait for some code in StudentPlacement to run first
+        //     StartCoroutine(PlaceStudent());
+        // }
         // else {
         //     Debug.Log("Student already here" + name);
         // }

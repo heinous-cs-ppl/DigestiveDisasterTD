@@ -8,6 +8,9 @@ public class StudentManager : MonoBehaviour
     public static bool placing = false;
     public static bool moving = false;
 
+    public static GameObject placementSelected;
+    public static GameObject plotOfSelected;
+
     public static GameObject selected;
     public LayerMask studentLayer;
     private GameObject map;
@@ -19,6 +22,9 @@ public class StudentManager : MonoBehaviour
 
     public static void Select(GameObject student) {
         selected = student;
+
+        RaycastHit2D plotHit = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+        plotOfSelected = plotHit.transform.gameObject;
         // show selection UI
         UIManager.ShowStudentSelectedUI();
         // hide hiring student UI
@@ -31,6 +37,9 @@ public class StudentManager : MonoBehaviour
 
     public static void Deselect() {
         selected = null;
+
+        placementSelected = null;
+        plotOfSelected = null;
 
         // there's a bug I can't be bothered to fix properly for now
         GameObject.Find("Purify Icon").GetComponent<Image>().color = Color.white;

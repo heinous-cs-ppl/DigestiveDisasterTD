@@ -88,23 +88,38 @@ public class MoveStudent : MonoBehaviour
         Debug.Log("detected click: " + pos.x + ", " + pos.y);
         RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 1f, studentLayer);
         if (!(hit)) {
-            // set the position of the student to the position
-            student.transform.position = pos;
-            // add cost for moving student here
-            MoneyManager.TakeMoney(moveCost);
-            UIManager.UpdateMoney();
+            // check if a plot was selected as the destination for the student
+            RaycastHit2D plotHit = Physics2D.Raycast(pos, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+            if (plotHit) {
+                // set old plot to have no student
+                RaycastHit2D oldPlot = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+                oldPlot.transform.gameObject.GetComponent<Plot>().student = null;
+                // set the position of the student to the position
+                student.transform.position = pos;
+                // add cost for moving student here
+                MoneyManager.TakeMoney(moveCost);
+                UIManager.UpdateMoney();
 
-            // disable moving once the student has been placed
-            moving = false;
-            StudentManager.moving = false;
+                // disable moving once the student has been placed
+                moving = false;
+                StudentManager.moving = false;
 
-            // destroy the preview
+                // destroy the preview
+                Destroy(studentPreview);
+
+                // "reselect" the selected student to redraw the range circle (I'm lazy)
+                StudentManager.Select(StudentManager.selected);
+            } else {
+                Debug.Log("No plot here");
+                Destroy(studentPreview);
+                moving = false;
+            }
+
+        } else {
+            Debug.Log("There's already a student here");
             Destroy(studentPreview);
-
-            // "reselect" the selected student to redraw the range circle (I'm lazy)
-            StudentManager.Select(StudentManager.selected);
-
-        } else Debug.Log("There's already a student here");
+            moving = false;
+        }
     }
 
     IEnumerator FlashSprite() {
