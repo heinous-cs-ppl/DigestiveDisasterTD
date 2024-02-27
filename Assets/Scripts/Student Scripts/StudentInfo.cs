@@ -114,5 +114,8 @@ public class StudentInfo : MonoBehaviour
         }
 
         Debug.Log("Removed buffs");
+
+        // reselect student if it is currently selected
+        if (StudentManager.selected == gameObject) StudentManager.Select(gameObject);
     }
 }

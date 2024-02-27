@@ -113,12 +113,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3ecc932a550794db81f40b9d3c1a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
-  purifyHp: 1
+  hp: 100
+  purifyHp: 100
   spawnPointIndex: 2
-  damage: 2
+  damage: 4
   speed: 1
   attackRadius: 0.55
+  moneyDrop: 10
   buffs: []
 --- !u!50 &-7840251677370535238
 Rigidbody2D:

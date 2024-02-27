@@ -116,9 +116,10 @@ MonoBehaviour:
   hp: 3
   purifyHp: 1
   spawnPointIndex: 1
-  damage: 2
+  damage: 4
   speed: 3
   attackRadius: 0.55
+  moneyDrop: 10
   buffs: []
 --- !u!50 &4975085935326695248
 Rigidbody2D:

@@ -54,3 +54,6 @@ MonoBehaviour:
   - enemy: {fileID: 7999120131923227785, guid: 3bc65d0d00e5ee448a3aaa6200698f05, type: 3}
     spawnDelay: 1
     repeats: 5
+  - enemy: {fileID: 7999120131923227785, guid: 1c1f772b70931a046a9fcfdec9db16aa, type: 3}
+    spawnDelay: 1
+    repeats: 5
