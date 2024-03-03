@@ -14,7 +14,7 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firingPoint;
 
     // attributes (defined in StudentInfo.cs)
-    private float targetingRange;
+    protected float targetingRange;
     private float rotationSpeed;
 
     // attributes for the bullets (also defined in StudentInfo.cs)
@@ -25,7 +25,7 @@ public class Turret : MonoBehaviour
     private float bps; // Bullets Per Second
 
 
-    private Transform target; 
+    protected Transform target; 
     private float timeUntilFire; 
 
 
@@ -49,7 +49,7 @@ public class Turret : MonoBehaviour
     }
 
     // Updates the turret gun to aim at food
-    private void Update(){
+    protected void Update(){
         
         // Tries to find food to attack
         if (target == null){
@@ -88,7 +88,7 @@ public class Turret : MonoBehaviour
     }
 
     // Finds the closest target available
-    private void FindTarget(){
+    protected void FindTarget(){
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2) transform.position, 0f, enemyMask);
 
         //
@@ -98,12 +98,12 @@ public class Turret : MonoBehaviour
     }
 
     // Checks if target is in range
-    private bool CheckTargetIsInRange(){
+    protected bool CheckTargetIsInRange(){
         // Returns the 2D vector to check if the target is in range 
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-    private void RotateTowardsTarget(){
+    protected void RotateTowardsTarget(){
         // Calculates the enemy that is in range and will rotate turret 
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;        
 

@@ -7,7 +7,7 @@ public class StudentInfo : MonoBehaviour
     public int cost = 100;
     [Header("Student Attributes")]
     public int maxHp = 10;
-    [HideInInspector] public int currentHp;
+     public int currentHp;
     public int damage = 1;
     public float range = 3f;
     public float rotationSpeed = 1000f;
@@ -25,7 +25,7 @@ public class StudentInfo : MonoBehaviour
     private float originalBulletLifetime;
 
     private float buffTime = 10f;
-    [HideInInspector] public bool buffed = false;
+    public bool buffed = false;
 
     public Turret turret;
 
@@ -47,6 +47,16 @@ public class StudentInfo : MonoBehaviour
         }
     }
 
+    public void Heal(int heal){
+        // Heals the target, but will first check if overhealed. If it is, give max hp, if not, heal normal amount
+        if (currentHp + heal > maxHp ) {
+            currentHp = maxHp;
+        }  
+        else 
+        {
+            currentHp += heal;
+        }
+    }
     public void StudentDeath() {
         RaycastHit2D plothit = Physics2D.Raycast(transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
         Plot plot = plothit.transform.gameObject.GetComponent<Plot>();
