@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveEnc:
-  - enemy: {fileID: 7999120131923227785, guid: 48866af28cbeea1479804a2eb0a5aec7, type: 3}
+  - enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
     spawnDelay: 1
     repeats: 3
-  - enemy: {fileID: 7999120131923227785, guid: 1c1f772b70931a046a9fcfdec9db16aa, type: 3}
+  - enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 1
     repeats: 4
   - enemy: {fileID: 7999120131923227785, guid: 3bc65d0d00e5ee448a3aaa6200698f05, type: 3}

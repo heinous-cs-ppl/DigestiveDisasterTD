@@ -46,11 +46,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Students behind tables
+    uniqueID: 3498969157
+    locked: 0
+  - name: Tables
+    uniqueID: 806873289
+    locked: 0
   - name: Enemies
     uniqueID: 4019000415
     locked: 0
-  - name: Students
-    uniqueID: 3498969157
+  - name: Students above tables
+    uniqueID: 1132957449
     locked: 0
   - name: Student Preview
     uniqueID: 1181824747

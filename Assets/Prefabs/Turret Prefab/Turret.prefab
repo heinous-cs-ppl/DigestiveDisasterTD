@@ -170,6 +170,7 @@ MonoBehaviour:
     m_Bits: 64
   bulletPrefab: {fileID: 8208342251038316243, guid: 3a3966e9145a9d347aac8dcce8f7ea53, type: 3}
   firingPoint: {fileID: 8931901967542906486}
+  spriteRotation: -45
 --- !u!58 &1827559064861225114
 CircleCollider2D:
   m_ObjectHideFlags: 0

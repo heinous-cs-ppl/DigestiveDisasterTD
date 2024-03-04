@@ -25,6 +25,8 @@ public class PathFollow : MonoBehaviour {
     // // most recently visited gameobject
     // private GameObject currNodeObj;
 
+    // animator for the enemy (used to update the animation)
+    public Animator anim;
     // position of the next node to be visited in the path
     Vector2 nextNodePos;
 
@@ -38,6 +40,22 @@ public class PathFollow : MonoBehaviour {
             return;
         }
         nextNodePos = path[nodeIndex].position;
+
+        // update the animation if necessary
+        if (anim != null) {
+            Vector2 dir = nextNodePos - (Vector2) transform.position;
+            dir.x = Mathf.Round(dir.x);
+            dir.y = Mathf.Round(dir.y);
+            if (dir.x > 0) {
+                anim.SetTrigger("SetMoveRight");
+            } else if (dir.x < 0) {
+                anim.SetTrigger("SetMoveLeft");
+            } else if (dir.y < 0) {
+                anim.SetTrigger("SetMoveDown");
+            } else if (dir.y > 0) {
+                anim.SetTrigger("SetMoveUp");
+            } 
+        }
 
         // transform.position refers to the Vector of the "current game object" - the enemy this script belongs to
         transform.position = Vector2.MoveTowards(transform.position, nextNodePos, speed * Time.deltaTime);
@@ -67,7 +85,7 @@ public class PathFollow : MonoBehaviour {
             Transform lastNodeTransformObj = path[currentNode-1];   // The last node in path currently
             if (lastNodeTransformObj.childCount == 0) {
                 // reached the end of the path
-                LevelManager.GameOver();
+                // LevelManager.GameOver();
                 Destroy(gameObject);
                 return;
             }
@@ -84,7 +102,5 @@ public class PathFollow : MonoBehaviour {
             // update the current node to the next node
             currentNode++;
         }
-
     }
-
 }
