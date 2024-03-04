@@ -141,7 +141,9 @@ public class LevelManager : MonoBehaviour {
         // Spawn the vacuous students on the plots if there is space
         if (vac != null) {
             foreach (Plot plot in vac) {
-                Instantiate(vacuousStudent, plot.transform.position, Quaternion.identity);
+                Vector2 studentPosition = plot.transform.position;
+                studentPosition.y += 3/16f;
+                Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
             }
         }
     }
