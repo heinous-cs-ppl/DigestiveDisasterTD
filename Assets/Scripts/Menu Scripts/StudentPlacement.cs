@@ -66,7 +66,7 @@ public class StudentPlacement : MonoBehaviour
                     UIManager.UpdateMoney();
                     studentPlacedOnPlot = false;
                     canPlace = false;
-                    StudentManager.placing = false;
+                    // StudentManager.placing = false;
                     Destroy(studentPreview);
                 }
             }

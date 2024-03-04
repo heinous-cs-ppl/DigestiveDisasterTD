@@ -29,6 +29,7 @@ public class Plot : MonoBehaviour {
         // Debug.Log("Place student here" + name);
         StudentManager.Place(selectedStu, plot);
         this.student = selectedStu;
+        StudentManager.placing = false;
     }
 
     /* If the plot is clicked */
