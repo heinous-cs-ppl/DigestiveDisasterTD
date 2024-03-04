@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class MoveStudent : MonoBehaviour
 {
-    bool moving = false;
-    private GameObject studentPreview;
+    public static MoveStudent instance;
 
+    private Plot oldPlot;
+    private GameObject studentPreview;
     private GameObject student;
     private Sprite studentSprite;
     public LayerMask studentLayer;
@@ -19,19 +20,22 @@ public class MoveStudent : MonoBehaviour
     private float flashDuration = 0.5f;
     private int numberOfFlashes = 2;
     private Image moneyImage;
+
     void Start() {
+        instance = this;
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
-
         moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
     }
+
+    // Called when button is clicked
     public void SetMoving() {
         if (MoneyManager.GetMoneyCount() >= moveCost) {
             student = StudentManager.selected;
+            oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>();;
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
 
-            moving = true;
             StudentManager.moving = true;
         } else {
             StartCoroutine(FlashSprite());
@@ -39,7 +43,7 @@ public class MoveStudent : MonoBehaviour
     }
 
     void Update() {
-        if(moving) {
+        if(StudentManager.moving) {
             // get cursor position
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
@@ -67,14 +71,10 @@ public class MoveStudent : MonoBehaviour
                 }
                 // set the position of the student preview to the cursor's position
                 studentPreview.transform.position = cursorPosition;
-                if (Input.GetMouseButtonDown(0)) {
-                    Place(cursorPosition);
-                }
             } else {
                 // if the player clicks somewhere not on the map
                 if (Input.GetMouseButtonDown(0)) {
                     // disable moving
-                    moving = false;
                     StudentManager.moving = false;
                     // destroy the preview if it exists
                     if(studentPreview) Destroy(studentPreview);
@@ -83,43 +83,10 @@ public class MoveStudent : MonoBehaviour
         }
     }
 
-    private void Place(Vector2 pos) {
-        // check if there is a student at the position
-        Debug.Log("detected click: " + pos.x + ", " + pos.y);
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 1f, studentLayer);
-        if (!(hit)) {
-            // check if a plot was selected as the destination for the student
-            RaycastHit2D plotHit = Physics2D.Raycast(pos, Vector2.zero, 1f, LevelManager.instance.plotLayer);
-            if (plotHit) {
-                // set old plot to have no student
-                RaycastHit2D oldPlot = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
-                oldPlot.transform.gameObject.GetComponent<Plot>().student = null;
-                // set the position of the student to the position
-                student.transform.position = pos;
-                // add cost for moving student here
-                MoneyManager.TakeMoney(moveCost);
-                UIManager.UpdateMoney();
-
-                // disable moving once the student has been placed
-                moving = false;
-                StudentManager.moving = false;
-
-                // destroy the preview
-                Destroy(studentPreview);
-
-                // "reselect" the selected student to redraw the range circle (I'm lazy)
-                StudentManager.Select(StudentManager.selected);
-            } else {
-                Debug.Log("No plot here");
-                Destroy(studentPreview);
-                moving = false;
-            }
-
-        } else {
-            Debug.Log("There's already a student here");
-            Destroy(studentPreview);
-            moving = false;
-        }
+    // Called from Plot.cs by the plot to move onto
+    public void Place(Transform newPlot) {
+        // Let Update() in StudentManager.cs run first, or student will not be selected after move.
+        StartCoroutine(DelayAndFinishMove(newPlot));
     }
 
     IEnumerator FlashSprite() {
@@ -140,5 +107,26 @@ public class MoveStudent : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    private IEnumerator DelayAndFinishMove(Transform newPlot) {
+        yield return new WaitForSeconds(0.05f);
+
+        // set the position of the student to the position
+        student.transform.position = newPlot.position;
+        oldPlot.student = null;
+
+        // add cost for moving student here
+        MoneyManager.TakeMoney(moveCost);
+        UIManager.UpdateMoney();
+
+        // destroy the preview
+        Destroy(studentPreview);
+
+        // "reselect" the selected student to redraw the range circle (I'm lazy)
+        StudentManager.Select(StudentManager.selected);
+
+        // disable moving once the student has been placed
+        StudentManager.moving = false;
     }
 }

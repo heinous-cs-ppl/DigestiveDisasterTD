@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 7816978345457103274}
   - component: {fileID: 1827559064861225114}
   - component: {fileID: 2165844561221868010}
-  - component: {fileID: 4127753987378004647}
   m_Layer: 8
   m_Name: Vacuous
   m_TagString: Student
@@ -199,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 100
   maxHp: 10
   currentHp: 0
   damage: 0
@@ -209,18 +209,6 @@ MonoBehaviour:
   bulletLifetime: 0
   buffed: 0
   turret: {fileID: 0}
---- !u!114 &4127753987378004647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2436313744661315829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415f89af0fb92bb41a3c605d29329342, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4095718559786198405
 GameObject:
   m_ObjectHideFlags: 0

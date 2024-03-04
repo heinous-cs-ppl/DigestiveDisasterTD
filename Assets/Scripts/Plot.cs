@@ -24,30 +24,25 @@ public class Plot : MonoBehaviour {
     }
 
     // Wait for a few frames before placing student so that code in StudentPlacement executes first
-    // private IEnumerator PlaceStudent() {
-    //     yield return new WaitForSeconds(0.05f);
-    //     Debug.Log("Place student here" + name);
-    //     StudentManager.Select(Instantiate(selectedStu, transform.position, Quaternion.identity));
-    // }
+    private IEnumerator PlaceStudent() {
+        yield return new WaitForSeconds(0.05f);
+        // Debug.Log("Place student here" + name);
+        StudentManager.Place(selectedStu, plot);
+        this.student = selectedStu;
+    }
 
-    // /* If the plot is clicked */
+    /* If the plot is clicked */
     private void OnMouseDown() {
-    //     // // If no student is selected, select the student on this tile
-    //     // if (selectedStu == null) {
-    //     //     StudentManager.selected = student;
-    //     //     return;
-    //     // }
-
-        // Place student if seat is empty
-        // if (student == null && selectedStu != null) {
-        //     StudentPlacement.plotPlaced = true;
-        //     // Wait for some code in StudentPlacement to run first
-        //     StartCoroutine(PlaceStudent());
-        // }
-        // else {
-        //     Debug.Log("Student already here" + name);
-        // }
-
+        // Place student if seat is empty and in placement mode
+        if (student == null && StudentManager.placing == true) {
+            StudentPlacement.studentPlacedOnPlot = true;
+            // Wait for some code in StudentPlacement to run first
+            StartCoroutine(PlaceStudent());
+        }
+        else if (student == null && StudentManager.moving == true) {
+            this.student = selectedStu;
+            MoveStudent.instance.Place(plot);
+        }
     }
 
     // Start is called before the first frame update
@@ -60,6 +55,6 @@ public class Plot : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        selectedStu = StudentManager.placementSelected;
+        selectedStu = StudentManager.selected;
     }
 }

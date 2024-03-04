@@ -119,7 +119,7 @@ MonoBehaviour:
   damage: 4
   speed: 1
   attackRadius: 0.55
-  moneyDrop: 10
+  moneyDrop: 150
   buffs: []
 --- !u!50 &-7840251677370535238
 Rigidbody2D:
