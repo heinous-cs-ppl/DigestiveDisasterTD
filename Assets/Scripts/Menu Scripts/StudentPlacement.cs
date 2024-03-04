@@ -17,8 +17,7 @@ public class StudentPlacement : MonoBehaviour
     private GameObject map;
     private GameObject ui;
     private Bounds mapBounds;
-    private float[] sideUIdim = new float[4];  // Left, Right, Top, Bottom side
-    [HideInInspector] public static bool plotPlaced = false; 
+    [HideInInspector] public static bool studentPlacedOnPlot = false; 
 
     void Start() {
         // Bounds of the map
@@ -29,18 +28,9 @@ public class StudentPlacement : MonoBehaviour
         studentInfo = student.GetComponent<StudentInfo>();
 
         moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
-        
-        // Bounds of the side UI canvas
-        ui = GameObject.Find("UI Canvas");
-        RectTransform sideUItransform = ui.GetComponent<RectTransform>();
-        Vector2 position = sideUItransform.position;
-        Vector2 size = sideUItransform.rect.size;
-        sideUIdim[0] = position.x - size.x/2;   // Left
-        sideUIdim[1] = position.x + size.x/2;   // Right
-        sideUIdim[2] = position.y + size.y/2;   // Top
-        sideUIdim[3] = position.y - size.y/2;   // Bottom
     }
 
+    // Just deal with placing student
     void Update()
     {
         // get cursor position
@@ -51,7 +41,6 @@ public class StudentPlacement : MonoBehaviour
 
         // Check if the cursor is on the map and placement is allowed
         if (mapBounds.Contains(cursorPosition) && canPlace) {
-            //Debug.Log("ON MAP AND CAN PLACE");
             // create the student preview if it doesn't exist
             if (!(studentPreview)) {
                 // create a new GameObject with a sprite renderer
@@ -69,107 +58,34 @@ public class StudentPlacement : MonoBehaviour
             // set the position of the student preview to the cursor's position
             studentPreview.transform.position = cursorPosition;
 
-            if (Input.GetMouseButtonDown(0)) {
-                // // check if there is a student at the cursor's position
-                // Debug.Log("detected click: " + cursorPosition.x + ", " + cursorPosition.y);
-                // RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
-                // if (hit) {
-                //     Debug.Log("There's already a student here");
-                // } else {
-                //     // Student is created from Plots.cs if a plot was clicked. The student will be selected by default.
-                //     Debug.Log("place student from plots");
-                    
-                //     canPlace = false;
-                //     // This deselection happens unless a student was placed. Timed to wait for Plot to finish running.
-                //     if (!plotPlaced) {StartCoroutine(DeselectStudent());}
-                //     else {plotPlaced = false;}
-                // }
-
-                Place(cursorPosition);
+            if (Input.GetMouseButtonDown(0)) {               
+                // This placement termination happens unless a student is to be placed. Timed to wait for Plot to finish running.
+                if (!studentPlacedOnPlot) {StartCoroutine(StopPlacingStudent());}
+                else {  // Student was placed, now exit placement mode
+                    MoneyManager.TakeMoney(student.GetComponent<StudentInfo>().cost);
+                    UIManager.UpdateMoney();
+                    studentPlacedOnPlot = false;
+                    canPlace = false;
+                    StudentManager.placing = false;
+                    Destroy(studentPreview);
+                }
             }
-        } else if(Input.GetMouseButtonDown(0) && canPlace) {
-            Debug.Log("clicked off map");
+        }
+        else if(Input.GetMouseButtonDown(0) && canPlace) {
+            Debug.Log("clicked off map - destroy preview");
             canPlace = false;
             StudentManager.placing = false;
-
-            Destroy(studentPreview);
-        }
-        // else if (!(cursorPosition.x >= sideUIdim[0] && cursorPosition.x <= sideUIdim[1] && cursorPosition.y <= sideUIdim[2] 
-        //             && cursorPosition.y >= sideUIdim[3]) && StudentManager.placementSelected == null) {
-        //     /* Must check if StudentManager.placementSelected is null, instead of !canPLace. This is because there are multiple instances of this StudentPlacement.cs running, and
-        //         only one instance of StudentManager running. Will error otherwise */
-
-        //     Debug.Log("OFF UI & NOT IN PLACEMENT");
-
-        //     if (Input.GetMouseButtonDown(0)) {
-        //         RaycastHit2D stuHit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
-
-        //         // If the player clicks on a student, select them
-        //         if (stuHit) {
-        //             // Debug.Log("There's already a student here");
-        //             RaycastHit2D plotHit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, LevelManager.instance.plotLayer);
-        //             StudentManager.Select(stuHit.transform.gameObject);
-        //         } 
-        //         // If the player clicks somewhere random, deselect any selected student
-        //         else {
-        //             StudentManager.Deselect();
-        //         }
-        //     }
-        // }
-
-        // Deselect student for placement if another student was selected for placement. Prevents duplicate selection for placing
-        if (student != StudentManager.placementSelected) {
-            canPlace = false;
             Destroy(studentPreview);
         }
     }
 
-    // public IEnumerator DeselectStudent() {
-    //     yield return new WaitForSeconds(0.05f);
+    public IEnumerator StopPlacingStudent() {
+        yield return new WaitForSeconds(0.05f);
 
-    //     Debug.Log("deselect student now");
-    //     StudentManager.Deselect();
-    //     canPlace = false;
-    //     Destroy(studentPreview);
-    // }
-
-    private void Place(Vector2 position) {
-        // check if there is a student at the cursor's position
-        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.zero, 1f, studentLayer);
-        if (!(hit)) {
-            Debug.Log("there's no student here");
-            RaycastHit2D plotHit = Physics2D.Raycast(position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
-            if (plotHit) {
-                Debug.Log("Placed");
-                // create student at cursor position on mouse click, the student will be selected by default
-                StudentManager.Select(Instantiate(student, position, Quaternion.identity));
-
-                // hide the student hiring UI
-                UIManager.HideStudentHiringUI();
-
-                // do money related actions
-                MoneyManager.TakeMoney(studentInfo.cost);
-                UIManager.UpdateMoney();
-
-                // disable placing once the student has been placed
-                canPlace = false;
-                StudentManager.placing = false;
-
-                // destroy the preview
-                Destroy(studentPreview);
-            } else {
-                Debug.Log("There's no plot here");
-                canPlace = false;
-                StudentManager.placing = false;
-                Destroy(studentPreview);
-            }
-
-        } else {
-            Debug.Log("There's already a student here");
-            canPlace = false;
-            StudentManager.placing = false;
-            Destroy(studentPreview);
-        }
+        Debug.Log("terminate student placing now");
+        canPlace = false;
+        StudentManager.placing = false;
+        Destroy(studentPreview);
     }
 
     // called when the button is clicked
@@ -183,7 +99,7 @@ public class StudentPlacement : MonoBehaviour
 
         // deselect the selected student
         StudentManager.Deselect();
-        StudentManager.placementSelected = student;
+        StudentManager.selected = student;
         // show UI for hiring a student
         UIManager.ShowStudentHiringUI(student, studentSprite);
     }

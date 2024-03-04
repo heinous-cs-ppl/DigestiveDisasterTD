@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -275966881
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 08f018d9dc0ce1a41bea911a95b439be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,6 +101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca41e066170c0443b8dce11341474dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  sr: {fileID: 6772121389600984652}
+  right: {fileID: 0}
+  left: {fileID: 0}
+  down: {fileID: 0}
+  up: {fileID: 0}
 --- !u!114 &4838809105904487661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +125,7 @@ MonoBehaviour:
   damage: 4
   speed: 3
   attackRadius: 0.55
-  moneyDrop: 10
+  moneyDrop: 25
   buffs: []
 --- !u!50 &4975085935326695248
 Rigidbody2D:

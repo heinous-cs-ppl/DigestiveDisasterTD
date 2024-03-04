@@ -8,7 +8,7 @@ public class StudentManager : MonoBehaviour
     public static bool placing = false;
     public static bool moving = false;
 
-    public static GameObject placementSelected;
+    // public static GameObject placementSelected;     // Only has a student if in placement mode
     public static GameObject plotOfSelected;
 
     public static GameObject selected;
@@ -19,6 +19,21 @@ public class StudentManager : MonoBehaviour
     private static GameObject rangeCircle;
     private static SpriteRenderer circle;
     public Sprite circleSprite;
+
+    public static void Place(GameObject student, Transform plot) {
+        selected = Instantiate(student, plot.position, Quaternion.identity);
+        selected.transform.position = plot.position;
+        plotOfSelected = plot.transform.gameObject;
+
+        // show selection UI
+        UIManager.ShowStudentSelectedUI();
+        // hide hiring student UI
+        UIManager.HideStudentHiringUI();
+
+        // draw the student's range so it's clear which student is selected
+        float range = selected.GetComponent<StudentInfo>().range;
+        DrawRange(range);
+    }
 
     public static void Select(GameObject student) {
         selected = student;
@@ -37,8 +52,6 @@ public class StudentManager : MonoBehaviour
 
     public static void Deselect() {
         selected = null;
-
-        placementSelected = null;
         plotOfSelected = null;
 
         // there's a bug I can't be bothered to fix properly for now
@@ -89,7 +102,7 @@ public class StudentManager : MonoBehaviour
                     GameObject student = hit.collider.gameObject;
                     StudentManager.Select(student);
                 } else {
-                    Debug.Log("didn't click on student");
+                    Debug.Log("didn't click on student - deselect");
                     // didn't click on a student, deselect
                     StudentManager.Deselect();
                 }
