@@ -142,7 +142,6 @@ public class LevelManager : MonoBehaviour {
         if (vac != null) {
             foreach (Plot plot in vac) {
                 Vector2 studentPosition = plot.transform.position;
-                studentPosition.y += 3/16f;
                 Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
             }
         }
