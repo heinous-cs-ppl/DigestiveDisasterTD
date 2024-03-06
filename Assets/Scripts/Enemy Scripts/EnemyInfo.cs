@@ -5,6 +5,7 @@ public class EnemyInfo : MonoBehaviour
 {
     public int maxHp = 10;
     public int currentHp;
+    public HealthBar healthBar;
     public int maxPurifyHp = 1;
     public int currentPurifyHp;
     public int spawnPointIndex = 0;
@@ -18,16 +19,19 @@ public class EnemyInfo : MonoBehaviour
 
     private void Start() {
         currentHp = maxHp;
+        healthBar.setMaxHealth(maxHp);
         currentPurifyHp = maxPurifyHp;
     }
 
     // Calculating damage done to enemy
     public void takeDamage(int dmg){
-        currentHp -= dmg;
-
-        if (currentHp <= 0){
+        int newHp = currentHp - dmg;
+        if (newHp <= 0){
             EnemyDeath();
+            return;
         }
+        currentHp = newHp;
+        healthBar.setHealth(newHp);
     } 
 
 
