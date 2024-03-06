@@ -101,7 +101,8 @@ public class Turret : MonoBehaviour
         bulletScript.SetTarget(target);
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
 
-        anim.SetTrigger("OnThrow");
+        // set throwing animation
+        if(anim != null) anim.SetTrigger("OnThrow");
     }
 
     // Finds the closest target available
@@ -133,19 +134,22 @@ public class Turret : MonoBehaviour
         // turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         turretRotationPoint.rotation = targetRotation;
 
-        Vector2 facingDirection = turretRotationPoint.transform.up;
 
-        if (Mathf.Abs(facingDirection.x) > Mathf.Abs(facingDirection.y)) {
-            if(facingDirection.x < 0) {
-                anim.SetTrigger("FaceLeft");
+        // Update the sprite based on the direction to the target
+        Vector2 facingDirection = turretRotationPoint.transform.up;
+        if(anim != null){
+            if (Mathf.Abs(facingDirection.x) > Mathf.Abs(facingDirection.y)) {
+                if(facingDirection.x < 0) {
+                    anim.SetTrigger("FaceLeft");
+                } else {
+                    anim.SetTrigger("FaceRight");
+                }
             } else {
-                anim.SetTrigger("FaceRight");
-            }
-        } else {
-            if(facingDirection.y > 0) {
-                anim.SetTrigger("FaceUp");
-            } else {
-                anim.SetTrigger("FaceDown");
+                if(facingDirection.y > 0) {
+                    anim.SetTrigger("FaceUp");
+                } else {
+                    anim.SetTrigger("FaceDown");
+                }
             }
         }
         

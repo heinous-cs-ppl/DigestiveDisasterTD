@@ -120,7 +120,7 @@ MonoBehaviour:
   maxHp: 10
   currentHp: 0
   healthBar: {fileID: 4863051512385409396}
-  maxPurifyHp: 1
+  maxPurifyHp: 10
   currentPurifyHp: 0
   purifyBar: {fileID: 230652410409183029}
   spawnPointIndex: 0

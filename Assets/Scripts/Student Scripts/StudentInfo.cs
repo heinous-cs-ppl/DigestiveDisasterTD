@@ -82,9 +82,8 @@ public class StudentInfo : MonoBehaviour
     public void Feed()
     {
         // heal the student for 30% of their max hp (rounded up because I'm generous)
-        currentHp = (int)(currentHp + Mathf.Ceil(maxHp * 0.3f));
-        // don't allow the hp to exceed the max
-        if (currentHp > maxHp) currentHp = maxHp;
+        int toHeal = Mathf.CeilToInt(maxHp * 0.3f);
+        Heal(toHeal);
 
         if (buffed)
         {
