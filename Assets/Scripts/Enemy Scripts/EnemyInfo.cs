@@ -17,40 +17,47 @@ public class EnemyInfo : MonoBehaviour
     public GameObject[] buffs;
 
 
-    private void Start() {
+    private void Start()
+    {
         currentHp = maxHp;
         healthBar.setMaxHealth(maxHp);
         currentPurifyHp = maxPurifyHp;
     }
 
     // Calculating damage done to enemy
-    public void takeDamage(int dmg){
+    public void takeDamage(int dmg)
+    {
         int newHp = currentHp - dmg;
-        if (newHp <= 0){
+        if (newHp <= 0)
+        {
             EnemyDeath();
             return;
         }
         currentHp = newHp;
         healthBar.setHealth(newHp);
-    } 
+    }
 
 
     // Calculating purifying damage done to the enemy
-    public void purifyDamage(int dmg) {
+    public void purifyDamage(int dmg)
+    {
         currentPurifyHp -= dmg;
-        if (currentPurifyHp <= 0) {
+        if (currentPurifyHp <= 0)
+        {
             purify();
         }
     }
 
-    public void EnemyDeath() {
+    public void EnemyDeath()
+    {
         MoneyManager.AddMoney(moneyDrop);
         UIManager.UpdateMoney();
 
         Destroy(gameObject);
     }
 
-    public void purify() {
+    public void purify()
+    {
         // give the player a purified meal
         PurifyManager.GainMeal();
         UIManager.UpdateMealCount();

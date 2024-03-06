@@ -20,7 +20,8 @@ public class StudentManager : MonoBehaviour
     private static SpriteRenderer circle;
     public Sprite circleSprite;
 
-    public static void Place(GameObject student, Transform plot) {
+    public static void Place(GameObject student, Transform plot)
+    {
         selected = Instantiate(student, plot.position, Quaternion.identity);
         selected.transform.position = plot.position;
         plotOfSelected = plot.transform.gameObject;
@@ -35,7 +36,8 @@ public class StudentManager : MonoBehaviour
         DrawRange(range);
     }
 
-    public static void Select(GameObject student) {
+    public static void Select(GameObject student)
+    {
         selected = student;
 
         RaycastHit2D plotHit = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
@@ -50,7 +52,8 @@ public class StudentManager : MonoBehaviour
         DrawRange(range);
     }
 
-    public static void Deselect() {
+    public static void Deselect()
+    {
         selected = null;
         plotOfSelected = null;
 
@@ -63,12 +66,14 @@ public class StudentManager : MonoBehaviour
         rangeCircle.transform.localScale = Vector2.zero;
     }
 
-    public static void DrawRange(float range) {
+    public static void DrawRange(float range)
+    {
         rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
         rangeCircle.transform.position = selected.transform.position;
     }
 
-    void Start() {
+    void Start()
+    {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
@@ -83,25 +88,31 @@ public class StudentManager : MonoBehaviour
     }
 
     // check for clicks on the map, if a student is clicked, then select, otherwise deselect.
-    void Update() {
+    void Update()
+    {
         // check for click, make sure student placing is off, make sure no student is being moved
-        if (Input.GetMouseButtonDown(0) && !(placing) && !(moving)) {
+        if (Input.GetMouseButtonDown(0) && !(placing) && !(moving))
+        {
             Debug.Log("clicked");
             // check if cursor is on map
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
             cursorPosition.x = Mathf.Ceil(cursorPosition.x) - 0.5f;
             cursorPosition.y = Mathf.Ceil(cursorPosition.y) - 0.5f;
-            
-            if (mapBounds.Contains(cursorPosition)) {
+
+            if (mapBounds.Contains(cursorPosition))
+            {
                 Debug.Log("clicked on map");
                 RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
-                if (hit) {
+                if (hit)
+                {
                     Debug.Log("clicked on student");
                     // clicked on a student, select the student
                     GameObject student = hit.collider.gameObject;
                     StudentManager.Select(student);
-                } else {
+                }
+                else
+                {
                     Debug.Log("didn't click on student - deselect");
                     // didn't click on a student, deselect
                     StudentManager.Deselect();

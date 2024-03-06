@@ -7,12 +7,13 @@ public class HealingTurret : Turret
 {
     private new void Update()
     {
-        if(ShouldFire()){
+        if (ShouldFire())
+        {
             FindTarget();
             base.Update();
         }
     }
-    private  new void FindTarget()
+    private new void FindTarget()
     {
         // Get all colliders within targeting range that belong to the "Student" layer
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
@@ -41,20 +42,20 @@ public class HealingTurret : Turret
 
     private bool ShouldFire()
     {
-    // Get all colliders within targeting range that belong to the "Student" layer
-    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
+        // Get all colliders within targeting range that belong to the "Student" layer
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
 
-    // Check if any ally is not at full health
-    foreach (Collider2D collider in colliders)
-    {
-        StudentInfo studentInfo = collider.GetComponent<StudentInfo>();
-        if (studentInfo != null && studentInfo.currentHp < studentInfo.maxHp)
+        // Check if any ally is not at full health
+        foreach (Collider2D collider in colliders)
         {
-            return true; // Return true if any ally is not at full health
+            StudentInfo studentInfo = collider.GetComponent<StudentInfo>();
+            if (studentInfo != null && studentInfo.currentHp < studentInfo.maxHp)
+            {
+                return true; // Return true if any ally is not at full health
+            }
         }
-    }
 
-    return false; // Return false if all allies are at full health
-}
+        return false; // Return false if all allies are at full health
+    }
 
 }

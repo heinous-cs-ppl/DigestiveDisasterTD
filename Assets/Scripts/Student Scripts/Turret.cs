@@ -18,43 +18,48 @@ public class Turret : MonoBehaviour
     private float rotationSpeed;
 
     // attributes for the bullets (also defined in StudentInfo.cs)
-    private float bulletSpeed; 
+    private float bulletSpeed;
     private int bulletDamage;
     private float bulletLifetime;
 
     private float bps; // Bullets Per Second
 
 
-    protected Transform target; 
-    private float timeUntilFire; 
+    protected Transform target;
+    private float timeUntilFire;
 
     [SerializeField] private float spriteRotation = 0f;
 
 
-    private void Start() {
+    private void Start()
+    {
         StudentInfo student = GetComponent<StudentInfo>();
 
         SetStudentAttributes(student);
         SetBulletAttributes(student);
     }
 
-    public void SetStudentAttributes(StudentInfo student) {
+    public void SetStudentAttributes(StudentInfo student)
+    {
         targetingRange = student.range;
         rotationSpeed = student.rotationSpeed;
         bps = student.bps;
     }
 
-    public void SetBulletAttributes(StudentInfo student) {
+    public void SetBulletAttributes(StudentInfo student)
+    {
         bulletSpeed = student.bulletSpeed;
         bulletDamage = student.damage;
         bulletLifetime = student.bulletLifetime;
     }
 
     // Updates the turret gun to aim at food
-    protected void Update(){
-        
+    protected void Update()
+    {
+
         // Tries to find food to attack
-        if (target == null){
+        if (target == null)
+        {
             FindTarget();
             return;
         }
@@ -64,52 +69,61 @@ public class Turret : MonoBehaviour
 
 
         // Steadily brings gun towards next target instead of snapping 
-        if (!CheckTargetIsInRange()){
+        if (!CheckTargetIsInRange())
+        {
             target = null;
-        } else {
+        }
+        else
+        {
 
             // If an enemy is in range, fire at set rate
             timeUntilFire += Time.deltaTime;
 
             // If the time until fire is larger then 1/bps 
-            if (timeUntilFire >= 1f / bps){
+            if (timeUntilFire >= 1f / bps)
+            {
                 Shoot();
 
                 // Resets time to fire next shot
                 timeUntilFire = 0f;
-            } 
+            }
         }
     }
 
     // function to actually fire a projectile
-    private void Shoot(){
+    private void Shoot()
+    {
         // shoot a projectile with the same rotation as the student (adjusted by the sprite angle)
         Quaternion adjustedRotation = Quaternion.Euler(0, 0, turretRotationPoint.eulerAngles.z - spriteRotation);
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, adjustedRotation);
         Bullets bulletScript = bulletObj.GetComponent<Bullets>();
-        bulletScript.SetTarget(target); 
+        bulletScript.SetTarget(target);
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
     }
 
     // Finds the closest target available
-    protected void FindTarget(){
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2) transform.position, 0f, enemyMask);
+    protected void FindTarget()
+    {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
 
         //
-        if (hits.Length > 0){
+        if (hits.Length > 0)
+        {
             target = hits[0].transform;
         }
     }
 
     // Checks if target is in range
-    protected bool CheckTargetIsInRange(){
+    protected bool CheckTargetIsInRange()
+    {
         // Returns the 2D vector to check if the target is in range 
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-    protected void RotateTowardsTarget(){
+    protected void RotateTowardsTarget()
+    {
         // Calculates the enemy that is in range and will rotate turret 
-        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;        
+        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
 
         // Actually rotates the turret
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
@@ -117,7 +131,8 @@ public class Turret : MonoBehaviour
     }
 
     // Creates a ring around turret that represents the range in editor (Cannot see in actual game)
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
 
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);

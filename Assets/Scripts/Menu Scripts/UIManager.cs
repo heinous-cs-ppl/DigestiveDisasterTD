@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
 
     private static TextMeshProUGUI gameOver;
 
-    void Start() {
+    void Start()
+    {
         // initialize the purify counter in the UI to 0
         purifyCount = GameObject.Find("Purify Count").GetComponent<TextMeshProUGUI>();
         UIManager.UpdateMealCount();
@@ -51,27 +52,33 @@ public class UIManager : MonoBehaviour
         UIManager.HideGameOverUI();
     }
 
-    public static void UpdateMealCount() {
+    public static void UpdateMealCount()
+    {
         purifyCount.text = PurifyManager.GetStringMealCount();
     }
 
-    public static void UpdateMoney() {
+    public static void UpdateMoney()
+    {
         moneyCount.text = "$" + MoneyManager.GetStringMoneyCount();
     }
 
-    public static void ShowStudentSelectedUI() {
+    public static void ShowStudentSelectedUI()
+    {
         studentSelectUI.SetActive(true);
     }
 
-    public static void HideStudentSelectedUI() {
+    public static void HideStudentSelectedUI()
+    {
         studentSelectUI.SetActive(false);
     }
 
-    public static void HideStudentHiringUI() {
+    public static void HideStudentHiringUI()
+    {
         studentHireUI.SetActive(false);
     }
 
-    public static void ShowStudentHiringUI(GameObject student, Sprite studentSprite) {
+    public static void ShowStudentHiringUI(GameObject student, Sprite studentSprite)
+    {
         studentHireUI.SetActive(true);
         studentHireUIStudentImage.sprite = studentSprite;
 
@@ -86,11 +93,13 @@ public class UIManager : MonoBehaviour
         studentHireUIStudentBPS.text = "Attack Speed: " + studentHireUIStudentInfo.bps.ToString();
     }
 
-    public static void ShowGameOverUI() {
+    public static void ShowGameOverUI()
+    {
         gameOver.text = "Game Over!";
     }
 
-    public static void HideGameOverUI() {
+    public static void HideGameOverUI()
+    {
         gameOver.text = "";
     }
 }

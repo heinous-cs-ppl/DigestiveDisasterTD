@@ -17,9 +17,10 @@ public class StudentPlacement : MonoBehaviour
     private GameObject map;
     private GameObject ui;
     private Bounds mapBounds;
-    [HideInInspector] public static bool studentPlacedOnPlot = false; 
+    [HideInInspector] public static bool studentPlacedOnPlot = false;
 
-    void Start() {
+    void Start()
+    {
         // Bounds of the map
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
@@ -40,9 +41,11 @@ public class StudentPlacement : MonoBehaviour
         cursorPosition.y = Mathf.Ceil(cursorPosition.y) - 0.5f;
 
         // Check if the cursor is on the map and placement is allowed
-        if (mapBounds.Contains(cursorPosition) && canPlace) {
+        if (mapBounds.Contains(cursorPosition) && canPlace)
+        {
             // create the student preview if it doesn't exist
-            if (!(studentPreview)) {
+            if (!(studentPreview))
+            {
                 // create a new GameObject with a sprite renderer
                 studentPreview = new GameObject("StudentPreview");
                 SpriteRenderer previewSprite = studentPreview.AddComponent<SpriteRenderer>();
@@ -58,10 +61,12 @@ public class StudentPlacement : MonoBehaviour
             // set the position of the student preview to the cursor's position
             studentPreview.transform.position = cursorPosition;
 
-            if (Input.GetMouseButtonDown(0)) {               
+            if (Input.GetMouseButtonDown(0))
+            {
                 // This placement termination happens unless a student is to be placed. Timed to wait for Plot to finish running.
-                if (!studentPlacedOnPlot) {StartCoroutine(StopPlacingStudent());}
-                else {  // Student was placed, now exit placement mode
+                if (!studentPlacedOnPlot) { StartCoroutine(StopPlacingStudent()); }
+                else
+                {  // Student was placed, now exit placement mode
                     MoneyManager.TakeMoney(student.GetComponent<StudentInfo>().cost);
                     UIManager.UpdateMoney();
                     studentPlacedOnPlot = false;
@@ -71,7 +76,8 @@ public class StudentPlacement : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetMouseButtonDown(0) && canPlace) {
+        else if (Input.GetMouseButtonDown(0) && canPlace)
+        {
             Debug.Log("clicked off map - destroy preview");
             canPlace = false;
             StudentManager.placing = false;
@@ -79,7 +85,8 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 
-    public IEnumerator StopPlacingStudent() {
+    public IEnumerator StopPlacingStudent()
+    {
         yield return new WaitForSeconds(0.05f);
 
         Debug.Log("terminate student placing now");
@@ -89,11 +96,15 @@ public class StudentPlacement : MonoBehaviour
     }
 
     // called when the button is clicked
-    public void StartPlacementMode() {
-        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost) {
+    public void StartPlacementMode()
+    {
+        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost)
+        {
             canPlace = true;
             StudentManager.placing = true;
-        } else {
+        }
+        else
+        {
             StartCoroutine(FlashSprite());
         }
 
@@ -104,11 +115,14 @@ public class StudentPlacement : MonoBehaviour
         UIManager.ShowStudentHiringUI(student, studentSprite);
     }
 
-    IEnumerator FlashSprite() {
-        for (int i = 0; i < numberOfFlashes; i++) {
+    IEnumerator FlashSprite()
+    {
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
             // gradually change the sprite color to red
             float elapsedTime = 0f;
-            while (elapsedTime < flashDuration) {
+            while (elapsedTime < flashDuration)
+            {
                 moneyImage.color = Color.Lerp(Color.white, Color.red, elapsedTime / flashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
@@ -116,7 +130,8 @@ public class StudentPlacement : MonoBehaviour
 
             // gradually change the sprite color back to its original color
             elapsedTime = 0f;
-            while (elapsedTime < flashDuration) {
+            while (elapsedTime < flashDuration)
+            {
                 moneyImage.color = Color.Lerp(Color.red, Color.white, elapsedTime / flashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
