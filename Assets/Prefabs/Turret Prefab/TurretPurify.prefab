@@ -146,6 +146,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8208342251038316243, guid: 983d8821814711a48b2ea08e6d99d388, type: 3}
   firingPoint: {fileID: 6815504381293445546}
   spriteRotation: 0
+  anim: {fileID: 0}
 --- !u!1 &6416164920234304673
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +354,10 @@ PrefabInstance:
     - target: {fileID: 1715933004402406023, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213150394870005731, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.09375
       objectReference: {fileID: 0}
     - target: {fileID: 6508072082101515395, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
       propertyPath: m_Name
