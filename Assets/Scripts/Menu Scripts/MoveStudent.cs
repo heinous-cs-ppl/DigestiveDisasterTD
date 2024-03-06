@@ -134,6 +134,12 @@ public class MoveStudent : MonoBehaviour
         student.transform.position = newPlot.position;
         oldPlot.student = null;
 
+        if(newPlot.GetComponent<Plot>().aboveTable) {
+            student.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
+        } else {
+            student.GetComponent<SpriteRenderer>().sortingLayerName = "Students behind tables";
+        }
+
         // add cost for moving student here
         MoneyManager.TakeMoney(moveCost);
         UIManager.UpdateMoney();
