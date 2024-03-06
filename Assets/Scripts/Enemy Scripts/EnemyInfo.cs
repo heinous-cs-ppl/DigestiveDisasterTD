@@ -4,10 +4,11 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour
 {
     public int maxHp = 10;
-    public int currentHp;
-    public HealthBar healthBar;
-    public int maxPurifyHp = 1;
-    public int currentPurifyHp;
+    [HideInInspector] public int currentHp;
+    public Bar healthBar;
+    public int maxPurifyHp = 7;
+    [HideInInspector] public int currentPurifyHp;
+    public Bar purifyBar;
     public int spawnPointIndex = 0;
     public int damage = 5;
     public float speed = 2f;
@@ -20,8 +21,12 @@ public class EnemyInfo : MonoBehaviour
     private void Start()
     {
         currentHp = maxHp;
-        healthBar.setMaxHealth(maxHp);
-        currentPurifyHp = maxPurifyHp;
+        healthBar.setMaxValue(maxHp);
+        healthBar.setValue(maxHp);
+
+        currentPurifyHp = 0;
+        purifyBar.setMaxValue(maxPurifyHp);
+        purifyBar.setValue(0);
     }
 
     // Calculating damage done to enemy
@@ -34,18 +39,21 @@ public class EnemyInfo : MonoBehaviour
             return;
         }
         currentHp = newHp;
-        healthBar.setHealth(newHp);
+        healthBar.setValue(newHp);
     }
 
 
     // Calculating purifying damage done to the enemy
     public void purifyDamage(int dmg)
     {
-        currentPurifyHp -= dmg;
-        if (currentPurifyHp <= 0)
+        int newPurifyHp = currentPurifyHp + dmg;
+        if (newPurifyHp >= maxPurifyHp)
         {
             purify();
+            return;
         }
+        currentPurifyHp = newPurifyHp;
+        purifyBar.setValue(newPurifyHp);
     }
 
     public void EnemyDeath()

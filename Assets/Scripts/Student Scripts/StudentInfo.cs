@@ -7,7 +7,7 @@ public class StudentInfo : MonoBehaviour
     public int cost = 100;
     [Header("Student Attributes")]
     public int maxHp = 10;
-    public int currentHp;
+    [HideInInspector] public int currentHp;
     public int damage = 1;
     public float range = 3f;
     public float rotationSpeed = 1000f;
@@ -15,7 +15,7 @@ public class StudentInfo : MonoBehaviour
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
     public float bulletLifetime = 1f;
-    public HealthBar healthBar;
+    public Bar healthBar;
 
 
     // extra fields to hold the original values of the attributes
@@ -34,7 +34,8 @@ public class StudentInfo : MonoBehaviour
     private void Start()
     {
         currentHp = maxHp;
-        healthBar.setMaxHealth(maxHp);
+        healthBar.setMaxValue(maxHp);
+        healthBar.setValue(currentHp);
 
         originalDamage = damage;
         originalRange = range;
@@ -47,7 +48,7 @@ public class StudentInfo : MonoBehaviour
     {
         int newHp = currentHp - dmg;
         currentHp = newHp;
-        healthBar.setHealth(newHp);
+        healthBar.setValue(newHp);
         if (currentHp <= 0)
         {
             StudentDeath();
@@ -60,13 +61,13 @@ public class StudentInfo : MonoBehaviour
         if (currentHp + heal > maxHp)
         {
             currentHp = maxHp;
-            healthBar.setHealth(maxHp);
+            healthBar.setValue(maxHp);
         }
         else
         {
             int newHp = currentHp + heal;
             currentHp = newHp;
-            healthBar.setHealth(newHp);
+            healthBar.setValue(newHp);
         }
     }
     public void StudentDeath()
