@@ -48,6 +48,12 @@ public class HealingTurret : Turret
         // Check if any ally is not at full health
         foreach (Collider2D collider in colliders)
         {
+            // Ignore collision with the turret's own collider
+            if (collider == GetComponent<Collider2D>())
+            {
+                continue;
+            }
+
             StudentInfo studentInfo = collider.GetComponent<StudentInfo>();
             if (studentInfo != null && studentInfo.currentHp < studentInfo.maxHp)
             {
