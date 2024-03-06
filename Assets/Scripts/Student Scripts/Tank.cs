@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Tank : Turret
 {
-    private new void Update(){
-        
+    private new void Update()
+    {
+
         // Tries to find food to attack
-        if (target == null){
+        if (target == null)
+        {
             FindTarget();
             return;
         }
@@ -17,7 +19,8 @@ public class Tank : Turret
 
 
         // Steadily brings gun towards next target instead of snapping 
-        if (!CheckTargetIsInRange()){
+        if (!CheckTargetIsInRange())
+        {
             target = null;
         }
     }

@@ -10,25 +10,31 @@ public class GiveMeal : MonoBehaviour
     private int numberOfFlashes = 2;
     private Coroutine flashCoroutine;
 
-    void Start() {
+    void Start()
+    {
         foodImage = GameObject.Find("Purify Icon").GetComponent<Image>();
-        
+
     }
-    public void UsePurifiedMeal() {
+    public void UsePurifiedMeal()
+    {
         // get the currently selected student
         GameObject selected = StudentManager.selected;
 
         // if the player has meals (subtracts a meal if they have one)
-        if (PurifyManager.UseMeal()) {
+        if (PurifyManager.UseMeal())
+        {
             // update the counter on the UI
             UIManager.UpdateMealCount();
             // give buffs to the selected student
             selected.GetComponent<StudentInfo>().Feed();
             // "reselect" the selected student to redraw the range circle (I'm lazy)
             StudentManager.Select(StudentManager.selected);
-        } else {
+        }
+        else
+        {
 
-            if (flashCoroutine != null) {
+            if (flashCoroutine != null)
+            {
                 StopCoroutine(flashCoroutine);
                 foodImage.color = Color.white;
             }
@@ -43,7 +49,8 @@ public class GiveMeal : MonoBehaviour
         {
             // gradually change the sprite color to red
             float elapsedTime = 0f;
-            while (elapsedTime < flashDuration) {
+            while (elapsedTime < flashDuration)
+            {
                 foodImage.color = Color.Lerp(Color.white, Color.red, elapsedTime / flashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
@@ -51,7 +58,8 @@ public class GiveMeal : MonoBehaviour
 
             // gradually change the sprite color back to its original color
             elapsedTime = 0f;
-            while (elapsedTime < flashDuration) {
+            while (elapsedTime < flashDuration)
+            {
                 foodImage.color = Color.Lerp(Color.red, Color.white, elapsedTime / flashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;

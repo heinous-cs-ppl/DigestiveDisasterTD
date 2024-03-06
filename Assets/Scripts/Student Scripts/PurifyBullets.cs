@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PurifyBullet : Bullets
 {
-    private void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         // Take health from Enemy
         other.gameObject.GetComponent<EnemyInfo>().purifyDamage(bulletDamage);
         Destroy(gameObject);

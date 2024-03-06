@@ -10,7 +10,7 @@ public class Bullets : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     // attributes (defined in StudentInfo.cs)
-    private float bulletSpeed; 
+    private float bulletSpeed;
     protected int bulletDamage;
     private float bulletLifetime;
 
@@ -20,31 +20,37 @@ public class Bullets : MonoBehaviour
 
     private Vector2 direction;
 
-    public void SetAttributes(float speed, int damage, float lifetime) {
+    public void SetAttributes(float speed, int damage, float lifetime)
+    {
         bulletSpeed = speed;
         bulletDamage = damage;
         bulletLifetime = lifetime;
     }
-    public void SetTarget(Transform _target){
+    public void SetTarget(Transform _target)
+    {
         target = _target;
     }
-    private void FixedUpdate() {
-        if (target) {
-            direction = (target.position - transform.position).normalized; 
+    private void FixedUpdate()
+    {
+        if (target)
+        {
+            direction = (target.position - transform.position).normalized;
         }
 
         rb.velocity = direction * bulletSpeed;
-        
+
         curLifetime += Time.fixedDeltaTime;
-        if(curLifetime >= bulletLifetime) {
+        if (curLifetime >= bulletLifetime)
+        {
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         // Take health from Enemy
         other.gameObject.GetComponent<EnemyInfo>().takeDamage(bulletDamage);
         Destroy(gameObject);
     }
-    
+
 }

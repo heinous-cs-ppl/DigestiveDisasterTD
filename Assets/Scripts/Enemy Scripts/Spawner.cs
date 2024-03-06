@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : MonoBehaviour
+{
     // Wave tracking variables
     private int waves;
     private int waveIdx = 0;   // wave number is (waveIdx+1)
@@ -15,13 +16,13 @@ public class Spawner : MonoBehaviour {
 
     // holds the current enemy data
     private Wave.WavePart curEnemy;
-    
+
     // int to keep track of number of times the spawn has been repeated
     private int repeatCount = 0;
 
     // array of every spawnpoint
     private Transform[] spawnpoints;
-    
+
     // holds the index of the spawnpoint (since they are indexed in an array)
     private int spawnIndex;
 
@@ -34,18 +35,22 @@ public class Spawner : MonoBehaviour {
 
 
     /* Returns an array of struct defined in Wave.cs */
-    private Wave.WavePart[] getWaveInfo(GameObject waveObj) {
-        return waveObj.GetComponent<Wave>().waveEnc;  
+    private Wave.WavePart[] getWaveInfo(GameObject waveObj)
+    {
+        return waveObj.GetComponent<Wave>().waveEnc;
     }
 
     /* This function gets called by the user clicking a button, via NextWave.cs */
-    public void NewWave() {        
+    public void NewWave()
+    {
         // Check if the current wave is done spawning, and if there are more waves
-        if (!(startFirstWave)) {
+        if (!(startFirstWave))
+        {
             startFirstWave = true;
             return;
         }
-        if (waveIdx < (waves-1) && i >= curWaveInfo.Length) {
+        if (waveIdx < (waves - 1) && i >= curWaveInfo.Length)
+        {
             // Spawn random vacuous students
             LevelManager.instance.SpawnVacuousStudents();
 
@@ -61,72 +66,81 @@ public class Spawner : MonoBehaviour {
         }
     }
 
-    void Awake() {
+    void Awake()
+    {
         waves = LevelManager.instance.waves.Length;
 
-        if (waves < 1) {
+        if (waves < 1)
+        {
             Debug.Log("NO WAVES TO SPAWN");
             Destroy(gameObject);
         }
         curWaveInfo = getWaveInfo(LevelManager.instance.waves[waveIdx]);
     }
 
-    void Start() {
+    void Start()
+    {
         // If this runs LevelManager has stuff to work with. This flag is to avoid vacuous console errors
-        if (LevelManager.instance.spawnObjs.Length > 0) {
+        if (LevelManager.instance.spawnObjs.Length > 0)
+        {
             // Spawn Vacuous students randomly
             LevelManager.instance.SpawnVacuousStudents();
 
             // get the first enemy in the list
             curEnemy = curWaveInfo[i];
-            
+
             // get the index of the spawnpoint for the first enemy
             spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
-            
+
             // get a list of every spawnpoint's position
             spawnpoints = LevelManager.instance.spawnObjTransforms;
 
             // get the spawnpoint of the first enemy
             spawnPoint = spawnpoints[spawnIndex];
-        } 
+        }
     }
 
-    void Update() {   
+    void Update()
+    {
         // Keep doing nothing at end of wave.
-        if (startFirstWave) {
-            if(i >= curWaveInfo.Length){
+        if (startFirstWave)
+        {
+            if (i >= curWaveInfo.Length)
+            {
                 return;
             }
 
             t += Time.deltaTime;
-            if(t >= curEnemy.spawnDelay){    
+            if (t >= curEnemy.spawnDelay)
+            {
                 Instantiate(curEnemy.enemy, spawnPoint.position, Quaternion.identity);
                 repeatCount++;
                 // reset the timer for the next spawn
                 t = 0;
-                if(repeatCount > curEnemy.repeats){
+                if (repeatCount > curEnemy.repeats)
+                {
                     // if the spawn has been repeated sufficiently, move to the next spawn in the array
                     repeatCount = 0;
                     t = 0;
                     i++;
-                    if(i < curWaveInfo.Length)
+                    if (i < curWaveInfo.Length)
                     {
                         // if there are still more enemies in the array
                         curEnemy = curWaveInfo[i];
 
                         spawnIndex = curEnemy.enemy.GetComponent<EnemyInfo>().spawnPointIndex;
                         spawnPoint = spawnpoints[spawnIndex];
-                        
+
                     }
                 }
             }
-        }   
+        }
     }
 }
 
 [System.Serializable]
 public class EnemyData
-{   
+{
     // enemy prefab to spawn
     public GameObject enemy;
 

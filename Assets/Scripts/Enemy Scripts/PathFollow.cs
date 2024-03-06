@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFollow : MonoBehaviour {   
+public class PathFollow : MonoBehaviour
+{
     // array of every spawnpoint
     private GameObject[] spawnpoints;
 
@@ -33,28 +34,38 @@ public class PathFollow : MonoBehaviour {
     // speed of the enemy (from the Enemy Info script attached to the enemy prefab)
     private float speed;
 
-    void MoveToNode(int nodeIndex) {
+    void MoveToNode(int nodeIndex)
+    {
         // check if the index of the node is valid
-        if (nodeIndex < 0 || nodeIndex >= path.Length) {
+        if (nodeIndex < 0 || nodeIndex >= path.Length)
+        {
             Debug.LogError("pathfollow.cs: bad index");
             return;
         }
         nextNodePos = path[nodeIndex].position;
 
         // update the animation if necessary
-        if (anim != null) {
-            Vector2 dir = nextNodePos - (Vector2) transform.position;
+        if (anim != null)
+        {
+            Vector2 dir = nextNodePos - (Vector2)transform.position;
             dir.x = Mathf.Round(dir.x);
             dir.y = Mathf.Round(dir.y);
-            if (dir.x > 0) {
+            if (dir.x > 0)
+            {
                 anim.SetTrigger("SetMoveRight");
-            } else if (dir.x < 0) {
+            }
+            else if (dir.x < 0)
+            {
                 anim.SetTrigger("SetMoveLeft");
-            } else if (dir.y < 0) {
+            }
+            else if (dir.y < 0)
+            {
                 anim.SetTrigger("SetMoveDown");
-            } else if (dir.y > 0) {
+            }
+            else if (dir.y > 0)
+            {
                 anim.SetTrigger("SetMoveUp");
-            } 
+            }
         }
 
         // transform.position refers to the Vector of the "current game object" - the enemy this script belongs to
@@ -62,7 +73,8 @@ public class PathFollow : MonoBehaviour {
     }
 
     // Start is called before the first frame update
-    void Start() {   
+    void Start()
+    {
         // get the index of the spawnpoint of the enemy that this script is attached to
         spawnIndex = GetComponent<EnemyInfo>().spawnPointIndex;
 
@@ -81,9 +93,11 @@ public class PathFollow : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(currentNode == pathNodeCount) {
-            Transform lastNodeTransformObj = path[currentNode-1];   // The last node in path currently
-            if (lastNodeTransformObj.childCount == 0) {
+        if (currentNode == pathNodeCount)
+        {
+            Transform lastNodeTransformObj = path[currentNode - 1];   // The last node in path currently
+            if (lastNodeTransformObj.childCount == 0)
+            {
                 // reached the end of the path
                 // LevelManager.GameOver();
                 Destroy(gameObject);
@@ -96,8 +110,9 @@ public class PathFollow : MonoBehaviour {
 
         // move the enemy towards the current node in the path
         MoveToNode(currentNode);
-        
-        if(Vector2.Distance((Vector2)transform.position, nextNodePos) < 0.01f) {
+
+        if (Vector2.Distance((Vector2)transform.position, nextNodePos) < 0.01f)
+        {
             // if the enemy has reached the current node in the path 
             // update the current node to the next node
             currentNode++;

@@ -31,12 +31,14 @@ public class EnemyAttacks : MonoBehaviour
     {
         // get an array of enemies in the range of the food
         Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(transform.position, triggerRadius, studentMask);
-        if(studentsInRange.Length > 0) {
+        if (studentsInRange.Length > 0)
+        {
             // there is an enemy in the range of food
             // get an array of students in the damage radius
             Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(transform.position, damageRadius, studentMask);
             // damage all of the students in the radius
-            foreach(Collider2D studentCollision in studentsToDamage) {
+            foreach (Collider2D studentCollision in studentsToDamage)
+            {
                 GameObject student = studentCollision.gameObject;
                 student.GetComponent<StudentInfo>().TakeDamage(damage);
             }
@@ -45,12 +47,13 @@ public class EnemyAttacks : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected(){
+    private void OnDrawGizmosSelected()
+    {
 
         Handles.color = Color.cyan;
         Handles.DrawWireDisc(transform.position, transform.forward, triggerRadius);
 
     }
 
-    
+
 }
