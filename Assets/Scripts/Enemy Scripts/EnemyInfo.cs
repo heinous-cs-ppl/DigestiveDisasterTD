@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
-    public int hp = 10;
-    public int purifyHp = 1;
+    public int maxHp = 10;
+    public int currentHp;
+    public int maxPurifyHp = 1;
+    public int currentPurifyHp;
     public int spawnPointIndex = 0;
     public int damage = 5;
     public float speed = 2f;
@@ -14,11 +16,16 @@ public class EnemyInfo : MonoBehaviour
     public GameObject[] buffs;
 
 
+    private void Start() {
+        currentHp = maxHp;
+        currentPurifyHp = maxPurifyHp;
+    }
+
     // Calculating damage done to enemy
     public void takeDamage(int dmg){
-        hp -= dmg;
+        currentHp -= dmg;
 
-        if (hp <= 0){
+        if (currentHp <= 0){
             EnemyDeath();
         }
     } 
@@ -26,8 +33,8 @@ public class EnemyInfo : MonoBehaviour
 
     // Calculating purifying damage done to the enemy
     public void purifyDamage(int dmg) {
-        purifyHp -= dmg;
-        if (purifyHp <= 0) {
+        currentPurifyHp -= dmg;
+        if (currentPurifyHp <= 0) {
             purify();
         }
     }
