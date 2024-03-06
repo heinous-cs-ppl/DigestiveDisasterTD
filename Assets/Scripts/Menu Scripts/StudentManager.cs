@@ -20,10 +20,10 @@ public class StudentManager : MonoBehaviour
     private static SpriteRenderer circle;
     public Sprite circleSprite;
 
-    public static void Place(GameObject student, Transform plot)
+    public static void Place(GameObject student, Transform plot, bool aboveTable)
     {
         selected = Instantiate(student, plot.position, Quaternion.identity);
-        selected.transform.position = plot.position;
+        if (aboveTable) selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
         plotOfSelected = plot.transform.gameObject;
 
         // show selection UI

@@ -8,6 +8,7 @@ public class Plot : MonoBehaviour
     [Header("References")]
     [SerializeField] private SpriteRenderer plotSR;
     [SerializeField] private Color hoverColor;
+    public bool aboveTable;
 
     [HideInInspector]
     public GameObject student = null;
@@ -31,7 +32,7 @@ public class Plot : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         // Debug.Log("Place student here" + name);
-        StudentManager.Place(selectedStu, plot);
+        StudentManager.Place(selectedStu, plot, aboveTable);
         this.student = selectedStu;
         StudentManager.placing = false;
     }

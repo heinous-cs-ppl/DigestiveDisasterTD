@@ -169,7 +169,8 @@ public class LevelManager : MonoBehaviour
             foreach (Plot plot in vac)
             {
                 Vector2 studentPosition = plot.transform.position;
-                Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
+                GameObject placed = Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
+                if (plot.GetComponent<Plot>().aboveTable) placed.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
             }
         }
     }
