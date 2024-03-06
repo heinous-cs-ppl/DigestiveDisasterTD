@@ -15,6 +15,7 @@ public class StudentInfo : MonoBehaviour
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
     public float bulletLifetime = 1f;
+    public HealthBar healthBar;
 
 
     // extra fields to hold the original values of the attributes
@@ -32,6 +33,7 @@ public class StudentInfo : MonoBehaviour
     private Coroutine timerOn;
     private void Start() {
         currentHp = maxHp;
+        healthBar.setMaxHealth(maxHp);
 
         originalDamage = damage;
         originalRange = range;
@@ -41,7 +43,9 @@ public class StudentInfo : MonoBehaviour
     }
 
     public void TakeDamage(int dmg) {
-        currentHp -= dmg;
+        int newHp = currentHp - dmg;
+        currentHp = newHp;
+        healthBar.setHealth(newHp);
         if(currentHp <= 0) {
             StudentDeath();
         }
@@ -51,10 +55,13 @@ public class StudentInfo : MonoBehaviour
         // Heals the target, but will first check if overhealed. If it is, give max hp, if not, heal normal amount
         if (currentHp + heal > maxHp ) {
             currentHp = maxHp;
+            healthBar.setHealth(maxHp);
         }  
         else 
         {
-            currentHp += heal;
+            int newHp = currentHp + heal;
+            currentHp = newHp;
+            healthBar.setHealth(newHp);
         }
     }
     public void StudentDeath() {
