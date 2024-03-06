@@ -30,6 +30,8 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private float spriteRotation = 0f;
 
+    [SerializeField] private Animator anim;
+
 
     private void Start() {
         StudentInfo student = GetComponent<StudentInfo>();
@@ -59,9 +61,8 @@ public class Turret : MonoBehaviour
             return;
         }
 
-        // Rotates gun towards target
-        RotateTowardsTarget();
-
+        if (target != null) RotateTowardsTarget();
+        
 
         // Steadily brings gun towards next target instead of snapping 
         if (!CheckTargetIsInRange()){
@@ -89,6 +90,8 @@ public class Turret : MonoBehaviour
         Bullets bulletScript = bulletObj.GetComponent<Bullets>();
         bulletScript.SetTarget(target); 
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
+
+        anim.SetTrigger("OnThrow");
     }
 
     // Finds the closest target available
@@ -113,7 +116,25 @@ public class Turret : MonoBehaviour
 
         // Actually rotates the turret
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-        turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        // turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        turretRotationPoint.rotation = targetRotation;
+
+        Vector2 facingDirection = turretRotationPoint.transform.up;
+
+        if (Mathf.Abs(facingDirection.x) > Mathf.Abs(facingDirection.y)) {
+            if(facingDirection.x < 0) {
+                anim.SetTrigger("FaceLeft");
+            } else {
+                anim.SetTrigger("FaceRight");
+            }
+        } else {
+            if(facingDirection.y > 0) {
+                anim.SetTrigger("FaceUp");
+            } else {
+                anim.SetTrigger("FaceDown");
+            }
+        }
+        
     }
 
     // Creates a ring around turret that represents the range in editor (Cannot see in actual game)

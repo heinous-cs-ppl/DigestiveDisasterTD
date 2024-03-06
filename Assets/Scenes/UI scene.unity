@@ -1917,7 +1917,7 @@ MonoBehaviour:
   plotLayer:
     serializedVersion: 2
     m_Bits: 512
-  vacuousStudent: {fileID: 2436313744661315829, guid: 5dda5530003b91543803f71c5ba9e235, type: 3}
+  vacuousStudent: {fileID: 5283033544635284914, guid: 5dda5530003b91543803f71c5ba9e235, type: 3}
   spawnObjs:
   - {fileID: 808091963}
   - {fileID: 1459006600}
