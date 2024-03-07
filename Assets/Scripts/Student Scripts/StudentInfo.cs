@@ -31,6 +31,10 @@ public class StudentInfo : MonoBehaviour
     public Turret turret;
 
     private Coroutine timerOn;
+
+    [Header("Materials for outline")]
+    public Material outline;
+    public Material noOutline;
     private void Start()
     {
         currentHp = maxHp;

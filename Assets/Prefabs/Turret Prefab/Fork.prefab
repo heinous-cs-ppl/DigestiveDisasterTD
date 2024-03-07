@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: -6784355479326202185}
   - component: {fileID: 2688338887147868177}
   m_Layer: 8
-  m_Name: Turret
+  m_Name: Fork
   m_TagString: Student
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
   healthBar: {fileID: 2818691394050949540}
   buffed: 0
   turret: {fileID: 4919567867377686460}
+  outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}
+  noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!212 &-6784355479326202185
 SpriteRenderer:
   m_ObjectHideFlags: 0

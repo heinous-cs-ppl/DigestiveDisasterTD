@@ -38,6 +38,9 @@ public class StudentManager : MonoBehaviour
 
     public static void Select(GameObject student)
     {
+        if (selected != null) {
+            Deselect();
+        }
         selected = student;
 
         RaycastHit2D plotHit = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
@@ -49,11 +52,15 @@ public class StudentManager : MonoBehaviour
 
         // draw the student's range so it's clear which student is selected
         float range = selected.GetComponent<StudentInfo>().range;
+        selected.GetComponent<SpriteRenderer>().material = selected.GetComponent<StudentInfo>().outline;
         DrawRange(range);
     }
 
     public static void Deselect()
     {
+        if (selected != null) {
+            selected.GetComponent<SpriteRenderer>().material = selected.GetComponent<StudentInfo>().noOutline;
+        }
         selected = null;
         plotOfSelected = null;
 
