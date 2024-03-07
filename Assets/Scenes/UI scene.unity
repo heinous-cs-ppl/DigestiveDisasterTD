@@ -1956,8 +1956,7 @@ MonoBehaviour:
   - {fileID: 1527328569}
   waves:
   - {fileID: 8062598552630366563, guid: 890a3e37ff5eee94c8864e04a4eb96a9, type: 3}
-  - {fileID: 8729652660297612924, guid: ab9800b6f7f057c4e9d9bffdc6d20e33, type: 3}
-  - {fileID: 8062598552630366563, guid: 56babc0c6b368c04a92c878a99756540, type: 3}
+  - {fileID: 583666475225075005, guid: 56babc0c6b368c04a92c878a99756540, type: 3}
   spawnObjTransforms: []
 --- !u!4 &240840213
 Transform:
