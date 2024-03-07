@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
 
     // private bool paths = false;     // This will be set to true in start if LevelManager was given paths to work with
 
-    private bool startFirstWave = false;
+    public static bool startFirstWave = false;
 
 
     /* Returns an array of struct defined in Wave.cs */

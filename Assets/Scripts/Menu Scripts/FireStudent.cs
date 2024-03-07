@@ -11,8 +11,14 @@ public class FireStudent : MonoBehaviour
         // Vacuous students don't have a turret
         if (selected.GetComponent<StudentInfo>().turret != null)
         {
-            // refund a fraction of the student's cost
-            MoneyManager.AddMoney((int)(0.5 * selected.GetComponent<StudentInfo>().cost));
+            // if the first round hasn't started, refund the full cost
+            // otherwise, refund a fraction of the cost
+            if (Spawner.startFirstWave) {
+                MoneyManager.AddMoney((int)(0.5 * selected.GetComponent<StudentInfo>().cost));
+            } else {
+                MoneyManager.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
+            }
+            
             UIManager.UpdateMoney();
 
             Destroy(selected);
