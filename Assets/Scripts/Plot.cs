@@ -33,7 +33,6 @@ public class Plot : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         // Debug.Log("Place student here" + name);
         StudentManager.Place(selectedStu, plot, aboveTable);
-        this.student = selectedStu;
         StudentManager.placing = false;
     }
 
