@@ -9,6 +9,7 @@ public class Wave : MonoBehaviour
     [System.Serializable]       // Makes instances of this data structure appear in Unity Inspector
     public struct WavePart
     {
+        public float oneTimeDelay;
         public GameObject enemy;
         public float spawnDelay;
         public int repeats;
@@ -17,7 +18,10 @@ public class Wave : MonoBehaviour
     public static Wave instance;
 
     [Header("Attributes")]
-    public WavePart[] waveEnc;     // Wave details given in Unity Inspector
+    // Wave details given in Unity Inspector
+    public WavePart[] Spawner0WaveEnc;     
+    public WavePart[] Spawner1WaveEnc;
+    public WavePart[] Spawner2WaveEnc;
 
     void Awake()
     {
