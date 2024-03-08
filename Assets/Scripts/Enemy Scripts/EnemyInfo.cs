@@ -1,13 +1,13 @@
+using JetBrains.Annotations;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
     public int maxHp = 10;
-    [HideInInspector] public int currentHp;
-    public Bar healthBar;
+    [SerializeField]
+    private Bar healthBar;
     public int maxPurifyHp = 7;
-    [HideInInspector] public int currentPurifyHp;
     public Bar purifyBar;
     public int spawnPointIndex = 0;
     public int damage = 5;
@@ -20,39 +20,45 @@ public class EnemyInfo : MonoBehaviour
 
     private void Start()
     {
-        currentHp = maxHp;
         healthBar.setMaxValue(maxHp);
         healthBar.setValue(maxHp);
 
-        currentPurifyHp = 0;
         purifyBar.setMaxValue(maxPurifyHp);
         purifyBar.setValue(0);
+    }
+    public int getHealth()
+    {
+        return healthBar.getValue();
+    }
+    public int getPurifyHealth()
+    {
+        return purifyBar.getValue();
     }
 
     // Calculating damage done to enemy
     public void takeDamage(int dmg)
     {
+        int currentHp = getHealth();
         int newHp = currentHp - dmg;
         if (newHp <= 0)
         {
             EnemyDeath();
             return;
         }
-        currentHp = newHp;
         healthBar.setValue(newHp);
     }
 
 
     // Calculating purifying damage done to the enemy
-    public void purifyDamage(int dmg)
+    public void takePurifyDamage(int dmg)
     {
+        int currentPurifyHp = getPurifyHealth();
         int newPurifyHp = currentPurifyHp + dmg;
         if (newPurifyHp >= maxPurifyHp)
         {
             purify();
             return;
         }
-        currentPurifyHp = newPurifyHp;
         purifyBar.setValue(newPurifyHp);
     }
 

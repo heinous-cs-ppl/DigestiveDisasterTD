@@ -7,7 +7,8 @@ public class StudentInfo : MonoBehaviour
     public int cost = 100;
     [Header("Student Attributes")]
     public int maxHp = 10;
-    [HideInInspector] public int currentHp;
+    [SerializeField]
+    private Bar healthBar;
     public int damage = 1;
     public float range = 3f;
     public float rotationSpeed = 1000f;
@@ -15,7 +16,6 @@ public class StudentInfo : MonoBehaviour
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
     public float bulletLifetime = 1f;
-    public Bar healthBar;
 
 
     // extra fields to hold the original values of the attributes
@@ -37,9 +37,8 @@ public class StudentInfo : MonoBehaviour
     public Material noOutline;
     private void Start()
     {
-        currentHp = maxHp;
         healthBar.setMaxValue(maxHp);
-        healthBar.setValue(currentHp);
+        healthBar.setValue(maxHp);
 
         originalDamage = damage;
         originalRange = range;
@@ -47,31 +46,37 @@ public class StudentInfo : MonoBehaviour
         originalBulletSpeed = bulletSpeed;
         originalBulletLifetime = bulletLifetime;
     }
+    // Getter for student health
+    public int getHealth()
+    {
+        return healthBar.getValue();
+    }
 
     public void TakeDamage(int dmg)
     {
+        int currentHp = getHealth();
         int newHp = currentHp - dmg;
-        currentHp = newHp;
-        healthBar.setValue(newHp);
-        if (currentHp <= 0)
+
+        if (newHp <= 0)
         {
             StudentDeath();
         }
+
+        healthBar.setValue(newHp);
     }
 
     public void Heal(int heal)
     {
+        int currentHp = getHealth();
+
         // Heals the target, but will first check if overhealed. If it is, give max hp, if not, heal normal amount
         if (currentHp + heal > maxHp)
         {
-            currentHp = maxHp;
             healthBar.setValue(maxHp);
         }
         else
         {
-            int newHp = currentHp + heal;
-            currentHp = newHp;
-            healthBar.setValue(newHp);
+            healthBar.setValue(currentHp + heal);
         }
     }
     public void StudentDeath()
