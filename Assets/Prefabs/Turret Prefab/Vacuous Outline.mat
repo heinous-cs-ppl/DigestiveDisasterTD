@@ -54,7 +54,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Sprite_size_X: 80
+    - _Sprite_size_Y: 120
     - _Thickness: 0.008333334
     m_Colors:
-    - _Color: {r: 0.21226418, g: 0.8587999, b: 1, a: 1}
+    - _Color: {r: 0.3066038, g: 1, b: 0.9667136, a: 1}
   m_BuildTextureStacks: []
