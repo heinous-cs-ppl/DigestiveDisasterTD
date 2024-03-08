@@ -32,6 +32,8 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Animator anim;
 
+    public bool rotateBullet;
+
 
     private void Start()
     {
@@ -95,8 +97,13 @@ public class Turret : MonoBehaviour
     private void Shoot()
     {
         // shoot a projectile with the same rotation as the student (adjusted by the sprite angle)
-        Quaternion adjustedRotation = Quaternion.Euler(0, 0, turretRotationPoint.eulerAngles.z - spriteRotation);
-        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, adjustedRotation);
+        GameObject bulletObj;
+        if(rotateBullet) {
+            Quaternion adjustedRotation = Quaternion.Euler(0, 0, turretRotationPoint.eulerAngles.z - spriteRotation);
+            bulletObj = Instantiate(bulletPrefab, firingPoint.position, adjustedRotation);
+        } else {
+            bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        }
         Bullets bulletScript = bulletObj.GetComponent<Bullets>();
         bulletScript.SetTarget(target);
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);

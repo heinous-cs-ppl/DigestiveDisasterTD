@@ -58,5 +58,5 @@ Material:
     - _Sprite_size_Y: 112
     - _Thickness: 0.008333334
     m_Colors:
-    - _Color: {r: 2.670157, g: 0.39044747, b: 1.1642946, a: 1}
+    - _Color: {r: 1.4142134, g: 0.3706994, b: 0.28684518, a: 1}
   m_BuildTextureStacks: []
