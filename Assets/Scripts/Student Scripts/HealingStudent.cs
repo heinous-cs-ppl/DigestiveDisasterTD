@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HealingTurret : Turret
 {
+    [HideInInspector] public string specificGameObject;
     private new void Update()
     {
         if (ShouldFire())
@@ -33,6 +34,10 @@ public class HealingTurret : Turret
             {
                 closestAlly = collider.transform;
                 minHP = studentInfo.getHealth();
+
+                // Get's the name of the targetted student
+                specificGameObject = collider.gameObject.name;
+
             }
         }
 

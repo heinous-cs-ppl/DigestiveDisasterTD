@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
     // Transform version of spawnObjs
     [HideInInspector] public Transform[] spawnObjTransforms;
 
+    private int studentCount = 1;
+
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake()
@@ -170,6 +172,10 @@ public class LevelManager : MonoBehaviour
             {
                 Vector2 studentPosition = plot.transform.position;
                 GameObject placed = Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
+
+                // Giving name of student in order for healing turret bullet collision to be able to differentiate between the different students
+                placed.name = "Vacuous" + studentCount;
+                studentCount++;
                 if (plot.GetComponent<Plot>().aboveTable) placed.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
             }
         }
