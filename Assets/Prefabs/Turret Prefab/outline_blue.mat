@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Doctor Outline
+  m_Name: outline_blue
   m_Shader: {fileID: -6465566751694194690, guid: b89c7dba1ba33654fb75440b95c07d72, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,9 +54,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Sprite_size_X: 48
-    - _Sprite_size_Y: 116
-    - _Thickness: 0.00862069
+    - _Sprite_size_X: 80
+    - _Sprite_size_Y: 120
+    - _Thickness: 0.008333334
     m_Colors:
-    - _Color: {r: 0.35106888, g: 1.0592737, b: 0.33830205, a: 1}
+    - _Color: {r: 0.29479787, g: 1.0592736, b: 1.0245248, a: 1}
   m_BuildTextureStacks: []

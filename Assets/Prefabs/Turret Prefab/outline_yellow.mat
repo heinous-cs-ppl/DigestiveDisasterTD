@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fork Outline
+  m_Name: outline_yellow
   m_Shader: {fileID: -6465566751694194690, guid: b89c7dba1ba33654fb75440b95c07d72, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
