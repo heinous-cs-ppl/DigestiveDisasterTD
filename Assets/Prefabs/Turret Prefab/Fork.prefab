@@ -122,6 +122,7 @@ MonoBehaviour:
   firingPoint: {fileID: 8931901967542906486}
   spriteRotation: -45
   anim: {fileID: 2688338887147868177}
+  rotateBullet: 1
 --- !u!58 &1827559064861225114
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -171,14 +172,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 100
   maxHp: 10
-  currentHp: 0
+  healthBar: {fileID: 2818691394050949540}
   damage: 1
   range: 7
   rotationSpeed: 1000
   bps: 1
   bulletSpeed: 15
   bulletLifetime: 0.75
-  healthBar: {fileID: 2818691394050949540}
   buffed: 0
   turret: {fileID: 4919567867377686460}
   outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}

@@ -52,6 +52,8 @@ public class StudentPlacement : MonoBehaviour
 
                 // set the sprite to the student sprite
                 previewSprite.sprite = studentSprite;
+                // set the layer to be above tables
+                previewSprite.sortingLayerName = "Students above tables";
 
                 // set the opacity to 50%
                 Color preview = studentPreview.GetComponent<SpriteRenderer>().color;
