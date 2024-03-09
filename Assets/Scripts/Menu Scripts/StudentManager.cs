@@ -22,7 +22,7 @@ public class StudentManager : MonoBehaviour
 
     public static void Place(GameObject student, Transform plot, bool aboveTable)
     {
-        selected = Instantiate(student, plot.position, Quaternion.identity);
+        selected = Instantiate(student, new Vector2(plot.position.x + student.GetComponent<StudentInfo>().offsetX, plot.position.y), Quaternion.identity);
         plotOfSelected = plot.transform.gameObject;
         Select(selected);
         if (aboveTable) selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";

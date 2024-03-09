@@ -61,7 +61,7 @@ public class StudentPlacement : MonoBehaviour
                 studentPreview.GetComponent<SpriteRenderer>().color = preview;
             }
             // set the position of the student preview to the cursor's position
-            studentPreview.transform.position = cursorPosition;
+            studentPreview.transform.position = new Vector2(cursorPosition.x + studentInfo.offsetX, cursorPosition.y);
 
             if (Input.GetMouseButtonDown(0))
             {

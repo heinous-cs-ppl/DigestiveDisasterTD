@@ -26,7 +26,7 @@ public class StudentInfo : MonoBehaviour
     private float originalBulletLifetime;
 
     private float buffTime = 10f;
-    public bool buffed = false;
+    [HideInInspector] public bool buffed = false;
 
     public Turret turret;
 
@@ -35,6 +35,9 @@ public class StudentInfo : MonoBehaviour
     [Header("Materials for outline")]
     public Material outline;
     public Material noOutline;
+
+    [Header("Sprite stuff")]
+    public float offsetX = 0;
     private void Start()
     {
         healthBar.setMaxValue(maxHp);

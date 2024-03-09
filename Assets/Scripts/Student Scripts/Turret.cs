@@ -26,13 +26,13 @@ public class Turret : MonoBehaviour
 
 
     protected Transform target;
-    private float timeUntilFire;
+    protected float timeUntilFire;
 
     [SerializeField] private float spriteRotation = 0f;
-
-    [SerializeField] private Animator anim;
-
     public bool rotateBullet;
+    [SerializeField] protected Animator anim;
+
+    
 
 
     private void Start()
