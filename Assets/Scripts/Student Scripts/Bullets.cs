@@ -12,19 +12,19 @@ public class Bullets : MonoBehaviour
     // attributes (defined in StudentInfo.cs)
     private float bulletSpeed;
     protected int bulletDamage;
-    private float bulletLifetime;
+    private float bulletDistance;
+    private Vector2 origin;
 
     private Transform target;
 
-    private float curLifetime = 0;
-
     private Vector2 direction;
 
-    public void SetAttributes(float speed, int damage, float lifetime)
+    public void SetAttributes(float speed, int damage, float distance, Vector2 studentPos)
     {
         bulletSpeed = speed;
         bulletDamage = damage;
-        bulletLifetime = lifetime;
+        bulletDistance = distance;
+        origin = studentPos;
     }
     public void SetTarget(Transform _target)
     {
@@ -37,11 +37,17 @@ public class Bullets : MonoBehaviour
             direction = (target.position - transform.position).normalized;
         }
 
+        if (direction == Vector2.zero && !target) {
+            // sometimes bullets are fired as the student dies, and they don't move
+            Destroy(gameObject);
+        }
+
         rb.velocity = direction * bulletSpeed;
 
-        curLifetime += Time.fixedDeltaTime;
-        if (curLifetime >= bulletLifetime)
+        Vector2 delta = (Vector2) transform.position - origin;
+        if (delta.magnitude > bulletDistance)
         {
+            // destroy the bullet when it gets too far from the student
             Destroy(gameObject);
         }
     }

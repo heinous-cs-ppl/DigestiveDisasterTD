@@ -117,19 +117,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 100
-  maxHp: 10
+  cost: 150
+  maxHp: 100
   healthBar: {fileID: 4549084777307704645}
-  damage: 1
-  range: 5
+  damage: 30
+  range: 7
   rotationSpeed: 1000
-  bps: 1
-  bulletSpeed: 15
-  bulletLifetime: 0.5
+  bps: 1.2
+  bulletSpeed: 25
+  bulletDistance: 8
   buffed: 0
   turret: {fileID: 3328366097059150213}
   outline: {fileID: 2100000, guid: fdecad1e1de8e054e81e36c682ca4851, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  offsetX: 0
 --- !u!114 &3328366097059150213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +150,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8208342251038316243, guid: 983d8821814711a48b2ea08e6d99d388, type: 3}
   firingPoint: {fileID: 6815504381293445546}
   spriteRotation: 0
-  anim: {fileID: 1700172236882340006}
   rotateBullet: 0
+  anim: {fileID: 1700172236882340006}
 --- !u!212 &2595080332699581591
 SpriteRenderer:
   m_ObjectHideFlags: 0

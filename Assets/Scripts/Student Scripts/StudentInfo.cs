@@ -15,7 +15,7 @@ public class StudentInfo : MonoBehaviour
     [Header("Bullet Attributes")]
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
-    public float bulletLifetime = 1f;
+    public float bulletDistance = 3f;
 
 
     // extra fields to hold the original values of the attributes
@@ -23,7 +23,7 @@ public class StudentInfo : MonoBehaviour
     private float originalRange;
     private float originalBps;
     private float originalBulletSpeed;
-    private float originalBulletLifetime;
+    private float originalBulletDistance;
 
     private float buffTime = 10f;
     [HideInInspector] public bool buffed = false;
@@ -47,7 +47,7 @@ public class StudentInfo : MonoBehaviour
         originalRange = range;
         originalBps = bps;
         originalBulletSpeed = bulletSpeed;
-        originalBulletLifetime = bulletLifetime;
+        originalBulletDistance = bulletDistance;
     }
     // Getter for student health
     public int getHealth()
@@ -86,6 +86,7 @@ public class StudentInfo : MonoBehaviour
     {
         RaycastHit2D plothit = Physics2D.Raycast(transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
         Plot plot = plothit.transform.gameObject.GetComponent<Plot>();
+        if (StudentManager.selected == gameObject) StudentManager.Deselect();
         Destroy(gameObject);
         plot.student = null;
     }
@@ -109,7 +110,7 @@ public class StudentInfo : MonoBehaviour
         damage = (int)Mathf.Ceil(damage * 1.3f);
         range *= 1.3f;
         bulletSpeed *= 1.3f;
-        bulletLifetime *= 1.3f;
+        bulletDistance *= 1.3f;
 
         // Vacuous students don't have a turret
         if (turret != null)
@@ -145,7 +146,7 @@ public class StudentInfo : MonoBehaviour
         bps = originalBps;
         range = originalRange;
         bulletSpeed = originalBulletSpeed;
-        bulletLifetime = originalBulletLifetime;
+        bulletDistance = originalBulletDistance;
         buffed = false;
 
         if (turret != null)
