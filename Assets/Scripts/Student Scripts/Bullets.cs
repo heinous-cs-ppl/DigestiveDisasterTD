@@ -45,12 +45,4 @@ public class Bullets : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // Take health from Enemy
-        other.gameObject.GetComponent<EnemyInfo>().takeDamage(bulletDamage);
-        Destroy(gameObject);
-    }
-
 }

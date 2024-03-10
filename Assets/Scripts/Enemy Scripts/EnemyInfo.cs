@@ -40,6 +40,7 @@ public class EnemyInfo : MonoBehaviour
     {
         int currentHp = getHealth();
         int newHp = currentHp - dmg;
+        Debug.Log("Damaged");
         if (newHp <= 0)
         {
             EnemyDeath();

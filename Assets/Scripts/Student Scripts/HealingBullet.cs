@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealingBullet : Bullets
 {  
     HealingTurret objectName;
+    public GameObject healingAoe;
     private void Awake()
     {
         objectName = FindObjectOfType<HealingTurret>();
@@ -14,14 +15,12 @@ public class HealingBullet : Bullets
     {
         string collided = other.gameObject.name;
         string target = objectName.specificGameObject;
-
-        Debug.Log(collided + ":" + target);
-
         // Will check if the collided target matches with the inteded target
         if (target == collided)
         {
-            // Give health to allies
-            other.gameObject.GetComponent<StudentInfo>().Heal(bulletDamage);
+            // Changes to explosion prefab
+            Instantiate(healingAoe, transform.position, transform.rotation);
+
             // Destroy the bullet regardless of the collided object
             Destroy(gameObject);
         }

@@ -16,6 +16,7 @@ public class StudentInfo : MonoBehaviour
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
     public float bulletLifetime = 1f;
+    public bool healer = false;
 
 
     // extra fields to hold the original values of the attributes
