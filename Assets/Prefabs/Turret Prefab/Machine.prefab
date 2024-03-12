@@ -159,8 +159,7 @@ MonoBehaviour:
   bulletSpeed: 15
   bulletLifetime: 0.75
   description: Queen's students created a machine that can purify food regardless
-    of its HP! Extremely low range, takes longer to recharge if the enemy has more
-    purify HP.
+    of its HP! Low range, takes longer to recharge based on enemy's purify HP.
   buffed: 0
   turret: {fileID: 0}
   outline: {fileID: 2100000, guid: 136d33f1fd2ab6845b03a1e1972e439c, type: 2}
