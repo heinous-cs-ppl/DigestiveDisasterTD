@@ -17,6 +17,8 @@ public class StudentInfo : MonoBehaviour
     public float bulletSpeed = 5f;
     public float bulletDistance = 3f;
 
+    public string description = "SAMPLE TEXT";
+
 
     // extra fields to hold the original values of the attributes
     private int originalDamage;

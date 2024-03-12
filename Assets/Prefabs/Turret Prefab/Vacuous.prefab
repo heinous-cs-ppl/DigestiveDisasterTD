@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 100
+  cost: 0
   maxHp: 50
   healthBar: {fileID: 1713564991460712253}
   damage: 0
@@ -155,7 +155,8 @@ MonoBehaviour:
   rotationSpeed: 0
   bps: 0
   bulletSpeed: 0
-  bulletDistance: 0
+  bulletLifetime: 0
+  description: SAMPLE TEXT
   buffed: 0
   turret: {fileID: 0}
   outline: {fileID: 2100000, guid: 87d19ebd08ddeae47b3aa5a17b1d815d, type: 2}

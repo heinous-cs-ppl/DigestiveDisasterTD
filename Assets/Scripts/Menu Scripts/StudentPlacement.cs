@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class StudentPlacement : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class StudentPlacement : MonoBehaviour
     private GameObject map;
     private GameObject ui;
     private Bounds mapBounds;
+    public TextMeshProUGUI studentPrice;
     [HideInInspector] public static bool studentPlacedOnPlot = false;
 
     void Start()
@@ -27,6 +29,8 @@ public class StudentPlacement : MonoBehaviour
         mapBounds = mapSprite.bounds;
 
         studentInfo = student.GetComponent<StudentInfo>();
+
+        studentPrice.text = "$" + studentInfo.cost;
 
         moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
     }
@@ -114,7 +118,7 @@ public class StudentPlacement : MonoBehaviour
         StudentManager.Deselect();
         StudentManager.selected = student;
         // show UI for hiring a student
-        UIManager.ShowStudentHiringUI(student, studentSprite);
+        UIManager.ShowStudentHiringUI(student);
     }
 
     IEnumerator FlashSprite()

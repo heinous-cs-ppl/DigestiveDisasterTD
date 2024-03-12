@@ -11,13 +11,15 @@ public class UIManager : MonoBehaviour
     private static TextMeshProUGUI moneyCount;
 
     private static GameObject studentHireUI;
-    private static TextMeshProUGUI studentHireUIStudentCost;
-    private static TextMeshProUGUI studentHireUIStudentHP;
-    private static TextMeshProUGUI studentHireUIStudentRange;
-    private static TextMeshProUGUI studentHireUIStudentDamage;
-    private static TextMeshProUGUI studentHireUIStudentBPS;
-    private static Image studentHireUIStudentImage;
+    private static Slider studentHireUIStudentHP;
+    private static Slider studentHireUIStudentRange;
+    private static Slider studentHireUIStudentDamage;
+    private static Slider studentHireUIStudentBPS;
     private static StudentInfo studentHireUIStudentInfo;
+    private static TextMeshProUGUI studentHireUIDescription;
+
+    private static GameObject fireButton;
+    private static RectTransform moveButton;
 
     private static TextMeshProUGUI gameOver;
 
@@ -31,6 +33,10 @@ public class UIManager : MonoBehaviour
         moneyCount = GameObject.Find("Money Count").GetComponent<TextMeshProUGUI>();
         UIManager.UpdateMoney();
 
+        // get the fire and move buttons
+        fireButton = GameObject.Find("Fire Button");
+        moveButton = GameObject.Find("Move Button").GetComponent<RectTransform>();
+
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
         UIManager.HideStudentSelectedUI();
@@ -38,13 +44,13 @@ public class UIManager : MonoBehaviour
         // initialize and hide the student hiring UI and related fields
         studentHireUI = GameObject.Find("Student Hire BG");
 
-        studentHireUIStudentImage = GameObject.Find("Student Hire UI Student Image").GetComponent<Image>();
+        studentHireUIStudentHP = GameObject.Find("Health bar").GetComponent<Slider>();
+        studentHireUIStudentDamage = GameObject.Find("Damage bar").GetComponent<Slider>();
+        studentHireUIStudentRange = GameObject.Find("Range bar").GetComponent<Slider>();
+        studentHireUIStudentBPS = GameObject.Find("BPS bar").GetComponent<Slider>();
 
-        studentHireUIStudentCost = GameObject.Find("Student Hire UI Student Cost").GetComponent<TextMeshProUGUI>();
-        studentHireUIStudentHP = GameObject.Find("Student Hire UI Student HP").GetComponent<TextMeshProUGUI>();
-        studentHireUIStudentRange = GameObject.Find("Student Hire UI Student Range").GetComponent<TextMeshProUGUI>();
-        studentHireUIStudentDamage = GameObject.Find("Student Hire UI Student Damage").GetComponent<TextMeshProUGUI>();
-        studentHireUIStudentBPS = GameObject.Find("Student Hire UI Student BPS").GetComponent<TextMeshProUGUI>();
+        // get the student description object
+        studentHireUIDescription = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();
 
         UIManager.HideStudentHiringUI();
 
@@ -65,6 +71,16 @@ public class UIManager : MonoBehaviour
     public static void ShowStudentSelectedUI()
     {
         studentSelectUI.SetActive(true);
+
+        if (StudentManager.selected.GetComponent<StudentInfo>().cost == 0) {
+            // vacuous students will be the only student that costs 0
+            // if selected student is vacuous, remove the fire button and make the move button wider
+            moveButton.sizeDelta = new Vector2(7, 2);
+            fireButton.SetActive(false);
+        } else {
+            moveButton.sizeDelta = new Vector2(3.375f, 2);
+            fireButton.SetActive(true);
+        }
     }
 
     public static void HideStudentSelectedUI()
@@ -77,20 +93,21 @@ public class UIManager : MonoBehaviour
         studentHireUI.SetActive(false);
     }
 
-    public static void ShowStudentHiringUI(GameObject student, Sprite studentSprite)
+    public static void ShowStudentHiringUI(GameObject student)
     {
         studentHireUI.SetActive(true);
-        studentHireUIStudentImage.sprite = studentSprite;
-
         // get info from the student
         studentHireUIStudentInfo = student.GetComponent<StudentInfo>();
 
-        // display student's info in the UI
-        studentHireUIStudentCost.text = "$" + studentHireUIStudentInfo.cost.ToString();
-        studentHireUIStudentHP.text = "HP: " + studentHireUIStudentInfo.maxHp.ToString();
-        studentHireUIStudentRange.text = "Range: " + studentHireUIStudentInfo.range.ToString();
-        studentHireUIStudentDamage.text = "Damage: " + studentHireUIStudentInfo.damage.ToString();
-        studentHireUIStudentBPS.text = "Attack Speed: " + studentHireUIStudentInfo.bps.ToString();
+        studentHireUIStudentHP.value = studentHireUIStudentInfo.maxHp;
+
+        studentHireUIStudentDamage.value = studentHireUIStudentInfo.damage;
+
+        studentHireUIStudentRange.value = studentHireUIStudentInfo.range;
+
+        studentHireUIStudentBPS.value = studentHireUIStudentInfo.bps;
+
+        studentHireUIDescription.text = studentHireUIStudentInfo.description;
     }
 
     public static void ShowGameOverUI()
