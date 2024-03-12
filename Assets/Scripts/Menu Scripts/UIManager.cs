@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     private static StudentInfo studentHireUIStudentInfo;
     private static TextMeshProUGUI studentHireUIDescription;
 
+    private static GameObject fireButton;
+    private static RectTransform moveButton;
+
     private static TextMeshProUGUI gameOver;
 
     void Start()
@@ -29,6 +32,10 @@ public class UIManager : MonoBehaviour
         // initialize the money counter in the UI to the starting amount of money
         moneyCount = GameObject.Find("Money Count").GetComponent<TextMeshProUGUI>();
         UIManager.UpdateMoney();
+
+        // get the fire and move buttons
+        fireButton = GameObject.Find("Fire Button");
+        moveButton = GameObject.Find("Move Button").GetComponent<RectTransform>();
 
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
@@ -42,6 +49,7 @@ public class UIManager : MonoBehaviour
         studentHireUIStudentRange = GameObject.Find("Range bar").GetComponent<Slider>();
         studentHireUIStudentBPS = GameObject.Find("BPS bar").GetComponent<Slider>();
 
+        // get the student description object
         studentHireUIDescription = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();
 
         UIManager.HideStudentHiringUI();
@@ -63,6 +71,16 @@ public class UIManager : MonoBehaviour
     public static void ShowStudentSelectedUI()
     {
         studentSelectUI.SetActive(true);
+
+        if (StudentManager.selected.GetComponent<StudentInfo>().cost == 0) {
+            // vacuous students will be the only student that costs 0
+            // if selected student is vacuous, remove the fire button and make the move button wider
+            moveButton.sizeDelta = new Vector2(7, 2);
+            fireButton.SetActive(false);
+        } else {
+            moveButton.sizeDelta = new Vector2(3.375f, 2);
+            fireButton.SetActive(true);
+        }
     }
 
     public static void HideStudentSelectedUI()
