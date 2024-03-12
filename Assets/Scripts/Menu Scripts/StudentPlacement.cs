@@ -114,7 +114,7 @@ public class StudentPlacement : MonoBehaviour
         StudentManager.Deselect();
         StudentManager.selected = student;
         // show UI for hiring a student
-        UIManager.ShowStudentHiringUI(student, studentSprite);
+        UIManager.ShowStudentHiringUI(student);
     }
 
     IEnumerator FlashSprite()

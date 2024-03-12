@@ -158,6 +158,8 @@ MonoBehaviour:
   bps: 1
   bulletSpeed: 15
   bulletLifetime: 0.75
+  description: Throws rejuvenating packets at nearby students, healing them in an
+    AOE.
   buffed: 0
   turret: {fileID: -4455204360603486957}
   outline: {fileID: 2100000, guid: f75814948922dde4fa70441d6eb54964, type: 2}

@@ -17,6 +17,8 @@ public class StudentInfo : MonoBehaviour
     public float bulletSpeed = 5f;
     public float bulletLifetime = 1f;
 
+    public string description = "SAMPLE TEXT";
+
 
     // extra fields to hold the original values of the attributes
     private int originalDamage;
