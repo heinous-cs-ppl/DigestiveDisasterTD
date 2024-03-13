@@ -158,6 +158,7 @@ MonoBehaviour:
   bps: 0.5
   bulletSpeed: 15
   bulletDistance: 5
+  description: Throws healthy supplements at nearby students, healing in an AOE.
   buffed: 0
   turret: {fileID: -4455204360603486957}
   outline: {fileID: 2100000, guid: f75814948922dde4fa70441d6eb54964, type: 2}

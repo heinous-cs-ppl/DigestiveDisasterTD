@@ -126,8 +126,7 @@ MonoBehaviour:
   bps: 1.2
   bulletSpeed: 25
   bulletDistance: 8
-  description: Throws a flask of purifying fluid at enemies! Deals low purifying
-    damage.
+  description: Throws a flask of purifying fluid at enemies! Deals purifying damage!
   buffed: 0
   turret: {fileID: 3328366097059150213}
   outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}

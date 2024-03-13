@@ -26,7 +26,9 @@ public class GiveMeal : MonoBehaviour
             // update the counter on the UI
             UIManager.UpdateMealCount();
             // give buffs to the selected student
-            selected.GetComponent<StudentInfo>().Feed();
+            StudentInfo selectedInfo = selected.GetComponent<StudentInfo>();
+            selectedInfo.Feed();
+            UIManager.UpdateSelectedBars(selectedInfo);
             // "reselect" the selected student to redraw the range circle (I'm lazy)
             StudentManager.Select(StudentManager.selected);
         }

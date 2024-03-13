@@ -173,7 +173,7 @@ MonoBehaviour:
   cost: 150
   maxHp: 100
   healthBar: {fileID: 2818691394050949540}
-  damage: 40
+  damage: 50
   range: 8
   rotationSpeed: 1000
   bps: 1.75

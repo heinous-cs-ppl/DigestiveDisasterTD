@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static GameObject studentSelectUI;
+    private static Slider studentSelectUIStudentHP;
+    private static Slider studentSelectUIStudentRange;
+    private static Slider studentSelectUIStudentDamage;
+    private static Slider studentSelectUIStudentBPS;
     private static TextMeshProUGUI purifyCount;
     private static TextMeshProUGUI moneyCount;
 
@@ -36,6 +40,11 @@ public class UIManager : MonoBehaviour
         // get the fire and move buttons
         fireButton = GameObject.Find("Fire Button");
         moveButton = GameObject.Find("Move Button").GetComponent<RectTransform>();
+
+        studentSelectUIStudentHP = GameObject.Find("Health bar S").GetComponent<Slider>();
+        studentSelectUIStudentDamage = GameObject.Find("Damage bar S").GetComponent<Slider>();
+        studentSelectUIStudentRange = GameObject.Find("Range bar S").GetComponent<Slider>();
+        studentSelectUIStudentBPS = GameObject.Find("BPS bar S").GetComponent<Slider>();
 
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
@@ -75,12 +84,15 @@ public class UIManager : MonoBehaviour
         if (StudentManager.selected.GetComponent<StudentInfo>().cost == 0) {
             // vacuous students will be the only student that costs 0
             // if selected student is vacuous, remove the fire button and make the move button wider
-            moveButton.sizeDelta = new Vector2(7, 2);
+            moveButton.sizeDelta = new Vector2(7, moveButton.sizeDelta.y);
             fireButton.SetActive(false);
         } else {
-            moveButton.sizeDelta = new Vector2(3.375f, 2);
+            moveButton.sizeDelta = new Vector2(3.375f, moveButton.sizeDelta.y);
             fireButton.SetActive(true);
         }
+
+        StudentInfo selectedInfo = StudentManager.selected.GetComponent<StudentInfo>();
+        UpdateSelectedBars(selectedInfo);
     }
 
     public static void HideStudentSelectedUI()
@@ -118,5 +130,12 @@ public class UIManager : MonoBehaviour
     public static void HideGameOverUI()
     {
         gameOver.text = "";
+    }
+
+    public static void UpdateSelectedBars(StudentInfo info) {
+        studentSelectUIStudentHP.value = info.getHealth();
+        studentSelectUIStudentDamage.value = info.damage;
+        studentSelectUIStudentRange.value = info.range;
+        studentSelectUIStudentBPS.value = info.bps;
     }
 }
