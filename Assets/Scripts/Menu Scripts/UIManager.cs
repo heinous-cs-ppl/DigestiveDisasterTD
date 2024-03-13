@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     private static TextMeshProUGUI gameOver;
 
+    private static TextMeshProUGUI studentsDeadText;
+
     void Start()
     {
         // initialize the purify counter in the UI to 0
@@ -65,6 +67,10 @@ public class UIManager : MonoBehaviour
 
         gameOver = GameObject.Find("Game Over").GetComponent<TextMeshProUGUI>();
         UIManager.HideGameOverUI();
+
+        // get students dead text
+        studentsDeadText = GameObject.Find("Students Dead").GetComponent<TextMeshProUGUI>();
+        UpdateStudentsDeadText();
     }
 
     public static void UpdateMealCount()
@@ -138,5 +144,9 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentDamage.value = info.damage;
         studentSelectUIStudentRange.value = info.range;
         studentSelectUIStudentBPS.value = info.bps;
+    }
+
+    public static void UpdateStudentsDeadText() {
+        studentsDeadText.text = "Students Dead: " + LevelManager.instance.studentsDead + "/" + LevelManager.instance.deathLimit;
     }
 }

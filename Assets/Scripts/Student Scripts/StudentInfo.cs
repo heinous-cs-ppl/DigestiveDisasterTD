@@ -98,6 +98,7 @@ public class StudentInfo : MonoBehaviour
         plot.student = null;
 
         LevelManager.instance.studentsDead += 1;
+        UIManager.UpdateStudentsDeadText();
         if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit) {
             LevelManager.instance.GameOver();
         }
