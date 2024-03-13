@@ -7,8 +7,8 @@ public class StudentInfo : MonoBehaviour
     public int cost = 100;
     [Header("Student Attributes")]
     public int maxHp = 10;
-    [SerializeField]
-    private Bar healthBar;
+    [SerializeField] private Bar healthBar;
+    [SerializeField] private Bar purifyTimerBar;
     public int damage = 1;
     public float range = 3f;
     public float rotationSpeed = 1000f;
@@ -45,6 +45,9 @@ public class StudentInfo : MonoBehaviour
     {
         healthBar.setMaxValue(maxHp);
         healthBar.setValue(maxHp);
+
+        purifyTimerBar.setMaxValue(buffTime);
+        purifyTimerBar.gameObject.SetActive(false);
 
         originalDamage = damage;
         originalRange = range;
@@ -125,9 +128,14 @@ public class StudentInfo : MonoBehaviour
         bulletSpeed *= 1.3f;
         bulletDistance *= 1.3f;
 
+        
+
         // Vacuous students don't have a turret
         if (turret != null)
         {
+            purifyTimerBar.gameObject.SetActive(true);
+            purifyTimerBar.setValue(buffTime);
+
             turret.SetStudentAttributes(this);
             turret.SetBulletAttributes(this);
             // delay
@@ -140,7 +148,14 @@ public class StudentInfo : MonoBehaviour
     private IEnumerator BuffTimer()
     {
         // wait for timer before removing buffs
-        yield return new WaitForSeconds(buffTime);
+        float iterationTime = 0.01f;
+        float counter = 0f;
+        while (counter < buffTime) {
+            yield return new WaitForSeconds(iterationTime);
+            counter += iterationTime;
+            purifyTimerBar.setValue(buffTime - counter);
+        }
+        
         RevertBuffs();
     }
 
@@ -150,6 +165,8 @@ public class StudentInfo : MonoBehaviour
         if (timerOn != null) StopCoroutine(timerOn);
 
         Debug.Log("refreshed buff");
+        purifyTimerBar.setValue(buffTime);
+
         // start a new timer
         timerOn = StartCoroutine(BuffTimer());
     }
@@ -170,6 +187,7 @@ public class StudentInfo : MonoBehaviour
         }
 
         Debug.Log("Removed buffs");
+        purifyTimerBar.gameObject.SetActive(false);
 
         // reselect student if it is currently selected
         if (StudentManager.selected == gameObject) StudentManager.Select(gameObject);

@@ -30,11 +30,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2676450933511664564}
+  m_Father: {fileID: 3208497097635247786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.09375, y: 0.265625}
+  m_AnchoredPosition: {x: 0.09375, y: 0.078125}
   m_SizeDelta: {x: 1.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6389282560467968435
@@ -171,6 +171,7 @@ RectTransform:
   - {fileID: 7770280586205684963}
   - {fileID: 7944139751798894606}
   - {fileID: 3909031875167448899}
+  - {fileID: 2303502160260837394}
   m_Father: {fileID: 2676450933511664564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -352,6 +353,7 @@ MonoBehaviour:
   cost: 100
   maxHp: 120
   healthBar: {fileID: 2818691394050949540}
+  purifyTimerBar: {fileID: 7573675254489230571}
   damage: 70
   range: 6
   rotationSpeed: 1000
@@ -892,9 +894,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1715933004402406023, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3208497097635247786}
-    - targetCorrespondingSourceObject: {fileID: 1715933004402406023, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2303502160260837394}
     - targetCorrespondingSourceObject: {fileID: 1715933004402406023, guid: dc137d959aeb64eada4acdf64f76d555, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3407090267636787152}

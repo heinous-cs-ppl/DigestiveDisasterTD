@@ -8,7 +8,7 @@ public class Bar : MonoBehaviour
     [SerializeField]
     private Slider slider;
 
-    public void setMaxValue(int value)
+    public void setMaxValue(float value)
     {
         slider.maxValue = value;
     }
@@ -16,7 +16,7 @@ public class Bar : MonoBehaviour
     {
         return (int)slider.maxValue;
     }
-    public void setValue(int value)
+    public void setValue(float value)
     {
         slider.value = value;
     }
