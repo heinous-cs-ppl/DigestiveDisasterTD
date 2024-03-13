@@ -520,17 +520,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3ecc932a550794db81f40b9d3c1a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
-  currentHp: 0
+  maxHp: 100
   healthBar: {fileID: 548791979858506205}
-  maxPurifyHp: 10
-  currentPurifyHp: 0
+  maxPurifyHp: 100
   purifyBar: {fileID: 5809816167552508561}
   spawnPointIndex: 0
-  damage: 6
-  speed: 2
+  damage: 60
+  speed: 1
   attackRadius: 0.55
-  moneyDrop: 10
+  moneyDrop: 50
   buffs: []
 --- !u!58 &-7922788916589517486
 CircleCollider2D:

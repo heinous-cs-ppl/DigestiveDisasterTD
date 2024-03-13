@@ -20,7 +20,7 @@ public class Turret : MonoBehaviour
     // attributes for the bullets (also defined in StudentInfo.cs)
     private float bulletSpeed;
     private int bulletDamage;
-    private float bulletLifetime;
+    private float bulletDistance;
 
     private float bps; // Bullets Per Second
 
@@ -41,6 +41,7 @@ public class Turret : MonoBehaviour
 
         SetStudentAttributes(student);
         SetBulletAttributes(student);
+        timeUntilFire = 1f / bps;
     }
 
     public void SetStudentAttributes(StudentInfo student)
@@ -54,7 +55,7 @@ public class Turret : MonoBehaviour
     {
         bulletSpeed = student.bulletSpeed;
         bulletDamage = student.damage;
-        bulletLifetime = student.bulletLifetime;
+        bulletDistance = student.bulletDistance;
     }
 
     // Updates the turret gun to aim at food
@@ -106,7 +107,7 @@ public class Turret : MonoBehaviour
         }
         Bullets bulletScript = bulletObj.GetComponent<Bullets>();
         bulletScript.SetTarget(target);
-        bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletLifetime);
+        bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletDistance, gameObject.transform.position);
 
         // set throwing animation
         if(anim != null) anim.SetTrigger("OnThrow");

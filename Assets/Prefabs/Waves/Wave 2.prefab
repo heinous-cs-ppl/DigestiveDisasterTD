@@ -44,16 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af43366a25c98f44786aa0f5384d73b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawner0WaveEnc:
-  - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 13f77efa2bfb9a245844f9959dddc6f0, type: 3}
-    spawnDelay: 0
-    repeats: 0
+  Spawner0WaveEnc: []
   Spawner1WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
-    spawnDelay: 0
-    repeats: 0
+    spawnDelay: 2
+    repeats: 3
+  - oneTimeDelay: 1
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.8
+    repeats: 3
+  - oneTimeDelay: 2
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.8
+    repeats: 3
+  - oneTimeDelay: 2
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.8
+    repeats: 3
   Spawner2WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}

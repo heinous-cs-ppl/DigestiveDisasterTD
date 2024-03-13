@@ -46,7 +46,7 @@ public class MachineStudent : Turret {
         anim.SetTrigger("Attack");
 
         // once timer hits some value (related to target's purify hp), give a purified meal
-        float cooldown = 1 + 0.3f * (maxPurify - currentPurify);
+        float cooldown = 1.5f + 0.02f * (maxPurify - currentPurify);
         
         StartCoroutine(AttackCooldown(cooldown, moneyDrop));
     }
