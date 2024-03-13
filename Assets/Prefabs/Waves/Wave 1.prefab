@@ -48,7 +48,7 @@ MonoBehaviour:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 2
-    repeats: 2
+    repeats: 4
   - oneTimeDelay: 1
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 1.2

@@ -349,13 +349,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 150
-  maxHp: 100
+  cost: 100
+  maxHp: 120
   healthBar: {fileID: 2818691394050949540}
-  damage: 50
-  range: 8
+  damage: 70
+  range: 6
   rotationSpeed: 1000
-  bps: 1.75
+  bps: 1
   bulletSpeed: 25
   healer: 0
   bulletDistance: 10

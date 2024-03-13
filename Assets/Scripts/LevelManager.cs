@@ -125,29 +125,44 @@ public class LevelManager : MonoBehaviour
             }
 
             // Randomly select a how many plots plots will get vacuous students
-            int numVac = Random.Range(2, Mathf.Min(6, free + 1));    // 2 to 5 vacuous students can come at most
+            // int numVac = Random.Range(2, Mathf.Min(6, free + 1));    // 2 to 5 vacuous students can come at most
+            int numVac = Mathf.Min(3, free); // spawns 3 students, unless there are less than 3 free plots
             int[] vacPlotIdxs = new int[numVac];
             Plot[] vacPlots = new Plot[numVac];
 
-            // Randomly select the indices of the freeplots to place vacuous students on
-            for (int i = 0; i < numVac; i++)
-            {
-                bool dupes = true;
-                while (dupes)
-                {
-                    vacPlotIdxs[i] = Random.Range(0, free);
-                    dupes = false;
-
-                    // Check if a duplicate index was generated
-                    for (int j = 0; j < i; j++)
-                    {
-                        if (vacPlotIdxs[j] == vacPlotIdxs[i])
-                        {
-                            dupes = true;
-                        }
-                    }
-                }
+            // create a list containing numbers 1 to free
+            List<int> freeIdxs = new List<int>();
+            for (int i = 0; i < free; i++) {
+                freeIdxs.Add(i);
             }
+
+            // select numVac random numbers from the array of free indices
+            for (int i = 0; i < numVac; i++) {
+                int randIdx = Random.Range(0, free - i);
+                vacPlotIdxs[i] = freeIdxs[randIdx];
+                // remove the selected index from the array
+                freeIdxs.RemoveAt(randIdx);
+            }
+
+            // Randomly select the indices of the freeplots to place vacuous students on
+            // for (int i = 0; i < numVac; i++)
+            // {
+            //     bool dupes = true;
+            //     while (dupes)
+            //     {
+            //         vacPlotIdxs[i] = Random.Range(0, free);
+            //         dupes = false;
+
+            //         // Check if a duplicate index was generated
+            //         for (int j = 0; j < i; j++)
+            //         {
+            //             if (vacPlotIdxs[j] == vacPlotIdxs[i])
+            //             {
+            //                 dupes = true;
+            //             }
+            //         }
+            //     }
+            // }
 
             // Get the plot objects and set to be occupied
             for (int i = 0; i < numVac; i++)
