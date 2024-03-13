@@ -127,5 +127,37 @@ public class StudentManager : MonoBehaviour
                 }
             }
         }
+
+        // if right click on a student, give them a purified meal
+        if (Input.GetMouseButtonDown(1)) {
+            
+            // check if cursor is on map
+            Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // round the cursor position to the middle of the tile
+            cursorPosition.x = Mathf.Ceil(cursorPosition.x) - 0.5f;
+            cursorPosition.y = Mathf.Ceil(cursorPosition.y) - 0.5f;
+
+            Debug.Log("right click");
+            RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
+            if (hit) {
+                Debug.Log("right clicked on student");
+                // clicked on a student, select the student
+                GameObject student = hit.collider.gameObject;
+                
+                if (PurifyManager.UseMeal())
+                {
+                    // update the counter on the UI
+                    UIManager.UpdateMealCount();
+                    // give buffs to the selected student
+                    StudentInfo clicked = student.GetComponent<StudentInfo>();
+                    clicked.Feed();
+                    if (StudentManager.selected == student) {
+                        UIManager.UpdateSelectedBars(clicked);
+                        // "reselect" the selected student to redraw the range circle (I'm lazy)
+                        StudentManager.Select(StudentManager.selected);
+                    }
+                }
+            }
+        }
     }
 }
