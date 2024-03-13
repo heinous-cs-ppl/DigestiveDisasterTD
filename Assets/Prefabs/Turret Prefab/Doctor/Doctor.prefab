@@ -152,10 +152,10 @@ MonoBehaviour:
   cost: 200
   maxHp: 70
   healthBar: {fileID: 7254655577153231281}
-  damage: 30
+  damage: 10
   range: 4
   rotationSpeed: 1000
-  bps: 0.5
+  bps: 1.5
   bulletSpeed: 15
   healer: 1
   bulletDistance: 5
