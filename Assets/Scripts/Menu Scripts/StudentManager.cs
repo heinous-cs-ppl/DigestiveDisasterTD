@@ -130,7 +130,7 @@ public class StudentManager : MonoBehaviour
 
         // if right click on a student, give them a purified meal
         if (Input.GetMouseButtonDown(1)) {
-            
+
             // check if cursor is on map
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
@@ -158,6 +158,13 @@ public class StudentManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // if escape is pressed, deselect the student
+        if (Input.GetKeyDown(KeyCode.Escape) && !placing && !moving)
+        {
+            Deselect();
+            Debug.Log("pressed esc, deselect");
         }
     }
 }

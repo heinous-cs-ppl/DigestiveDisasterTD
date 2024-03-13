@@ -38,6 +38,12 @@ public class StudentPlacement : MonoBehaviour
     // Just deal with placing student
     void Update()
     {
+        // if escape is pressed, terminate placement mode
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine(StopPlacingStudent());
+            return;
+        }
         // get cursor position
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // round the cursor position to the middle of the tile

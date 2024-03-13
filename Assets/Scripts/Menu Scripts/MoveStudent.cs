@@ -51,6 +51,14 @@ public class MoveStudent : MonoBehaviour
     {
         if (StudentManager.moving)
         {
+            // if escape is pressed, terminate moving
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                StudentManager.moving = false;
+                if (studentPreview) Destroy(studentPreview);
+                return;
+            }
+            
             // get cursor position
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
