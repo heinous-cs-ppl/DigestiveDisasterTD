@@ -157,6 +157,7 @@ MonoBehaviour:
   rotationSpeed: 1000
   bps: 0
   bulletSpeed: 0
+  healer: 0
   bulletDistance: 0
   description: Queen's students created a machine that can purify food regardless
     of its HP! Low range, takes longer to recharge based on enemy's purify HP.

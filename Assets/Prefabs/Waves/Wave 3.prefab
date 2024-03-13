@@ -62,8 +62,4 @@ MonoBehaviour:
     enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
     spawnDelay: 1
     repeats: 2
-  Spawner2WaveEnc:
-  - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
-    spawnDelay: 0
-    repeats: 0
+  Spawner2WaveEnc: []

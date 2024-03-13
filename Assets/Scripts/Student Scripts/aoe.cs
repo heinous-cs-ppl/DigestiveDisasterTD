@@ -21,7 +21,7 @@ public class aoe : MonoBehaviour
         if (healer)
         {
             // Give health to allies
-            other.gameObject.GetComponent<StudentInfo>().Heal(bulletDamage);  
+            other.gameObject.GetComponent<StudentInfo>().Heal(bulletDamage);
             Destroy(gameObject);  
         } 
         else 

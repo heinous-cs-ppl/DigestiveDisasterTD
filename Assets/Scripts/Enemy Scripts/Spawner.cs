@@ -1,6 +1,8 @@
 using UnityEngine;
 // using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
+
 
 public class Spawner : MonoBehaviour
 {
@@ -35,6 +37,7 @@ public class Spawner : MonoBehaviour
     private bool[] spawn = {false, false, false};
     public static bool anySpawning = false;
 
+    public Button nextWaveButton;
 
     /* Returns an array of struct defined in Wave.cs */
     private Wave.WavePart[][] getWaveInfo(GameObject waveObj)
@@ -54,6 +57,7 @@ public class Spawner : MonoBehaviour
         if (!anySpawning && waveIdx < (waves - 1)) {
             // Spawn random vacuous students
             LevelManager.instance.SpawnVacuousStudents();
+            nextWaveButton.interactable = false;
 
             // Get new wave information
             waveIdx++;
@@ -75,9 +79,9 @@ public class Spawner : MonoBehaviour
             spawn[2] = true;
             // curEnemy[0] = curWaveSpawner0Info[i[0]];
             // These will all run simultaneously
-            StartCoroutine(SpawnerThread0());   // Grill Station
-            StartCoroutine(SpawnerThread1());   // Entree Station
-            StartCoroutine(SpawnerThread2());   // Pizza Station
+            StartCoroutine(SpawnerThread0());
+            StartCoroutine(SpawnerThread1());
+            StartCoroutine(SpawnerThread2());
         }
         Debug.Log("Wave "+waveIdx);
     }
@@ -203,6 +207,9 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         anySpawning = spawn[0] || spawn[1] || spawn[2];
+        if (!anySpawning && waveIdx < (waves - 1)) {
+            nextWaveButton.interactable = true;
+        }
     }
 }
 

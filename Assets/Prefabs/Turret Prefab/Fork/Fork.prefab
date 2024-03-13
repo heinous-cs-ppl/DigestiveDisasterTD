@@ -178,6 +178,7 @@ MonoBehaviour:
   rotationSpeed: 1000
   bps: 1.75
   bulletSpeed: 25
+  healer: 0
   bulletDistance: 10
   description: Throws forks at enemies. Has high range and deals high damage.
   buffed: 0
