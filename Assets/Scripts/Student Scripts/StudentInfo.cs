@@ -69,6 +69,8 @@ public class StudentInfo : MonoBehaviour
         }
 
         healthBar.setValue(newHp);
+
+        if (StudentManager.selected == gameObject) UIManager.UpdateSelectedBars(this);
     }
 
     public void Heal(int heal)
@@ -84,6 +86,8 @@ public class StudentInfo : MonoBehaviour
         {
             healthBar.setValue(currentHp + heal);
         }
+
+        if (StudentManager.selected == gameObject) UIManager.UpdateSelectedBars(this);
     }
     public void StudentDeath()
     {
@@ -123,6 +127,7 @@ public class StudentInfo : MonoBehaviour
             // delay
             timerOn = StartCoroutine(BuffTimer());
         }
+        UIManager.UpdateSelectedBars(this);
         Debug.Log("Buffed student");
     }
 

@@ -27,11 +27,10 @@ public class StudentManager : MonoBehaviour
         Select(selected);
         if (aboveTable) selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
         
-
-        // show selection UI
-        UIManager.ShowStudentSelectedUI();
         // hide hiring student UI
         UIManager.HideStudentHiringUI();
+        // show selection UI
+        UIManager.ShowStudentSelectedUI();
 
         // draw the student's range so it's clear which student is selected
         float range = selected.GetComponent<StudentInfo>().range;

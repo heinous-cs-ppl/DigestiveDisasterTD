@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   student: {fileID: 2436313744661315829, guid: bd7b79566e50aed4597c695c2aaa808e, type: 3}
+  lingerTime: 0.4

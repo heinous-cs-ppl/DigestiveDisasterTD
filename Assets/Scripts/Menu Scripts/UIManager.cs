@@ -133,6 +133,7 @@ public class UIManager : MonoBehaviour
     }
 
     public static void UpdateSelectedBars(StudentInfo info) {
+        studentSelectUIStudentHP.maxValue = info.maxHp;
         studentSelectUIStudentHP.value = info.getHealth();
         studentSelectUIStudentDamage.value = info.damage;
         studentSelectUIStudentRange.value = info.range;

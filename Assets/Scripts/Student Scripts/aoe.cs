@@ -1,35 +1,38 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using UnityEditor.Timeline.Actions;
-using UnityEngine;
+
 
 public class aoe : MonoBehaviour
 {
     private int bulletDamage;
     private bool healer;
     public GameObject student;
-    
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        // Gets needed data for damage
+    public float lingerTime = 0.4f;
+
+    void Awake() {
         StudentInfo studentScript = student.GetComponent<StudentInfo>();
         bulletDamage = studentScript.damage;
         healer = studentScript.healer;
-
+        StartCoroutine(DestroyAfterDelay(lingerTime));
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         if (healer)
         {
             // Give health to allies
             other.gameObject.GetComponent<StudentInfo>().Heal(bulletDamage);
-            Destroy(gameObject);  
         } 
         else 
         {
             // Deal damage
             other.gameObject.GetComponent<EnemyInfo>().takeDamage(bulletDamage);
+        }
+    }
+
+    IEnumerator DestroyAfterDelay(float delay) {
+            yield return new WaitForSeconds(delay);
             Destroy(gameObject);
         }
-
-    }
 }
