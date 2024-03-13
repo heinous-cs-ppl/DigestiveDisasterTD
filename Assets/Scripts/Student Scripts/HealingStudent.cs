@@ -29,8 +29,8 @@ public class HealingTurret : Turret
             // Get the StudentInfo component of the collider's game object
             StudentInfo studentInfo = collider.GetComponent<StudentInfo>();
 
-            // Ensure the student is an ally (not the turret's own student) and has lower HP than current minimum
-            if (studentInfo != null && studentInfo != GetComponent<StudentInfo>() && studentInfo.getHealth() < minHP)
+            // Ensure the student is an ally (not the turret's own student) and has lower HP than current minimum, while not being at full hp
+            if (studentInfo != null && studentInfo != GetComponent<StudentInfo>() && studentInfo.getHealth() < minHP && studentInfo.getHealth() != studentInfo.maxHp)
             {
                 closestAlly = collider.transform;
                 minHP = studentInfo.getHealth();
