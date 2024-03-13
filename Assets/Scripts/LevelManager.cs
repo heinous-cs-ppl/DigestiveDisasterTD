@@ -24,6 +24,11 @@ public class LevelManager : MonoBehaviour
 
     private int studentCount = 1;
 
+    [HideInInspector] public int studentsDead = 0;
+    public int deathLimit = 10;
+
+    public bool disableGameOver = false;
+
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake()
@@ -196,9 +201,11 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public static void GameOver()
+    public void GameOver()
     {
-        Time.timeScale = 0;
-        UIManager.ShowGameOverUI();
+        if (!disableGameOver) {
+            Time.timeScale = 0;
+            UIManager.ShowGameOverUI();
+        }
     }
 }

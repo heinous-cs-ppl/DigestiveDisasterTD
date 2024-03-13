@@ -85,7 +85,7 @@ public class PathFollow : MonoBehaviour {
             Transform lastNodeTransformObj = path[currentNode-1];   // The last node in path currently
             if (lastNodeTransformObj.childCount == 0) {
                 // reached the end of the path
-                // LevelManager.GameOver();
+                LevelManager.instance.GameOver();
                 Destroy(gameObject);
                 return;
             }

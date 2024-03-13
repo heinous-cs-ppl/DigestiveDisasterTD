@@ -96,6 +96,11 @@ public class StudentInfo : MonoBehaviour
         if (StudentManager.selected == gameObject) StudentManager.Deselect();
         Destroy(gameObject);
         plot.student = null;
+
+        LevelManager.instance.studentsDead += 1;
+        if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit) {
+            LevelManager.instance.GameOver();
+        }
     }
 
     // handles buffs when student is fed purified food
