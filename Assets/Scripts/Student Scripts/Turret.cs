@@ -61,7 +61,7 @@ public class Turret : MonoBehaviour
     // Updates the turret gun to aim at food
     protected void Update()
     {
-
+        timeUntilFire += Time.deltaTime;
         // Tries to find food to attack
         if (target == null)
         {
@@ -81,12 +81,12 @@ public class Turret : MonoBehaviour
         {
 
             // If an enemy is in range, fire at set rate
-            timeUntilFire += Time.deltaTime;
 
             // If the time until fire is larger then 1/bps 
             if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
+                Debug.Log("time until fire on attack: "+ timeUntilFire);
 
                 // Resets time to fire next shot
                 timeUntilFire = 0f;
