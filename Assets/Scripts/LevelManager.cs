@@ -113,6 +113,8 @@ public class LevelManager : MonoBehaviour
             if (plot.student == null)
             {
                 free++;
+            } else {
+                Debug.Log(plot.name + " is occupied by " + plot.student.name);
             }
         }
 

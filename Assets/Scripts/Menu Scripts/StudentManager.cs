@@ -24,6 +24,7 @@ public class StudentManager : MonoBehaviour
     {
         selected = Instantiate(student, new Vector2(plot.position.x + student.GetComponent<StudentInfo>().offsetX, plot.position.y), Quaternion.identity);
         plotOfSelected = plot.transform.gameObject;
+        plot.transform.gameObject.GetComponent<Plot>().student = selected;
         Select(selected);
         if (aboveTable) selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
         
