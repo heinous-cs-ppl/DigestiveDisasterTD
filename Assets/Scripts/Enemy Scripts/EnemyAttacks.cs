@@ -47,13 +47,13 @@ public class EnemyAttacks : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
+    // private void OnDrawGizmosSelected()
+    // {
 
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, triggerRadius);
+    //     Handles.color = Color.cyan;
+    //     Handles.DrawWireDisc(transform.position, transform.forward, triggerRadius);
 
-    }
+    // }
 
 
 }

@@ -12765,7 +12765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   student: {fileID: 2436313744661315829, guid: c77094c26ef00d743b97f6e137ed6ef5, type: 3}
-  studentSprite: {fileID: 21300000, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
+  studentSprite: {fileID: -971260976, guid: 62d5ea7e452c86248b96ba70f0c2bc7b, type: 3}
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -16628,7 +16628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
+  m_Sprite: {fileID: -971260976, guid: 62d5ea7e452c86248b96ba70f0c2bc7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
