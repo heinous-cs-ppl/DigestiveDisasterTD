@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     private static TextMeshProUGUI gameOver;
 
     private static TextMeshProUGUI studentsDeadText;
+    private static TextMeshProUGUI roundText;
 
     void Start()
     {
@@ -71,6 +72,10 @@ public class UIManager : MonoBehaviour
         // get students dead text
         studentsDeadText = GameObject.Find("Students Dead").GetComponent<TextMeshProUGUI>();
         UpdateStudentsDeadText();
+
+        // get round text
+        roundText = GameObject.Find("Round Count").GetComponent<TextMeshProUGUI>();
+        UpdateRound();
     }
 
     public static void UpdateMealCount()
@@ -148,5 +153,9 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateStudentsDeadText() {
         studentsDeadText.text = "Students Dead: " + LevelManager.instance.studentsDead + "/" + LevelManager.instance.deathLimit;
+    }
+
+    public static void UpdateRound() {
+        roundText.text = "Round: " + Spawner.GetRound();
     }
 }

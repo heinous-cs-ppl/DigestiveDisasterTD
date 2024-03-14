@@ -15,7 +15,7 @@ public class MoveStudent : MonoBehaviour
 
     private GameObject map;
     private Bounds mapBounds;
-    private int moveCost = 50;
+    private int moveCost = 20;
 
     private float flashDuration = 0.5f;
     private int numberOfFlashes = 2;

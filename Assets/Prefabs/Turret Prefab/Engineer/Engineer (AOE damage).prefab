@@ -304,7 +304,7 @@ MonoBehaviour:
   healthBar: {fileID: 621413196455083679}
   purifyTimerBar: {fileID: 2212103781074680409}
   damage: 40
-  range: 5
+  range: 6
   rotationSpeed: 1000
   bps: 1.1
   bulletSpeed: 15

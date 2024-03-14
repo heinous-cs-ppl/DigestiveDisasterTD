@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     // Wave tracking variables
-    private int waves;
-    private int waveIdx = -1;   // wave number is (waveIdx+1)
+    private static int waves;
+    private static int waveIdx = -1;   // wave number is (waveIdx+1)
     private Wave.WavePart[][] curWaveInfo;
     
     // timer
@@ -39,6 +39,8 @@ public class Spawner : MonoBehaviour
 
     public Button nextWaveButton;
 
+    public static bool roundAddMoney = false;
+
     /* Returns an array of struct defined in Wave.cs */
     private Wave.WavePart[][] getWaveInfo(GameObject waveObj)
     {
@@ -58,6 +60,7 @@ public class Spawner : MonoBehaviour
             // Spawn random vacuous students
             LevelManager.instance.SpawnVacuousStudents();
             nextWaveButton.interactable = false;
+            roundAddMoney = true;
 
             // Get new wave information
             waveIdx++;
@@ -207,9 +210,16 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         anySpawning = spawn[0] || spawn[1] || spawn[2];
-        if (!anySpawning && waveIdx < (waves - 1)) {
+        if (!anySpawning && waveIdx < (waves - 1) && roundAddMoney) {
             nextWaveButton.interactable = true;
+            MoneyManager.AddMoney(NextWave.waveMoney);
+            UIManager.UpdateMoney();
+            roundAddMoney = false;
         }
+    }
+
+    public static int GetRound() {
+        return waveIdx;
     }
 }
 
