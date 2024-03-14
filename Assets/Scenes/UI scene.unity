@@ -2573,6 +2573,7 @@ MonoBehaviour:
   - {fileID: 583666475225075005, guid: 86cc35fe9a43d3c4e82853739099e6e3, type: 3}
   - {fileID: 583666475225075005, guid: 4e265d97978ee614398461d06469b88c, type: 3}
   - {fileID: 583666475225075005, guid: 61dcc309c5edac749a2cb8e698631610, type: 3}
+  - {fileID: 583666475225075005, guid: c2ae142937447a043a6ba37914cc8a33, type: 3}
   spawnObjTransforms: []
   studentsDead: 0
   deathLimit: 10
