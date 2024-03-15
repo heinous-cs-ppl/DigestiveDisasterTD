@@ -35,7 +35,9 @@ public class Spawner : MonoBehaviour
     // private Transform spawnPoint;
 
     private bool[] spawn = {false, false, false};
-    public static bool anySpawning = false;
+    private bool anySpawning = false;
+    private bool enemiesAlive = false;
+    public static bool waveEnd = true;
 
     public Button nextWaveButton;
 
@@ -56,7 +58,7 @@ public class Spawner : MonoBehaviour
     public void NewWave()
     {
         // If wave is done and more waves exist, start wave
-        if (!anySpawning && waveIdx < (waves - 1)) {
+        if (waveEnd && waveIdx < (waves - 1)) {
             // Spawn random vacuous students
             LevelManager.instance.SpawnVacuousStudents();
             nextWaveButton.interactable = false;
@@ -65,9 +67,6 @@ public class Spawner : MonoBehaviour
             // Get new wave information
             waveIdx++;
             curWaveInfo = getWaveInfo(LevelManager.instance.waves[waveIdx]);
-            // curWaveSpawner0Info = curWaveInfo[0];  
-            // curWaveSpawner1Info = curWaveInfo[1];
-            // curWaveSpawner2Info = curWaveInfo[2];
             i[0] = 0;
             i[1] = 0;
             i[2] = 0;
@@ -85,6 +84,9 @@ public class Spawner : MonoBehaviour
             StartCoroutine(SpawnerThread0());
             StartCoroutine(SpawnerThread1());
             StartCoroutine(SpawnerThread2());
+
+            anySpawning = true;
+            waveEnd = false;
         }
         Debug.Log("Wave "+waveIdx);
     }
@@ -215,6 +217,20 @@ public class Spawner : MonoBehaviour
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             roundAddMoney = false;
+        }
+
+        RaycastHit2D[] hitEnemies = Physics2D.CircleCastAll(Vector2.zero, Mathf.Infinity, Vector2.zero, Mathf.Infinity, LevelManager.instance.enemyLayer);
+        if (hitEnemies.Length == 0) {
+            enemiesAlive = false;
+            Debug.Log("no alive enemies");
+        }
+        else
+        {
+            enemiesAlive = true;
+        }
+
+        if (!(anySpawning || enemiesAlive)) {
+            waveEnd = true;
         }
     }
 

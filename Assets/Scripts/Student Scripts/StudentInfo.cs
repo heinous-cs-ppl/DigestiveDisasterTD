@@ -151,6 +151,7 @@ public class StudentInfo : MonoBehaviour
         float iterationTime = 0.01f;
         float counter = 0f;
         while (counter < buffTime) {
+            // If you check !Spawner.waveEnd here the game will freeze, this is a warning
             yield return new WaitForSeconds(iterationTime);
             counter += iterationTime;
             purifyTimerBar.setValue(buffTime - counter);

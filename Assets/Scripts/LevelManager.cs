@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public GameObject spawner;
     [SerializeField] private GameObject plotsParent;    // The parent object of all plots
     public LayerMask plotLayer;
+    public LayerMask enemyLayer;
     [SerializeField] private GameObject vacuousStudent;
 
     // Number of starting paths or number of spawnpoints - each of these points is the parent of the rest of it's path
@@ -41,7 +42,7 @@ public class LevelManager : MonoBehaviour
             Debug.Break();
         }
 
-        spawnObjTransforms = new Transform[spawnObjs.Length];   // GameObject arrays use .Length
+        spawnObjTransforms = new Transform[spawnObjs.Length];
         for (int i = 0; i < spawnObjs.Length; i++)
         {
             spawnObjTransforms[i] = spawnObjs[i].transform;
