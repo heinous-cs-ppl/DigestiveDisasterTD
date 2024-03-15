@@ -12,6 +12,6 @@ public class NextWave : MonoBehaviour
         spawnerInstance.NewWave();
 
         // give the player money when they start the next wave
-        
+        UIManager.UpdateRound();
     }
 }
