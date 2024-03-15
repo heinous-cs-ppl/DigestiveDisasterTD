@@ -13,7 +13,7 @@ public class FireStudent : MonoBehaviour
         {
             // if the first round hasn't started, refund the full cost
             // otherwise, refund a fraction of the cost
-            if (Spawner.anySpawning) {
+            if (Spawner.waveEnd) {
                 MoneyManager.AddMoney((int)(0.5 * selected.GetComponent<StudentInfo>().cost));
             } else {
                 MoneyManager.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));

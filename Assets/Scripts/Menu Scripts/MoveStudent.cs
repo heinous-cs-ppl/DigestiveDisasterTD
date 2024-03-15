@@ -33,7 +33,7 @@ public class MoveStudent : MonoBehaviour
     // Called when button is clicked
     public void SetMoving()
     {
-        if (MoneyManager.GetMoneyCount() >= moveCost)
+        if (MoneyManager.GetMoneyCount() >= moveCost || Spawner.waveEnd)
         {
             student = StudentManager.selected;
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>(); ;
@@ -148,9 +148,11 @@ public class MoveStudent : MonoBehaviour
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students behind tables";
         }
 
-        // add cost for moving student here
-        MoneyManager.TakeMoney(moveCost);
-        UIManager.UpdateMoney();
+        // add cost for moving student here unless between rounds
+        if (!Spawner.waveEnd) {
+            MoneyManager.TakeMoney(moveCost);
+            UIManager.UpdateMoney();
+        }
 
         // destroy the preview
         Destroy(studentPreview);
