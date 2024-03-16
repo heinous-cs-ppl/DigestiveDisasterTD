@@ -312,6 +312,9 @@ MonoBehaviour:
   bulletDistance: 6
   description: Throws antacid bombs that deal damage and linger for a short time.
     Can hit multiple enemies.
+  healer: 0
+  purify: 0
+  slow: 0
   buffed: 0
   turret: {fileID: -2031602153459670616}
   outline: {fileID: 2100000, guid: fdecad1e1de8e054e81e36c682ca4851, type: 2}

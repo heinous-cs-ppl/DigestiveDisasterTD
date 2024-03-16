@@ -426,9 +426,10 @@ MonoBehaviour:
   rotationSpeed: 1000
   bps: 1.2
   bulletSpeed: 20
-  healer: 0
   bulletDistance: 6
   description: Throws a flask of enzymes at enemies! Deals purifying damage.
+  healer: 0
+  purify: 1
   buffed: 0
   turret: {fileID: 3328366097059150213}
   outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}

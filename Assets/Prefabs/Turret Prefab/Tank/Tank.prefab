@@ -224,8 +224,8 @@ GameObject:
   - component: {fileID: 7816978345457103274}
   - component: {fileID: 1827559064861225114}
   - component: {fileID: 2165844561221868010}
-  - component: {fileID: -6792771979598707114}
   - component: {fileID: 7519061932890612091}
+  - component: {fileID: -2638382949580373971}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Student
@@ -302,41 +302,23 @@ MonoBehaviour:
   maxHp: 400
   healthBar: {fileID: 621413196455083679}
   purifyTimerBar: {fileID: 4904802092294498763}
-  damage: 20
+  damage: 0
   range: 4
   rotationSpeed: 1000
   bps: 1
   bulletSpeed: 15
+  bulletDistance: 5
+  description: '"I have a chymous appetite! I''ll eat all the food myself and throw
+    honey to slow down that pesky food!" Has extremely high hp and throws aoe attacks
+    slow food.'
   healer: 0
-  bulletDistance: 3
-  description: '"I have a chymous appetite! I''ll eat all the food myself!" Has extremely
-    high hp, does no damage.'
+  purify: 0
+  slow: 1
   buffed: 0
-  turret: {fileID: -6792771979598707114}
+  turret: {fileID: -2638382949580373971}
   outline: {fileID: 2100000, guid: 87d19ebd08ddeae47b3aa5a17b1d815d, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
---- !u!114 &-6792771979598707114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2436313744661315829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb702b34b37dab4096d476020aedd82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretRotationPoint: {fileID: 6625684098734232166}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  bulletPrefab: {fileID: 0}
-  firingPoint: {fileID: 8931901967542906486}
-  spriteRotation: 0
-  rotateBullet: 0
-  anim: {fileID: 0}
 --- !u!212 &7519061932890612091
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -389,6 +371,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2638382949580373971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436313744661315829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f243617bc15ce478bace4100f0a45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretRotationPoint: {fileID: 6625684098734232166}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 8208342251038316243, guid: 70d413383f4910e4d9582e0ae61877f7, type: 3}
+  firingPoint: {fileID: 8931901967542906486}
+  spriteRotation: 0
+  rotateBullet: 0
+  anim: {fileID: 0}
 --- !u!1 &2881322664039906816
 GameObject:
   m_ObjectHideFlags: 0
