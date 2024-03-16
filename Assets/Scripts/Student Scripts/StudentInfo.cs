@@ -148,7 +148,7 @@ public class StudentInfo : MonoBehaviour
     private IEnumerator BuffTimer()
     {
         // wait for timer before removing buffs
-        float iterationTime = 0.01f;
+        float iterationTime = 0.1f;
         float counter = 0f;
         while (counter < buffTime) {
             // If you check !Spawner.waveEnd here the game will freeze, this is a warning

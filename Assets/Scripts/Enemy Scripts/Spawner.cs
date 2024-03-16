@@ -60,9 +60,11 @@ public class Spawner : MonoBehaviour
         // If wave is done and more waves exist, start wave
         if (waveEnd && waveIdx < (waves - 1)) {
             // Spawn random vacuous students
-            LevelManager.instance.SpawnVacuousStudents();
+            // LevelManager.instance.SpawnVacuousStudents();
             nextWaveButton.interactable = false;
             roundAddMoney = true;
+
+
 
             // Get new wave information
             waveIdx++;
@@ -213,25 +215,29 @@ public class Spawner : MonoBehaviour
     {
         anySpawning = spawn[0] || spawn[1] || spawn[2];
         if (!anySpawning && waveIdx < (waves - 1) && roundAddMoney) {
-            nextWaveButton.interactable = true;
-            MoneyManager.AddMoney(NextWave.waveMoney);
-            UIManager.UpdateMoney();
-            roundAddMoney = false;
+            // nextWaveButton.interactable = true;
+            // MoneyManager.AddMoney(NextWave.waveMoney);
+            // UIManager.UpdateMoney();
+            // roundAddMoney = false;
         }
 
         RaycastHit2D[] hitEnemies = Physics2D.CircleCastAll(Vector2.zero, Mathf.Infinity, Vector2.zero, Mathf.Infinity, LevelManager.instance.enemyLayer);
-        if (hitEnemies.Length == 0) {
+        if (hitEnemies.Length == 0 && enemiesAlive) {
             enemiesAlive = false;
-            Debug.Log("no alive enemies");
-        }
-        else
-        {
+            Debug.Log("no enemies alive");
+        } else if (hitEnemies.Length > 0 && !enemiesAlive) {
             enemiesAlive = true;
+            Debug.Log("enemies alive");
         }
 
-        if (!(anySpawning || enemiesAlive)) {
+        if (!(anySpawning || enemiesAlive) && !waveEnd) {
             waveEnd = true;
+            nextWaveButton.interactable = true;
+            Debug.Log("wave ended");
             UIManager.UpdateMove(0);
+            LevelManager.instance.SpawnVacuousStudents();
+            MoneyManager.AddMoney(NextWave.waveMoney);
+            UIManager.UpdateMoney();
         }
     }
 

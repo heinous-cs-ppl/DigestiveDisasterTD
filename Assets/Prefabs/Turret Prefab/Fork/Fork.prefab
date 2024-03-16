@@ -354,10 +354,10 @@ MonoBehaviour:
   maxHp: 120
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 7573675254489230571}
-  damage: 100
+  damage: 90
   range: 6
   rotationSpeed: 1000
-  bps: 0.7
+  bps: 0.8
   bulletSpeed: 25
   healer: 0
   bulletDistance: 6

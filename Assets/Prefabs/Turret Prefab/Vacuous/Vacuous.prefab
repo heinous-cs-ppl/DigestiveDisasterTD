@@ -478,7 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0
-  maxHp: 50
+  maxHp: 75
   healthBar: {fileID: 1713564991460712253}
   purifyTimerBar: {fileID: 3010583431908058900}
   damage: 0

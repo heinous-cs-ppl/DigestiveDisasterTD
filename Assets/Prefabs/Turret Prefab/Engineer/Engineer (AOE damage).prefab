@@ -300,14 +300,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 150
-  maxHp: 160
+  maxHp: 100
   healthBar: {fileID: 621413196455083679}
   purifyTimerBar: {fileID: 2212103781074680409}
   damage: 40
-  range: 6
+  range: 5
   rotationSpeed: 1000
   bps: 1
-  bulletSpeed: 10
+  bulletSpeed: 20
   healer: 0
   bulletDistance: 6
   description: Throws antacid bombs that deal damage and linger for a short time.

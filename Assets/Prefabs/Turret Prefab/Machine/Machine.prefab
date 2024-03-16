@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 160
+  cost: 150
   maxHp: 200
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 242047190924835797}
