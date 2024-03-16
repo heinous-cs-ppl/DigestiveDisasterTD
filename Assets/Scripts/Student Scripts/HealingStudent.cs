@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,12 +9,18 @@ public class HealingTurret : Turret
     [HideInInspector] public string specificGameObject;
     private new void Update()
     {
-        if (ShouldFire())
+        if (ShouldFire() && specificGameObject != null)
         {
+            Debug.Log(specificGameObject);
             FindTarget();
+
+            // Sets the target and sends the designated target to HealingBullet
+            HealingBullet target = bulletPrefab.GetComponent<HealingBullet>();
+            target.selectedTarget = specificGameObject;
             base.Update();
         }
     }
+
     private new void FindTarget()
     {
         // Get all colliders within targeting range that belong to the "Student" layer

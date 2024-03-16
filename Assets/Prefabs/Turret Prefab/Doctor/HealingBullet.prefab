@@ -162,4 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5760139248048277314}
+  other: {fileID: 2436313744661315829, guid: bd7b79566e50aed4597c695c2aaa808e, type: 3}
   healingAoe: {fileID: 8208342251038316243, guid: d0a3720d2e7c1e34fa1f87c6efb4b33b, type: 3}
