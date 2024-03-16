@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     private static TextMeshProUGUI studentsDeadText;
     private static TextMeshProUGUI roundText;
 
+    private static TextMeshProUGUI moveStudentText;
+
     void Start()
     {
         // initialize the purify counter in the UI to 0
@@ -48,6 +50,8 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentDamage = GameObject.Find("Damage bar S").GetComponent<Slider>();
         studentSelectUIStudentRange = GameObject.Find("Range bar S").GetComponent<Slider>();
         studentSelectUIStudentBPS = GameObject.Find("BPS bar S").GetComponent<Slider>();
+
+        moveStudentText = GameObject.Find("Move Text").GetComponent<TextMeshProUGUI>();
 
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
@@ -157,5 +161,9 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateRound() {
         roundText.text = "Round: " + Spawner.GetRound();
+    }
+
+    public static void UpdateMove(int val) {
+        moveStudentText.text = "Move ($" + val + ")";
     }
 }

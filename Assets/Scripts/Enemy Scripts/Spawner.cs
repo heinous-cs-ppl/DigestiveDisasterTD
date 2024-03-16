@@ -231,6 +231,7 @@ public class Spawner : MonoBehaviour
 
         if (!(anySpawning || enemiesAlive)) {
             waveEnd = true;
+            UIManager.UpdateMove(0);
         }
     }
 

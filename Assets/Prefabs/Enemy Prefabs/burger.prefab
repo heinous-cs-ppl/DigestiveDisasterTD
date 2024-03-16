@@ -528,7 +528,7 @@ MonoBehaviour:
   damage: 80
   speed: 2
   attackRadius: 0.55
-  moneyDrop: 6
+  moneyDrop: 8
   buffs: []
 --- !u!58 &-7922788916589517486
 CircleCollider2D:

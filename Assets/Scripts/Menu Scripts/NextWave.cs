@@ -11,7 +11,7 @@ public class NextWave : MonoBehaviour
         Spawner spawnerInstance = LevelManager.instance.spawner.GetComponent<Spawner>();
         spawnerInstance.NewWave();
 
-        // give the player money when they start the next wave
         UIManager.UpdateRound();
+        UIManager.UpdateMove(MoveStudent.moveCost);
     }
 }

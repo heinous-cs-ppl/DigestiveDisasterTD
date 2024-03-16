@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 110
+  cost: 120
   maxHp: 100
   healthBar: {fileID: 4549084777307704645}
   purifyTimerBar: {fileID: 1311332473630942102}

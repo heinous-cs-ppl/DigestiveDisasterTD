@@ -15,7 +15,7 @@ public class MoveStudent : MonoBehaviour
 
     private GameObject map;
     private Bounds mapBounds;
-    private int moveCost = 20;
+    public static int moveCost = 20;
 
     private float flashDuration = 0.5f;
     private int numberOfFlashes = 2;
@@ -144,8 +144,16 @@ public class MoveStudent : MonoBehaviour
 
         if(newPlot.GetComponent<Plot>().aboveTable) {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
+            SpriteRenderer[] chymous = student.GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer chyme in chymous) {
+                chyme.sortingLayerName = "Students above tables";
+            }
         } else {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students behind tables";
+            SpriteRenderer[] chymous = student.GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer chyme in chymous) {
+                chyme.sortingLayerName = "Students behind tables";
+            }
         }
 
         // add cost for moving student here unless between rounds

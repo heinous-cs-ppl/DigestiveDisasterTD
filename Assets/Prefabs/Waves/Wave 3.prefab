@@ -48,7 +48,19 @@ MonoBehaviour:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 0.5
-    repeats: 14
+    repeats: 7
+  - oneTimeDelay: 1
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.5
+    repeats: 7
+  - oneTimeDelay: 1
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.5
+    repeats: 7
+  - oneTimeDelay: 1
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
+    spawnDelay: 0.5
+    repeats: 7
   Spawner1WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}

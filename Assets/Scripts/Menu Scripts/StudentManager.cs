@@ -26,8 +26,13 @@ public class StudentManager : MonoBehaviour
         plotOfSelected = plot.transform.gameObject;
         plot.transform.gameObject.GetComponent<Plot>().student = selected;
         Select(selected);
-        if (aboveTable) selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
-        
+        if (aboveTable) {
+            selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
+            SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer chyme in chymous) {
+                chyme.sortingLayerName = "Students above tables";
+            }
+        }
         // hide hiring student UI
         UIManager.HideStudentHiringUI();
         // show selection UI
@@ -54,15 +59,26 @@ public class StudentManager : MonoBehaviour
 
         // draw the student's range so it's clear which student is selected
         float range = selected.GetComponent<StudentInfo>().range;
-        selected.GetComponent<SpriteRenderer>().material = selected.GetComponent<StudentInfo>().outline;
+        Material outline = selected.GetComponent<StudentInfo>().outline;
+        selected.GetComponent<SpriteRenderer>().material = outline;
+        SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
+        foreach(SpriteRenderer chyme in chymous) {
+            chyme.material = outline;
+        }
         DrawRange(range);
     }
 
     public static void Deselect()
     {
         if (selected != null) {
-            selected.GetComponent<SpriteRenderer>().material = selected.GetComponent<StudentInfo>().noOutline;
+            Material noOutline = selected.GetComponent<StudentInfo>().noOutline;
+            selected.GetComponent<SpriteRenderer>().material = noOutline;
+            SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer chyme in chymous) {
+                chyme.material = noOutline;
+            }
         }
+        
         selected = null;
         plotOfSelected = null;
 
