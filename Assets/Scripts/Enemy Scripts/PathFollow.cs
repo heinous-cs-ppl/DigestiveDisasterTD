@@ -32,6 +32,11 @@ public class PathFollow : MonoBehaviour {
 
     // speed of the enemy (from the Enemy Info script attached to the enemy prefab)
     private float speed;
+    private float originalSpeed;
+    // For calculating slows
+    private bool slowCheck = false;
+    private float remainingTime;
+    private Coroutine slowCoroutine;
 
     void MoveToNode(int nodeIndex) {
         // check if the index of the node is valid
@@ -76,6 +81,9 @@ public class PathFollow : MonoBehaviour {
 
         // get the speed of the enemies
         speed = GetComponent<EnemyInfo>().speed;
+
+        // Stores original speed
+        originalSpeed = speed;
     }
 
     // Update is called once per frame
@@ -103,4 +111,47 @@ public class PathFollow : MonoBehaviour {
             currentNode++;
         }
     }
+
+    public void slowSpeed(float slow, float delay)
+    {
+
+        // Checks if the target has been slowed already
+        if(slowCheck == false)
+        {
+            // Sets slowCheck to be true in order to prevent slows from stacking
+            slowCheck = true;
+
+            Debug.Log(delay);
+            Debug.Log("Before: " + speed);
+            // Sets the new speed of the slow 
+            speed = speed*slow;
+            Debug.Log("After: " + speed);
+            
+            // Stores the length of the delay duration into remaining
+            remainingTime = delay;
+            
+            // Starts the timer
+            slowCoroutine = StartCoroutine(NormalSpeedAfterDelay());
+            Debug.Log("After delay: " + speed);
+
+            
+        } 
+        else 
+        {
+            // Stops current timer and resets it if target is slowed again
+            StopCoroutine(slowCoroutine);
+            // Starts the timer
+            slowCoroutine = StartCoroutine(NormalSpeedAfterDelay());
+        }
+    }
+
+    IEnumerator NormalSpeedAfterDelay() 
+    {
+        // Will delay before reseting the speed back to its original speed
+        yield return new WaitForSeconds(remainingTime);  
+        speed = originalSpeed;
+        Debug.Log("Back to original speed");   
+        slowCheck = false;
+    }
+    
 }

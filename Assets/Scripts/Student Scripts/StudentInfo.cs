@@ -15,11 +15,14 @@ public class StudentInfo : MonoBehaviour
     [Header("Bullet Attributes")]
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
-    public bool healer = false;
     public float bulletDistance = 3f;
 
     public string description = "SAMPLE TEXT";
 
+    [Header("Tower Type")]
+    public bool healer = false;
+    public bool purify = false;
+    public bool slow = false;
 
     // extra fields to hold the original values of the attributes
     private int originalDamage;
