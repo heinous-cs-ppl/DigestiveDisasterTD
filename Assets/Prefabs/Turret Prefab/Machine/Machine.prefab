@@ -263,10 +263,12 @@ MonoBehaviour:
   rotationSpeed: 1000
   bps: 0
   bulletSpeed: 0
-  healer: 0
   bulletDistance: 0
   description: Queen's students created a machine that can purify food regardless
     of its HP! Low range, takes longer to recharge based on enemy's purify HP.
+  healer: 0
+  purify: 1
+  slow: 0
   buffed: 0
   turret: {fileID: 2172817358560362739}
   outline: {fileID: 2100000, guid: 136d33f1fd2ab6845b03a1e1972e439c, type: 2}
@@ -334,7 +336,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 19386da55c18087489f14a75383232d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

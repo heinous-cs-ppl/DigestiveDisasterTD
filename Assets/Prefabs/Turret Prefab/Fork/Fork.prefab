@@ -350,14 +350,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 110
+  cost: 120
   maxHp: 120
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 7573675254489230571}
   damage: 90
   range: 6
   rotationSpeed: 1000
-  bps: 0.8
+  bps: 0.75
   bulletSpeed: 25
   bulletDistance: 6
   description: Throws forks at enemies. Has high range and deals high damage.
