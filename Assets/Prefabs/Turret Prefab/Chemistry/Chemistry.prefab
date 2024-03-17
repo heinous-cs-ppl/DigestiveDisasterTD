@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 2595080332699581591}
   - component: {fileID: 1700172236882340006}
   m_Layer: 8
-  m_Name: Flask
+  m_Name: Chemistry
   m_TagString: Student
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
   bps: 1.1
   bulletSpeed: 20
   bulletDistance: 6
-  description: Throws a flask of enzymes at enemies! Deals purifying damage.
+  description: Throws a flask of antacids at enemies! Deals purifying damage.
   healer: 0
   purify: 1
   slow: 0

@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 2172817358560362739}
   - component: {fileID: 4712276935845045019}
   m_Layer: 8
-  m_Name: Machine
+  m_Name: Engineer
   m_TagString: Student
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

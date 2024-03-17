@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 8870497493809485842}
   - component: {fileID: 8040120879947313827}
   m_Layer: 8
-  m_Name: Engineer (AOE damage)
+  m_Name: Physics
   m_TagString: Student
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
   bps: 1
   bulletSpeed: 20
   bulletDistance: 6
-  description: Throws antacid bombs that deal damage and linger for a short time.
+  description: Throws enzyme bombs that deal damage and linger for a short time.
     Can hit multiple enemies.
   healer: 0
   purify: 0
