@@ -54,6 +54,9 @@ public class HealingTurret : Turret
 
     private bool ShouldFire()
     {
+        if (Spawner.waveEnd) {
+            return false;
+        }
         // Get all colliders within targeting range that belong to the "Student" layer
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
 
