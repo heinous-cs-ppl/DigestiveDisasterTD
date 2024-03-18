@@ -30,6 +30,9 @@ public class LevelManager : MonoBehaviour
 
     public bool disableGameOver = false;
 
+    // used to disable mouse interaction with AOE
+    [SerializeField] private LayerMask inputLayerMask;
+
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake()
@@ -47,6 +50,7 @@ public class LevelManager : MonoBehaviour
         {
             spawnObjTransforms[i] = spawnObjs[i].transform;
         }
+        Camera.main.eventMask = inputLayerMask;
     }
 
     /* Since the paths stop at a point, then that point has child objects to represent multiple paths, each of which is the parent of
