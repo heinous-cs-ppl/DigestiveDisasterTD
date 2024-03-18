@@ -32,6 +32,14 @@ public class UIManager : MonoBehaviour
 
     private static TextMeshProUGUI moveStudentText;
 
+    private static GameObject path_0;
+    private static GameObject path_1;
+    private static GameObject path_2;
+    private static GameObject path_01;
+    private static GameObject path_12;
+    private static GameObject path_02;
+    private static GameObject path_012;
+
     void Start()
     {
         // initialize the purify counter in the UI to 0
@@ -80,6 +88,17 @@ public class UIManager : MonoBehaviour
         // get round text
         roundText = GameObject.Find("Round Count").GetComponent<TextMeshProUGUI>();
         UpdateRound();
+
+        // get the paths
+        path_0 = GameObject.Find("path_0");
+        path_1 = GameObject.Find("path_1");
+        path_2 = GameObject.Find("path_2");
+        path_01 = GameObject.Find("path_01");
+        path_12 = GameObject.Find("path_12");
+        path_02 = GameObject.Find("path_02");
+        path_012 = GameObject.Find("path_012");
+
+        HidePath();
     }
 
     public static void UpdateMealCount()
@@ -165,5 +184,33 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateMove(int val) {
         moveStudentText.text = "Move ($" + val + ")";
+    }
+
+    public static void ShowPath(bool path0, bool path1, bool path2) {
+        if(path0 && path1 && path2) {
+            path_012.SetActive(true);
+        } else if(path0 && path1) {
+            path_01.SetActive(true);
+        } else if(path1 && path2) {
+            path_12.SetActive(true);
+        } else if(path0 && path2) {
+            path_02.SetActive(true);
+        } else if(path0) {
+            path_0.SetActive(true);
+        } else if(path1) {
+            path_1.SetActive(true);
+        } else if(path2) {
+            path_2.SetActive(true);
+        }
+    }
+
+    public static void HidePath() {
+        path_0.SetActive(false);
+        path_1.SetActive(false);
+        path_2.SetActive(false);
+        path_01.SetActive(false);
+        path_12.SetActive(false);
+        path_02.SetActive(false);
+        path_012.SetActive(false);
     }
 }

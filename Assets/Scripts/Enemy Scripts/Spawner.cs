@@ -64,7 +64,7 @@ public class Spawner : MonoBehaviour
             nextWaveButton.interactable = false;
             roundAddMoney = true;
 
-
+            UIManager.HidePath();
 
             // Get new wave information
             waveIdx++;
@@ -114,6 +114,8 @@ public class Spawner : MonoBehaviour
 
             // get a list of every spawnpoint's position
             spawnpoints = LevelManager.instance.spawnObjTransforms;
+            UIManager.UpdateMove(0);
+            ShowPath();
         }
     }
 
@@ -214,12 +216,12 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         anySpawning = spawn[0] || spawn[1] || spawn[2];
-        if (!anySpawning && waveIdx < (waves - 1) && roundAddMoney) {
-            // nextWaveButton.interactable = true;
-            // MoneyManager.AddMoney(NextWave.waveMoney);
-            // UIManager.UpdateMoney();
-            // roundAddMoney = false;
-        }
+        // if (!anySpawning && waveIdx < (waves - 1) && roundAddMoney) {
+        //     nextWaveButton.interactable = true;
+        //     MoneyManager.AddMoney(NextWave.waveMoney);
+        //     UIManager.UpdateMoney();
+        //     roundAddMoney = false;
+        // }
 
         RaycastHit2D[] hitEnemies = Physics2D.CircleCastAll(Vector2.zero, Mathf.Infinity, Vector2.zero, Mathf.Infinity, LevelManager.instance.enemyLayer);
         if (hitEnemies.Length == 0 && enemiesAlive) {
@@ -238,11 +240,69 @@ public class Spawner : MonoBehaviour
             LevelManager.instance.SpawnVacuousStudents();
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
+            ShowPath();
         }
     }
 
     public static int GetRound() {
         return waveIdx;
+    }
+
+    void ShowPath() {
+        // get next wave
+        GameObject wave = LevelManager.instance.waves[waveIdx + 1];
+        Wave.WavePart[] spawner0 = wave.GetComponent<Wave>().Spawner0WaveEnc;
+        Wave.WavePart[] spawner1 = wave.GetComponent<Wave>().Spawner1WaveEnc;
+        Wave.WavePart[] spawner2 = wave.GetComponent<Wave>().Spawner2WaveEnc;
+
+        bool spawnpoint0 = false;
+        bool spawnpoint1 = false;
+        bool spawnpoint2 = false;
+        // check if there are enemies that spawn at each spawnpoint
+        foreach (Wave.WavePart wavePart in spawner0) {
+            EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
+            if (curEnemy.spawnPointIndex == 0) {
+                Debug.Log("spawnpoint0 in spawner0");
+                spawnpoint0 = true;
+            } else if (curEnemy.spawnPointIndex == 1) {
+                Debug.Log("spawnpoint1 in spawner0");
+                spawnpoint1 = true;
+            } else if (curEnemy.spawnPointIndex == 2) {
+                Debug.Log("spawnpoint2 in spawner0");
+                spawnpoint2 = true;
+            }
+        }
+
+        foreach (Wave.WavePart wavePart in spawner1) {
+            EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
+            if (curEnemy.spawnPointIndex == 0) {
+                Debug.Log("spawnpoint0 in spawner1");
+                spawnpoint0 = true;
+            } else if (curEnemy.spawnPointIndex == 1) {
+                Debug.Log("spawnpoint1 in spawner1");
+                spawnpoint1 = true;
+            } else if (curEnemy.spawnPointIndex == 2) {
+                Debug.Log("spawnpoint2 in spawner1");
+                spawnpoint2 = true;
+            }
+        }
+
+        foreach (Wave.WavePart wavePart in spawner2) {
+            EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
+            if (curEnemy.spawnPointIndex == 0) {
+                Debug.Log("spawnpoint0 in spawner2");
+                spawnpoint0 = true;
+            } else if (curEnemy.spawnPointIndex == 1) {
+                Debug.Log("spawnpoint1 in spawner2");
+                spawnpoint1 = true;
+            } else if (curEnemy.spawnPointIndex == 2) {
+                Debug.Log("spawnpoint2 in spawner2");
+                spawnpoint2 = true;
+            }
+        }
+
+        // show the path of the next wave depending on where the enemies are spawning
+        UIManager.ShowPath(spawnpoint0, spawnpoint1, spawnpoint2);
     }
 }
 
