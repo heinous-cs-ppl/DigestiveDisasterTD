@@ -43,6 +43,16 @@ public class Spawner : MonoBehaviour
 
     public static bool roundAddMoney = false;
 
+    // boss stuff
+    // false if the current wave is not a boss wave, true if it is
+    public static bool isBossWave = false;
+    // false if there is no boss, true if the boss is alive
+    public static bool bossAlive = false;
+    // holds tags for each enemy spawning in the boss waves
+    private static string[] bossSpawnerThreads = new string[3];
+    // holds the number of each enemy alive in the boss wave
+    private static int[] bossEnemyCount = new int[3];
+
     /* Returns an array of struct defined in Wave.cs */
     private Wave.WavePart[][] getWaveInfo(GameObject waveObj)
     {
@@ -69,28 +79,128 @@ public class Spawner : MonoBehaviour
             // Get new wave information
             waveIdx++;
             curWaveInfo = getWaveInfo(LevelManager.instance.waves[waveIdx]);
-            i[0] = 0;
-            i[1] = 0;
-            i[2] = 0;
-            isNewEnemy[0] = true;
-            isNewEnemy[1] = true;
-            isNewEnemy[2] = true;
-            repeatCount[0] = 0;
-            repeatCount[1] = 0;
-            repeatCount[2] = 0;
-            spawn[0] = true;
-            spawn[1] = true;
-            spawn[2] = true;
-            // curEnemy[0] = curWaveSpawner0Info[i[0]];
-            // These will all run simultaneously
-            StartCoroutine(SpawnerThread0());
-            StartCoroutine(SpawnerThread1());
-            StartCoroutine(SpawnerThread2());
 
-            anySpawning = true;
-            waveEnd = false;
+            // if the wave is not a boss wave
+            if (!LevelManager.instance.waves[waveIdx].GetComponent<Wave>().bossWave) {
+                i[0] = 0;
+                i[1] = 0;
+                i[2] = 0;
+                isNewEnemy[0] = true;
+                isNewEnemy[1] = true;
+                isNewEnemy[2] = true;
+                repeatCount[0] = 0;
+                repeatCount[1] = 0;
+                repeatCount[2] = 0;
+                spawn[0] = true;
+                spawn[1] = true;
+                spawn[2] = true;
+                // curEnemy[0] = curWaveSpawner0Info[i[0]];
+                // These will all run simultaneously
+                StartCoroutine(SpawnerThread0());
+                StartCoroutine(SpawnerThread1());
+                StartCoroutine(SpawnerThread2());
+
+                anySpawning = true;
+                waveEnd = false;
+            } else {
+                // if the wave is a boss wave
+                // The boss wave will have up to three spawners, with one enemy each
+                // The "repeats" field in the struct will be treated as "maxInstances"
+                // meaning that there will be maxInstances of the enemy alive while the boss is alive
+                // enemies will stop spawning once boss is dead
+
+                // set boss to alive
+                bossAlive = true;
+                isBossWave = true;
+
+                // spawn the boss
+                StartCoroutine(SpawnBoss(LevelManager.instance.waves[waveIdx].GetComponent<BossWave>().boss));
+
+                // set the enemies in spawner threads to keep track of the number of each enemy alive
+                Wave.WavePart enemy0;
+                Wave.WavePart enemy1;
+                Wave.WavePart enemy2;
+                if(curWaveInfo[0].Length > 0) {
+                    enemy0 = curWaveInfo[0][0];
+                    bossSpawnerThreads[0] = enemy0.enemy.tag;
+                    StartCoroutine(BossWaveSpawner(enemy0));
+                }
+                if(curWaveInfo[1].Length > 0) {
+                    enemy1 = curWaveInfo[1][0];
+                    bossSpawnerThreads[1] = enemy1.enemy.tag;
+                    StartCoroutine(BossWaveSpawner(enemy1));
+                }
+                if(curWaveInfo[2].Length > 0) {
+                    enemy2 = curWaveInfo[2][0];
+                    bossSpawnerThreads[2] = enemy2.enemy.tag;
+                    StartCoroutine(BossWaveSpawner(enemy2));
+                }
+                
+            }
         }
         Debug.Log("Wave "+waveIdx);
+    }
+
+    public IEnumerator SpawnBoss(Wave.WavePart boss) {
+        yield return new WaitForSeconds(boss.oneTimeDelay);
+        // spawn the boss
+        GameObject chymousDisaster = Instantiate(boss.enemy, spawnpoints[0].position, Quaternion.identity);
+        EnemyInfo chymousInfo = chymousDisaster.GetComponent<EnemyInfo>();
+        chymousInfo.isBoss = true;
+        chymousDisaster.GetComponent<EnemyAttacks>().isBoss = true;
+
+        // multiply hp and purify hp by 10
+        chymousInfo.maxHp *= 10;
+        chymousInfo.healthBar.setMaxValue(chymousInfo.maxHp);
+        chymousInfo.healthBar.setValue(chymousInfo.maxHp);
+
+        chymousInfo.maxPurifyHp *= 10;
+        chymousInfo.purifyBar.setMaxValue(chymousInfo.maxPurifyHp);
+        // don't need to set purify bar value since it starts at 0
+
+        // halve the speed of the boss
+        chymousInfo.speed /= 2f;
+
+        // double the scale of the boss
+        chymousDisaster.transform.localScale *= 2f;
+    }
+
+    public static int GetBossWaveSpawnerThread(string tag) {
+        // return the spawner thread of the corresponding tag
+        for (int i = 0; i < bossSpawnerThreads.Length; i++) {
+            if (bossSpawnerThreads[i] == tag) {
+                return i;
+            }
+        }
+        Debug.Log("Error: No spawner thread found for tag "+tag);
+        return 0;
+    }
+    
+    public static void ReduceBossEnemyCount(string tag) {
+        // reduce the enemy count of the corresponding tag
+        int spawnerThread = GetBossWaveSpawnerThread(tag);
+        bossEnemyCount[spawnerThread]--;
+        Debug.Log(tag+" removed, count: "+bossEnemyCount[spawnerThread]);
+    }
+
+    private IEnumerator BossWaveSpawner(Wave.WavePart chyme) {
+        
+        yield return new WaitForSeconds(chyme.oneTimeDelay);
+        while (bossAlive) {
+            // check if the enemy limit has been reached
+            int spawnerThread = GetBossWaveSpawnerThread(chyme.enemy.tag);
+            // wait to spawn the enemy
+            if (bossEnemyCount[spawnerThread] < chyme.repeats) {
+                yield return new WaitForSeconds(chyme.spawnDelay);
+                // spawn the enemy
+                Instantiate(chyme.enemy, spawnpoints[chyme.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position, Quaternion.identity);
+                bossEnemyCount[spawnerThread]++;
+                Debug.Log(chyme.enemy.tag+" spawned, count: "+bossEnemyCount[spawnerThread]);
+            } else {
+                // wait for one frame (game freeze if you don't)
+                yield return null;
+            }
+        }
     }
 
     void Awake()
@@ -241,11 +351,20 @@ public class Spawner : MonoBehaviour
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
+
+            // reset all boss wave related fields
+            isBossWave = false;
+            bossSpawnerThreads = new string[3];
+            bossEnemyCount = new int[3];
+
         }
     }
 
     public static int GetRound() {
-        return waveIdx;
+        if (waveIdx == -1) {
+            return 1;
+        }
+        return waveIdx + 1;
     }
 
     void ShowPath() {

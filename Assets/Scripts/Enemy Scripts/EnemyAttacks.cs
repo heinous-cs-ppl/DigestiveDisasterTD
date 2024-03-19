@@ -17,7 +17,8 @@ public class EnemyAttacks : MonoBehaviour
 
     // layermask to only check for collisions with students
     [SerializeField] private LayerMask studentMask;
-    // Start is called before the first frame update
+
+    public bool isBoss = false;
     void Start()
     {
         EnemyInfo enemy = GetComponent<EnemyInfo>();
@@ -30,20 +31,28 @@ public class EnemyAttacks : MonoBehaviour
     void Update()
     {
         // get an array of enemies in the range of the food
-        Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(transform.position, triggerRadius, studentMask);
-        if (studentsInRange.Length > 0)
-        {
-            // there is an enemy in the range of food
-            // get an array of students in the damage radius
-            Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(transform.position, damageRadius, studentMask);
-            // damage all of the students in the radius
-            foreach (Collider2D studentCollision in studentsToDamage)
+        if(!isBoss){
+            // if the enemy is not a boss
+            Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(transform.position, triggerRadius, studentMask);
+            if (studentsInRange.Length > 0)
             {
-                GameObject student = studentCollision.gameObject;
-                student.GetComponent<StudentInfo>().TakeDamage(damage);
+                // there is an enemy in the range of food
+                // get an array of students in the damage radius
+                Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(transform.position, damageRadius, studentMask);
+                // damage all of the students in the radius
+                foreach (Collider2D studentCollision in studentsToDamage)
+                {
+                    GameObject student = studentCollision.gameObject;
+                    student.GetComponent<StudentInfo>().TakeDamage(damage);
+                }
+
+                if(Spawner.isBossWave) {
+                    Spawner.ReduceBossEnemyCount(gameObject.tag);
+                    Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+                }
+                // destroy the enemy
+                Destroy(gameObject);
             }
-            // destroy the enemy
-            Destroy(gameObject);
         }
     }
 

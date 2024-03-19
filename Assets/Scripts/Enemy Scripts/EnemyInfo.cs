@@ -6,7 +6,7 @@ public class EnemyInfo : MonoBehaviour
 {
     public int maxHp = 10;
     [SerializeField]
-    private Bar healthBar;
+    public Bar healthBar;
     public int maxPurifyHp = 7;
     public Bar purifyBar;
     public int spawnPointIndex = 0;
@@ -16,6 +16,8 @@ public class EnemyInfo : MonoBehaviour
     public int moneyDrop = 10;
 
     public GameObject[] buffs;
+
+    public bool isBoss = false;
 
 
     private void Start()
@@ -68,6 +70,18 @@ public class EnemyInfo : MonoBehaviour
         MoneyManager.AddMoney(moneyDrop);
         UIManager.UpdateMoney();
 
+        // if the enemy is a boss, set bossAlive to false in spawner
+        if (isBoss) {
+            Spawner.bossAlive = false;
+            Debug.Log("Boss died");
+        }
+
+        // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
+        if(Spawner.isBossWave) {
+            Spawner.ReduceBossEnemyCount(gameObject.tag);
+            Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+        }
+
         Destroy(gameObject);
     }
 
@@ -79,6 +93,18 @@ public class EnemyInfo : MonoBehaviour
 
         MoneyManager.AddMoney(moneyDrop);
         UIManager.UpdateMoney();
+
+        // if the enemy is a boss, set bossAlive to false in spawner
+        if (isBoss) {
+            Spawner.bossAlive = false;
+            Debug.Log("Boss died");
+        }
+
+        // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
+        if(Spawner.isBossWave) {
+            Spawner.ReduceBossEnemyCount(gameObject.tag);
+            Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+        }
 
         Destroy(gameObject);
     }

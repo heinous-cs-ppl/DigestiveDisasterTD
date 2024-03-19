@@ -15,6 +15,7 @@ public class Wave : MonoBehaviour
         public int repeats;
     }
 
+    public bool bossWave = false;
     public static Wave instance;
 
     [Header("Attributes")]
