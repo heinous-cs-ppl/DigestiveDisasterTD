@@ -79,7 +79,7 @@ public class EnemyInfo : MonoBehaviour
         // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
         if(Spawner.isBossWave) {
             Spawner.ReduceBossEnemyCount(gameObject.tag);
-            Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+            Debug.Log(gameObject.tag + " killed");
         }
 
         Destroy(gameObject);
@@ -97,13 +97,12 @@ public class EnemyInfo : MonoBehaviour
         // if the enemy is a boss, set bossAlive to false in spawner
         if (isBoss) {
             Spawner.bossAlive = false;
+            Spawner.anySpawning = false;
             Debug.Log("Boss died");
-        }
-
-        // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
-        if(Spawner.isBossWave) {
+        } else if(Spawner.isBossWave) {
+            // if current wave is a boss wave, and this enemy isn't the boss, reduce the number of alive enemies of corresponding tag by 1
             Spawner.ReduceBossEnemyCount(gameObject.tag);
-            Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+            Debug.Log(gameObject.tag + " purified");
         }
 
         Destroy(gameObject);

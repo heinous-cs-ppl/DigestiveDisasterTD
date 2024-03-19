@@ -49,11 +49,19 @@ MonoBehaviour:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 1
+    repeats: 5
+  Spawner1WaveEnc:
+  - oneTimeDelay: 3
+    enemy: {fileID: 7999120131923227785, guid: f22069341e5b66d46aa0ad6732c1764f, type: 3}
+    spawnDelay: 1
     repeats: 3
-  Spawner1WaveEnc: []
-  Spawner2WaveEnc: []
+  Spawner2WaveEnc:
+  - oneTimeDelay: 10
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
+    spawnDelay: 1
+    repeats: 3
   boss:
     oneTimeDelay: 1
     enemy: {fileID: 7999120131923227785, guid: 13f77efa2bfb9a245844f9959dddc6f0, type: 3}
     spawnDelay: 0
-    repeats: 0
+    repeats: 100

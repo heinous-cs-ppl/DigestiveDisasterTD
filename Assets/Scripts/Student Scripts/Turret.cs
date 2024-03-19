@@ -86,7 +86,7 @@ public class Turret : MonoBehaviour
             if (timeUntilFire >= 1f / bps)
             {
                 Shoot();
-                Debug.Log("time until fire on attack: "+ timeUntilFire);
+                // Debug.Log("time until fire on attack: "+ timeUntilFire);
 
                 // Resets time to fire next shot
                 timeUntilFire = 0f;

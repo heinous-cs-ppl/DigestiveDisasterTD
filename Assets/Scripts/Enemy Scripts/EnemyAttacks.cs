@@ -48,7 +48,7 @@ public class EnemyAttacks : MonoBehaviour
 
                 if(Spawner.isBossWave) {
                     Spawner.ReduceBossEnemyCount(gameObject.tag);
-                    Debug.Log("Reduced enemy count of tag " + gameObject.tag);
+                    Debug.Log(gameObject.tag + " self-destruct");
                 }
                 // destroy the enemy
                 Destroy(gameObject);

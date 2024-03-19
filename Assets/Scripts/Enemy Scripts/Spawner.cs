@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     // private Transform spawnPoint;
 
     private bool[] spawn = {false, false, false};
-    private bool anySpawning = false;
+    public static bool anySpawning = false;
     private bool enemiesAlive = false;
     public static bool waveEnd = true;
 
@@ -80,6 +80,8 @@ public class Spawner : MonoBehaviour
             waveIdx++;
             curWaveInfo = getWaveInfo(LevelManager.instance.waves[waveIdx]);
 
+            waveEnd = false;
+            anySpawning = true;
             // if the wave is not a boss wave
             if (!LevelManager.instance.waves[waveIdx].GetComponent<Wave>().bossWave) {
                 i[0] = 0;
@@ -99,15 +101,12 @@ public class Spawner : MonoBehaviour
                 StartCoroutine(SpawnerThread0());
                 StartCoroutine(SpawnerThread1());
                 StartCoroutine(SpawnerThread2());
-
-                anySpawning = true;
-                waveEnd = false;
             } else {
                 // if the wave is a boss wave
                 // The boss wave will have up to three spawners, with one enemy each
                 // The "repeats" field in the struct will be treated as "maxInstances"
                 // meaning that there will be maxInstances of the enemy alive while the boss is alive
-                // enemies will stop spawning once boss is dead
+                // enemies will stop spawning once boss is dead (anySpawning set to false once boss dies)
 
                 // set boss to alive
                 bossAlive = true;
@@ -149,12 +148,12 @@ public class Spawner : MonoBehaviour
         chymousInfo.isBoss = true;
         chymousDisaster.GetComponent<EnemyAttacks>().isBoss = true;
 
-        // multiply hp and purify hp by 10
-        chymousInfo.maxHp *= 10;
+        // multiply hp and purify hp by the value set in repeats (chymous and heinous code)
+        chymousInfo.maxHp *= boss.repeats;
         chymousInfo.healthBar.setMaxValue(chymousInfo.maxHp);
         chymousInfo.healthBar.setValue(chymousInfo.maxHp);
 
-        chymousInfo.maxPurifyHp *= 10;
+        chymousInfo.maxPurifyHp *= boss.repeats;
         chymousInfo.purifyBar.setMaxValue(chymousInfo.maxPurifyHp);
         // don't need to set purify bar value since it starts at 0
 
@@ -191,11 +190,11 @@ public class Spawner : MonoBehaviour
             int spawnerThread = GetBossWaveSpawnerThread(chyme.enemy.tag);
             // wait to spawn the enemy
             if (bossEnemyCount[spawnerThread] < chyme.repeats) {
-                yield return new WaitForSeconds(chyme.spawnDelay);
                 // spawn the enemy
                 Instantiate(chyme.enemy, spawnpoints[chyme.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position, Quaternion.identity);
                 bossEnemyCount[spawnerThread]++;
                 Debug.Log(chyme.enemy.tag+" spawned, count: "+bossEnemyCount[spawnerThread]);
+                yield return new WaitForSeconds(chyme.spawnDelay);
             } else {
                 // wait for one frame (game freeze if you don't)
                 yield return null;

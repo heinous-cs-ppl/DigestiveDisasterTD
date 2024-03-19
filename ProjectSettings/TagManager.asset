@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Spawnpoint
   - Student
+  - Apple
+  - Fish
+  - Poutine
+  - Burger
+  - Spaghetti
+  - Pizza
   layers:
   - Default
   - TransparentFX
