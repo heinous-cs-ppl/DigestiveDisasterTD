@@ -167,12 +167,11 @@ public class Spawner : MonoBehaviour
     public static int GetBossWaveSpawnerThread(string tag) {
         // return the spawner thread of the corresponding tag
         for (int i = 0; i < bossSpawnerThreads.Length; i++) {
-            if (bossSpawnerThreads[i] == tag) {
+            if (bossSpawnerThreads[i].Equals(tag)) {
                 return i;
             }
         }
-        Debug.Log("Error: No spawner thread found for tag "+tag);
-        return 0;
+        throw new System.Exception("No spawner thread found for tag "+tag);
     }
     
     public static void ReduceBossEnemyCount(string tag) {
@@ -185,9 +184,9 @@ public class Spawner : MonoBehaviour
     private IEnumerator BossWaveSpawner(Wave.WavePart chyme) {
         
         yield return new WaitForSeconds(chyme.oneTimeDelay);
+        int spawnerThread = GetBossWaveSpawnerThread(chyme.enemy.tag);
         while (bossAlive) {
             // check if the enemy limit has been reached
-            int spawnerThread = GetBossWaveSpawnerThread(chyme.enemy.tag);
             // wait to spawn the enemy
             if (bossEnemyCount[spawnerThread] < chyme.repeats) {
                 // spawn the enemy
@@ -341,7 +340,8 @@ public class Spawner : MonoBehaviour
             Debug.Log("enemies alive");
         }
 
-        if (!(anySpawning || enemiesAlive) && !waveEnd) {
+        if (!(anySpawning || enemiesAlive) && !waveEnd && !isBossWave) {
+            // when a regular wave ends
             waveEnd = true;
             nextWaveButton.interactable = true;
             Debug.Log("wave ended");
@@ -350,12 +350,21 @@ public class Spawner : MonoBehaviour
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
+        } else if (isBossWave && !bossAlive) {
+            // when a boss wave ends
+            waveEnd = true;
+            nextWaveButton.interactable = true;
+            Debug.Log("boss wave ended");
+            UIManager.UpdateMove(0);
+            LevelManager.instance.SpawnVacuousStudents();
+            MoneyManager.AddMoney(NextWave.waveMoney);
+            UIManager.UpdateMoney();
+            ShowPath();
 
-            // reset all boss wave related fields
+            // reset boss related fields
             isBossWave = false;
             bossSpawnerThreads = new string[3];
             bossEnemyCount = new int[3];
-
         }
     }
 
