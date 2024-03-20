@@ -74,10 +74,8 @@ public class EnemyInfo : MonoBehaviour
         if (isBoss) {
             Spawner.bossAlive = false;
             Debug.Log("Boss died");
-        }
-
-        // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
-        if(Spawner.isBossWave) {
+        } else if(Spawner.isBossWave) {
+            // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
             Spawner.ReduceBossEnemyCount(gameObject.tag);
             Debug.Log(gameObject.tag + " killed");
         }

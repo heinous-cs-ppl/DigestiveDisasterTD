@@ -350,7 +350,7 @@ public class Spawner : MonoBehaviour
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
-        } else if (isBossWave && !bossAlive) {
+        } else if (isBossWave && !bossAlive && !enemiesAlive && !waveEnd) {
             // when a boss wave ends
             waveEnd = true;
             nextWaveButton.interactable = true;
