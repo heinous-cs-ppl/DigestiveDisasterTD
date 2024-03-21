@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoneyManager
 {
-    private static int money = 250;
+    private static int money = 10000;
 
     public static void AddMoney(int amt)
     {

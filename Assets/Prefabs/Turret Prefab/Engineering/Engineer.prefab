@@ -258,14 +258,15 @@ MonoBehaviour:
   maxHp: 200
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 242047190924835797}
-  damage: 999
+  damage: 100
   range: 1
   rotationSpeed: 1000
-  bps: 0
+  bps: 3
   bulletSpeed: 0
   bulletDistance: 0
   description: Queen's students created a machine that can purify food regardless
-    of its HP! Low range, takes longer to recharge based on enemy's purify HP.
+    of its HP! Low range, takes longer to recharge based on enemy's purify HP. Does
+    DPS to boss enemies while they're in range.
   healer: 0
   purify: 1
   slow: 0
