@@ -35,7 +35,7 @@ public class Turret : MonoBehaviour
     
 
 
-    protected void Start()
+    private void Start()
     {
         StudentInfo student = GetComponent<StudentInfo>();
 

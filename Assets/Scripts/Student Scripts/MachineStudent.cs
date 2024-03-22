@@ -6,12 +6,6 @@ using Unity.VisualScripting;
 
 public class MachineStudent : Turret {
     private bool canAttack = true;
-    private StudentInfo student;
-
-    private new void Start() {
-        base.Start();
-        student = gameObject.GetComponent<StudentInfo>();
-    }
     protected new void Update() {
         // Tries to find food to attack
         if (canAttack && target == null)
@@ -62,12 +56,7 @@ public class MachineStudent : Turret {
         anim.SetTrigger("Attack");
 
         // once timer hits some value (related to target's purify hp), give a purified meal
-        float cooldown;
-        if (!student.buffed) {
-            cooldown = 0.75f + 0.005f * (maxPurify - currentPurify);
-        } else {
-            cooldown = 0.75f + 0.005f * (maxPurify - currentPurify) / 0.3f;
-        }
+        float cooldown = 0.75f + 0.005f * (maxPurify - currentPurify);
         
         StartCoroutine(AttackCooldown(cooldown, moneyDrop));
     }
