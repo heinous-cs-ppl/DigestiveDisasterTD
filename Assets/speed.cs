@@ -6,7 +6,7 @@ public class slowdown : MonoBehaviour
     public UnityEngine.UI.Button speedButton;
 
     public KeyCode slowKey = KeyCode.Q;
-    public KeyCode speedKey = KeyCode.W;
+    public KeyCode speedKey = KeyCode.E;
 
     private bool slowKeyLast = false;
     private bool speedKeyLast = false;
