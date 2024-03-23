@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public int deathLimit = 10;
 
     public bool disableGameOver = false;
+    public bool gameOver = false;
 
     // used to disable mouse interaction with AOE
     [SerializeField] private LayerMask inputLayerMask;
@@ -118,7 +119,9 @@ public class LevelManager : MonoBehaviour
             if (plot.student == null)
             {
                 free++;
-            } else {
+            }
+            else
+            {
                 Debug.Log(plot.name + " is occupied by " + plot.student.name);
             }
         }
@@ -144,12 +147,14 @@ public class LevelManager : MonoBehaviour
 
             // create a list containing numbers 1 to free
             List<int> freeIdxs = new List<int>();
-            for (int i = 0; i < free; i++) {
+            for (int i = 0; i < free; i++)
+            {
                 freeIdxs.Add(i);
             }
 
             // select numVac random numbers from the array of free indices
-            for (int i = 0; i < numVac; i++) {
+            for (int i = 0; i < numVac; i++)
+            {
                 int randIdx = Random.Range(0, free - i);
                 vacPlotIdxs[i] = freeIdxs[randIdx];
                 // remove the selected index from the array
@@ -210,8 +215,10 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (!disableGameOver) {
+        if (!disableGameOver)
+        {
             Time.timeScale = 0;
+            gameOver = true;
             UIManager.ShowGameOverUI();
         }
     }

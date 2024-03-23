@@ -19,49 +19,6 @@ public class slowdown : MonoBehaviour
 
     public void Update()
     {
-        /* if (!Input.GetKey(slowKey) && !Input.GetKey(speedKey)) */
-        /* { */
-        /*     Time.timeScale = 1; */
-        /* } */
-        /* else if (Input.GetKey(slowKey)) */
-        /* { */
-        /*     if (Input.GetKey(speedKey)) */
-        /*     { */
-        /*         slowKeyLast = true; */
-        /*     } */
-        /*     else */
-        /*     { */
-        /*         slowKeyLast = false; */
-        /*         speedKeyLast = false; */
-        /*         SlowDown(); */
-        /*     } */
-        /* } */
-        /* else if (Input.GetKey(speedKey)) */
-        /* { */
-        /*     if (Input.GetKey(slowKey)) */
-        /*     { */
-        /*         speedKeyLast = true; */
-        /*     } */
-        /*     else */
-        /*     { */
-        /*         slowKeyLast = false; */
-        /*         speedKeyLast = false; */
-        /*         SpeedUp(); */
-        /*     } */
-        /* } */
-        /* if (Input.GetKey(slowKey) && Input.GetKey(speedKey)) */
-        /* { */
-        /*     if (slowKeyLast) */
-        /*     { */
-        /*         SlowDown(); */
-        /*     } */
-        /*     if (speedKeyLast) */
-        /*     { */
-        /*         SpeedUp(); */
-        /*     } */
-        /* } */
-
-
         if (Input.GetKeyDown(slowKey))
         {
             SlowDown();
@@ -78,7 +35,7 @@ public class slowdown : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1;
+                NormalSpeed();
             }
         }
         else if (Input.GetKeyUp(speedKey))
@@ -89,23 +46,41 @@ public class slowdown : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1;
+                NormalSpeed();
             }
+        }
+    }
+
+    public void NormalSpeed()
+    {
+        if (!LevelManager.instance.gameOver)
+        {
+            Time.timeScale = 1;
         }
     }
 
     public void SlowDown()
     {
-        Time.timeScale = 0.5f;
+        if (!LevelManager.instance.gameOver)
+        {
+            Time.timeScale = 0.5f;
+        }
     }
 
     public void SpeedUp()
     {
-        Time.timeScale = 2;
+        if (!LevelManager.instance.gameOver)
+        {
+            Time.timeScale = 2;
+        }
     }
 
     public void ToggleSlowDown()
     {
+        if (LevelManager.instance.gameOver)
+        {
+            return;
+        }
         if (Time.timeScale == 0.5f)
         {
             Time.timeScale = 1;
@@ -120,6 +95,10 @@ public class slowdown : MonoBehaviour
     }
     public void ToggleSpeedUp()
     {
+        if (LevelManager.instance.gameOver)
+        {
+            return;
+        }
         if (Time.timeScale == 2)
         {
             Time.timeScale = 1;
