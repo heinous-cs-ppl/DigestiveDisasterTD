@@ -143,7 +143,7 @@ public class Spawner : MonoBehaviour
     public IEnumerator SpawnBoss(Wave.WavePart boss) {
         yield return new WaitForSeconds(boss.oneTimeDelay);
         // spawn the boss
-        GameObject chymousDisaster = Instantiate(boss.enemy, spawnpoints[0].position, Quaternion.identity);
+        GameObject chymousDisaster = Instantiate(boss.enemy, spawnpoints[boss.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position, Quaternion.identity);
         EnemyInfo chymousInfo = chymousDisaster.GetComponent<EnemyInfo>();
         chymousInfo.isBoss = true;
         chymousDisaster.GetComponent<EnemyAttacks>().isBoss = true;

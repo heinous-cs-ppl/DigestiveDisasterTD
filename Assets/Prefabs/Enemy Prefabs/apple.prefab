@@ -600,7 +600,7 @@ MonoBehaviour:
   maxPurifyHp: 60
   purifyBar: {fileID: 8309139937942490931}
   spawnPointIndex: 1
-  damage: 20
+  damage: 30
   speed: 4
   attackRadius: 0.55
   moneyDrop: 2

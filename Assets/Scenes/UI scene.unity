@@ -2578,6 +2578,10 @@ MonoBehaviour:
   - {fileID: 583666475225075005, guid: 61dcc309c5edac749a2cb8e698631610, type: 3}
   - {fileID: 583666475225075005, guid: c2ae142937447a043a6ba37914cc8a33, type: 3}
   - {fileID: 583666475225075005, guid: 633b630b95b66b041989c951ffd9dac9, type: 3}
+  - {fileID: 583666475225075005, guid: 35f2b79db001bef45a7d17b02138e3dc, type: 3}
+  - {fileID: 583666475225075005, guid: 971fd09cdf027734c92bf54407017600, type: 3}
+  - {fileID: 583666475225075005, guid: 38c8da5b4bc23ae42b9cc02723087c45, type: 3}
+  - {fileID: 583666475225075005, guid: 4947def7d02e6e34ebba66e50fa1801e, type: 3}
   - {fileID: 583666475225075005, guid: 86d313383532de8439ac9164e168cd68, type: 3}
   spawnObjTransforms: []
   studentsDead: 0
@@ -8455,10 +8459,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -0.07978241
-    y: -0.16945997
-    width: 1.1604714
-    height: 1.3407822
+    x: -1
+    y: -0.75000006
+    width: 2
+    height: 1.5000001
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

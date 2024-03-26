@@ -522,10 +522,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 240
   healthBar: {fileID: 548791979858506205}
-  maxPurifyHp: 180
+  maxPurifyHp: 240
   purifyBar: {fileID: 5809816167552508561}
   spawnPointIndex: 0
-  damage: 80
+  damage: 70
   speed: 2
   attackRadius: 0.55
   moneyDrop: 5
