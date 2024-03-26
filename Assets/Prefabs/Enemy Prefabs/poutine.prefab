@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 5234410730176319405}
   m_Layer: 6
   m_Name: poutine
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: -14507217610245762}
+  LawyerDebuff: 0
 --- !u!114 &4838809105904487661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +532,8 @@ MonoBehaviour:
   moneyDrop: 4
   buffs: []
   isBoss: 0
+  LawyerDebuff: 0
+  LawyerDamageMultiplier: 0
 --- !u!50 &-6527944116906063019
 Rigidbody2D:
   serializedVersion: 4

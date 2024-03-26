@@ -37,6 +37,7 @@ public class PathFollow : MonoBehaviour {
     private bool slowCheck = false;
     private float remainingTime;
     private Coroutine slowCoroutine;
+    [HideInInspector] public bool LawyerDebuff = false;
 
     void MoveToNode(int nodeIndex) {
         // check if the index of the node is valid
@@ -116,7 +117,7 @@ public class PathFollow : MonoBehaviour {
     {
 
         // Checks if the target has been slowed already
-        if(slowCheck == false)
+        if(slowCheck == false && LawyerDebuff == false)
         {
             // Sets slowCheck to be true in order to prevent slows from stacking
             slowCheck = true;
@@ -152,6 +153,14 @@ public class PathFollow : MonoBehaviour {
         speed = originalSpeed;
         Debug.Log("Back to original speed");   
         slowCheck = false;
+    }
+
+    // Only here because of lawyer debuff slow effect
+    public void StatReset()
+    {
+        speed = originalSpeed;
+        slowCheck = false;
+        LawyerDebuff = false;
     }
     
 }

@@ -2899,7 +2899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87338c93aa36e9848aab03eccb7ca82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  student: {fileID: 2436313744661315829, guid: 1bbc8a87b56683b4cac50c023ad53283, type: 3}
+  student: {fileID: 5847128244897676795, guid: 406f23fcbb15fe944a38f25782d28dce, type: 3}
   studentSprite: {fileID: 21300000, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
   studentLayer:
     serializedVersion: 2
@@ -7900,8 +7900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87338c93aa36e9848aab03eccb7ca82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  student: {fileID: 2436313744661315829, guid: 1d0a302d570a9f443a0ac7ab46589fc4, type: 3}
-  studentSprite: {fileID: 920362317, guid: c339fa89f390abf44b0065b6cbe5c286, type: 3}
+  student: {fileID: 2436313744661315829, guid: fd1a1f63f2d897d48ab4b82b1b48465a, type: 3}
+  studentSprite: {fileID: 1363007384, guid: f1cb32060a0e59746b1a13c95f94af36, type: 3}
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -8455,10 +8455,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -0.07978241
-    y: -0.16945997
-    width: 1.1604714
-    height: 1.3407822
+    x: -0.1626943
+    y: -0.14056939
+    width: 1.326425
+    height: 1.2811388
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -19646,7 +19646,7 @@ RectTransform:
   m_GameObject: {fileID: 1835500136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.41, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 737942841}
@@ -19669,14 +19669,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.17609969, g: 0.9716981, b: 0.0779192, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 911956aeebf726e41a94f4227d3fc345, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a9066ffbc2caa6e44b9f617ec3cd1c82, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -19,12 +19,19 @@ public class EnemyAttacks : MonoBehaviour
     [SerializeField] private LayerMask studentMask;
 
     public bool isBoss = false;
+
+    private Coroutine DamageReductionCoroutine;
+    [HideInInspector] public int LawyerDamageMultiplier;
+    int originalDamage;
+
     void Start()
     {
         EnemyInfo enemy = GetComponent<EnemyInfo>();
         damage = enemy.damage;
         triggerRadius = enemy.attackRadius;
         damageRadius = triggerRadius * 2f;
+
+        originalDamage = damage;
     }
 
     // Update is called once per frame
@@ -54,6 +61,25 @@ public class EnemyAttacks : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void DamageReduction(int amount, int duration)
+    {
+        damage = damage / amount;
+        Debug.Log(damage);
+
+        DamageReductionCoroutine = StartCoroutine(NormalDamageAfterDelay(duration));
+    }
+    IEnumerator NormalDamageAfterDelay(int remainingTime) 
+    {
+        // Will delay before reseting the attack back to its original speed
+        yield return new WaitForSeconds(remainingTime);  
+        damage = originalDamage;
+        Debug.Log("Back to original damage");   
+    }
+    public void ResetDebuff()
+    {
+        damage = originalDamage;
     }
 
     // private void OnDrawGizmosSelected()

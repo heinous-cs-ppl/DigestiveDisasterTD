@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
@@ -11,13 +12,19 @@ public class EnemyInfo : MonoBehaviour
     public Bar purifyBar;
     public int spawnPointIndex = 0;
     public int damage = 5;
+    private int originalDamage;
     public float speed = 2f;
     public float attackRadius = 0.55f;
     public int moneyDrop = 10;
+    
 
     public GameObject[] buffs;
 
     public bool isBoss = false;
+    [HideInInspector] public bool LawyerDebuff = false;
+    [HideInInspector] public int LawyerDamageMultiplier;
+
+
 
 
     private void Start()
@@ -27,6 +34,8 @@ public class EnemyInfo : MonoBehaviour
 
         purifyBar.setMaxValue(maxPurifyHp);
         purifyBar.setValue(0);
+
+        originalDamage = damage;
     }
     public int getHealth()
     {
@@ -40,9 +49,15 @@ public class EnemyInfo : MonoBehaviour
     // Calculating damage done to enemy
     public void takeDamage(int dmg)
     {
+        Debug.Log("Damaged");
+
+        // If the lawyer debuff is true, multiply it by the value that was randomly selected
+        if (LawyerDebuff == true)
+        {
+            dmg = dmg * LawyerDamageMultiplier;
+        }
         int currentHp = getHealth();
         int newHp = currentHp - dmg;
-        Debug.Log("Damaged");
         if (newHp <= 0)
         {
             EnemyDeath();
@@ -56,6 +71,10 @@ public class EnemyInfo : MonoBehaviour
     public void takePurifyDamage(int dmg)
     {
         int currentPurifyHp = getPurifyHealth();
+        if (LawyerDebuff == true)
+        {
+            dmg = dmg * LawyerDamageMultiplier;
+        }
         int newPurifyHp = currentPurifyHp + dmg;
         if (newPurifyHp >= maxPurifyHp)
         {
@@ -105,4 +124,11 @@ public class EnemyInfo : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+        public void ResetDebuff()
+    {
+        damage = originalDamage;
+        LawyerDebuff = false;
+    }
+
 }
