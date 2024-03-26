@@ -392,9 +392,9 @@ MonoBehaviour:
   bps: 0
   bulletSpeed: 0
   bulletDistance: 0
-  description: I will reveal the truth of this food! will randomly choose one of
-    three effects, slow, increase damage dealt, or decrease damage recieved. These
-    buffs do no stack. Potency and duration is also randomized
+  description: I will reveal the truth of this food! Once placed, will randomly choose
+    one of three effects, slow, increase damage dealt, or decrease damage recieved.
+    Potency and duration is also randomized. When the effects end, the lawyer leaves
   healer: 0
   purify: 0
   slow: 0
