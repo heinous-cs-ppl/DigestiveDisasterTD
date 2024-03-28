@@ -23,6 +23,7 @@ public class StudentInfo : MonoBehaviour
     public bool healer = false;
     public bool purify = false;
     public bool slow = false;
+    public bool commerce = false;
 
     // extra fields to hold the original values of the attributes
     private int originalDamage;
@@ -68,7 +69,6 @@ public class StudentInfo : MonoBehaviour
     {
         int currentHp = getHealth();
         int newHp = currentHp - dmg;
-
         if (newHp <= 0)
         {
             StudentDeath();
@@ -113,15 +113,23 @@ public class StudentInfo : MonoBehaviour
     // handles buffs when student is fed purified food
     public void Feed()
     {
-        // heal the student for 30% of their max hp (rounded up because I'm generous)
+      // heal the student for 30% of their max hp (rounded up because I'm generous)
         int toHeal = Mathf.CeilToInt(maxHp * 0.3f);
         Heal(toHeal);
+
+        // If the student is a commerce student, give some money when buffed
+        if (commerce == true)
+        {
+            MoneyManager.AddMoney(25);
+            UIManager.UpdateMoney();
+        }
 
         if (buffed)
         {
             RefreshBuff();
             return;
         }
+        
 
         buffed = true;
         // increase bps, damage, range, bullet speed, bullet lifetime by 30%
@@ -130,8 +138,6 @@ public class StudentInfo : MonoBehaviour
         range *= 1.3f;
         bulletSpeed *= 1.3f;
         bulletDistance *= 1.3f;
-
-        
 
         // Vacuous students don't have a turret
         if (turret != null)

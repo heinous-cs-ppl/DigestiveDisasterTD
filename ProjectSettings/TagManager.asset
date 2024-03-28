@@ -12,6 +12,7 @@ TagManager:
   - Burger
   - Spaghetti
   - Pizza
+  - Enemy
   layers:
   - Default
   - TransparentFX
