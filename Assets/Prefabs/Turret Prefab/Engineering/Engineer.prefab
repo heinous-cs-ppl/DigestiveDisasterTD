@@ -235,6 +235,7 @@ MonoBehaviour:
   healer: 0
   purify: 1
   slow: 0
+  commerce: 0
   buffed: 0
   turret: {fileID: 2172817358560362739}
   outline: {fileID: 2100000, guid: 136d33f1fd2ab6845b03a1e1972e439c, type: 2}
