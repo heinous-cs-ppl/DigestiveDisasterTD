@@ -2767,10 +2767,18 @@ MonoBehaviour:
   - {fileID: 583666475225075005, guid: 971fd09cdf027734c92bf54407017600, type: 3}
   - {fileID: 583666475225075005, guid: 38c8da5b4bc23ae42b9cc02723087c45, type: 3}
   - {fileID: 583666475225075005, guid: 4947def7d02e6e34ebba66e50fa1801e, type: 3}
+  - {fileID: 583666475225075005, guid: 21b263b5622086c41acf07c267a17fdb, type: 3}
+  - {fileID: 583666475225075005, guid: fb7bd9f527fc85f4bb57d37abfb09c19, type: 3}
+  - {fileID: 583666475225075005, guid: 547b1796744d5d24bbce0280abc55309, type: 3}
   - {fileID: 583666475225075005, guid: 86d313383532de8439ac9164e168cd68, type: 3}
+  - {fileID: 583666475225075005, guid: f719a37a67f017e49a283d1f6bc75ba1, type: 3}
+  - {fileID: 583666475225075005, guid: 617414eb49d61fa48abf9a0dc2162afe, type: 3}
+  - {fileID: 583666475225075005, guid: 2dc3c02fe09bafa469f4e116bbfa7b8c, type: 3}
+  - {fileID: 583666475225075005, guid: f2a9a8aed1d7fb2418ec08ebfbfa1bb9, type: 3}
+  - {fileID: 583666475225075005, guid: da434a5cc9333c54f881c81c71129746, type: 3}
   spawnObjTransforms: []
   studentsDead: 0
-  deathLimit: 10
+  deathLimit: 15
   disableGameOver: 0
   gameOver: 0
   inputLayerMask:
@@ -13145,7 +13153,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -1.0281805, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -16804,9 +16812,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 5
+  m_MaxValue: 3
   m_WholeNumbers: 0
-  m_Value: 5
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
