@@ -239,6 +239,7 @@ MonoBehaviour:
   outline: {fileID: 2100000, guid: f75814948922dde4fa70441d6eb54964, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
+  commerceMoneyGain: 0
 --- !u!114 &-4455204360603486957
 MonoBehaviour:
   m_ObjectHideFlags: 0

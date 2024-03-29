@@ -241,6 +241,7 @@ MonoBehaviour:
   outline: {fileID: 2100000, guid: 136d33f1fd2ab6845b03a1e1972e439c, type: 2}
   noOutline: {fileID: 2100000, guid: 19386da55c18087489f14a75383232d2, type: 2}
   offsetX: 0
+  commerceMoneyGain: 0
 --- !u!95 &2688338887147868177
 Animator:
   serializedVersion: 5
