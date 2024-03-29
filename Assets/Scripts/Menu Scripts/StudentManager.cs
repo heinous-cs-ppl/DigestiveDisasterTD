@@ -160,20 +160,15 @@ public class StudentManager : MonoBehaviour
                 Debug.Log("right clicked on student");
                 // clicked on a student, select the student
                 GameObject student = hit.collider.gameObject;
-                
-                if (PurifyManager.UseMeal())
-                {
-                    // update the counter on the UI
-                    UIManager.UpdateMealCount();
-                    // give buffs to the selected student
-                    StudentInfo clicked = student.GetComponent<StudentInfo>();
-                    clicked.Feed();
-                    if (StudentManager.selected == student) {
-                        UIManager.UpdateSelectedBars(clicked);
-                        // "reselect" the selected student to redraw the range circle (I'm lazy)
-                        StudentManager.Select(StudentManager.selected);
-                    }
+
+                // start a coroutine to check when the mouse is released if the student is a commerce student
+                if (student.GetComponent<StudentInfo>().commerce) {
+                    StartCoroutine(FeedContinuously(student));
+                    Debug.Log("feeding a commerce student");
                 }
+
+                // feed the student
+                FeedStudent(student);
             }
         }
 
@@ -182,6 +177,32 @@ public class StudentManager : MonoBehaviour
         {
             Deselect();
             Debug.Log("pressed esc, deselect");
+        }
+    }
+
+    IEnumerator FeedContinuously(GameObject student)
+    {
+        // wait a second before continuous feeding
+        yield return new WaitForSeconds(1f);
+        // feed student every 0.1 seconds if right click not released
+        while (Input.GetMouseButton(1)) {
+            FeedStudent(student);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public void FeedStudent(GameObject student) {
+        if (PurifyManager.UseMeal()){
+            // update the counter on the UI
+            UIManager.UpdateMealCount();
+            // give buffs to the selected student
+            StudentInfo clicked = student.GetComponent<StudentInfo>();
+            clicked.Feed();
+            if (StudentManager.selected == student) {
+                UIManager.UpdateSelectedBars(clicked);
+                // "reselect" the selected student to redraw the range circle (I'm lazy)
+                StudentManager.Select(StudentManager.selected);
+            }
         }
     }
 }
