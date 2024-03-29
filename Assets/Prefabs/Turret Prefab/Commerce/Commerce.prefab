@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 60
+  cost: 200
   maxHp: 60
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 7573675254489230571}
@@ -337,6 +337,7 @@ MonoBehaviour:
   outline: {fileID: 2100000, guid: fdecad1e1de8e054e81e36c682ca4851, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
+  commerceMoneyGain: 0
 --- !u!212 &-6784355479326202185
 SpriteRenderer:
   m_ObjectHideFlags: 0

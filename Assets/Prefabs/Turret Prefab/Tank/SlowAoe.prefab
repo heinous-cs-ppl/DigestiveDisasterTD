@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4898349547868796542}
   - component: {fileID: 5760139248048277314}
   - component: {fileID: 1282939735757078768}
+  - component: {fileID: 9200021205165162314}
   m_Layer: 7
   m_Name: SlowAoe
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -610192338, guid: a998c6b244c21424f9b64a07e27430db, type: 3}
   m_Color: {r: 0.88604903, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +122,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
 --- !u!50 &5760139248048277314
 Rigidbody2D:
   serializedVersion: 4
@@ -164,4 +165,25 @@ MonoBehaviour:
   delay: 1
   slowPercentage: 0.5
   student: {fileID: 2436313744661315829, guid: 1bbc8a87b56683b4cac50c023ad53283, type: 3}
-  lingerTime: 1
+  lingerTime: 0.6
+--- !u!95 &9200021205165162314
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208342251038316243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb72601832ef31a44a3096588d2fecf8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

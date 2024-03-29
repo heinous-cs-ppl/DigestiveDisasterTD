@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     private static GameObject path_12;
     private static GameObject path_02;
     private static GameObject path_012;
+    private static TextMeshProUGUI fireText;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentBPS = GameObject.Find("BPS bar S").GetComponent<Slider>();
 
         moveStudentText = GameObject.Find("Move Text").GetComponent<TextMeshProUGUI>();
+        fireText = GameObject.Find("Fire Text").GetComponent<TextMeshProUGUI>();
 
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
@@ -123,6 +125,7 @@ public class UIManager : MonoBehaviour
         } else {
             moveButton.sizeDelta = new Vector2(3.375f, moveButton.sizeDelta.y);
             fireButton.SetActive(true);
+            fireText.text = "Fire ($" + StudentManager.selected.GetComponent<StudentInfo>().cost + ")";
         }
 
         StudentInfo selectedInfo = StudentManager.selected.GetComponent<StudentInfo>();

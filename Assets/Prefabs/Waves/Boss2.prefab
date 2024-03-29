@@ -48,7 +48,7 @@ MonoBehaviour:
   Spawner0WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 3822bbadfc467b145b974347bbc77945, type: 3}
-    spawnDelay: 0.5
+    spawnDelay: 0.7
     repeats: 10
   Spawner1WaveEnc:
   - oneTimeDelay: 3

@@ -45,6 +45,8 @@ public class StudentInfo : MonoBehaviour
 
     [Header("Sprite stuff")]
     public float offsetX = 0;
+
+    public int commerceMoneyGain = 0;
     private void Start()
     {
         healthBar.setMaxValue(maxHp);
@@ -120,7 +122,7 @@ public class StudentInfo : MonoBehaviour
         // If the student is a commerce student, give some money when buffed
         if (commerce == true)
         {
-            MoneyManager.AddMoney(25);
+            MoneyManager.AddMoney(commerceMoneyGain);
             UIManager.UpdateMoney();
         }
 

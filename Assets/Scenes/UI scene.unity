@@ -7153,7 +7153,7 @@ GameObject:
   - component: {fileID: 663313711}
   - component: {fileID: 663313710}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Fire Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7198,7 +7198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fire
+  m_text: Fire (+$100)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8459,10 +8459,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -1
-    y: -0.75000006
-    width: 2
-    height: 1.5000001
+    x: 0.099499375
+    y: 0.09899888
+    width: 0.80100125
+    height: 0.80088985
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -17011,7 +17011,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.375}
-  m_SizeDelta: {x: 1.125, y: 1.75}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658173664
 MonoBehaviour:
@@ -17033,7 +17033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -971260976, guid: 62d5ea7e452c86248b96ba70f0c2bc7b, type: 3}
+  m_Sprite: {fileID: -33725969, guid: e35b6372bffcc0a46b5a25375523fa45, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -19650,7 +19650,7 @@ RectTransform:
   m_GameObject: {fileID: 1835500136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.41, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 737942841}
@@ -19658,7 +19658,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.375}
-  m_SizeDelta: {x: 1, y: 2}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835500138
 MonoBehaviour:
