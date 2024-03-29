@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 7519061932890612091}
   - component: {fileID: -2638382949580373971}
   - component: {fileID: 4952942395228964026}
+  - component: {fileID: 2256249432279208016}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Student
@@ -285,6 +286,7 @@ MonoBehaviour:
   outline: {fileID: 2100000, guid: 87d19ebd08ddeae47b3aa5a17b1d815d, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
+  commerceMoneyGain: 0
 --- !u!212 &7519061932890612091
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -326,12 +328,12 @@ SpriteRenderer:
   m_SortingLayerID: -795998139
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
+  m_Sprite: {fileID: -588460865, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.875}
+  m_Size: {x: 1.125, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -357,7 +359,7 @@ MonoBehaviour:
   firingPoint: {fileID: 8931901967542906486}
   spriteRotation: 0
   rotateBullet: 0
-  anim: {fileID: 0}
+  anim: {fileID: 2256249432279208016}
 --- !u!61 &4952942395228964026
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -395,7 +397,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.125, y: 1.75}
-    newSize: {x: 0.5625, y: 0.875}
+    newSize: {x: 1.125, y: 1.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -403,6 +405,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &2256249432279208016
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436313744661315829}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74412ff37f879814b9700ee1e1e03124, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2881322664039906816
 GameObject:
   m_ObjectHideFlags: 0
