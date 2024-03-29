@@ -274,9 +274,8 @@ MonoBehaviour:
   bps: 0.9
   bulletSpeed: 15
   bulletDistance: 4
-  description: '"I have a chymous appetite! I''ll eat all the food myself and throw
-    honey to slow down that pesky food!" Has extremely high hp and throws aoe attacks
-    that slow food.'
+  description: Throws honey at food, slowing it down, but dealing no damage. Has
+    extremely high HP.
   healer: 0
   purify: 0
   slow: 1

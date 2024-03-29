@@ -125,7 +125,11 @@ public class UIManager : MonoBehaviour
         } else {
             moveButton.sizeDelta = new Vector2(3.375f, moveButton.sizeDelta.y);
             fireButton.SetActive(true);
-            fireText.text = "Fire ($" + StudentManager.selected.GetComponent<StudentInfo>().cost + ")";
+            if (Spawner.GetRound() != -1) {
+                fireText.text = "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost / 2 + ")";
+            } else {
+                fireText.text = "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost + ")";
+            }
         }
 
         StudentInfo selectedInfo = StudentManager.selected.GetComponent<StudentInfo>();

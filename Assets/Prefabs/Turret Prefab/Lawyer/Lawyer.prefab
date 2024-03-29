@@ -404,6 +404,7 @@ MonoBehaviour:
   outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
+  commerceMoneyGain: 0
 --- !u!212 &2595080332699581591
 SpriteRenderer:
   m_ObjectHideFlags: 0

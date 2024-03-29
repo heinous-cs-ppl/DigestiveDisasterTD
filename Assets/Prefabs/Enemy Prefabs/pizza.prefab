@@ -596,15 +596,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3ecc932a550794db81f40b9d3c1a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 90
+  maxHp: 300
   healthBar: {fileID: 4733106552636871247}
-  maxPurifyHp: 90
+  maxPurifyHp: 300
   purifyBar: {fileID: 314002872493191786}
   spawnPointIndex: 2
   damage: 50
-  speed: 6
+  speed: 5
   attackRadius: 0.55
-  moneyDrop: 6
+  moneyDrop: 10
   buffs: []
   isBoss: 0
   LawyerDebuff: 0
@@ -652,6 +652,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isBoss: 0
+  LawyerDamageMultiplier: 0
 --- !u!95 &-14507217610245762
 Animator:
   serializedVersion: 5

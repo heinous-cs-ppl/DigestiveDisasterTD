@@ -65,14 +65,14 @@ MonoBehaviour:
     repeats: 3
   Spawner2WaveEnc:
   - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 0
     repeats: 0
   - oneTimeDelay: 5
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 1.5
     repeats: 4
   - oneTimeDelay: 1
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 1.5
     repeats: 4

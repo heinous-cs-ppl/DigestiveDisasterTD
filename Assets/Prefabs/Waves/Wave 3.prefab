@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af43366a25c98f44786aa0f5384d73b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossWave: 0
   Spawner0WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
@@ -59,15 +60,15 @@ MonoBehaviour:
     repeats: 7
   Spawner1WaveEnc:
   - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 0
     repeats: 0
   - oneTimeDelay: 5
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 2
     repeats: 2
   - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 2
     repeats: 2
   Spawner2WaveEnc:

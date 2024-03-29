@@ -44,13 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af43366a25c98f44786aa0f5384d73b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossWave: 0
   Spawner0WaveEnc:
   - oneTimeDelay: 0
-    enemy: {fileID: 7999120131923227785, guid: 13f77efa2bfb9a245844f9959dddc6f0, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: f22069341e5b66d46aa0ad6732c1764f, type: 3}
     spawnDelay: 0.75
     repeats: 4
   - oneTimeDelay: 2
-    enemy: {fileID: 7999120131923227785, guid: 13f77efa2bfb9a245844f9959dddc6f0, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: f22069341e5b66d46aa0ad6732c1764f, type: 3}
     spawnDelay: 1.5
     repeats: 2
   - oneTimeDelay: 2
@@ -58,7 +59,7 @@ MonoBehaviour:
     spawnDelay: 1.5
     repeats: 6
   - oneTimeDelay: 2
-    enemy: {fileID: 7999120131923227785, guid: 3822bbadfc467b145b974347bbc77945, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: 4f98ae08e33ce6247a0ae5155ba3523c, type: 3}
     spawnDelay: 0.75
     repeats: 4
   Spawner1WaveEnc:
@@ -76,7 +77,7 @@ MonoBehaviour:
     spawnDelay: 1
     repeats: 2
   - oneTimeDelay: 3
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 1
     repeats: 2
   - oneTimeDelay: 3
@@ -84,6 +85,6 @@ MonoBehaviour:
     spawnDelay: 1
     repeats: 2
   - oneTimeDelay: 3
-    enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
+    enemy: {fileID: 7999120131923227785, guid: b8b7cfe1b7e16ea428b9a0b659093190, type: 3}
     spawnDelay: 1
     repeats: 2
