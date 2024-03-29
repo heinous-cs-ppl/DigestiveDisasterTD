@@ -223,12 +223,12 @@ MonoBehaviour:
   maxHp: 110
   healthBar: {fileID: 7254655577153231281}
   purifyTimerBar: {fileID: 919416677439042704}
-  damage: 20
-  range: 7
+  damage: 30
+  range: 5
   rotationSpeed: 1000
-  bps: 1.5
+  bps: 0.8
   bulletSpeed: 15
-  bulletDistance: 7
+  bulletDistance: 5
   description: Throws healthy supplements at nearby students, healing in an AOE.
   healer: 1
   purify: 0

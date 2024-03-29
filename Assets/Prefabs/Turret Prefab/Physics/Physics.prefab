@@ -272,7 +272,7 @@ MonoBehaviour:
   range: 5
   rotationSpeed: 1000
   bps: 1
-  bulletSpeed: 20
+  bulletSpeed: 18
   bulletDistance: 6
   description: Throws enzyme bombs that deal damage and linger for a short time.
     Can hit multiple enemies.

@@ -298,10 +298,10 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  bulletPrefab: {fileID: 8208342251038316243, guid: 3a3966e9145a9d347aac8dcce8f7ea53, type: 3}
+  bulletPrefab: {fileID: 8208342251038316243, guid: 8b0caaa97a7ecd5489b487e19ca8e10e, type: 3}
   firingPoint: {fileID: 8931901967542906486}
-  spriteRotation: -45
-  rotateBullet: 1
+  spriteRotation: 0
+  rotateBullet: 0
   anim: {fileID: 2688338887147868177}
 --- !u!114 &2165844561221868010
 MonoBehaviour:
@@ -316,18 +316,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 200
-  maxHp: 60
+  maxHp: 75
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 7573675254489230571}
-  damage: 15
-  range: 6
+  damage: 25
+  range: 5
   rotationSpeed: 1000
   bps: 0.75
-  bulletSpeed: 25
-  bulletDistance: 6
+  bulletSpeed: 15
+  bulletDistance: 5
   description: Commerce students have managed to create a monopoly with the purified
-    food and is willing to share a small portion of it with you. Deals less damage
-    and has less hp, but can gives you money if given purified food
+    food and are willing to share a small portion of it with you. Generates $5 when
+    fed purified meals.
   healer: 0
   purify: 0
   slow: 0

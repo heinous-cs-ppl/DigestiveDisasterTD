@@ -56,7 +56,7 @@ public class MachineStudent : Turret {
         anim.SetTrigger("Attack");
 
         // once timer hits some value (related to target's purify hp), give a purified meal
-        float cooldown = 0.75f + 0.005f * (maxPurify - currentPurify);
+        float cooldown = 0.75f + 0.006f * (maxPurify - currentPurify);
         
         StartCoroutine(AttackCooldown(cooldown, moneyDrop));
     }
@@ -94,7 +94,7 @@ public class MachineStudent : Turret {
 
     private IEnumerator DamageBoss(GameObject boss) {
         StudentInfo info = gameObject.GetComponent<StudentInfo>();
-        float iterationTime = 1/info.bps;
+        float iterationTime = 0.5f;
         float range = info.range;
         // do dps based on damage
         // check if the boss is in range of the student

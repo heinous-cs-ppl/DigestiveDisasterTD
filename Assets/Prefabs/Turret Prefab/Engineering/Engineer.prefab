@@ -226,7 +226,7 @@ MonoBehaviour:
   damage: 150
   range: 1.2
   rotationSpeed: 1000
-  bps: 3
+  bps: 0.5
   bulletSpeed: 0
   bulletDistance: 0
   description: Queen's students created a machine that can purify food regardless
