@@ -8231,7 +8231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   student: {fileID: 2436313744661315829, guid: fd1a1f63f2d897d48ab4b82b1b48465a, type: 3}
-  studentSprite: {fileID: 1363007384, guid: f1cb32060a0e59746b1a13c95f94af36, type: 3}
+  studentSprite: {fileID: 1026747722, guid: cbed477ccd5ce494f8a689144523613b, type: 3}
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -8790,10 +8790,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.099499375
-    y: 0.09899888
-    width: 0.80100125
-    height: 0.80088985
+    x: -0.13004926
+    y: -0.1295972
+    width: 1.2610838
+    height: 1.2609457
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -20327,14 +20327,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.17609969, g: 0.9716981, b: 0.0779192, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9066ffbc2caa6e44b9f617ec3cd1c82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f942a841a3d18fc409852ed91f484889, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
