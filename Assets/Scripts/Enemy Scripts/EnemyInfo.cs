@@ -16,13 +16,15 @@ public class EnemyInfo : MonoBehaviour
     public float speed = 2f;
     public float attackRadius = 0.55f;
     public int moneyDrop = 10;
+
+    SpriteRenderer enemySprite;
     
 
     public GameObject[] buffs;
 
     public bool isBoss = false;
     [HideInInspector] public bool LawyerDebuff = false;
-    [HideInInspector] public int LawyerDamageMultiplier;
+    [HideInInspector] public float LawyerDamageMultiplier;
 
 
 
@@ -36,6 +38,7 @@ public class EnemyInfo : MonoBehaviour
         purifyBar.setValue(0);
 
         originalDamage = damage;
+        enemySprite = gameObject.GetComponent<SpriteRenderer>();
     }
     public int getHealth()
     {
@@ -54,7 +57,7 @@ public class EnemyInfo : MonoBehaviour
         // If the lawyer debuff is true, multiply it by the value that was randomly selected
         if (LawyerDebuff == true)
         {
-            dmg = dmg * LawyerDamageMultiplier;
+            dmg = (int) (dmg * LawyerDamageMultiplier);
         }
         int currentHp = getHealth();
         int newHp = currentHp - dmg;
@@ -73,7 +76,7 @@ public class EnemyInfo : MonoBehaviour
         int currentPurifyHp = getPurifyHealth();
         if (LawyerDebuff == true)
         {
-            dmg = dmg * LawyerDamageMultiplier;
+            dmg = (int) (dmg * LawyerDamageMultiplier);
         }
         int newPurifyHp = currentPurifyHp + dmg;
         if (newPurifyHp >= maxPurifyHp)
@@ -125,10 +128,27 @@ public class EnemyInfo : MonoBehaviour
         Destroy(gameObject);
     }
 
-        public void ResetDebuff()
+    public void ResetDebuff()
     {
         damage = originalDamage;
         LawyerDebuff = false;
+    }
+
+    public void Debuff(float time) {
+        LawyerDamageMultiplier = 1.3f;
+        gameObject.GetComponent<EnemyAttacks>().DamageReduction(1.3f, time);
+        
+        enemySprite.color = Color.red;
+        Debug.Log("changed enemy color");
+        LawyerDebuff = true;
+        StartCoroutine(LawyerDelay(time));
+    }
+
+    public IEnumerator LawyerDelay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        ResetDebuff();
+        enemySprite.color = Color.white;
     }
 
 }
