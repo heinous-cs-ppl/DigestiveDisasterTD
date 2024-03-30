@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4898349547868796542}
   - component: {fileID: 5760139248048277314}
   - component: {fileID: 4911856776903062879}
+  - component: {fileID: 8699653737848162262}
   m_Layer: 10
   m_Name: HealingBulletAoe
   m_TagString: Untagged
@@ -73,11 +74,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.014359593, g: 1, b: 0, a: 1}
+  m_SortingLayerID: 1132957449
+  m_SortingLayer: 4
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 1590000657, guid: 7f961ee7290c75c409a7b5371f6c8078, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -165,3 +166,24 @@ MonoBehaviour:
   slowPercentage: 0
   student: {fileID: 2436313744661315829, guid: bd7b79566e50aed4597c695c2aaa808e, type: 3}
   lingerTime: 0.4
+--- !u!95 &8699653737848162262
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208342251038316243}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5de711980fdd9c145bfbb4d6d1506a05, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
