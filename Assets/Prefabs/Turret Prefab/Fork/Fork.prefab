@@ -320,11 +320,11 @@ MonoBehaviour:
   healthBar: {fileID: 2818691394050949540}
   purifyTimerBar: {fileID: 7573675254489230571}
   damage: 80
-  range: 6
+  range: 7
   rotationSpeed: 1000
   bps: 0.9
   bulletSpeed: 25
-  bulletDistance: 6
+  bulletDistance: 7
   description: Throws forks at enemies. Has high range and deals high damage.
   healer: 0
   purify: 0
