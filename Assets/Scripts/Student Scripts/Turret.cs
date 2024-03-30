@@ -8,7 +8,7 @@ public class Turret : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint;
-    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] protected LayerMask enemyMask;
     [SerializeField] protected GameObject bulletPrefab;
 
     [SerializeField] private Transform firingPoint;
@@ -22,7 +22,7 @@ public class Turret : MonoBehaviour
     private int bulletDamage;
     private float bulletDistance;
 
-    private float bps; // Bullets Per Second
+    protected float bps; // Bullets Per Second
 
 
     protected Transform target;
@@ -110,7 +110,10 @@ public class Turret : MonoBehaviour
         bulletScript.SetAttributes(bulletSpeed, bulletDamage, bulletDistance, gameObject.transform.position);
 
         // set throwing animation
-        if(anim != null) anim.SetTrigger("OnThrow");
+        if(anim != null) {
+            anim.SetTrigger("OnThrow");
+            StartCoroutine("EndThrow");
+        }
     }
 
     // Finds the closest target available
@@ -171,4 +174,9 @@ public class Turret : MonoBehaviour
     //     Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
 
     // }
+
+    protected IEnumerator EndThrow() {
+        yield return new WaitForSeconds(0.5f);
+        anim.SetTrigger("EndThrow");
+    }
 }

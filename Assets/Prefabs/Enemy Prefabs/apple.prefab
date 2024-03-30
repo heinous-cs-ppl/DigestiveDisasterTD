@@ -601,7 +601,7 @@ MonoBehaviour:
   maxPurifyHp: 60
   purifyBar: {fileID: 8309139937942490931}
   spawnPointIndex: 1
-  damage: 30
+  damage: 20
   speed: 4
   attackRadius: 0.55
   moneyDrop: 2
@@ -652,6 +652,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isBoss: 0
+  LawyerDamageMultiplier: 0
 --- !u!95 &-14507217610245762
 Animator:
   serializedVersion: 5

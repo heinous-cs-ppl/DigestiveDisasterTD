@@ -63,14 +63,14 @@ public class EnemyAttacks : MonoBehaviour
         }
     }
 
-    public void DamageReduction(int amount, int duration)
+    public void DamageReduction(float amount, float duration)
     {
-        damage = damage / amount;
+        damage = (int) (damage / amount);
         Debug.Log(damage);
 
         DamageReductionCoroutine = StartCoroutine(NormalDamageAfterDelay(duration));
     }
-    IEnumerator NormalDamageAfterDelay(int remainingTime) 
+    IEnumerator NormalDamageAfterDelay(float remainingTime) 
     {
         // Will delay before reseting the attack back to its original speed
         yield return new WaitForSeconds(remainingTime);  
