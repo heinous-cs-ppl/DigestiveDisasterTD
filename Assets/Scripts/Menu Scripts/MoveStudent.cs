@@ -139,8 +139,50 @@ public class MoveStudent : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         // set the position of the student to the position
-        student.transform.position = newPlot.position;
-        oldPlot.student = null;
+        if (student.GetComponent<StudentInfo>().turret is MachineStudent)       // Handle Engineer student
+        {
+            Plot leftPlot = null;
+            if (newPlot.gameObject.GetComponent<Plot>().plotOnLeft) {leftPlot = newPlot.gameObject.GetComponent<Plot>().plotOnLeft.gameObject.GetComponent<Plot>();}
+            Plot oldLeftPlot = null;
+            if (oldPlot.plotOnLeft) {oldLeftPlot = oldPlot.plotOnLeft.gameObject.GetComponent<Plot>();}
+            if (leftPlot)
+            {
+                // Handle moving right one tile
+                if (leftPlot == oldPlot) 
+                {
+                    Debug.Log("right one tile");
+                    student.transform.position = newPlot.position;
+                    leftPlot.student = LevelManager.instance.machineRepresentation;
+                    if (oldLeftPlot) {oldLeftPlot.student = null;}
+                }
+                else if (oldLeftPlot.transform == newPlot)
+                {
+                    Debug.Log("left one tile");
+                    student.transform.position = newPlot.position;
+                    leftPlot.student = LevelManager.instance.machineRepresentation;
+                    oldPlot.student = null;
+                }
+                else
+                {
+                    Debug.Log("eee");
+                    student.transform.position = newPlot.position;
+                    leftPlot.student = LevelManager.instance.machineRepresentation;
+                    if (oldLeftPlot) {oldLeftPlot.student = null;}
+                    oldPlot.student = null;
+                }
+            }
+            else
+            {
+                student.transform.position = newPlot.position;
+                if (oldLeftPlot) {oldLeftPlot.student = null;}
+                oldPlot.student = null;
+            }
+        }
+        else
+        {
+            student.transform.position = newPlot.position;
+            oldPlot.student = null;
+        }
 
         if(newPlot.GetComponent<Plot>().aboveTable) {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";

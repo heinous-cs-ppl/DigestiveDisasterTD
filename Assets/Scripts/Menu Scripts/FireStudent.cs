@@ -22,7 +22,12 @@ public class FireStudent : MonoBehaviour
             UIManager.UpdateMoney();
 
             Destroy(selected);
-            StudentManager.plotOfSelected.GetComponent<Plot>().student = null;
+            Plot plotOfFired = StudentManager.plotOfSelected.GetComponent<Plot>(); 
+            if (selected.GetComponent<StudentInfo>().turret is MachineStudent) 
+            {
+                if (plotOfFired.plotOnLeft) {plotOfFired.plotOnLeft.gameObject.GetComponent<Plot>().student = null;}
+            }
+            plotOfFired.student = null;
             StudentManager.Deselect();
         }
     }

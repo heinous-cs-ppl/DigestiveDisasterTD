@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public LayerMask plotLayer;
     public LayerMask enemyLayer;
     [SerializeField] private GameObject vacuousStudent;
+    public GameObject machineRepresentation;
 
     // Number of starting paths or number of spawnpoints - each of these points is the parent of the rest of it's path
     public GameObject[] spawnObjs;      // given in object inspector
