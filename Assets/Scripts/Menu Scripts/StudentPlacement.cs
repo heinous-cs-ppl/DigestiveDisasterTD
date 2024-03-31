@@ -21,6 +21,11 @@ public class StudentPlacement : MonoBehaviour
     public TextMeshProUGUI studentPrice;
     [HideInInspector] public static bool studentPlacedOnPlot = false;
 
+    // stuff for range circle
+    private static GameObject rangeCircle;
+    private static SpriteRenderer circle;
+    public Sprite circleSprite;
+
     void Start()
     {
         // Bounds of the map
@@ -33,6 +38,12 @@ public class StudentPlacement : MonoBehaviour
         studentPrice.text = "$" + studentInfo.cost;
 
         moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
+        rangeCircle = new GameObject("Placement Range Circle");
+        circle = rangeCircle.AddComponent<SpriteRenderer>();
+        circle.sprite = circleSprite;
+        Color BREAKINGMUSCLEMEMORY = new Color(0f, 0f, 0f, 0.25f);
+        circle.color = BREAKINGMUSCLEMEMORY;
+        rangeCircle.transform.localScale = Vector2.zero;
     }
 
     // Just deal with placing student
@@ -54,6 +65,7 @@ public class StudentPlacement : MonoBehaviour
         if (mapBounds.Contains(cursorPosition) && canPlace)
         {
             // create the student preview if it doesn't exist
+            // create a circle for range too! :D :D :D :D :D :D :D
             if (!(studentPreview))
             {
                 // create a new GameObject with a sprite renderer
@@ -69,9 +81,16 @@ public class StudentPlacement : MonoBehaviour
                 Color preview = studentPreview.GetComponent<SpriteRenderer>().color;
                 preview.a = 0.5f; // Set alpha value to 50% opacity
                 studentPreview.GetComponent<SpriteRenderer>().color = preview;
+
+                // range circle stuff
+                float range = studentInfo.range;
+                rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
             }
+                
             // set the position of the student preview to the cursor's position
             studentPreview.transform.position = new Vector2(cursorPosition.x + studentInfo.offsetX, cursorPosition.y);
+            // set range circle position to cursor's position
+            rangeCircle.transform.position = new Vector2(cursorPosition.x, cursorPosition.y);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -85,6 +104,7 @@ public class StudentPlacement : MonoBehaviour
                     canPlace = false;
                     // StudentManager.placing = false;
                     Destroy(studentPreview);
+                    rangeCircle.transform.localScale = Vector2.zero;
                 }
             }
         }
