@@ -32,6 +32,8 @@ public class Turret : MonoBehaviour
     public bool rotateBullet;
     [SerializeField] protected Animator anim;
 
+    private Vector3 offset;
+
     
 
 
@@ -42,6 +44,7 @@ public class Turret : MonoBehaviour
         SetStudentAttributes(student);
         SetBulletAttributes(student);
         timeUntilFire = 1f / bps;
+        offset = new Vector3(student.offsetX, 0, 0);
     }
 
     public void SetStudentAttributes(StudentInfo student)
@@ -119,7 +122,7 @@ public class Turret : MonoBehaviour
     // Finds the closest target available
     protected void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, (Vector2)transform.position, 0f, enemyMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position + offset, targetingRange, (Vector2)transform.position, 0f, enemyMask);
 
         //
         if (hits.Length > 0)

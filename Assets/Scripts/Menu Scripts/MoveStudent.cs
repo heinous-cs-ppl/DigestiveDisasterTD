@@ -12,6 +12,7 @@ public class MoveStudent : MonoBehaviour
     private GameObject student;
     private Sprite studentSprite;
     public LayerMask studentLayer;
+    private StudentInfo info;
 
     private GameObject map;
     private Bounds mapBounds;
@@ -38,6 +39,7 @@ public class MoveStudent : MonoBehaviour
             student = StudentManager.selected;
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>(); ;
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
+            info = student.GetComponent<StudentInfo>();
 
             StudentManager.moving = true;
         }
@@ -139,7 +141,7 @@ public class MoveStudent : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         // set the position of the student to the position
-        if (student.GetComponent<StudentInfo>().turret is MachineStudent)       // Handle Engineer student
+        if (info.turret is MachineStudent)       // Handle Engineer student
         {
             Plot leftPlot = null;
             if (newPlot.gameObject.GetComponent<Plot>().plotOnLeft) {leftPlot = newPlot.gameObject.GetComponent<Plot>().plotOnLeft.gameObject.GetComponent<Plot>();}
@@ -151,21 +153,21 @@ public class MoveStudent : MonoBehaviour
                 if (leftPlot == oldPlot) 
                 {
                     Debug.Log("right one tile");
-                    student.transform.position = newPlot.position;
+                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
                     leftPlot.student = LevelManager.instance.machineRepresentation;
                     if (oldLeftPlot) {oldLeftPlot.student = null;}
                 }
                 else if (oldLeftPlot && oldLeftPlot.transform == newPlot)
                 {
                     Debug.Log("left one tile");
-                    student.transform.position = newPlot.position;
+                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
                     leftPlot.student = LevelManager.instance.machineRepresentation;
                     oldPlot.student = null;
                 }
                 else
                 {
                     Debug.Log("eee");
-                    student.transform.position = newPlot.position;
+                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
                     leftPlot.student = LevelManager.instance.machineRepresentation;
                     if (oldLeftPlot) {oldLeftPlot.student = null;}
                     oldPlot.student = null;
