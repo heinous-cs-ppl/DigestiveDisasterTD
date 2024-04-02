@@ -114,6 +114,7 @@ public class StudentPlacement : MonoBehaviour
             canPlace = false;
             StudentManager.placing = false;
             Destroy(studentPreview);
+            rangeCircle.transform.localScale = Vector2.zero;
         }
     }
 
@@ -125,6 +126,7 @@ public class StudentPlacement : MonoBehaviour
         canPlace = false;
         StudentManager.placing = false;
         Destroy(studentPreview);
+        rangeCircle.transform.localScale = Vector2.zero;
     }
 
     // called when the button is clicked
