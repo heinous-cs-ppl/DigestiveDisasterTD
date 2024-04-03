@@ -1022,7 +1022,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73684037}
-  - component: {fileID: 73684038}
   m_Layer: 0
   m_Name: MachineHere
   m_TagString: Untagged
@@ -1045,27 +1044,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 240840213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &73684038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73684036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f243617bc15ce478bace4100f0a45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretRotationPoint: {fileID: 0}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 0
-  bulletPrefab: {fileID: 0}
-  firingPoint: {fileID: 0}
-  spriteRotation: 0
-  rotateBullet: 0
-  anim: {fileID: 0}
 --- !u!4 &76943799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 126917083961848099, guid: 3f85c3460aefd9e4eaee830989749072, type: 3}
@@ -8846,10 +8824,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.099499375
-    y: 0.09899888
-    width: 0.80100125
-    height: 0.80088985
+    x: -0.32332325
+    y: -0.018502321
+    width: 0.91560566
+    height: 0.6660836
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
