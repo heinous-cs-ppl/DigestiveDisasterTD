@@ -389,7 +389,7 @@ MonoBehaviour:
   damage: 0
   range: 8
   rotationSpeed: 1000
-  bps: 0.2
+  bps: 0.4
   bulletSpeed: 0
   bulletDistance: 0
   description: I will reveal the truth of this food! Gives debuffs to enemies within
