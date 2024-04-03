@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateMoney()
     {
-        moneyCount.text = "$" + MoneyManager.GetStringMoneyCount();
+        moneyCount.text = "$" + MoneyManager.instance.GetStringMoneyCount();
     }
 
     public static void ShowStudentSelectedUI()

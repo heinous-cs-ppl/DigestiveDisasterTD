@@ -416,7 +416,7 @@ public class Spawner : MonoBehaviour
             Debug.Log("wave ended");
             UIManager.UpdateMove(0);
             LevelManager.instance.SpawnVacuousStudents();
-            MoneyManager.AddMoney(NextWave.waveMoney);
+            MoneyManager.instance.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
         }
@@ -428,7 +428,7 @@ public class Spawner : MonoBehaviour
             Debug.Log("boss wave ended");
             UIManager.UpdateMove(0);
             LevelManager.instance.SpawnVacuousStudents();
-            MoneyManager.AddMoney(NextWave.waveMoney);
+            MoneyManager.instance.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
 

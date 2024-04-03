@@ -142,7 +142,7 @@ public class StudentInfo : MonoBehaviour
         // If the student is a commerce student, give some money when buffed
         if (commerce == true)
         {
-            MoneyManager.AddMoney(commerceMoneyGain);
+            MoneyManager.instance.AddMoney(commerceMoneyGain);
             UIManager.UpdateMoney();
         }
 

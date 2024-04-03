@@ -15,11 +15,13 @@ public class FireStudent : MonoBehaviour
             // otherwise, refund a fraction of the cost
             if (Spawner.instance.GetRound() != -1)
             {
-                MoneyManager.AddMoney((int)(0.5 * selected.GetComponent<StudentInfo>().cost));
+                MoneyManager.instance.AddMoney(
+                    (int)(0.5 * selected.GetComponent<StudentInfo>().cost)
+                );
             }
             else
             {
-                MoneyManager.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
+                MoneyManager.instance.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
             }
 
             UIManager.UpdateMoney();

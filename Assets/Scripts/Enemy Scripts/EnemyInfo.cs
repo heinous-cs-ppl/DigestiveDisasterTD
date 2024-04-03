@@ -91,7 +91,7 @@ public class EnemyInfo : MonoBehaviour
 
     public void EnemyDeath()
     {
-        MoneyManager.AddMoney(moneyDrop);
+        MoneyManager.instance.AddMoney(moneyDrop);
         UIManager.UpdateMoney();
 
         // if the enemy is a boss, set bossAlive to false in spawner
@@ -116,7 +116,7 @@ public class EnemyInfo : MonoBehaviour
         PurifyManager.GainMeal();
         UIManager.UpdateMealCount();
 
-        MoneyManager.AddMoney(moneyDrop);
+        MoneyManager.instance.AddMoney(moneyDrop);
         UIManager.UpdateMoney();
 
         // if the enemy is a boss, set bossAlive to false in spawner

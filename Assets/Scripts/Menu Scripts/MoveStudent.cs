@@ -34,7 +34,7 @@ public class MoveStudent : MonoBehaviour
     // Called when button is clicked
     public void SetMoving()
     {
-        if (MoneyManager.GetMoneyCount() >= moveCost || Spawner.instance.waveEnd)
+        if (MoneyManager.instance.GetMoneyCount() >= moveCost || Spawner.instance.waveEnd)
         {
             student = StudentManager.selected;
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>();
@@ -237,7 +237,7 @@ public class MoveStudent : MonoBehaviour
         // add cost for moving student here unless between rounds
         if (!Spawner.instance.waveEnd)
         {
-            MoneyManager.TakeMoney(moveCost);
+            MoneyManager.instance.TakeMoney(moveCost);
             UIManager.UpdateMoney();
         }
 
