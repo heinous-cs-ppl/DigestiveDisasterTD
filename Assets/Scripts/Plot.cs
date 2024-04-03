@@ -135,9 +135,10 @@ public class Plot : MonoBehaviour
             }
             else
             {
-                Debug.Log("drag movey");
-                // MoveStudent.instance.DelayAndFinishMove(StudentManager.draggingOver.transform);
-                StudentManager.moving = false;
+                Debug.Log("try to drag movey");
+                MoveStudent.instance.Place(StudentManager.draggingOver.transform);
+                StudentManager.draggingOver.student = selectedStu;
+                // StudentManager.moving = false;
             }
         }
     }
