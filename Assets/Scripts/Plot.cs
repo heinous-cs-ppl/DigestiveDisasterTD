@@ -90,10 +90,16 @@ public class Plot : MonoBehaviour
         else if (!StudentManager.placing && this.student)   // Start mouse drag if student was not placed or moved here on this click
         {
             Debug.Log("Started drag over: " + this);
-            StudentManager.Select(this.student);
+            // StudentManager.Select(this.student);
             StudentManager.mouseDragging = true;
-            // MoveStudent.instance.SetMoving();       // Preview updates in MoveStudent
+            StartCoroutine(DelayAndSetMoving());       // Preview updates in MoveStudent
         }
+    }
+
+    private IEnumerator DelayAndSetMoving()     // Wait for Update() in StudentManager to run before calling MoveStudent.SetMoving or you won't have a good time :D
+    {
+        yield return new WaitForSeconds(0.05f);
+        MoveStudent.instance.SetMoving();
     }
 
     /* The tile that the drag started on will know if the mouse is still being dragged even if it leaves the tile. */
@@ -116,23 +122,23 @@ public class Plot : MonoBehaviour
             Debug.Log("Released drag over: " + StudentManager.draggingOver);
             StudentManager.mouseDragging = false;
 
-            // if (StudentManager.draggingOver == this)   // Same time, treat as just a click
-            // {
-            //     StudentManager.moving = false;
-            //     Destroy(MoveStudent.instance.studentPreview);
-            // }
-            // else if (StudentManager.draggingOver == null)   // Do the move if released over a plot
-            // {
-            //     StudentManager.moving = false;
-            //     StudentManager.Deselect();
-            //     Destroy(MoveStudent.instance.studentPreview);    
-            // }
-            // else
-            // {
-            //     Debug.Log("drag movey");
-            //     // MoveStudent.instance.DelayAndFinishMove(StudentManager.draggingOver.transform);
-            //     StudentManager.moving = false;
-            // }
+            if (StudentManager.draggingOver == this)   // Same time, treat as just a click
+            {
+                StudentManager.moving = false;
+                Destroy(MoveStudent.instance.studentPreview);
+            }
+            else if (StudentManager.draggingOver == null)   // Do the move if released over a plot
+            {
+                StudentManager.moving = false;
+                StudentManager.Deselect();
+                Destroy(MoveStudent.instance.studentPreview);    
+            }
+            else
+            {
+                Debug.Log("drag movey");
+                // MoveStudent.instance.DelayAndFinishMove(StudentManager.draggingOver.transform);
+                StudentManager.moving = false;
+            }
         }
     }
 
