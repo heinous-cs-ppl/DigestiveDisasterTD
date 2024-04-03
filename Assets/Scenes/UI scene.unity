@@ -3134,7 +3134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   student: {fileID: 5847128244897676795, guid: 0e0dc4be2b3a5bd429527cfbadc91475, type: 3}
-  studentSprite: {fileID: 21300000, guid: f9927b6cb17d7fe418b53f0f89a596fe, type: 3}
+  studentSprite: {fileID: -599506414, guid: 4373be4fd7537ab489eb4f099c2ea837, type: 3}
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -8824,10 +8824,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -0.32332325
-    y: -0.018502321
-    width: 0.91560566
-    height: 0.6660836
+    x: 0.099499375
+    y: 0.09899888
+    width: 0.80100125
+    height: 0.80088985
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -16256,7 +16256,7 @@ RectTransform:
   m_GameObject: {fileID: 1499393629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 281473798}
@@ -16264,7 +16264,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.375}
-  m_SizeDelta: {x: 2, y: 3.5}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1499393631
 MonoBehaviour:
@@ -16279,14 +16279,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.75964546, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 691401483, guid: b8b9fc67b35514840882bbba7c2eb803, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 79afaa8f28f434f48bc7dbd25bc35681, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
