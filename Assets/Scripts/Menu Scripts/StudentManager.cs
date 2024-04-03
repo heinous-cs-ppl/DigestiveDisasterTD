@@ -24,14 +24,23 @@ public class StudentManager : MonoBehaviour
 
     public static void Place(GameObject student, Transform plot, bool aboveTable)
     {
-        selected = Instantiate(student, new Vector2(plot.position.x + student.GetComponent<StudentInfo>().offsetX, plot.position.y), Quaternion.identity);
+        selected = Instantiate(
+            student,
+            new Vector2(
+                plot.position.x + student.GetComponent<StudentInfo>().offsetX,
+                plot.position.y
+            ),
+            Quaternion.identity
+        );
         plotOfSelected = plot.transform.gameObject;
         plot.transform.gameObject.GetComponent<Plot>().student = selected;
         Select(selected);
-        if (aboveTable) {
+        if (aboveTable)
+        {
             selected.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
             SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
-            foreach(SpriteRenderer chyme in chymous) {
+            foreach (SpriteRenderer chyme in chymous)
+            {
                 chyme.sortingLayerName = "Students above tables";
             }
         }
@@ -47,12 +56,18 @@ public class StudentManager : MonoBehaviour
 
     public static void Select(GameObject student)
     {
-        if (selected != null) {
+        if (selected != null)
+        {
             Deselect();
         }
         selected = student;
 
-        RaycastHit2D plotHit = Physics2D.Raycast(student.transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+        RaycastHit2D plotHit = Physics2D.Raycast(
+            student.transform.position,
+            Vector2.zero,
+            1f,
+            LevelManager.instance.plotLayer
+        );
         plotOfSelected = plotHit.transform.gameObject;
         // show selection UI
         UIManager.ShowStudentSelectedUI();
@@ -64,7 +79,8 @@ public class StudentManager : MonoBehaviour
         Material outline = selected.GetComponent<StudentInfo>().outline;
         selected.GetComponent<SpriteRenderer>().material = outline;
         SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
-        foreach(SpriteRenderer chyme in chymous) {
+        foreach (SpriteRenderer chyme in chymous)
+        {
             chyme.material = outline;
         }
         DrawRange(range);
@@ -72,15 +88,17 @@ public class StudentManager : MonoBehaviour
 
     public static void Deselect()
     {
-        if (selected != null) {
+        if (selected != null)
+        {
             Material noOutline = selected.GetComponent<StudentInfo>().noOutline;
             selected.GetComponent<SpriteRenderer>().material = noOutline;
             SpriteRenderer[] chymous = selected.GetComponentsInChildren<SpriteRenderer>();
-            foreach(SpriteRenderer chyme in chymous) {
+            foreach (SpriteRenderer chyme in chymous)
+            {
                 chyme.material = noOutline;
             }
         }
-        
+
         selected = null;
         plotOfSelected = null;
 
@@ -130,7 +148,12 @@ public class StudentManager : MonoBehaviour
             if (mapBounds.Contains(cursorPosition))
             {
                 Debug.Log("clicked on map");
-                RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
+                RaycastHit2D hit = Physics2D.Raycast(
+                    cursorPosition,
+                    Vector2.zero,
+                    1f,
+                    studentLayer
+                );
                 if (hit)
                 {
                     Debug.Log("clicked on student");
@@ -148,8 +171,8 @@ public class StudentManager : MonoBehaviour
         }
 
         // if right click on a student, give them a purified meal
-        if (Input.GetMouseButtonDown(1)) {
-
+        if (Input.GetMouseButtonDown(1))
+        {
             // check if cursor is on map
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
@@ -158,13 +181,15 @@ public class StudentManager : MonoBehaviour
 
             Debug.Log("right click");
             RaycastHit2D hit = Physics2D.Raycast(cursorPosition, Vector2.zero, 1f, studentLayer);
-            if (hit) {
+            if (hit)
+            {
                 Debug.Log("right clicked on student");
                 // clicked on a student, select the student
                 GameObject student = hit.collider.gameObject;
 
                 // start a coroutine to check when the mouse is released if the student is a commerce student
-                if (student.GetComponent<StudentInfo>().commerce) {
+                if (student.GetComponent<StudentInfo>().commerce)
+                {
                     StartCoroutine(FeedContinuously(student));
                     Debug.Log("feeding a commerce student");
                 }
@@ -187,20 +212,24 @@ public class StudentManager : MonoBehaviour
         // wait a second before continuous feeding
         yield return new WaitForSeconds(1f);
         // feed student every 0.1 seconds if right click not released
-        while (Input.GetMouseButton(1)) {
+        while (Input.GetMouseButton(1))
+        {
             FeedStudent(student);
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    public void FeedStudent(GameObject student) {
-        if (PurifyManager.UseMeal()){
+    public void FeedStudent(GameObject student)
+    {
+        if (PurifyManager.instance.UseMeal())
+        {
             // update the counter on the UI
             UIManager.UpdateMealCount();
             // give buffs to the selected student
             StudentInfo clicked = student.GetComponent<StudentInfo>();
             clicked.Feed();
-            if (StudentManager.selected == student) {
+            if (StudentManager.selected == student)
+            {
                 UIManager.UpdateSelectedBars(clicked);
                 // "reselect" the selected student to redraw the range circle (I'm lazy)
                 StudentManager.Select(StudentManager.selected);

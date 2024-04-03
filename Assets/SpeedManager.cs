@@ -1,15 +1,19 @@
 using UnityEngine;
 
-public class slowdown : MonoBehaviour
+public class SpeedManager : MonoBehaviour
 {
+    public static SpeedManager instance;
     public UnityEngine.UI.Button slowButton;
     public UnityEngine.UI.Button speedButton;
 
     public KeyCode slowKey = KeyCode.Q;
     public KeyCode speedKey = KeyCode.E;
 
-    private bool slowKeyLast = false;
-    private bool speedKeyLast = false;
+    public void Awake()
+    {
+        instance = this;
+        Time.timeScale = 1;
+    }
 
     public void Start()
     {
@@ -19,6 +23,10 @@ public class slowdown : MonoBehaviour
 
     public void Update()
     {
+        if (PauseMenu.paused)
+        {
+            return;
+        }
         if (Input.GetKeyDown(slowKey))
         {
             SlowDown();
@@ -93,6 +101,7 @@ public class slowdown : MonoBehaviour
             Time.timeScale = 0.5f;
         }
     }
+
     public void ToggleSpeedUp()
     {
         if (LevelManager.instance.gameOver)
@@ -112,4 +121,3 @@ public class slowdown : MonoBehaviour
         }
     }
 }
-

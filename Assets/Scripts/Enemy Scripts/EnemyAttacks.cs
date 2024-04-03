@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
 
 public class EnemyAttacks : MonoBehaviour
 {
@@ -16,12 +16,15 @@ public class EnemyAttacks : MonoBehaviour
     private float damageRadius;
 
     // layermask to only check for collisions with students
-    [SerializeField] private LayerMask studentMask;
+    [SerializeField]
+    private LayerMask studentMask;
 
     public bool isBoss = false;
 
     private Coroutine DamageReductionCoroutine;
-    [HideInInspector] public int LawyerDamageMultiplier;
+
+    [HideInInspector]
+    public int LawyerDamageMultiplier;
     int originalDamage;
 
     void Start()
@@ -38,14 +41,23 @@ public class EnemyAttacks : MonoBehaviour
     void Update()
     {
         // get an array of enemies in the range of the food
-        if(!isBoss){
+        if (!isBoss)
+        {
             // if the enemy is not a boss
-            Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(transform.position, triggerRadius, studentMask);
+            Collider2D[] studentsInRange = Physics2D.OverlapCircleAll(
+                transform.position,
+                triggerRadius,
+                studentMask
+            );
             if (studentsInRange.Length > 0)
             {
                 // there is an enemy in the range of food
                 // get an array of students in the damage radius
-                Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(transform.position, damageRadius, studentMask);
+                Collider2D[] studentsToDamage = Physics2D.OverlapCircleAll(
+                    transform.position,
+                    damageRadius,
+                    studentMask
+                );
                 // damage all of the students in the radius
                 foreach (Collider2D studentCollision in studentsToDamage)
                 {
@@ -53,8 +65,9 @@ public class EnemyAttacks : MonoBehaviour
                     student.GetComponent<StudentInfo>().TakeDamage(damage);
                 }
 
-                if(Spawner.isBossWave) {
-                    Spawner.ReduceBossEnemyCount(gameObject.tag);
+                if (Spawner.instance.isBossWave)
+                {
+                    Spawner.instance.ReduceBossEnemyCount(gameObject.tag);
                     Debug.Log(gameObject.tag + " self-destruct");
                 }
                 // destroy the enemy
@@ -65,18 +78,20 @@ public class EnemyAttacks : MonoBehaviour
 
     public void DamageReduction(float amount, float duration)
     {
-        damage = (int) (damage / amount);
+        damage = (int)(damage / amount);
         Debug.Log(damage);
 
         DamageReductionCoroutine = StartCoroutine(NormalDamageAfterDelay(duration));
     }
-    IEnumerator NormalDamageAfterDelay(float remainingTime) 
+
+    IEnumerator NormalDamageAfterDelay(float remainingTime)
     {
         // Will delay before reseting the attack back to its original speed
-        yield return new WaitForSeconds(remainingTime);  
+        yield return new WaitForSeconds(remainingTime);
         damage = originalDamage;
-        Debug.Log("Back to original damage");   
+        Debug.Log("Back to original damage");
     }
+
     public void ResetDebuff()
     {
         damage = originalDamage;
@@ -89,6 +104,4 @@ public class EnemyAttacks : MonoBehaviour
     //     Handles.DrawWireDisc(transform.position, transform.forward, triggerRadius);
 
     // }
-
-
 }

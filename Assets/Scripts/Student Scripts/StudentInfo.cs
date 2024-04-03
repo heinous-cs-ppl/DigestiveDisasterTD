@@ -5,13 +5,19 @@ using UnityEngine;
 public class StudentInfo : MonoBehaviour
 {
     public int cost = 100;
+
     [Header("Student Attributes")]
     public int maxHp = 10;
-    [SerializeField] private Bar healthBar;
-    [SerializeField] private Bar purifyTimerBar;
+
+    [SerializeField]
+    private Bar healthBar;
+
+    [SerializeField]
+    private Bar purifyTimerBar;
     public int damage = 1;
     public float range = 3f;
     public float rotationSpeed = 1000f;
+
     [Header("Bullet Attributes")]
     public float bps = 1f; // bullets per second
     public float bulletSpeed = 5f;
@@ -33,7 +39,9 @@ public class StudentInfo : MonoBehaviour
     private float originalBulletDistance;
 
     private float buffTime = 10f;
-    [HideInInspector] public bool buffed = false;
+
+    [HideInInspector]
+    public bool buffed = false;
 
     public Turret turret;
 
@@ -47,6 +55,7 @@ public class StudentInfo : MonoBehaviour
     public float offsetX = 0;
 
     public int commerceMoneyGain = 0;
+
     private void Start()
     {
         healthBar.setMaxValue(maxHp);
@@ -61,6 +70,7 @@ public class StudentInfo : MonoBehaviour
         originalBulletSpeed = bulletSpeed;
         originalBulletDistance = bulletDistance;
     }
+
     // Getter for student health
     public int getHealth()
     {
@@ -78,7 +88,8 @@ public class StudentInfo : MonoBehaviour
 
         healthBar.setValue(newHp);
 
-        if (StudentManager.selected == gameObject) UIManager.UpdateSelectedBars(this);
+        if (StudentManager.selected == gameObject)
+            UIManager.UpdateSelectedBars(this);
     }
 
     public void Heal(int heal)
@@ -95,19 +106,28 @@ public class StudentInfo : MonoBehaviour
             healthBar.setValue(currentHp + heal);
         }
 
-        if (StudentManager.selected == gameObject) UIManager.UpdateSelectedBars(this);
+        if (StudentManager.selected == gameObject)
+            UIManager.UpdateSelectedBars(this);
     }
+
     public void StudentDeath()
     {
-        RaycastHit2D plothit = Physics2D.Raycast(transform.position, Vector2.zero, 1f, LevelManager.instance.plotLayer);
+        RaycastHit2D plothit = Physics2D.Raycast(
+            transform.position,
+            Vector2.zero,
+            1f,
+            LevelManager.instance.plotLayer
+        );
         Plot plot = plothit.transform.gameObject.GetComponent<Plot>();
-        if (StudentManager.selected == gameObject) StudentManager.Deselect();
+        if (StudentManager.selected == gameObject)
+            StudentManager.Deselect();
         Destroy(gameObject);
         plot.student = null;
 
         LevelManager.instance.studentsDead += 1;
         UIManager.UpdateStudentsDeadText();
-        if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit) {
+        if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit)
+        {
             LevelManager.instance.GameOver();
         }
     }
@@ -115,14 +135,14 @@ public class StudentInfo : MonoBehaviour
     // handles buffs when student is fed purified food
     public void Feed()
     {
-      // heal the student for 30% of their max hp (rounded up because I'm generous)
+        // heal the student for 30% of their max hp (rounded up because I'm generous)
         int toHeal = Mathf.CeilToInt(maxHp * 0.3f);
         Heal(toHeal);
 
         // If the student is a commerce student, give some money when buffed
         if (commerce == true)
         {
-            MoneyManager.AddMoney(commerceMoneyGain);
+            MoneyManager.instance.AddMoney(commerceMoneyGain);
             UIManager.UpdateMoney();
         }
 
@@ -131,7 +151,6 @@ public class StudentInfo : MonoBehaviour
             RefreshBuff();
             return;
         }
-        
 
         buffed = true;
         // increase bps, damage, range, bullet speed, bullet lifetime by 30%
@@ -161,21 +180,23 @@ public class StudentInfo : MonoBehaviour
         // wait for timer before removing buffs
         float iterationTime = 0.1f;
         float counter = 0f;
-        while (counter < buffTime) {
+        while (counter < buffTime)
+        {
             // If you check !Spawner.waveEnd here the game will freeze, this is a warning
-            yield return new WaitUntil(() => !Spawner.waveEnd);
+            yield return new WaitUntil(() => !Spawner.instance.waveEnd);
             yield return new WaitForSeconds(iterationTime);
             counter += iterationTime;
             purifyTimerBar.setValue(buffTime - counter);
         }
-        
+
         RevertBuffs();
     }
 
     private void RefreshBuff()
     {
         // stop the current timer
-        if (timerOn != null) StopCoroutine(timerOn);
+        if (timerOn != null)
+            StopCoroutine(timerOn);
 
         Debug.Log("refreshed buff");
         purifyTimerBar.setValue(buffTime);
@@ -203,6 +224,7 @@ public class StudentInfo : MonoBehaviour
         purifyTimerBar.gameObject.SetActive(false);
 
         // reselect student if it is currently selected
-        if (StudentManager.selected == gameObject) StudentManager.Select(gameObject);
+        if (StudentManager.selected == gameObject)
+            StudentManager.Select(gameObject);
     }
 }

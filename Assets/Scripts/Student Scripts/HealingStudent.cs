@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class HealingTurret : Turret
 {
-    [HideInInspector] public string specificGameObject;
+    [HideInInspector]
+    public string specificGameObject;
+
     private new void Update()
     {
         if (ShouldFire() && specificGameObject != null)
@@ -24,7 +26,11 @@ public class HealingTurret : Turret
     private new void FindTarget()
     {
         // Get all colliders within targeting range that belong to the "Student" layer
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(
+            transform.position,
+            targetingRange,
+            LayerMask.GetMask("Student")
+        );
 
         // Initialize variables to store the closest ally and its HP
         Transform closestAlly = null;
@@ -37,14 +43,18 @@ public class HealingTurret : Turret
             StudentInfo studentInfo = collider.GetComponent<StudentInfo>();
 
             // Ensure the student is an ally (not the turret's own student) and has lower HP than current minimum, while not being at full hp
-            if (studentInfo != null && studentInfo != GetComponent<StudentInfo>() && studentInfo.getHealth() < minHP && studentInfo.getHealth() != studentInfo.maxHp)
+            if (
+                studentInfo != null
+                && studentInfo != GetComponent<StudentInfo>()
+                && studentInfo.getHealth() < minHP
+                && studentInfo.getHealth() != studentInfo.maxHp
+            )
             {
                 closestAlly = collider.transform;
                 minHP = studentInfo.getHealth();
 
                 // Get's the name of the targetted student
                 specificGameObject = collider.gameObject.name;
-
             }
         }
 
@@ -54,11 +64,16 @@ public class HealingTurret : Turret
 
     private bool ShouldFire()
     {
-        if (Spawner.waveEnd) {
+        if (Spawner.instance.waveEnd)
+        {
             return false;
         }
         // Get all colliders within targeting range that belong to the "Student" layer
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, targetingRange, LayerMask.GetMask("Student"));
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(
+            transform.position,
+            targetingRange,
+            LayerMask.GetMask("Student")
+        );
 
         // Check if any ally is not at full health
         foreach (Collider2D collider in colliders)
@@ -78,5 +93,4 @@ public class HealingTurret : Turret
 
         return false; // Return false if all allies are at full health
     }
-
 }
