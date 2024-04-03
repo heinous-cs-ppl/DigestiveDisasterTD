@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Menu()
     {
+        Spawner.waveEnd = true;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Start Menu");
     }
 }
