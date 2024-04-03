@@ -1,16 +1,15 @@
-using UnityEngine;
 // using System.Collections.Generic;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-
 
 public class Spawner : MonoBehaviour
 {
     // Wave tracking variables
     private static int waves;
-    public static int waveIdx = -1;   // wave number is (waveIdx+1)
+    public static int waveIdx = -1; // wave number is (waveIdx+1)
     private Wave.WavePart[][] curWaveInfo;
-    
+
     // timer
     // private float[] t = new float[3];    // doesnt work in coroutine for some reason
 
@@ -34,7 +33,7 @@ public class Spawner : MonoBehaviour
     // // holds the spawn point of the next enemy
     // private Transform spawnPoint;
 
-    private bool[] spawn = {false, false, false};
+    private bool[] spawn = { false, false, false };
     public static bool anySpawning = false;
     private bool enemiesAlive = false;
     public static bool waveEnd = true;
@@ -46,10 +45,13 @@ public class Spawner : MonoBehaviour
     // boss stuff
     // false if the current wave is not a boss wave, true if it is
     public static bool isBossWave = false;
+
     // false if there is no boss, true if the boss is alive
     public static bool bossAlive = false;
+
     // holds tags for each enemy spawning in the boss waves
     private static string[] bossSpawnerThreads = new string[3];
+
     // holds the number of each enemy alive in the boss wave
     private static int[] bossEnemyCount = new int[3];
 
@@ -68,7 +70,8 @@ public class Spawner : MonoBehaviour
     public void NewWave()
     {
         // If wave is done and more waves exist, start wave
-        if (waveEnd && waveIdx < (waves - 1)) {
+        if (waveEnd && waveIdx < (waves - 1))
+        {
             // Spawn random vacuous students
             // LevelManager.instance.SpawnVacuousStudents();
             nextWaveButton.interactable = false;
@@ -83,7 +86,8 @@ public class Spawner : MonoBehaviour
             waveEnd = false;
             anySpawning = true;
             // if the wave is not a boss wave
-            if (!LevelManager.instance.waves[waveIdx].GetComponent<Wave>().bossWave) {
+            if (!LevelManager.instance.waves[waveIdx].GetComponent<Wave>().bossWave)
+            {
                 i[0] = 0;
                 i[1] = 0;
                 i[2] = 0;
@@ -101,7 +105,9 @@ public class Spawner : MonoBehaviour
                 StartCoroutine(SpawnerThread0());
                 StartCoroutine(SpawnerThread1());
                 StartCoroutine(SpawnerThread2());
-            } else {
+            }
+            else
+            {
                 // if the wave is a boss wave
                 // The boss wave will have up to three spawners, with one enemy each
                 // The "repeats" field in the struct will be treated as "maxInstances"
@@ -113,37 +119,46 @@ public class Spawner : MonoBehaviour
                 isBossWave = true;
 
                 // spawn the boss
-                StartCoroutine(SpawnBoss(LevelManager.instance.waves[waveIdx].GetComponent<BossWave>().boss));
+                StartCoroutine(
+                    SpawnBoss(LevelManager.instance.waves[waveIdx].GetComponent<BossWave>().boss)
+                );
 
                 // set the enemies in spawner threads to keep track of the number of each enemy alive
                 Wave.WavePart enemy0;
                 Wave.WavePart enemy1;
                 Wave.WavePart enemy2;
-                if(curWaveInfo[0].Length > 0) {
+                if (curWaveInfo[0].Length > 0)
+                {
                     enemy0 = curWaveInfo[0][0];
                     bossSpawnerThreads[0] = enemy0.enemy.tag;
                     StartCoroutine(BossWaveSpawner(enemy0));
                 }
-                if(curWaveInfo[1].Length > 0) {
+                if (curWaveInfo[1].Length > 0)
+                {
                     enemy1 = curWaveInfo[1][0];
                     bossSpawnerThreads[1] = enemy1.enemy.tag;
                     StartCoroutine(BossWaveSpawner(enemy1));
                 }
-                if(curWaveInfo[2].Length > 0) {
+                if (curWaveInfo[2].Length > 0)
+                {
                     enemy2 = curWaveInfo[2][0];
                     bossSpawnerThreads[2] = enemy2.enemy.tag;
                     StartCoroutine(BossWaveSpawner(enemy2));
                 }
-                
             }
         }
-        Debug.Log("Wave "+waveIdx);
+        Debug.Log("Wave " + waveIdx);
     }
 
-    public IEnumerator SpawnBoss(Wave.WavePart boss) {
+    public IEnumerator SpawnBoss(Wave.WavePart boss)
+    {
         yield return new WaitForSeconds(boss.oneTimeDelay);
         // spawn the boss
-        GameObject chymousDisaster = Instantiate(boss.enemy, spawnpoints[boss.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position, Quaternion.identity);
+        GameObject chymousDisaster = Instantiate(
+            boss.enemy,
+            spawnpoints[boss.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position,
+            Quaternion.identity
+        );
         EnemyInfo chymousInfo = chymousDisaster.GetComponent<EnemyInfo>();
         chymousInfo.isBoss = true;
         chymousDisaster.GetComponent<EnemyAttacks>().isBoss = true;
@@ -164,37 +179,49 @@ public class Spawner : MonoBehaviour
         chymousDisaster.transform.localScale *= 2f;
     }
 
-    public static int GetBossWaveSpawnerThread(string tag) {
+    public static int GetBossWaveSpawnerThread(string tag)
+    {
         // return the spawner thread of the corresponding tag
-        for (int i = 0; i < bossSpawnerThreads.Length; i++) {
-            if (bossSpawnerThreads[i].Equals(tag)) {
+        for (int i = 0; i < bossSpawnerThreads.Length; i++)
+        {
+            if (bossSpawnerThreads[i].Equals(tag))
+            {
                 return i;
             }
         }
-        throw new System.Exception("No spawner thread found for tag "+tag);
+        throw new System.Exception("No spawner thread found for tag " + tag);
     }
-    
-    public static void ReduceBossEnemyCount(string tag) {
+
+    public static void ReduceBossEnemyCount(string tag)
+    {
         // reduce the enemy count of the corresponding tag
         int spawnerThread = GetBossWaveSpawnerThread(tag);
         bossEnemyCount[spawnerThread]--;
-        Debug.Log(tag+" removed, count: "+bossEnemyCount[spawnerThread]);
+        Debug.Log(tag + " removed, count: " + bossEnemyCount[spawnerThread]);
     }
 
-    private IEnumerator BossWaveSpawner(Wave.WavePart chyme) {
-        
+    private IEnumerator BossWaveSpawner(Wave.WavePart chyme)
+    {
         yield return new WaitForSeconds(chyme.oneTimeDelay);
         int spawnerThread = GetBossWaveSpawnerThread(chyme.enemy.tag);
-        while (bossAlive) {
+        while (bossAlive)
+        {
             // check if the enemy limit has been reached
             // wait to spawn the enemy
-            if (bossEnemyCount[spawnerThread] < chyme.repeats) {
+            if (bossEnemyCount[spawnerThread] < chyme.repeats)
+            {
                 // spawn the enemy
-                Instantiate(chyme.enemy, spawnpoints[chyme.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position, Quaternion.identity);
+                Instantiate(
+                    chyme.enemy,
+                    spawnpoints[chyme.enemy.GetComponent<EnemyInfo>().spawnPointIndex].position,
+                    Quaternion.identity
+                );
                 bossEnemyCount[spawnerThread]++;
-                Debug.Log(chyme.enemy.tag+" spawned, count: "+bossEnemyCount[spawnerThread]);
+                Debug.Log(chyme.enemy.tag + " spawned, count: " + bossEnemyCount[spawnerThread]);
                 yield return new WaitForSeconds(chyme.spawnDelay);
-            } else {
+            }
+            else
+            {
                 // wait for one frame (game freeze if you don't)
                 yield return null;
             }
@@ -227,11 +254,14 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnerThread0() {
-        while (spawn[0]) {
+    private IEnumerator SpawnerThread0()
+    {
+        while (spawn[0])
+        {
             if (curWaveInfo[0].Length > 0)
             {
-                if (isNewEnemy[0]) {      // First time seeing this element (enemy)
+                if (isNewEnemy[0])
+                { // First time seeing this element (enemy)
                     curWaveElem[0] = curWaveInfo[0][i[0]];
                     spawnIndex[0] = curWaveElem[0].enemy.GetComponent<EnemyInfo>().spawnPointIndex;
                     yield return new WaitForSeconds(curWaveElem[0].oneTimeDelay);
@@ -239,12 +269,17 @@ public class Spawner : MonoBehaviour
                 }
 
                 // Spawn enemy and repeat relevent times
-                if (repeatCount[0] <= curWaveElem[0].repeats) {
-                    Instantiate(curWaveElem[0].enemy, spawnpoints[spawnIndex[0]].position, Quaternion.identity);
+                if (repeatCount[0] <= curWaveElem[0].repeats)
+                {
+                    Instantiate(
+                        curWaveElem[0].enemy,
+                        spawnpoints[spawnIndex[0]].position,
+                        Quaternion.identity
+                    );
                     repeatCount[0]++;
                     yield return new WaitForSeconds(curWaveElem[0].spawnDelay);
                 }
-                else    // Move onto the next element
+                else // Move onto the next element
                 {
                     i[0]++;
                     isNewEnemy[0] = true;
@@ -252,17 +287,22 @@ public class Spawner : MonoBehaviour
                 }
             }
 
-            if (i[0] >= curWaveInfo[0].Length || curWaveInfo[0].Length == 0) {
+            if (i[0] >= curWaveInfo[0].Length || curWaveInfo[0].Length == 0)
+            {
                 spawn[0] = false;
                 Debug.Log("Spawner0 done");
             }
         }
     }
-    private IEnumerator SpawnerThread1() {
-        while (spawn[1]) {
+
+    private IEnumerator SpawnerThread1()
+    {
+        while (spawn[1])
+        {
             if (curWaveInfo[1].Length > 0)
             {
-                if (isNewEnemy[1]) {      // First time seeing this element (enemy)
+                if (isNewEnemy[1])
+                { // First time seeing this element (enemy)
                     curWaveElem[1] = curWaveInfo[1][i[1]];
                     spawnIndex[1] = curWaveElem[1].enemy.GetComponent<EnemyInfo>().spawnPointIndex;
                     yield return new WaitForSeconds(curWaveElem[1].oneTimeDelay);
@@ -270,12 +310,17 @@ public class Spawner : MonoBehaviour
                 }
 
                 // Spawn enemy and repeat relevent times
-                if (repeatCount[1] <= curWaveElem[1].repeats) {
-                    Instantiate(curWaveElem[1].enemy, spawnpoints[spawnIndex[1]].position, Quaternion.identity);
+                if (repeatCount[1] <= curWaveElem[1].repeats)
+                {
+                    Instantiate(
+                        curWaveElem[1].enemy,
+                        spawnpoints[spawnIndex[1]].position,
+                        Quaternion.identity
+                    );
                     repeatCount[1]++;
                     yield return new WaitForSeconds(curWaveElem[1].spawnDelay);
                 }
-                else    // Move onto the next element
+                else // Move onto the next element
                 {
                     i[1]++;
                     isNewEnemy[1] = true;
@@ -283,17 +328,22 @@ public class Spawner : MonoBehaviour
                 }
             }
 
-            if (i[1] >= curWaveInfo[1].Length || curWaveInfo[1].Length == 0) {
+            if (i[1] >= curWaveInfo[1].Length || curWaveInfo[1].Length == 0)
+            {
                 spawn[1] = false;
                 Debug.Log("Spawner1 done");
             }
         }
     }
-    private IEnumerator SpawnerThread2() {
-        while (spawn[2]) {
+
+    private IEnumerator SpawnerThread2()
+    {
+        while (spawn[2])
+        {
             if (curWaveInfo[2].Length > 0)
             {
-                if (isNewEnemy[2]) {      // First time seeing this element (enemy)
+                if (isNewEnemy[2])
+                { // First time seeing this element (enemy)
                     curWaveElem[2] = curWaveInfo[2][i[2]];
                     spawnIndex[2] = curWaveElem[2].enemy.GetComponent<EnemyInfo>().spawnPointIndex;
                     yield return new WaitForSeconds(curWaveElem[2].oneTimeDelay);
@@ -301,12 +351,17 @@ public class Spawner : MonoBehaviour
                 }
 
                 // Spawn enemy and repeat relevent times
-                if (repeatCount[2] <= curWaveElem[2].repeats) {
-                    Instantiate(curWaveElem[2].enemy, spawnpoints[spawnIndex[2]].position, Quaternion.identity);
+                if (repeatCount[2] <= curWaveElem[2].repeats)
+                {
+                    Instantiate(
+                        curWaveElem[2].enemy,
+                        spawnpoints[spawnIndex[2]].position,
+                        Quaternion.identity
+                    );
                     repeatCount[2]++;
                     yield return new WaitForSeconds(curWaveElem[2].spawnDelay);
                 }
-                else    // Move onto the next element
+                else // Move onto the next element
                 {
                     i[2]++;
                     isNewEnemy[2] = true;
@@ -314,7 +369,8 @@ public class Spawner : MonoBehaviour
                 }
             }
 
-            if (i[2] >= curWaveInfo[2].Length || curWaveInfo[2].Length == 0) {
+            if (i[2] >= curWaveInfo[2].Length || curWaveInfo[2].Length == 0)
+            {
                 spawn[2] = false;
                 Debug.Log("Spawner2 done");
             }
@@ -331,16 +387,26 @@ public class Spawner : MonoBehaviour
         //     roundAddMoney = false;
         // }
 
-        RaycastHit2D[] hitEnemies = Physics2D.CircleCastAll(Vector2.zero, Mathf.Infinity, Vector2.zero, Mathf.Infinity, LevelManager.instance.enemyLayer);
-        if (hitEnemies.Length == 0 && enemiesAlive) {
+        RaycastHit2D[] hitEnemies = Physics2D.CircleCastAll(
+            Vector2.zero,
+            Mathf.Infinity,
+            Vector2.zero,
+            Mathf.Infinity,
+            LevelManager.instance.enemyLayer
+        );
+        if (hitEnemies.Length == 0 && enemiesAlive)
+        {
             enemiesAlive = false;
             Debug.Log("no enemies alive");
-        } else if (hitEnemies.Length > 0 && !enemiesAlive) {
+        }
+        else if (hitEnemies.Length > 0 && !enemiesAlive)
+        {
             enemiesAlive = true;
             Debug.Log("enemies alive");
         }
 
-        if (!(anySpawning || enemiesAlive) && !waveEnd && !isBossWave) {
+        if (!(anySpawning || enemiesAlive) && !waveEnd && !isBossWave)
+        {
             // when a regular wave ends
             waveEnd = true;
             nextWaveButton.interactable = true;
@@ -350,7 +416,9 @@ public class Spawner : MonoBehaviour
             MoneyManager.AddMoney(NextWave.waveMoney);
             UIManager.UpdateMoney();
             ShowPath();
-        } else if (isBossWave && !bossAlive && !enemiesAlive && !waveEnd) {
+        }
+        else if (isBossWave && !bossAlive && !enemiesAlive && !waveEnd)
+        {
             // when a boss wave ends
             waveEnd = true;
             nextWaveButton.interactable = true;
@@ -368,14 +436,17 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public static int GetRound() {
-        if (waveIdx == -1) {
+    public static int GetRound()
+    {
+        if (waveIdx == -1)
+        {
             return 1;
         }
         return waveIdx + 1;
     }
 
-    void ShowPath() {
+    void ShowPath()
+    {
         // get next wave
         GameObject wave = LevelManager.instance.waves[waveIdx + 1];
         Wave.WavePart[] spawner0 = wave.GetComponent<Wave>().Spawner0WaveEnc;
@@ -386,43 +457,61 @@ public class Spawner : MonoBehaviour
         bool spawnpoint1 = false;
         bool spawnpoint2 = false;
         // check if there are enemies that spawn at each spawnpoint
-        foreach (Wave.WavePart wavePart in spawner0) {
+        foreach (Wave.WavePart wavePart in spawner0)
+        {
             EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
-            if (curEnemy.spawnPointIndex == 0) {
+            if (curEnemy.spawnPointIndex == 0)
+            {
                 Debug.Log("spawnpoint0 in spawner0");
                 spawnpoint0 = true;
-            } else if (curEnemy.spawnPointIndex == 1) {
+            }
+            else if (curEnemy.spawnPointIndex == 1)
+            {
                 Debug.Log("spawnpoint1 in spawner0");
                 spawnpoint1 = true;
-            } else if (curEnemy.spawnPointIndex == 2) {
+            }
+            else if (curEnemy.spawnPointIndex == 2)
+            {
                 Debug.Log("spawnpoint2 in spawner0");
                 spawnpoint2 = true;
             }
         }
 
-        foreach (Wave.WavePart wavePart in spawner1) {
+        foreach (Wave.WavePart wavePart in spawner1)
+        {
             EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
-            if (curEnemy.spawnPointIndex == 0) {
+            if (curEnemy.spawnPointIndex == 0)
+            {
                 Debug.Log("spawnpoint0 in spawner1");
                 spawnpoint0 = true;
-            } else if (curEnemy.spawnPointIndex == 1) {
+            }
+            else if (curEnemy.spawnPointIndex == 1)
+            {
                 Debug.Log("spawnpoint1 in spawner1");
                 spawnpoint1 = true;
-            } else if (curEnemy.spawnPointIndex == 2) {
+            }
+            else if (curEnemy.spawnPointIndex == 2)
+            {
                 Debug.Log("spawnpoint2 in spawner1");
                 spawnpoint2 = true;
             }
         }
 
-        foreach (Wave.WavePart wavePart in spawner2) {
+        foreach (Wave.WavePart wavePart in spawner2)
+        {
             EnemyInfo curEnemy = wavePart.enemy.GetComponent<EnemyInfo>();
-            if (curEnemy.spawnPointIndex == 0) {
+            if (curEnemy.spawnPointIndex == 0)
+            {
                 Debug.Log("spawnpoint0 in spawner2");
                 spawnpoint0 = true;
-            } else if (curEnemy.spawnPointIndex == 1) {
+            }
+            else if (curEnemy.spawnPointIndex == 1)
+            {
                 Debug.Log("spawnpoint1 in spawner2");
                 spawnpoint1 = true;
-            } else if (curEnemy.spawnPointIndex == 2) {
+            }
+            else if (curEnemy.spawnPointIndex == 2)
+            {
                 Debug.Log("spawnpoint2 in spawner2");
                 spawnpoint2 = true;
             }
