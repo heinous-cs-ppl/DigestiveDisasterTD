@@ -155,7 +155,7 @@ public class MoveStudent : MonoBehaviour
                     leftPlot.student = LevelManager.instance.machineRepresentation;
                     if (oldLeftPlot) {oldLeftPlot.student = null;}
                 }
-                else if (oldLeftPlot.transform == newPlot)
+                else if (oldLeftPlot && oldLeftPlot.transform == newPlot)
                 {
                     Debug.Log("left one tile");
                     student.transform.position = newPlot.position;
