@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //
-public class PurifyManager
+public class PurifyManager : MonoBehaviour
 {
-    private static int purifiedMealCount = 0;
+    public static PurifyManager instance;
+    private int purifiedMealCount = 0;
 
-    public static void GainMeal()
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void GainMeal()
     {
         purifiedMealCount++;
     }
 
-    public static bool UseMeal()
+    public bool UseMeal()
     {
         if (purifiedMealCount > 0)
         {
@@ -24,7 +30,7 @@ public class PurifyManager
         return false;
     }
 
-    public static void SetMealCount(int amt)
+    public void SetMealCount(int amt)
     {
         if (amt < 0)
         {
@@ -34,7 +40,7 @@ public class PurifyManager
         purifiedMealCount = amt;
     }
 
-    public static string GetStringMealCount()
+    public string GetStringMealCount()
     {
         return purifiedMealCount.ToString();
     }

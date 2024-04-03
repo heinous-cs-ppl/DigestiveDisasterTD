@@ -74,7 +74,7 @@ public class MachineStudent : Turret
         // call attack end animation
         anim.SetTrigger("AttackEnd");
         // give player money and purified meal
-        PurifyManager.GainMeal();
+        PurifyManager.instance.GainMeal();
         UIManager.UpdateMealCount();
 
         MoneyManager.instance.AddMoney(money);
@@ -138,4 +138,3 @@ public class MachineStudent : Turret
         return false; // Collider is not within range
     }
 }
-

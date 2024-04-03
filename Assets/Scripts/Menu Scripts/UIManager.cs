@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateMealCount()
     {
-        purifyCount.text = PurifyManager.GetStringMealCount();
+        purifyCount.text = PurifyManager.instance.GetStringMealCount();
     }
 
     public static void UpdateMoney()

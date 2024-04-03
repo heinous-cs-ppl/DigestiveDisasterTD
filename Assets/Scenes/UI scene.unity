@@ -3188,6 +3188,8 @@ GameObject:
   - component: {fileID: 240840213}
   - component: {fileID: 240840212}
   - component: {fileID: 240840214}
+  - component: {fileID: 240840215}
+  - component: {fileID: 240840216}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -3283,6 +3285,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   circleSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+--- !u!114 &240840215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240840211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd433533fd6776f45af9fce4abdda026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &240840216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240840211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876f348f4e3241c49a3b7c8bddad3954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &241313634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 126917083961848099, guid: 3f85c3460aefd9e4eaee830989749072, type: 3}
@@ -18407,7 +18433,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389c343d8f4a8374da691ce8899220d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anySpawning: 0
+  waveEnd: 1
   nextWaveButton: {fileID: 16033497}
+  roundAddMoney: 0
+  isBossWave: 0
+  bossAlive: 0
 --- !u!1001 &1654175609
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -113,7 +113,7 @@ public class EnemyInfo : MonoBehaviour
     public void purify()
     {
         // give the player a purified meal
-        PurifyManager.GainMeal();
+        PurifyManager.instance.GainMeal();
         UIManager.UpdateMealCount();
 
         MoneyManager.instance.AddMoney(moneyDrop);
