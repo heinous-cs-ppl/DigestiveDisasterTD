@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour
 {
     public int maxHp = 10;
+
     [SerializeField]
     public Bar healthBar;
     public int maxPurifyHp = 7;
@@ -18,16 +19,16 @@ public class EnemyInfo : MonoBehaviour
     public int moneyDrop = 10;
 
     SpriteRenderer enemySprite;
-    
 
     public GameObject[] buffs;
 
     public bool isBoss = false;
-    [HideInInspector] public bool LawyerDebuff = false;
-    [HideInInspector] public float LawyerDamageMultiplier;
 
+    [HideInInspector]
+    public bool LawyerDebuff = false;
 
-
+    [HideInInspector]
+    public float LawyerDamageMultiplier;
 
     private void Start()
     {
@@ -40,10 +41,12 @@ public class EnemyInfo : MonoBehaviour
         originalDamage = damage;
         enemySprite = gameObject.GetComponent<SpriteRenderer>();
     }
+
     public int getHealth()
     {
         return healthBar.getValue();
     }
+
     public int getPurifyHealth()
     {
         return purifyBar.getValue();
@@ -57,7 +60,7 @@ public class EnemyInfo : MonoBehaviour
         // If the lawyer debuff is true, multiply it by the value that was randomly selected
         if (LawyerDebuff == true)
         {
-            dmg = (int) (dmg * LawyerDamageMultiplier);
+            dmg = (int)(dmg * LawyerDamageMultiplier);
         }
         int currentHp = getHealth();
         int newHp = currentHp - dmg;
@@ -69,14 +72,13 @@ public class EnemyInfo : MonoBehaviour
         healthBar.setValue(newHp);
     }
 
-
     // Calculating purifying damage done to the enemy
     public void takePurifyDamage(int dmg)
     {
         int currentPurifyHp = getPurifyHealth();
         if (LawyerDebuff == true)
         {
-            dmg = (int) (dmg * LawyerDamageMultiplier);
+            dmg = (int)(dmg * LawyerDamageMultiplier);
         }
         int newPurifyHp = currentPurifyHp + dmg;
         if (newPurifyHp >= maxPurifyHp)
@@ -93,12 +95,15 @@ public class EnemyInfo : MonoBehaviour
         UIManager.UpdateMoney();
 
         // if the enemy is a boss, set bossAlive to false in spawner
-        if (isBoss) {
-            Spawner.bossAlive = false;
+        if (isBoss)
+        {
+            Spawner.instance.bossAlive = false;
             Debug.Log("Boss died");
-        } else if(Spawner.isBossWave) {
+        }
+        else if (Spawner.instance.isBossWave)
+        {
             // if current wave is a boss wave, reduce the number of alive enemies of corresponding tag by 1
-            Spawner.ReduceBossEnemyCount(gameObject.tag);
+            Spawner.instance.ReduceBossEnemyCount(gameObject.tag);
             Debug.Log(gameObject.tag + " killed");
         }
 
@@ -115,13 +120,16 @@ public class EnemyInfo : MonoBehaviour
         UIManager.UpdateMoney();
 
         // if the enemy is a boss, set bossAlive to false in spawner
-        if (isBoss) {
-            Spawner.bossAlive = false;
-            Spawner.anySpawning = false;
+        if (isBoss)
+        {
+            Spawner.instance.bossAlive = false;
+            Spawner.instance.anySpawning = false;
             Debug.Log("Boss died");
-        } else if(Spawner.isBossWave) {
+        }
+        else if (Spawner.instance.isBossWave)
+        {
             // if current wave is a boss wave, and this enemy isn't the boss, reduce the number of alive enemies of corresponding tag by 1
-            Spawner.ReduceBossEnemyCount(gameObject.tag);
+            Spawner.instance.ReduceBossEnemyCount(gameObject.tag);
             Debug.Log(gameObject.tag + " purified");
         }
 
@@ -134,10 +142,11 @@ public class EnemyInfo : MonoBehaviour
         LawyerDebuff = false;
     }
 
-    public void Debuff(float time) {
+    public void Debuff(float time)
+    {
         LawyerDamageMultiplier = 1.3f;
         gameObject.GetComponent<EnemyAttacks>().DamageReduction(1.3f, time);
-        
+
         enemySprite.color = Color.red;
         Debug.Log("changed enemy color");
         LawyerDebuff = true;
@@ -150,5 +159,4 @@ public class EnemyInfo : MonoBehaviour
         ResetDebuff();
         enemySprite.color = Color.white;
     }
-
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -117,18 +117,26 @@ public class UIManager : MonoBehaviour
     {
         studentSelectUI.SetActive(true);
 
-        if (StudentManager.selected.GetComponent<StudentInfo>().cost == 0) {
+        if (StudentManager.selected.GetComponent<StudentInfo>().cost == 0)
+        {
             // vacuous students will be the only student that costs 0
             // if selected student is vacuous, remove the fire button and make the move button wider
             moveButton.sizeDelta = new Vector2(7, moveButton.sizeDelta.y);
             fireButton.SetActive(false);
-        } else {
+        }
+        else
+        {
             moveButton.sizeDelta = new Vector2(3.375f, moveButton.sizeDelta.y);
             fireButton.SetActive(true);
-            if (Spawner.GetRound() != -1) {
-                fireText.text = "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost / 2 + ")";
-            } else {
-                fireText.text = "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost + ")";
+            if (Spawner.instance.GetRound() != -1)
+            {
+                fireText.text =
+                    "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost / 2 + ")";
+            }
+            else
+            {
+                fireText.text =
+                    "Fire (+$" + StudentManager.selected.GetComponent<StudentInfo>().cost + ")";
             }
         }
 
@@ -173,7 +181,8 @@ public class UIManager : MonoBehaviour
         gameOver.text = "";
     }
 
-    public static void UpdateSelectedBars(StudentInfo info) {
+    public static void UpdateSelectedBars(StudentInfo info)
+    {
         studentSelectUIStudentHP.maxValue = info.maxHp;
         studentSelectUIStudentHP.value = info.getHealth();
         studentSelectUIStudentDamage.value = info.damage;
@@ -181,37 +190,59 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentBPS.value = info.bps;
     }
 
-    public static void UpdateStudentsDeadText() {
-        studentsDeadText.text = "Students Dead: " + LevelManager.instance.studentsDead + "/" + LevelManager.instance.deathLimit;
+    public static void UpdateStudentsDeadText()
+    {
+        studentsDeadText.text =
+            "Students Dead: "
+            + LevelManager.instance.studentsDead
+            + "/"
+            + LevelManager.instance.deathLimit;
     }
 
-    public static void UpdateRound() {
-        roundText.text = "Round: " + Spawner.GetRound();
+    public static void UpdateRound()
+    {
+        roundText.text = "Round: " + Spawner.instance.GetRound();
     }
 
-    public static void UpdateMove(int val) {
+    public static void UpdateMove(int val)
+    {
         moveStudentText.text = "Move ($" + val + ")";
     }
 
-    public static void ShowPath(bool path0, bool path1, bool path2) {
-        if(path0 && path1 && path2) {
+    public static void ShowPath(bool path0, bool path1, bool path2)
+    {
+        if (path0 && path1 && path2)
+        {
             path_012.SetActive(true);
-        } else if(path0 && path1) {
+        }
+        else if (path0 && path1)
+        {
             path_01.SetActive(true);
-        } else if(path1 && path2) {
+        }
+        else if (path1 && path2)
+        {
             path_12.SetActive(true);
-        } else if(path0 && path2) {
+        }
+        else if (path0 && path2)
+        {
             path_02.SetActive(true);
-        } else if(path0) {
+        }
+        else if (path0)
+        {
             path_0.SetActive(true);
-        } else if(path1) {
+        }
+        else if (path1)
+        {
             path_1.SetActive(true);
-        } else if(path2) {
+        }
+        else if (path2)
+        {
             path_2.SetActive(true);
         }
     }
 
-    public static void HidePath() {
+    public static void HidePath()
+    {
         path_0.SetActive(false);
         path_1.SetActive(false);
         path_2.SetActive(false);

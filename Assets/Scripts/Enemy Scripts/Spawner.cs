@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+    public static Spawner instance;
+
     // Wave tracking variables
-    private static int waves;
-    public static int waveIdx = -1; // wave number is (waveIdx+1)
+    private int waves;
+    private int waveIdx = -1; // wave number is (waveIdx+1)
     private Wave.WavePart[][] curWaveInfo;
 
     // timer
@@ -34,26 +36,26 @@ public class Spawner : MonoBehaviour
     // private Transform spawnPoint;
 
     private bool[] spawn = { false, false, false };
-    public static bool anySpawning = false;
+    public bool anySpawning = false;
     private bool enemiesAlive = false;
-    public static bool waveEnd = true;
+    public bool waveEnd = true;
 
     public Button nextWaveButton;
 
-    public static bool roundAddMoney = false;
+    public bool roundAddMoney = false;
 
     // boss stuff
     // false if the current wave is not a boss wave, true if it is
-    public static bool isBossWave = false;
+    public bool isBossWave = false;
 
     // false if there is no boss, true if the boss is alive
-    public static bool bossAlive = false;
+    public bool bossAlive = false;
 
     // holds tags for each enemy spawning in the boss waves
-    private static string[] bossSpawnerThreads = new string[3];
+    private string[] bossSpawnerThreads = new string[3];
 
     // holds the number of each enemy alive in the boss wave
-    private static int[] bossEnemyCount = new int[3];
+    private int[] bossEnemyCount = new int[3];
 
     /* Returns an array of struct defined in Wave.cs */
     private Wave.WavePart[][] getWaveInfo(GameObject waveObj)
@@ -179,7 +181,7 @@ public class Spawner : MonoBehaviour
         chymousDisaster.transform.localScale *= 2f;
     }
 
-    public static int GetBossWaveSpawnerThread(string tag)
+    public int GetBossWaveSpawnerThread(string tag)
     {
         // return the spawner thread of the corresponding tag
         for (int i = 0; i < bossSpawnerThreads.Length; i++)
@@ -192,7 +194,7 @@ public class Spawner : MonoBehaviour
         throw new System.Exception("No spawner thread found for tag " + tag);
     }
 
-    public static void ReduceBossEnemyCount(string tag)
+    public void ReduceBossEnemyCount(string tag)
     {
         // reduce the enemy count of the corresponding tag
         int spawnerThread = GetBossWaveSpawnerThread(tag);
@@ -230,6 +232,7 @@ public class Spawner : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         waves = LevelManager.instance.waves.Length;
 
         if (waves < 1)
@@ -436,7 +439,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public static int GetRound()
+    public int GetRound()
     {
         if (waveIdx == -1)
         {
