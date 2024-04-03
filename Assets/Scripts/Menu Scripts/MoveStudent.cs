@@ -8,7 +8,7 @@ public class MoveStudent : MonoBehaviour
     public static MoveStudent instance;
 
     private Plot oldPlot;
-    private GameObject studentPreview;
+    [HideInInspector] public GameObject studentPreview;
     private GameObject student;
     private Sprite studentSprite;
     public LayerMask studentLayer;
@@ -29,6 +29,7 @@ public class MoveStudent : MonoBehaviour
 
     void Start()
     {
+        // instance = this;
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
@@ -41,6 +42,7 @@ public class MoveStudent : MonoBehaviour
         if (MoneyManager.GetMoneyCount() >= moveCost || Spawner.waveEnd)
         {
             student = StudentManager.selected;
+            Debug.Log("Selected " + student + " for move");
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>(); ;
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
             info = student.GetComponent<StudentInfo>();
@@ -107,6 +109,7 @@ public class MoveStudent : MonoBehaviour
                 }
             }
         }
+        Debug.Log(StudentManager.moving);
     }
 
     // Called from Plot.cs by the plot to move onto
@@ -189,6 +192,7 @@ public class MoveStudent : MonoBehaviour
             student.transform.position = newPlot.position;
             oldPlot.student = null;
         }
+        Debug.Log("move move from " + oldPlot + " to " + newPlot.gameObject.GetComponent<Plot>());
 
         if(newPlot.GetComponent<Plot>().aboveTable) {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";

@@ -92,7 +92,7 @@ public class Plot : MonoBehaviour
             Debug.Log("Started drag over: " + this);
             StudentManager.Select(this.student);
             StudentManager.mouseDragging = true;
-            MoveStudent.instance.SetMoving();       // Preview updates in MoveStudent
+            // MoveStudent.instance.SetMoving();       // Preview updates in MoveStudent
         }
     }
 
@@ -115,14 +115,24 @@ public class Plot : MonoBehaviour
         {
             Debug.Log("Released drag over: " + StudentManager.draggingOver);
             StudentManager.mouseDragging = false;
-            StudentManager.moving = false;
-            
-            // Do the move if released over a plot
-            if (!StudentManager.draggingOver) {StudentManager.Deselect();}
-            else
-            {
-                Debug.Log("drag movey");
-            }
+
+            // if (StudentManager.draggingOver == this)   // Same time, treat as just a click
+            // {
+            //     StudentManager.moving = false;
+            //     Destroy(MoveStudent.instance.studentPreview);
+            // }
+            // else if (StudentManager.draggingOver == null)   // Do the move if released over a plot
+            // {
+            //     StudentManager.moving = false;
+            //     StudentManager.Deselect();
+            //     Destroy(MoveStudent.instance.studentPreview);    
+            // }
+            // else
+            // {
+            //     Debug.Log("drag movey");
+            //     // MoveStudent.instance.DelayAndFinishMove(StudentManager.draggingOver.transform);
+            //     StudentManager.moving = false;
+            // }
         }
     }
 
