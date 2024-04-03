@@ -10,12 +10,11 @@ public class Plot : MonoBehaviour
     [SerializeField] private Color hoverColor;
     public bool aboveTable;
 
-    [HideInInspector]
-    public GameObject student = null;
+    [HideInInspector] public GameObject student = null;
     private GameObject selectedStu;
     private Color startColor;
     private Transform plot;
-    public Transform plotOnLeft;
+    [HideInInspector] public Transform plotOnLeft;
 
     /* Triggered when the mouse hovers over a plot with a collider on it */
     private void OnMouseEnter()
@@ -58,14 +57,6 @@ public class Plot : MonoBehaviour
                     Debug.Log("no placey");
                     return;
                 }
-                // if (!plotOnLeft)    // Left edge case
-                // {
-                //     Debug.Log("can place");
-                // }
-                // else if (plotOnLeft.gameObject.GetComponent<Plot>().student == null)    // Left tile exists and is empty
-                // {
-                //     Debug.Log("can place"); 
-                // }
             }
             StudentPlacement.studentPlacedOnPlot = true;
             // Wait for some code in StudentPlacement to run first
@@ -96,7 +87,45 @@ public class Plot : MonoBehaviour
                 MoveStudent.instance.Place(plot);
             }
         }
+        else if (!StudentManager.placing && this.student)   // Start mouse drag if student was not placed or moved here on this click
+        {
+            Debug.Log("Started drag over: " + this);
+            StudentManager.Select(this.student);
+            StudentManager.mouseDragging = true;
+            MoveStudent.instance.SetMoving();       // Preview updates in MoveStudent
+        }
     }
+
+    /* The tile that the drag started on will know if the mouse is still being dragged even if it leaves the tile. */
+    private void OnMouseDrag()
+    {
+        if (StudentManager.mouseDragging)
+        {
+            StudentManager.draggingOver = null;
+            RaycastHit2D plotHit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1f, LevelManager.instance.plotLayer);
+            if (plotHit) {StudentManager.draggingOver = plotHit.transform.gameObject.GetComponent<Plot>();}
+            // Debug.Log("Dragging over: " + StudentManager.draggingOver);
+        }
+    }
+
+    /* Mouse was held down, and gets released over this plot */
+    private void OnMouseUp()
+    {
+        if (StudentManager.mouseDragging)
+        {
+            Debug.Log("Released drag over: " + StudentManager.draggingOver);
+            StudentManager.mouseDragging = false;
+            StudentManager.moving = false;
+            
+            // Do the move if released over a plot
+            if (!StudentManager.draggingOver) {StudentManager.Deselect();}
+            else
+            {
+                Debug.Log("drag movey");
+            }
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -104,14 +133,6 @@ public class Plot : MonoBehaviour
         plot = this.transform;
         RaycastHit2D plotHit = Physics2D.Raycast((Vector2)this.transform.position + Vector2.left, Vector2.left, 1f, LevelManager.instance.plotLayer);
         plotOnLeft = plotHit.transform;
-        // if (plotHit) 
-        // {
-        //     plotOnLeft = plotHit.transform;
-        // }
-        // else
-        // {
-        //     plotOnLeft = null;
-        // }
         startColor = plotSR.color;
     }
 

@@ -22,9 +22,13 @@ public class MoveStudent : MonoBehaviour
     private int numberOfFlashes = 2;
     private Image moneyImage;
 
-    void Start()
+    void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
         map = GameObject.Find("Map");
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;

@@ -7,6 +7,8 @@ public class StudentManager : MonoBehaviour
 {
     public static bool placing = false;
     public static bool moving = false;
+    public static bool mouseDragging = false;
+    public static Plot draggingOver = null;
 
     // public static GameObject placementSelected;     // Only has a student if in placement mode
     public static GameObject plotOfSelected;
