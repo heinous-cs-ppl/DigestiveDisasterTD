@@ -24,6 +24,16 @@ public class PurifyManager
         return false;
     }
 
+    public static void SetMealCount(int amt)
+    {
+        if (amt < 0)
+        {
+            Debug.LogError("Meal count cannot be negative");
+            return;
+        }
+        purifiedMealCount = amt;
+    }
+
     public static string GetStringMealCount()
     {
         return purifiedMealCount.ToString();

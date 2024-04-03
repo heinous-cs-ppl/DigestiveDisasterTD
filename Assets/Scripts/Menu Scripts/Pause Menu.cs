@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    private float prevSpeed;
+    public static bool paused = false;
     public void Pause()
     {
+        prevSpeed = Time.timeScale;
+        paused = true;
         Time.timeScale = 0;
     }
 
     public void Resume()
     {
-        Time.timeScale = 1;
+        paused = false;
+        Time.timeScale = prevSpeed;
     }
 
     public void Menu()

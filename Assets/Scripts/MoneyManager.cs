@@ -25,4 +25,14 @@ public class MoneyManager
     {
         return money;
     }
+
+    public static void SetMoneyCount(int amt)
+    {
+        if (amt < 0)
+        {
+            Debug.LogError("Money cannot be negative");
+            return;
+        }
+        money = amt;
+    }
 }

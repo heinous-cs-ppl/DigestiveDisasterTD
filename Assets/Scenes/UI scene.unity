@@ -4700,7 +4700,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 398097190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b1a0339c2f0e4330aaaaefef5fb7c68, type: 3}
+  m_Script: {fileID: 11500000, guid: f9efed1da53a541f7b53808f0228802b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slowButton: {fileID: 850638785}
@@ -9549,10 +9549,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.12085308
-    y: 0.10612692
-    width: 0.75829387
-    height: 0.7877462
+    x: 0.06462585
+    y: 0.07553059
+    width: 0.8707483
+    height: 0.89887637
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

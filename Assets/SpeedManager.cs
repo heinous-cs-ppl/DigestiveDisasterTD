@@ -1,15 +1,12 @@
 using UnityEngine;
 
-public class slowdown : MonoBehaviour
+public class SpeedManager : MonoBehaviour
 {
     public UnityEngine.UI.Button slowButton;
     public UnityEngine.UI.Button speedButton;
 
     public KeyCode slowKey = KeyCode.Q;
     public KeyCode speedKey = KeyCode.E;
-
-    private bool slowKeyLast = false;
-    private bool speedKeyLast = false;
 
     public void Start()
     {
@@ -19,6 +16,10 @@ public class slowdown : MonoBehaviour
 
     public void Update()
     {
+        if (PauseMenu.paused)
+        {
+            return;
+        }
         if (Input.GetKeyDown(slowKey))
         {
             SlowDown();

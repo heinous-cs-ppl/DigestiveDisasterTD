@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
 {
     // Wave tracking variables
     private static int waves;
-    private static int waveIdx = -1;   // wave number is (waveIdx+1)
+    public static int waveIdx = -1;   // wave number is (waveIdx+1)
     private Wave.WavePart[][] curWaveInfo;
     
     // timer
