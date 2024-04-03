@@ -3190,8 +3190,9 @@ GameObject:
   - component: {fileID: 240840214}
   - component: {fileID: 240840215}
   - component: {fileID: 240840216}
+  - component: {fileID: 240840217}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: StateManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3309,6 +3310,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876f348f4e3241c49a3b7c8bddad3954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &240840217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240840211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9efed1da53a541f7b53808f0228802b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowButton: {fileID: 850638785}
+  speedButton: {fileID: 2057407473}
+  slowKey: 113
+  speedKey: 101
 --- !u!4 &241313634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 126917083961848099, guid: 3f85c3460aefd9e4eaee830989749072, type: 3}
@@ -4692,9 +4709,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 398097192}
-  - component: {fileID: 398097193}
   m_Layer: 0
-  m_Name: SpeedManager
+  m_Name: Speed Button Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4717,22 +4733,6 @@ Transform:
   - {fileID: 2057407471}
   m_Father: {fileID: 971437743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &398097193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398097190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9efed1da53a541f7b53808f0228802b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slowButton: {fileID: 850638785}
-  speedButton: {fileID: 2057407473}
-  slowKey: 113
-  speedKey: 101
 --- !u!1001 &401862785
 PrefabInstance:
   m_ObjectHideFlags: 0
