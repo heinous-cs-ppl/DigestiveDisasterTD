@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class SpeedManager : MonoBehaviour
 {
+    public static SpeedManager instance;
     public UnityEngine.UI.Button slowButton;
     public UnityEngine.UI.Button speedButton;
 
     public KeyCode slowKey = KeyCode.Q;
     public KeyCode speedKey = KeyCode.E;
+
+    public void Awake()
+    {
+        instance = this;
+        Time.timeScale = 1;
+    }
 
     public void Start()
     {
@@ -94,6 +101,7 @@ public class SpeedManager : MonoBehaviour
             Time.timeScale = 0.5f;
         }
     }
+
     public void ToggleSpeedUp()
     {
         if (LevelManager.instance.gameOver)
@@ -113,4 +121,3 @@ public class SpeedManager : MonoBehaviour
         }
     }
 }
-
