@@ -1,46 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine;
 
-public class MachineStudent : Turret {
+public class MachineStudent : Turret
+{
     private bool canAttack = true;
-    protected new void Update() {
+
+    protected new void Update()
+    {
         // Tries to find food to attack
         if (canAttack && target == null)
         {
             FindTarget();
             return;
         }
-
         // this student doesn't rotate
         else
         {
-
             // If an enemy is in range, fire at set rate
             timeUntilFire += Time.deltaTime;
 
-            // If the time until fire is larger then 1/bps 
+            // If the time until fire is larger then 1/bps
             if (canAttack)
             {
-                if(!target.gameObject.GetComponent<EnemyInfo>().isBoss) {
+                if (!target.gameObject.GetComponent<EnemyInfo>().isBoss)
+                {
                     // if not attacking the boss
                     Attack(target.gameObject);
                     target = null;
-                } else {
+                }
+                else
+                {
                     // if the target is the boss
                     // while the boss is in range, deal some dps
                     AttackBoss(target.gameObject);
                     target = null;
                     Debug.Log("Attacking boss");
                 }
-                
             }
         }
     }
 
-    private void Attack(GameObject chyme) {
+    private void Attack(GameObject chyme)
+    {
         // set canAttack to false
         canAttack = false;
 
@@ -50,14 +54,14 @@ public class MachineStudent : Turret {
         int maxPurify = chymousValues.maxPurifyHp;
         int moneyDrop = chymousValues.moneyDrop;
         Destroy(chyme);
-        
+
         // activate start attack animation
         // attack loop animation will automatically play when start animation is done
         anim.SetTrigger("Attack");
 
         // once timer hits some value (related to target's purify hp), give a purified meal
         float cooldown = 0.75f + 0.006f * (maxPurify - currentPurify);
-        
+
         StartCoroutine(AttackCooldown(cooldown, moneyDrop));
     }
 
@@ -70,10 +74,10 @@ public class MachineStudent : Turret {
         // call attack end animation
         anim.SetTrigger("AttackEnd");
         // give player money and purified meal
-        PurifyManager.GainMeal();
+        PurifyManager.instance.GainMeal();
         UIManager.UpdateMealCount();
 
-        MoneyManager.AddMoney(money);
+        MoneyManager.instance.AddMoney(money);
         UIManager.UpdateMoney();
 
         // small delay before attack is allowed
@@ -83,7 +87,8 @@ public class MachineStudent : Turret {
         canAttack = true;
     }
 
-    private void AttackBoss(GameObject boss) {
+    private void AttackBoss(GameObject boss)
+    {
         // start the attack animation
         // call coroutine to deal dps (using purifyDamage in EnemyInfo), checking constantly if the boss is still in range
         // once the boss is out of range, stop the attack animation
@@ -92,7 +97,8 @@ public class MachineStudent : Turret {
         StartCoroutine(DamageBoss(boss));
     }
 
-    private IEnumerator DamageBoss(GameObject boss) {
+    private IEnumerator DamageBoss(GameObject boss)
+    {
         StudentInfo info = gameObject.GetComponent<StudentInfo>();
         float iterationTime = 0.5f;
         float range = info.range;
@@ -102,7 +108,7 @@ public class MachineStudent : Turret {
         {
             boss.GetComponent<EnemyInfo>().takePurifyDamage(info.damage);
             yield return new WaitForSeconds(iterationTime);
-            range = info.range;      // to check if the student gets its range buffed by food
+            range = info.range; // to check if the student gets its range buffed by food
             Debug.Log("Damaged boss");
         }
         anim.SetTrigger("AttackEnd");
@@ -114,7 +120,8 @@ public class MachineStudent : Turret {
         canAttack = true;
     }
 
-    bool BossInRange(Collider2D bossCollider, float range) {
+    bool BossInRange(Collider2D bossCollider, float range)
+    {
         // Check if any colliders are within the specified range of this GameObject
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range);
 

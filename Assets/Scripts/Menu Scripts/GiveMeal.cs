@@ -13,15 +13,15 @@ public class GiveMeal : MonoBehaviour
     void Start()
     {
         foodImage = GameObject.Find("Purify Icon").GetComponent<Image>();
-
     }
+
     public void UsePurifiedMeal()
     {
         // get the currently selected student
         GameObject selected = StudentManager.selected;
 
         // if the player has meals (subtracts a meal if they have one)
-        if (PurifyManager.UseMeal())
+        if (PurifyManager.instance.UseMeal())
         {
             // update the counter on the UI
             UIManager.UpdateMealCount();
@@ -34,7 +34,6 @@ public class GiveMeal : MonoBehaviour
         }
         else
         {
-
             if (flashCoroutine != null)
             {
                 StopCoroutine(flashCoroutine);

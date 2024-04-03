@@ -13,19 +13,27 @@ public class FireStudent : MonoBehaviour
         {
             // if the first round hasn't started, refund the full cost
             // otherwise, refund a fraction of the cost
-            if (Spawner.GetRound() != -1) {
-                MoneyManager.AddMoney((int)(0.5 * selected.GetComponent<StudentInfo>().cost));
-            } else {
-                MoneyManager.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
+            if (Spawner.instance.GetRound() != -1)
+            {
+                MoneyManager.instance.AddMoney(
+                    (int)(0.5 * selected.GetComponent<StudentInfo>().cost)
+                );
             }
-            
+            else
+            {
+                MoneyManager.instance.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
+            }
+
             UIManager.UpdateMoney();
 
             Destroy(selected);
-            Plot plotOfFired = StudentManager.plotOfSelected.GetComponent<Plot>(); 
-            if (selected.GetComponent<StudentInfo>().turret is MachineStudent) 
+            Plot plotOfFired = StudentManager.plotOfSelected.GetComponent<Plot>();
+            if (selected.GetComponent<StudentInfo>().turret is MachineStudent)
             {
-                if (plotOfFired.plotOnLeft) {plotOfFired.plotOnLeft.gameObject.GetComponent<Plot>().student = null;}
+                if (plotOfFired.plotOnLeft)
+                {
+                    plotOfFired.plotOnLeft.gameObject.GetComponent<Plot>().student = null;
+                }
             }
             plotOfFired.student = null;
             StudentManager.Deselect();

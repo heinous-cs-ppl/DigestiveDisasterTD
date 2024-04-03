@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class StudentPlacement : MonoBehaviour
 {
-    [SerializeField] private GameObject student;
-    [SerializeField] private Sprite studentSprite;
+    [SerializeField]
+    private GameObject student;
+
+    [SerializeField]
+    private Sprite studentSprite;
     private GameObject studentPreview;
     private bool canPlace = false;
     private StudentInfo studentInfo;
@@ -19,7 +22,9 @@ public class StudentPlacement : MonoBehaviour
     private GameObject ui;
     private Bounds mapBounds;
     public TextMeshProUGUI studentPrice;
-    [HideInInspector] public static bool studentPlacedOnPlot = false;
+
+    [HideInInspector]
+    public static bool studentPlacedOnPlot = false;
 
     // stuff for range circle
     private static GameObject rangeCircle;
@@ -86,19 +91,25 @@ public class StudentPlacement : MonoBehaviour
                 float range = studentInfo.range;
                 rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
             }
-                
+
             // set the position of the student preview to the cursor's position
-            studentPreview.transform.position = new Vector2(cursorPosition.x + studentInfo.offsetX, cursorPosition.y);
+            studentPreview.transform.position = new Vector2(
+                cursorPosition.x + studentInfo.offsetX,
+                cursorPosition.y
+            );
             // set range circle position to cursor's position
             rangeCircle.transform.position = new Vector2(cursorPosition.x, cursorPosition.y);
 
             if (Input.GetMouseButtonDown(0))
             {
                 // This placement termination happens unless a student is to be placed. Timed to wait for Plot to finish running.
-                if (!studentPlacedOnPlot) { StartCoroutine(StopPlacingStudent()); }
+                if (!studentPlacedOnPlot)
+                {
+                    StartCoroutine(StopPlacingStudent());
+                }
                 else
-                {  // Student was placed, now exit placement mode
-                    MoneyManager.TakeMoney(student.GetComponent<StudentInfo>().cost);
+                { // Student was placed, now exit placement mode
+                    MoneyManager.instance.TakeMoney(student.GetComponent<StudentInfo>().cost);
                     UIManager.UpdateMoney();
                     studentPlacedOnPlot = false;
                     canPlace = false;
@@ -132,7 +143,7 @@ public class StudentPlacement : MonoBehaviour
     // called when the button is clicked
     public void StartPlacementMode()
     {
-        if (MoneyManager.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost)
+        if (MoneyManager.instance.GetMoneyCount() >= student.GetComponent<StudentInfo>().cost)
         {
             canPlace = true;
             StudentManager.placing = true;
@@ -173,3 +184,4 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 }
+

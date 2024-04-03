@@ -2,27 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoneyManager
+public class MoneyManager : MonoBehaviour
 {
-    private static int money = 250;
+    public static MoneyManager instance;
+    private int money = 250;
 
-    public static void AddMoney(int amt)
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void AddMoney(int amt)
     {
         money += amt;
     }
 
-    public static void TakeMoney(int amt)
+    public void TakeMoney(int amt)
     {
         money -= amt;
     }
 
-    public static string GetStringMoneyCount()
+    public string GetStringMoneyCount()
     {
         return money.ToString();
     }
 
-    public static int GetMoneyCount()
+    public int GetMoneyCount()
     {
         return money;
+    }
+
+    public void SetMoneyCount(int amt)
+    {
+        if (amt < 0)
+        {
+            Debug.LogError("Money cannot be negative");
+            return;
+        }
+        money = amt;
     }
 }

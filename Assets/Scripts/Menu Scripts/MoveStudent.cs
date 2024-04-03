@@ -34,10 +34,11 @@ public class MoveStudent : MonoBehaviour
     // Called when button is clicked
     public void SetMoving()
     {
-        if (MoneyManager.GetMoneyCount() >= moveCost || Spawner.waveEnd)
+        if (MoneyManager.instance.GetMoneyCount() >= moveCost || Spawner.instance.waveEnd)
         {
             student = StudentManager.selected;
-            oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>(); ;
+            oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>();
+            ;
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
             info = student.GetComponent<StudentInfo>();
 
@@ -54,13 +55,14 @@ public class MoveStudent : MonoBehaviour
         if (StudentManager.moving)
         {
             // if escape is pressed, terminate moving
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 StudentManager.moving = false;
-                if (studentPreview) Destroy(studentPreview);
+                if (studentPreview)
+                    Destroy(studentPreview);
                 return;
             }
-            
+
             // get cursor position
             Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // round the cursor position to the middle of the tile
@@ -99,7 +101,8 @@ public class MoveStudent : MonoBehaviour
                     // disable moving
                     StudentManager.moving = false;
                     // destroy the preview if it exists
-                    if (studentPreview) Destroy(studentPreview);
+                    if (studentPreview)
+                        Destroy(studentPreview);
                 }
             }
         }
@@ -141,42 +144,68 @@ public class MoveStudent : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         // set the position of the student to the position
-        if (info.turret is MachineStudent)       // Handle Engineer student
+        if (info.turret is MachineStudent) // Handle Engineer student
         {
             Plot leftPlot = null;
-            if (newPlot.gameObject.GetComponent<Plot>().plotOnLeft) {leftPlot = newPlot.gameObject.GetComponent<Plot>().plotOnLeft.gameObject.GetComponent<Plot>();}
+            if (newPlot.gameObject.GetComponent<Plot>().plotOnLeft)
+            {
+                leftPlot = newPlot
+                    .gameObject.GetComponent<Plot>()
+                    .plotOnLeft.gameObject.GetComponent<Plot>();
+            }
             Plot oldLeftPlot = null;
-            if (oldPlot.plotOnLeft) {oldLeftPlot = oldPlot.plotOnLeft.gameObject.GetComponent<Plot>();}
+            if (oldPlot.plotOnLeft)
+            {
+                oldLeftPlot = oldPlot.plotOnLeft.gameObject.GetComponent<Plot>();
+            }
             if (leftPlot)
             {
                 // Handle moving right one tile
-                if (leftPlot == oldPlot) 
+                if (leftPlot == oldPlot)
                 {
                     Debug.Log("right one tile");
-                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
+                    student.transform.position = new Vector2(
+                        newPlot.position.x + info.offsetX,
+                        newPlot.position.y
+                    );
                     leftPlot.student = LevelManager.instance.machineRepresentation;
-                    if (oldLeftPlot) {oldLeftPlot.student = null;}
+                    if (oldLeftPlot)
+                    {
+                        oldLeftPlot.student = null;
+                    }
                 }
                 else if (oldLeftPlot && oldLeftPlot.transform == newPlot)
                 {
                     Debug.Log("left one tile");
-                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
+                    student.transform.position = new Vector2(
+                        newPlot.position.x + info.offsetX,
+                        newPlot.position.y
+                    );
                     leftPlot.student = LevelManager.instance.machineRepresentation;
                     oldPlot.student = null;
                 }
                 else
                 {
                     Debug.Log("eee");
-                    student.transform.position = new Vector2(newPlot.position.x + info.offsetX, newPlot.position.y);
+                    student.transform.position = new Vector2(
+                        newPlot.position.x + info.offsetX,
+                        newPlot.position.y
+                    );
                     leftPlot.student = LevelManager.instance.machineRepresentation;
-                    if (oldLeftPlot) {oldLeftPlot.student = null;}
+                    if (oldLeftPlot)
+                    {
+                        oldLeftPlot.student = null;
+                    }
                     oldPlot.student = null;
                 }
             }
             else
             {
                 student.transform.position = newPlot.position;
-                if (oldLeftPlot) {oldLeftPlot.student = null;}
+                if (oldLeftPlot)
+                {
+                    oldLeftPlot.student = null;
+                }
                 oldPlot.student = null;
             }
         }
@@ -186,23 +215,29 @@ public class MoveStudent : MonoBehaviour
             oldPlot.student = null;
         }
 
-        if(newPlot.GetComponent<Plot>().aboveTable) {
+        if (newPlot.GetComponent<Plot>().aboveTable)
+        {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
             SpriteRenderer[] chymous = student.GetComponentsInChildren<SpriteRenderer>();
-            foreach(SpriteRenderer chyme in chymous) {
+            foreach (SpriteRenderer chyme in chymous)
+            {
                 chyme.sortingLayerName = "Students above tables";
             }
-        } else {
+        }
+        else
+        {
             student.GetComponent<SpriteRenderer>().sortingLayerName = "Students behind tables";
             SpriteRenderer[] chymous = student.GetComponentsInChildren<SpriteRenderer>();
-            foreach(SpriteRenderer chyme in chymous) {
+            foreach (SpriteRenderer chyme in chymous)
+            {
                 chyme.sortingLayerName = "Students behind tables";
             }
         }
 
         // add cost for moving student here unless between rounds
-        if (!Spawner.waveEnd) {
-            MoneyManager.TakeMoney(moveCost);
+        if (!Spawner.instance.waveEnd)
+        {
+            MoneyManager.instance.TakeMoney(moveCost);
             UIManager.UpdateMoney();
         }
 
