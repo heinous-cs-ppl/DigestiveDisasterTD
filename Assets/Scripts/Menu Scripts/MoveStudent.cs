@@ -8,7 +8,7 @@ public class MoveStudent : MonoBehaviour
     public static MoveStudent instance;
 
     private Plot oldPlot;
-    private GameObject studentPreview;
+    [HideInInspector] public GameObject studentPreview;
     private GameObject student;
     private Sprite studentSprite;
     public LayerMask studentLayer;
