@@ -128,13 +128,14 @@ public class Plot : MonoBehaviour
         {
             Debug.Log("Released drag over: " + StudentManager.draggingOver);
             StudentManager.mouseDragging = false;
+            Plot plotDraggedOver = StudentManager.draggingOver;
 
-            if (StudentManager.draggingOver == this)   // Same time, treat as just a click
+            if (plotDraggedOver == this)   // Same time, treat as just a click
             {
                 StudentManager.moving = false;
                 Destroy(MoveStudent.instance.studentPreview);
             }
-            else if (StudentManager.draggingOver == null)   // Do the move if released over a plot
+            else if (plotDraggedOver == null)   // Do the move if released over a plot
             {
                 StudentManager.moving = false;
                 StudentManager.Deselect();
@@ -143,8 +144,18 @@ public class Plot : MonoBehaviour
             else
             {
                 Debug.Log("try to drag movey");
-                MoveStudent.instance.Place(StudentManager.draggingOver.transform);
-                StudentManager.draggingOver.student = selectedStu;
+                if (!plotDraggedOver.student)
+                {
+                    MoveStudent.instance.Place(StudentManager.draggingOver.transform);
+                    StudentManager.draggingOver.student = selectedStu;
+                }
+                // if (plotDraggedOver.student && plotDraggedOver.student == LevelManager.instance.machineRepresentation) {int i = 1;}
+                else
+                {
+                    StudentManager.moving = false;
+                    StudentManager.Deselect();
+                    Destroy(MoveStudent.instance.studentPreview);  
+                }
             }
         }
     }
