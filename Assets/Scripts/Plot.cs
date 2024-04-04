@@ -69,7 +69,6 @@ public class Plot : MonoBehaviour
             if (selectedStu.GetComponent<StudentInfo>().turret is MachineStudent)
             {
                 if (this.student && this.student != LevelManager.instance.machineRepresentation && (this.student.GetComponent<StudentInfo>().turret is MachineStudent)) {return;}    // Return if moving onto self
-                // Turret studentOnLeftType = this.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret;
                 if (plotOnLeft && plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(this.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
                 {
                     Debug.Log("no movey");
@@ -93,7 +92,6 @@ public class Plot : MonoBehaviour
         else if (!StudentManager.placing && this.student && this.student != LevelManager.instance.machineRepresentation)   
         {
             Debug.Log("Started drag over: " + this);
-            // StudentManager.Select(this.student);
             StudentManager.mouseDragging = true;
             StartCoroutine(DelayAndSetMoving());       // Preview updates in MoveStudent
         }
@@ -120,6 +118,12 @@ public class Plot : MonoBehaviour
     /* Mouse was held down, and gets released over this plot */
     private void OnMouseUp()
     {
+        StartCoroutine(DelayAndHandleMouseUp());
+    }
+
+    private IEnumerator DelayAndHandleMouseUp()     // Makes sure DelayAndSetMoving() can finish running to avoid issues on fast clicks
+    {
+        yield return new WaitForSeconds(0.05f);
         if (StudentManager.mouseDragging)
         {
             Debug.Log("Released drag over: " + StudentManager.draggingOver);
@@ -141,7 +145,6 @@ public class Plot : MonoBehaviour
                 Debug.Log("try to drag movey");
                 MoveStudent.instance.Place(StudentManager.draggingOver.transform);
                 StudentManager.draggingOver.student = selectedStu;
-                // StudentManager.moving = false;
             }
         }
     }
@@ -152,14 +155,6 @@ public class Plot : MonoBehaviour
         plot = this.transform;
         RaycastHit2D plotHit = Physics2D.Raycast((Vector2)this.transform.position + Vector2.left, Vector2.left, 1f, LevelManager.instance.plotLayer);
         plotOnLeft = plotHit.transform;
-        // if (plotHit) 
-        // {
-        //     plotOnLeft = plotHit.transform;
-        // }
-        // else
-        // {
-        //     plotOnLeft = null;
-        // }
         startColor = plotSR.color;
     }
 
