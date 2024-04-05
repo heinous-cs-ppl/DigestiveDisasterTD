@@ -137,27 +137,54 @@ public class Plot : MonoBehaviour
             }
             else if (plotDraggedOver == null)   // Do the move if released over a plot
             {
-                StudentManager.moving = false;
-                StudentManager.Deselect();
-                Destroy(MoveStudent.instance.studentPreview);    
+                BadDragSoEndDragMove();
             }
             else
             {
                 Debug.Log("try to drag movey");
-                if (!plotDraggedOver.student)
+                if (this.student.GetComponent<StudentInfo>().turret is MachineStudent)    // Handle drag moving a machine student
+                {
+                    if (!plotDraggedOver.student && !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student) 
+                    {
+                        MoveStudent.instance.Place(StudentManager.draggingOver.transform);
+                        StudentManager.draggingOver.student = selectedStu;
+                    }
+                    // Allow a machine student to be dragged one tile left, but don't let other machine students be moved onto machine tiles not belonging to them
+                    //      also make sure when moving a machine student, their machine does not get moved on top of another student
+                    else if (this.plotOnLeft == plotDraggedOver.transform && !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student) 
+                    {
+                        MoveStudent.instance.Place(StudentManager.draggingOver.transform);
+                        StudentManager.draggingOver.student = selectedStu;
+                    }
+                    // Allow a machine student to be dragged one tile right
+                    else if (!plotDraggedOver.student && this.transform == plotDraggedOver.plotOnLeft)
+                    {
+                        MoveStudent.instance.Place(StudentManager.draggingOver.transform);
+                        StudentManager.draggingOver.student = selectedStu;
+                    }
+                    else
+                    {
+                        BadDragSoEndDragMove();   
+                    }
+                }
+                else if (!plotDraggedOver.student)      
                 {
                     MoveStudent.instance.Place(StudentManager.draggingOver.transform);
                     StudentManager.draggingOver.student = selectedStu;
                 }
-                // if (plotDraggedOver.student && plotDraggedOver.student == LevelManager.instance.machineRepresentation) {int i = 1;}
                 else
                 {
-                    StudentManager.moving = false;
-                    StudentManager.Deselect();
-                    Destroy(MoveStudent.instance.studentPreview);  
+                    BadDragSoEndDragMove();
                 }
             }
         }
+    }
+
+    private void BadDragSoEndDragMove()
+    {
+        StudentManager.moving = false;
+        StudentManager.Deselect();
+        Destroy(MoveStudent.instance.studentPreview);  
     }
 
     // Start is called before the first frame update
