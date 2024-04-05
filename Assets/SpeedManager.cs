@@ -23,7 +23,7 @@ public class SpeedManager : MonoBehaviour
 
     public void Update()
     {
-        if (PauseMenu.paused)
+        if (PauseManager.paused)
         {
             return;
         }
