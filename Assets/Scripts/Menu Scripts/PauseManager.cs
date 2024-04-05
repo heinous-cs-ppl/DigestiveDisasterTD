@@ -7,6 +7,7 @@ public class PauseManager : MonoBehaviour
 {
     private float prevSpeed;
     public static bool paused = false;
+    public GameObject pauseMenu;
     private Button[] allButtons;
 
     public void Start()
@@ -23,6 +24,7 @@ public class PauseManager : MonoBehaviour
         {
             button.interactable = false;
         }
+        pauseMenu.SetActive(true);
     }
 
     public void Resume()
@@ -33,6 +35,7 @@ public class PauseManager : MonoBehaviour
         {
             button.interactable = true;
         }
+        pauseMenu.SetActive(false);
     }
 
     public void Menu()
