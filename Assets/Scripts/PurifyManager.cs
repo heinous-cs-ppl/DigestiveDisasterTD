@@ -8,6 +8,8 @@ public class PurifyManager : MonoBehaviour
     public static PurifyManager instance;
     private int purifiedMealCount = 0;
 
+    public AudioClip mealSound;
+
     private void Awake()
     {
         instance = this;
@@ -24,6 +26,10 @@ public class PurifyManager : MonoBehaviour
         {
             // if the player has purified meals, allow them to use a meal
             purifiedMealCount--;
+
+            // play sound effect for feeding a meal
+            PlaySound.instance.SFX(mealSound);
+            
             return true;
         }
         // if the player doesn't have purified meals, don't allow them to use a meal

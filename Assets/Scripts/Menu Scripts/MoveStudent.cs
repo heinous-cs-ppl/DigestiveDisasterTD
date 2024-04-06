@@ -23,6 +23,8 @@ public class MoveStudent : MonoBehaviour
     private int numberOfFlashes = 2;
     private Image moneyImage;
 
+    public AudioClip placeSound;
+
     void Start()
     {
         instance = this;
@@ -39,7 +41,6 @@ public class MoveStudent : MonoBehaviour
         {
             student = StudentManager.selected;
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>();
-            ;
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
 
             StudentManager.moving = true;
@@ -113,6 +114,9 @@ public class MoveStudent : MonoBehaviour
     {
         // Let Update() in StudentManager.cs run first, or student will not be selected after move.
         StartCoroutine(DelayAndFinishMove(newPlot));
+
+        // play sound effect for placing student
+        PlaySound.instance.SFX(placeSound);
     }
 
     IEnumerator FlashSprite()

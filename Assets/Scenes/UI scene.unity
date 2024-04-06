@@ -3557,6 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876f348f4e3241c49a3b7c8bddad3954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mealSound: {fileID: 8300000, guid: 17c6eb49ca86fee4287868672d5764e5, type: 3}
 --- !u!114 &240840217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14282,6 +14283,7 @@ MonoBehaviour:
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
+  placeSound: {fileID: 8300000, guid: 4eb890cfae144a34cbf6e97ea6629818, type: 3}
 --- !u!114 &1084492748
 MonoBehaviour:
   m_ObjectHideFlags: 0
