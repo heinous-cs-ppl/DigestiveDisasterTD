@@ -223,8 +223,9 @@ public class MoveStudent : MonoBehaviour
             }
             else
             {
+                Debug.Log("no left plot");
                 student.transform.position = newPlot.position;
-                if (oldLeftPlot)
+                if (oldLeftPlot && oldLeftPlot.transform != newPlot)
                 {
                     oldLeftPlot.student = null;
                 }

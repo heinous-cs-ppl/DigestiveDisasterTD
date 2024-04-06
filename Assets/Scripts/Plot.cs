@@ -113,6 +113,7 @@ public class Plot : MonoBehaviour
             if (plotHit) {StudentManager.draggingOver = plotHit.transform.gameObject.GetComponent<Plot>();}
             // Debug.Log("Dragging over: " + StudentManager.draggingOver);
         }
+        Debug.Log("dragging");
     }
 
     /* Mouse was held down, and gets released over this plot */
@@ -141,17 +142,43 @@ public class Plot : MonoBehaviour
             }
             else
             {
+                // if (selectedStu.GetComponent<StudentInfo>().turret is MachineStudent)
+                // {
+                //     if (this.student && this.student != LevelManager.instance.machineRepresentation && (this.student.GetComponent<StudentInfo>().turret is MachineStudent)) {return;}    // Return if moving onto self
+                //     if (plotOnLeft && plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(this.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
+                //     {
+                //         Debug.Log("no movey");
+                //         return;
+                //     }
+                //     // Allow moving of machine by one tile to the left
+                //     if (this.student == LevelManager.instance.machineRepresentation )
+                //     {
+                //         this.student = selectedStu;
+                //         MoveStudent.instance.Place(plot);
+                //         return;
+                //     }
+                // }
+                // if (this.student == null)
+                // {
+                //     this.student = selectedStu;
+                //     MoveStudent.instance.Place(plot);
+                // }
                 Debug.Log("try to drag movey");
                 if (this.student.GetComponent<StudentInfo>().turret is MachineStudent)    // Handle drag moving a machine student
                 {
-                    if (!plotDraggedOver.student && !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student) 
+                    // if (plotDraggedOver.plotOnLeft && plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
+                    // {
+                    //     Debug.Log("no movey");
+                    //     return;
+                    // }
+                    if (!plotDraggedOver.student && (!plotDraggedOver.plotOnLeft || !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student)) 
                     {
                         MoveStudent.instance.Place(StudentManager.draggingOver.transform);
                         StudentManager.draggingOver.student = selectedStu;
                     }
                     // Allow a machine student to be dragged one tile left, but don't let other machine students be moved onto machine tiles not belonging to them
                     //      also make sure when moving a machine student, their machine does not get moved on top of another student
-                    else if (this.plotOnLeft == plotDraggedOver.transform && !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student) 
+                    else if (this.plotOnLeft == plotDraggedOver.transform && ((plotDraggedOver.plotOnLeft && !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student) || !plotDraggedOver.plotOnLeft)) 
                     {
                         MoveStudent.instance.Place(StudentManager.draggingOver.transform);
                         StudentManager.draggingOver.student = selectedStu;
