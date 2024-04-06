@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI moneyCount;
 
     private GameObject studentHireUI;
+    private Button[] allButtons;
     private Slider studentHireUIStudentHP;
     private Slider studentHireUIStudentRange;
     private Slider studentHireUIStudentDamage;
@@ -49,6 +50,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        allButtons = FindObjectsOfType<Button>();
         // initialize the purify counter in the UI to 0
         purifyCount = GameObject.Find("Purify Count").GetComponent<TextMeshProUGUI>();
         UpdateMealCount();
@@ -104,6 +106,16 @@ public class UIManager : MonoBehaviour
         path_012 = GameObject.Find("path_012");
 
         HidePath();
+    }
+
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0;
+        foreach (Button button in allButtons)
+        {
+            button.interactable = false;
+        }
     }
 
     public void UpdateMealCount()

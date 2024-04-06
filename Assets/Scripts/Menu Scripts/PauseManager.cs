@@ -52,6 +52,10 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (LevelManager.instance.gameOver)
+            {
+                return;
+            }
             if (paused)
             {
                 Resume();
