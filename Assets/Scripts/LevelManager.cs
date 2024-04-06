@@ -34,6 +34,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int studentsDead = 0;
     public int deathLimit = 10;
+    [SerializeField] private const int VACUOUS_STUDENT_LIMIT = 20;
+    public int vacuousAlive = 0;
 
     public bool disableGameOver = false;
     public bool gameOver = false;
@@ -147,7 +149,8 @@ public class LevelManager : MonoBehaviour
 
             // Randomly select a how many plots plots will get vacuous students
             // int numVac = Random.Range(2, Mathf.Min(6, free + 1));    // 2 to 5 vacuous students can come at most
-            int numVac = Mathf.Min(3, free); // spawns 3 students, unless there are less than 3 free plots
+            int allowableVac = VACUOUS_STUDENT_LIMIT - vacuousAlive;
+            int numVac = Mathf.Min(Mathf.Min(3, free), allowableVac); // spawns 3 students, unless there are less than 3 free plots or too many vacuous students
             int[] vacPlotIdxs = new int[numVac];
             Plot[] vacPlots = new Plot[numVac];
 
@@ -200,27 +203,31 @@ public class LevelManager : MonoBehaviour
 
     public void SpawnVacuousStudents()
     {
-        // Assign vacuous students to plots
-        Plot[] vac = AssignVacuousStudents();
-
-        // Spawn the vacuous students on the plots if there is space
-        if (vac != null)
+        if (vacuousAlive < VACUOUS_STUDENT_LIMIT)
         {
-            foreach (Plot plot in vac)
-            {
-                Vector2 studentPosition = plot.transform.position;
-                GameObject placed = Instantiate(
-                    vacuousStudent,
-                    studentPosition,
-                    Quaternion.identity
-                );
+            // Assign vacuous students to plots
+            Plot[] vac = AssignVacuousStudents();
 
-                // Giving name of student in order for healing turret bullet collision to be able to differentiate between the different students
-                placed.name = "Vacuous" + studentCount;
-                studentCount++;
-                if (plot.GetComponent<Plot>().aboveTable)
-                    placed.GetComponent<SpriteRenderer>().sortingLayerName =
-                        "Students above tables";
+            // Spawn the vacuous students on the plots if there is space
+            if (vac != null)
+            {
+                foreach (Plot plot in vac)
+                {
+                    Vector2 studentPosition = plot.transform.position;
+                    GameObject placed = Instantiate(
+                        vacuousStudent,
+                        studentPosition,
+                        Quaternion.identity
+                    );
+                    vacuousAlive++;
+
+                    // Giving name of student in order for healing turret bullet collision to be able to differentiate between the different students
+                    placed.name = "Vacuous" + studentCount;
+                    studentCount++;
+                    if (plot.GetComponent<Plot>().aboveTable)
+                        placed.GetComponent<SpriteRenderer>().sortingLayerName =
+                            "Students above tables";
+                }
             }
         }
     }

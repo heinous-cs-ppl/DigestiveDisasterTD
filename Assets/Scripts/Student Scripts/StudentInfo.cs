@@ -124,6 +124,8 @@ public class StudentInfo : MonoBehaviour
         Destroy(gameObject);
         plot.student = null;
 
+        if (!this.turret) {LevelManager.instance.vacuousAlive--;}   // Vacuous students have no turret
+
         LevelManager.instance.studentsDead += 1;
         UIManager.instance.UpdateStudentsDeadText();
         if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit)
