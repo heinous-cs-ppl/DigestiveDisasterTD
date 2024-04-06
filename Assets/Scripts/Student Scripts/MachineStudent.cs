@@ -7,6 +7,7 @@ using UnityEngine;
 public class MachineStudent : Turret
 {
     private bool canAttack = true;
+    public AudioClip attackSound;
 
     protected new void Update()
     {
@@ -58,6 +59,9 @@ public class MachineStudent : Turret
         // activate start attack animation
         // attack loop animation will automatically play when start animation is done
         anim.SetTrigger("Attack");
+
+        // play attack sound
+        PlaySound.instance.SFX(attackSound);
 
         // once timer hits some value (related to target's purify hp), give a purified meal
         float cooldown = 0.75f + 0.006f * (maxPurify - currentPurify);

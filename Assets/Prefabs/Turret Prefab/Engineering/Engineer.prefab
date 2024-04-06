@@ -284,6 +284,7 @@ MonoBehaviour:
   spriteRotation: 0
   rotateBullet: 0
   anim: {fileID: 2688338887147868177}
+  attackSound: {fileID: 8300000, guid: a70242d2e0f8810499c4089eb3969c5c, type: 3}
 --- !u!212 &4712276935845045019
 SpriteRenderer:
   m_ObjectHideFlags: 0
