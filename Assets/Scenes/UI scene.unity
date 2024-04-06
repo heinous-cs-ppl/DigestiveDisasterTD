@@ -3438,6 +3438,7 @@ GameObject:
   - component: {fileID: 240840216}
   - component: {fileID: 240840217}
   - component: {fileID: 240840218}
+  - component: {fileID: 240840219}
   m_Layer: 0
   m_Name: StateManager
   m_TagString: Untagged
@@ -3590,6 +3591,22 @@ MonoBehaviour:
   pauseMenu: {fileID: 962482821}
   slow: {fileID: 850638785}
   fast: {fileID: 2057407473}
+--- !u!114 &240840219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240840211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691ca320bf0634252b4ee57c7af5fe21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 551720937}
+  musicSlider: {fileID: 1023672721}
+  sfxSource: {fileID: 1600030326}
+  sfxSlider: {fileID: 1927789990}
 --- !u!4 &241313634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 126917083961848099, guid: 3f85c3460aefd9e4eaee830989749072, type: 3}
@@ -13541,7 +13558,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1023672719}
   - component: {fileID: 1023672721}
-  - component: {fileID: 1023672720}
   m_Layer: 5
   m_Name: music slider
   m_TagString: Untagged
@@ -13572,18 +13588,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -220.83}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1023672720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023672718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef8bf3fe98bb62145a32287d133496e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1023672721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13635,8 +13639,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1023672720}
-        m_TargetAssemblyTypeName: MusicVolume, Assembly-CSharp
+      - m_Target: {fileID: 240840219}
+        m_TargetAssemblyTypeName: VolumeManager, Assembly-CSharp
         m_MethodName: UpdateMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -24429,7 +24433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1927789988}
   - component: {fileID: 1927789990}
-  - component: {fileID: 1927789989}
   m_Layer: 5
   m_Name: SFX slider
   m_TagString: Untagged
@@ -24460,18 +24463,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -277.7}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1927789989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927789987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7ae27d11c0896b4ca50a7b587dd3b16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1927789990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24523,8 +24514,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1927789989}
-        m_TargetAssemblyTypeName: SFXVolume, Assembly-CSharp
+      - m_Target: {fileID: 240840219}
+        m_TargetAssemblyTypeName: VolumeManager, Assembly-CSharp
         m_MethodName: UpdateSFXVolume
         m_Mode: 1
         m_Arguments:
