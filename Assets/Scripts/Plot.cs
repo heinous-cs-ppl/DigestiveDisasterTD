@@ -69,20 +69,54 @@ public class Plot : MonoBehaviour
             if (selectedStu.GetComponent<StudentInfo>().turret is MachineStudent)
             {
                 if (this.student && this.student != LevelManager.instance.machineRepresentation && (this.student.GetComponent<StudentInfo>().turret is MachineStudent)) {return;}    // Return if moving onto self
-                if (plotOnLeft && plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(this.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
+                // Left one tile case
+                if (this.student && this.transform == StudentManager.plotOfSelected.GetComponent<Plot>().plotOnLeft)
                 {
-                    Debug.Log("no movey");
-                    return;
+                    if (this.plotOnLeft && !this.plotOnLeft.gameObject.GetComponent<Plot>().student)
+                    {
+                        Debug.Log("left move");
+                        this.student = selectedStu;
+                        MoveStudent.instance.Place(plot);
+                    }
+                    else if (!this.plotOnLeft)
+                    {
+                        Debug.Log("left move to left edge");
+                        this.student = selectedStu;
+                        MoveStudent.instance.Place(plot);
+                    }
                 }
-                // Allow moving of machine by one tile to the left
-                if (this.student == LevelManager.instance.machineRepresentation )
+                // Right one tile case
+                else if (!this.student && this.plotOnLeft == StudentManager.plotOfSelected.transform)
                 {
+                    Debug.Log("right move");
                     this.student = selectedStu;
                     MoveStudent.instance.Place(plot);
-                    return;
+                }
+                // Other valid moves
+                else if (!this.student)
+                {
+                    if (!this.plotOnLeft)    // Left edge of table 
+                    {
+                        this.student = selectedStu;
+                        MoveStudent.instance.Place(plot);
+                    }
+                    else if (this.plotOnLeft && !this.plotOnLeft.gameObject.GetComponent<Plot>().student)
+                    {
+                        Debug.Log("general move");
+                        this.student = selectedStu;
+                        MoveStudent.instance.Place(plot);
+                    }
+                    else
+                    {
+                        Debug.Log("no movey - student on left");
+                    }
+                }
+                else
+                {
+                    Debug.Log("no movey - student here");
                 }
             }
-            if (this.student == null)
+            else if (this.student == null)
             {
                 this.student = selectedStu;
                 MoveStudent.instance.Place(plot);
@@ -113,7 +147,7 @@ public class Plot : MonoBehaviour
             if (plotHit) {StudentManager.draggingOver = plotHit.transform.gameObject.GetComponent<Plot>();}
             // Debug.Log("Dragging over: " + StudentManager.draggingOver);
         }
-        Debug.Log("dragging");
+        // Debug.Log("dragging");
     }
 
     /* Mouse was held down, and gets released over this plot */
@@ -142,35 +176,9 @@ public class Plot : MonoBehaviour
             }
             else
             {
-                // if (selectedStu.GetComponent<StudentInfo>().turret is MachineStudent)
-                // {
-                //     if (this.student && this.student != LevelManager.instance.machineRepresentation && (this.student.GetComponent<StudentInfo>().turret is MachineStudent)) {return;}    // Return if moving onto self
-                //     if (plotOnLeft && plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(this.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
-                //     {
-                //         Debug.Log("no movey");
-                //         return;
-                //     }
-                //     // Allow moving of machine by one tile to the left
-                //     if (this.student == LevelManager.instance.machineRepresentation )
-                //     {
-                //         this.student = selectedStu;
-                //         MoveStudent.instance.Place(plot);
-                //         return;
-                //     }
-                // }
-                // if (this.student == null)
-                // {
-                //     this.student = selectedStu;
-                //     MoveStudent.instance.Place(plot);
-                // }
                 Debug.Log("try to drag movey");
                 if (this.student.GetComponent<StudentInfo>().turret is MachineStudent)    // Handle drag moving a machine student
                 {
-                    // if (plotDraggedOver.plotOnLeft && plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student != null && (!(plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student.GetComponent<StudentInfo>().turret is MachineStudent)))
-                    // {
-                    //     Debug.Log("no movey");
-                    //     return;
-                    // }
                     if (!plotDraggedOver.student && (!plotDraggedOver.plotOnLeft || !plotDraggedOver.plotOnLeft.gameObject.GetComponent<Plot>().student)) 
                     {
                         MoveStudent.instance.Place(StudentManager.draggingOver.transform);
