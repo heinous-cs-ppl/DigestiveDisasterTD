@@ -110,7 +110,7 @@ public class StudentPlacement : MonoBehaviour
                 else
                 { // Student was placed, now exit placement mode
                     MoneyManager.instance.TakeMoney(student.GetComponent<StudentInfo>().cost);
-                    UIManager.UpdateMoney();
+                    UIManager.instance.UpdateMoney();
                     studentPlacedOnPlot = false;
                     canPlace = false;
                     // StudentManager.placing = false;
@@ -157,7 +157,7 @@ public class StudentPlacement : MonoBehaviour
         StudentManager.Deselect();
         StudentManager.selected = student;
         // show UI for hiring a student
-        UIManager.ShowStudentHiringUI(student);
+        UIManager.instance.ShowStudentHiringUI(student);
     }
 
     IEnumerator FlashSprite()
@@ -184,4 +184,3 @@ public class StudentPlacement : MonoBehaviour
         }
     }
 }
-

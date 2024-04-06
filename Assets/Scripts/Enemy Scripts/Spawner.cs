@@ -79,7 +79,7 @@ public class Spawner : MonoBehaviour
             nextWaveButton.interactable = false;
             roundAddMoney = true;
 
-            UIManager.HidePath();
+            UIManager.instance.HidePath();
 
             // Get new wave information
             waveIdx++;
@@ -252,7 +252,7 @@ public class Spawner : MonoBehaviour
 
             // get a list of every spawnpoint's position
             spawnpoints = LevelManager.instance.spawnObjTransforms;
-            UIManager.UpdateMove(0);
+            UIManager.instance.UpdateMove(0);
             ShowPath();
         }
     }
@@ -386,7 +386,7 @@ public class Spawner : MonoBehaviour
         // if (!anySpawning && waveIdx < (waves - 1) && roundAddMoney) {
         //     nextWaveButton.interactable = true;
         //     MoneyManager.AddMoney(NextWave.waveMoney);
-        //     UIManager.UpdateMoney();
+        //     UIManager.instance.UpdateMoney();
         //     roundAddMoney = false;
         // }
 
@@ -414,10 +414,10 @@ public class Spawner : MonoBehaviour
             waveEnd = true;
             nextWaveButton.interactable = true;
             Debug.Log("wave ended");
-            UIManager.UpdateMove(0);
+            UIManager.instance.UpdateMove(0);
             LevelManager.instance.SpawnVacuousStudents();
             MoneyManager.instance.AddMoney(NextWave.waveMoney);
-            UIManager.UpdateMoney();
+            UIManager.instance.UpdateMoney();
             ShowPath();
         }
         else if (isBossWave && !bossAlive && !enemiesAlive && !waveEnd)
@@ -426,10 +426,10 @@ public class Spawner : MonoBehaviour
             waveEnd = true;
             nextWaveButton.interactable = true;
             Debug.Log("boss wave ended");
-            UIManager.UpdateMove(0);
+            UIManager.instance.UpdateMove(0);
             LevelManager.instance.SpawnVacuousStudents();
             MoneyManager.instance.AddMoney(NextWave.waveMoney);
-            UIManager.UpdateMoney();
+            UIManager.instance.UpdateMoney();
             ShowPath();
 
             // reset boss related fields
@@ -521,7 +521,7 @@ public class Spawner : MonoBehaviour
         }
 
         // show the path of the next wave depending on where the enemies are spawning
-        UIManager.ShowPath(spawnpoint0, spawnpoint1, spawnpoint2);
+        UIManager.instance.ShowPath(spawnpoint0, spawnpoint1, spawnpoint2);
     }
 }
 

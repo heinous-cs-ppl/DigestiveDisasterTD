@@ -75,10 +75,10 @@ public class MachineStudent : Turret
         anim.SetTrigger("AttackEnd");
         // give player money and purified meal
         PurifyManager.instance.GainMeal();
-        UIManager.UpdateMealCount();
+        UIManager.instance.UpdateMealCount();
 
         MoneyManager.instance.AddMoney(money);
-        UIManager.UpdateMoney();
+        UIManager.instance.UpdateMoney();
 
         // small delay before attack is allowed
         yield return new WaitForSeconds(0.1f);

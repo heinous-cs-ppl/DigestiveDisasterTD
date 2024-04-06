@@ -6,50 +6,56 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private static GameObject studentSelectUI;
-    private static Slider studentSelectUIStudentHP;
-    private static Slider studentSelectUIStudentRange;
-    private static Slider studentSelectUIStudentDamage;
-    private static Slider studentSelectUIStudentBPS;
-    private static TextMeshProUGUI purifyCount;
-    private static TextMeshProUGUI moneyCount;
+    public static UIManager instance;
+    private GameObject studentSelectUI;
+    private Slider studentSelectUIStudentHP;
+    private Slider studentSelectUIStudentRange;
+    private Slider studentSelectUIStudentDamage;
+    private Slider studentSelectUIStudentBPS;
+    private TextMeshProUGUI purifyCount;
+    private TextMeshProUGUI moneyCount;
 
-    private static GameObject studentHireUI;
-    private static Slider studentHireUIStudentHP;
-    private static Slider studentHireUIStudentRange;
-    private static Slider studentHireUIStudentDamage;
-    private static Slider studentHireUIStudentBPS;
-    private static StudentInfo studentHireUIStudentInfo;
-    private static TextMeshProUGUI studentHireUIDescription;
+    private GameObject studentHireUI;
+    private Slider studentHireUIStudentHP;
+    private Slider studentHireUIStudentRange;
+    private Slider studentHireUIStudentDamage;
+    private Slider studentHireUIStudentBPS;
+    private StudentInfo studentHireUIStudentInfo;
+    private TextMeshProUGUI studentHireUIDescription;
 
-    private static GameObject fireButton;
-    private static RectTransform moveButton;
+    private GameObject fireButton;
+    private RectTransform moveButton;
 
-    private static TextMeshProUGUI gameOver;
+    private TextMeshProUGUI gameOver;
 
-    private static TextMeshProUGUI studentsDeadText;
-    private static TextMeshProUGUI roundText;
+    private TextMeshProUGUI studentsDeadText;
+    private TextMeshProUGUI roundText;
 
-    private static TextMeshProUGUI moveStudentText;
+    private TextMeshProUGUI moveStudentText;
 
-    private static GameObject path_0;
-    private static GameObject path_1;
-    private static GameObject path_2;
-    private static GameObject path_01;
-    private static GameObject path_12;
-    private static GameObject path_02;
-    private static GameObject path_012;
-    private static TextMeshProUGUI fireText;
+    private GameObject path_0;
+    private GameObject path_1;
+    private GameObject path_2;
+    private GameObject path_01;
+    private GameObject path_12;
+    private GameObject path_02;
+    private GameObject path_012;
+    private TextMeshProUGUI fireText;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
         // initialize the purify counter in the UI to 0
         purifyCount = GameObject.Find("Purify Count").GetComponent<TextMeshProUGUI>();
-        UIManager.UpdateMealCount();
+        UpdateMealCount();
 
         // initialize the money counter in the UI to the starting amount of money
         moneyCount = GameObject.Find("Money Count").GetComponent<TextMeshProUGUI>();
-        UIManager.UpdateMoney();
+        UpdateMoney();
 
         // get the fire and move buttons
         fireButton = GameObject.Find("Fire Button");
@@ -65,7 +71,7 @@ public class UIManager : MonoBehaviour
 
         // hide the student selected UI
         studentSelectUI = GameObject.Find("Student Menu BG");
-        UIManager.HideStudentSelectedUI();
+        HideStudentSelectedUI();
 
         // initialize and hide the student hiring UI and related fields
         studentHireUI = GameObject.Find("Student Hire BG");
@@ -78,10 +84,10 @@ public class UIManager : MonoBehaviour
         // get the student description object
         studentHireUIDescription = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();
 
-        UIManager.HideStudentHiringUI();
+        HideStudentHiringUI();
 
         gameOver = GameObject.Find("Game Over").GetComponent<TextMeshProUGUI>();
-        UIManager.HideGameOverUI();
+        HideGameOverUI();
 
         // get students dead text
         studentsDeadText = GameObject.Find("Students Dead").GetComponent<TextMeshProUGUI>();
@@ -103,17 +109,17 @@ public class UIManager : MonoBehaviour
         HidePath();
     }
 
-    public static void UpdateMealCount()
+    public void UpdateMealCount()
     {
         purifyCount.text = PurifyManager.instance.GetStringMealCount();
     }
 
-    public static void UpdateMoney()
+    public void UpdateMoney()
     {
         moneyCount.text = "$" + MoneyManager.instance.GetStringMoneyCount();
     }
 
-    public static void ShowStudentSelectedUI()
+    public void ShowStudentSelectedUI()
     {
         studentSelectUI.SetActive(true);
 
@@ -144,17 +150,17 @@ public class UIManager : MonoBehaviour
         UpdateSelectedBars(selectedInfo);
     }
 
-    public static void HideStudentSelectedUI()
+    public void HideStudentSelectedUI()
     {
         studentSelectUI.SetActive(false);
     }
 
-    public static void HideStudentHiringUI()
+    public void HideStudentHiringUI()
     {
         studentHireUI.SetActive(false);
     }
 
-    public static void ShowStudentHiringUI(GameObject student)
+    public void ShowStudentHiringUI(GameObject student)
     {
         studentHireUI.SetActive(true);
         // get info from the student
@@ -171,17 +177,17 @@ public class UIManager : MonoBehaviour
         studentHireUIDescription.text = studentHireUIStudentInfo.description;
     }
 
-    public static void ShowGameOverUI()
+    public void ShowGameOverUI()
     {
         gameOver.text = "Game Over!";
     }
 
-    public static void HideGameOverUI()
+    public void HideGameOverUI()
     {
         gameOver.text = "";
     }
 
-    public static void UpdateSelectedBars(StudentInfo info)
+    public void UpdateSelectedBars(StudentInfo info)
     {
         studentSelectUIStudentHP.maxValue = info.maxHp;
         studentSelectUIStudentHP.value = info.getHealth();
@@ -190,7 +196,7 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentBPS.value = info.bps;
     }
 
-    public static void UpdateStudentsDeadText()
+    public void UpdateStudentsDeadText()
     {
         studentsDeadText.text =
             "Students Dead: "
@@ -199,17 +205,17 @@ public class UIManager : MonoBehaviour
             + LevelManager.instance.deathLimit;
     }
 
-    public static void UpdateRound()
+    public void UpdateRound()
     {
         roundText.text = "Round: " + Spawner.instance.GetRound();
     }
 
-    public static void UpdateMove(int val)
+    public void UpdateMove(int val)
     {
         moveStudentText.text = "Move ($" + val + ")";
     }
 
-    public static void ShowPath(bool path0, bool path1, bool path2)
+    public void ShowPath(bool path0, bool path1, bool path2)
     {
         if (path0 && path1 && path2)
         {
@@ -241,7 +247,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public static void HidePath()
+    public void HidePath()
     {
         path_0.SetActive(false);
         path_1.SetActive(false);

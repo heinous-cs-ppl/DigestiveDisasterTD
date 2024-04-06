@@ -5,36 +5,42 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     /********************* References *********************/
-    public static LevelManager instance;                // Use this reference to access stuff from this class
+    public static LevelManager instance; // Use this reference to access stuff from this class
 
     [Header("References")]
     public GameObject spawner;
-    [SerializeField] private GameObject plotsParent;    // The parent object of all plots
+
+    [SerializeField]
+    private GameObject plotsParent; // The parent object of all plots
     public LayerMask plotLayer;
     public LayerMask enemyLayer;
-    [SerializeField] private GameObject vacuousStudent;
+
+    [SerializeField]
+    private GameObject vacuousStudent;
     public GameObject machineRepresentation;
 
     // Number of starting paths or number of spawnpoints - each of these points is the parent of the rest of it's path
-    public GameObject[] spawnObjs;      // given in object inspector
+    public GameObject[] spawnObjs; // given in object inspector
 
     // Array of wave game objects
-    public GameObject[] waves;          // Wave prefabs given in Unity Inspector - these contain info about enemies
+    public GameObject[] waves; // Wave prefabs given in Unity Inspector - these contain info about enemies
 
     // Transform version of spawnObjs
-    [HideInInspector] public Transform[] spawnObjTransforms;
+    [HideInInspector]
+    public Transform[] spawnObjTransforms;
 
     private int studentCount = 1;
 
-    [HideInInspector] public int studentsDead = 0;
+    [HideInInspector]
+    public int studentsDead = 0;
     public int deathLimit = 10;
 
     public bool disableGameOver = false;
     public bool gameOver = false;
 
     // used to disable mouse interaction with AOE
-    [SerializeField] private LayerMask inputLayerMask;
-
+    [SerializeField]
+    private LayerMask inputLayerMask;
 
     // Like Start() but is called first, after all objects and therefore scripts are initialized
     private void Awake()
@@ -59,7 +65,7 @@ public class LevelManager : MonoBehaviour
     the rest of the points that make up that path */
     public Transform[] NextPathLeg(GameObject endNode, bool spawnPoint)
     {
-        int childCount = endNode.transform.childCount;      // Number of paths the enemy could take from this endNode
+        int childCount = endNode.transform.childCount; // Number of paths the enemy could take from this endNode
         if (childCount == 0)
         {
             return null;
@@ -111,7 +117,6 @@ public class LevelManager : MonoBehaviour
         {
             plots[i] = plotsParent.transform.GetChild(i).gameObject.GetComponent<Plot>();
         }
-
 
         // Find out how many free plots exist
         int free = 0;
@@ -204,12 +209,18 @@ public class LevelManager : MonoBehaviour
             foreach (Plot plot in vac)
             {
                 Vector2 studentPosition = plot.transform.position;
-                GameObject placed = Instantiate(vacuousStudent, studentPosition, Quaternion.identity);
+                GameObject placed = Instantiate(
+                    vacuousStudent,
+                    studentPosition,
+                    Quaternion.identity
+                );
 
                 // Giving name of student in order for healing turret bullet collision to be able to differentiate between the different students
                 placed.name = "Vacuous" + studentCount;
                 studentCount++;
-                if (plot.GetComponent<Plot>().aboveTable) placed.GetComponent<SpriteRenderer>().sortingLayerName = "Students above tables";
+                if (plot.GetComponent<Plot>().aboveTable)
+                    placed.GetComponent<SpriteRenderer>().sortingLayerName =
+                        "Students above tables";
             }
         }
     }
@@ -220,7 +231,7 @@ public class LevelManager : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOver = true;
-            UIManager.ShowGameOverUI();
+            UIManager.instance.ShowGameOverUI();
         }
     }
 }

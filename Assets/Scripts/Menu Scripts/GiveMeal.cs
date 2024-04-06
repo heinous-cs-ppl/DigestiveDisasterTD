@@ -24,11 +24,11 @@ public class GiveMeal : MonoBehaviour
         if (PurifyManager.instance.UseMeal())
         {
             // update the counter on the UI
-            UIManager.UpdateMealCount();
+            UIManager.instance.UpdateMealCount();
             // give buffs to the selected student
             StudentInfo selectedInfo = selected.GetComponent<StudentInfo>();
             selectedInfo.Feed();
-            UIManager.UpdateSelectedBars(selectedInfo);
+            UIManager.instance.UpdateSelectedBars(selectedInfo);
             // "reselect" the selected student to redraw the range circle (I'm lazy)
             StudentManager.Select(StudentManager.selected);
         }
