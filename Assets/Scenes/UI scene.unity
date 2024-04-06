@@ -10343,10 +10343,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.099499375
-    y: 0.09899888
-    width: 0.80100125
-    height: 0.80088985
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -14283,6 +14283,7 @@ MonoBehaviour:
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
+  circleSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   placeSound: {fileID: 8300000, guid: 4eb890cfae144a34cbf6e97ea6629818, type: 3}
 --- !u!114 &1084492748
 MonoBehaviour:
