@@ -23,7 +23,7 @@ public class SpeedManager : MonoBehaviour
 
     public void Update()
     {
-        if (PauseManager.paused)
+        if (PauseManager.instance.paused)
         {
             return;
         }
@@ -63,6 +63,8 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
+            speedButton.interactable = true;
+            slowButton.interactable = true;
             Time.timeScale = 1;
         }
     }
@@ -71,6 +73,8 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
+            speedButton.interactable = true;
+            slowButton.interactable = false;
             Time.timeScale = 0.5f;
         }
     }
@@ -79,12 +83,15 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
+            speedButton.interactable = false;
+            slowButton.interactable = true;
             Time.timeScale = 2;
         }
     }
 
     public void ToggleSlowDown()
     {
+        speedButton.interactable = true;
         if (LevelManager.instance.gameOver)
         {
             return;
@@ -92,18 +99,18 @@ public class SpeedManager : MonoBehaviour
         if (Time.timeScale == 0.5f)
         {
             Time.timeScale = 1;
-            // Hacky way to deselect the button
-            slowButton.interactable = false;
             slowButton.interactable = true;
         }
         else
         {
             Time.timeScale = 0.5f;
+            slowButton.interactable = false;
         }
     }
 
     public void ToggleSpeedUp()
     {
+        slowButton.interactable = true;
         if (LevelManager.instance.gameOver)
         {
             return;
@@ -111,13 +118,12 @@ public class SpeedManager : MonoBehaviour
         if (Time.timeScale == 2)
         {
             Time.timeScale = 1;
-            // Hacky way to deselect the button
-            speedButton.interactable = false;
             speedButton.interactable = true;
         }
         else
         {
             Time.timeScale = 2;
+            speedButton.interactable = false;
         }
     }
 }

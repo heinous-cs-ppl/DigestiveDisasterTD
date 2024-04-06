@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5760139248048277314}
+  sfx: {fileID: 8300000, guid: b0c03e5e8a4601147ad191fce7c59c6a, type: 3}
   explosion: {fileID: 8208342251038316243, guid: 027a4db24734fd94d800d7950822b517, type: 3}
 --- !u!95 &8963174970658318165
 Animator:

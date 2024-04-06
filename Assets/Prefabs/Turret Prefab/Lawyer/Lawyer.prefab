@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2595080332699581591}
   - component: {fileID: 1700172236882340006}
   - component: {fileID: -8628577694774748970}
-  - component: {fileID: 6714615471078472679}
+  - component: {fileID: -1426755130074754768}
   m_Layer: 8
   m_Name: Lawyer
   m_TagString: Student
@@ -382,26 +382,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd649d76e5916841afdcdd116c60285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 120
+  cost: 100
   maxHp: 100
   healthBar: {fileID: 4549084777307704645}
   purifyTimerBar: {fileID: 1311332473630942102}
   damage: 0
-  range: 0
+  range: 6
   rotationSpeed: 1000
-  bps: 0
+  bps: 0.4
   bulletSpeed: 0
   bulletDistance: 0
-  description: I will reveal the truth of this food! Once placed, will randomly choose
-    one of three effects, slow, increase damage dealt, or decrease damage recieved.
-    Potency and duration is also randomized. When the effects end, the lawyer leaves
+  description: I will reveal the truth of this food! Gives debuffs to enemies within
+    range. Enemies' damage taken is increased, damage dealt is reduced.
   healer: 0
   purify: 0
   slow: 0
   commerce: 0
   buffed: 0
-  turret: {fileID: 0}
-  outline: {fileID: 2100000, guid: fda51fb511ff9fb439678310f8b13161, type: 2}
+  turret: {fileID: -1426755130074754768}
+  outline: {fileID: 2100000, guid: 87d19ebd08ddeae47b3aa5a17b1d815d, type: 2}
   noOutline: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   offsetX: 0
   commerceMoneyGain: 0
@@ -446,8 +445,8 @@ SpriteRenderer:
   m_SortingLayerID: -795998139
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 691401483, guid: b8b9fc67b35514840882bbba7c2eb803, type: 3}
-  m_Color: {r: 0, g: 0.8381572, b: 1, a: 1}
+  m_Sprite: {fileID: -599506414, guid: 4373be4fd7537ab489eb4f099c2ea837, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -467,7 +466,7 @@ Animator:
   m_GameObject: {fileID: 5847128244897676795}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd666b5432dc5e04db3712ef10eb5677, type: 2}
+  m_Controller: {fileID: 9100000, guid: 16674928dfa5e1748bbfae1d0441b64f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -514,7 +513,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.75}
+    oldSize: {x: 1.5, y: 1.75}
     newSize: {x: 0.5, y: 0.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -523,7 +522,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6714615471078472679
+--- !u!114 &-1426755130074754768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -532,9 +531,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5847128244897676795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847de5356773d0a458d59cd6529c342d, type: 3}
+  m_Script: {fileID: 11500000, guid: c306cfc8e10e99a43a9ed1cfb19ea0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretRotationPoint: {fileID: 0}
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 0}
+  firingPoint: {fileID: 0}
+  spriteRotation: 0
+  rotateBullet: 0
+  anim: {fileID: 1700172236882340006}
+  aoe: {fileID: 8208342251038316243, guid: 4866c87307b5613458678cbca0549aea, type: 3}
 --- !u!1 &6416164920234304673
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class ForkStudent : Bullets
     {
         // Take health from Enemy
         other.gameObject.GetComponent<EnemyInfo>().takeDamage(bulletDamage);
+        PlaySound.instance.SFX(sfx);
         Destroy(gameObject);
     }
 }

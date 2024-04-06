@@ -3,6 +3,7 @@ using System.Collections;
 
 public class LawyerStudent : Turret
 {
+    public GameObject aoe;
     
     private new void Update() {
         timeUntilFire += Time.deltaTime;
@@ -11,9 +12,7 @@ public class LawyerStudent : Turret
             GameObject[] targets = FindTargets();
             if (targets.Length > 0) {
                 anim.SetTrigger("OnThrow");
-                StartCoroutine(EndThrow());
-                Debug.Log("Found targets");
-                Debuff(targets);
+                StartCoroutine(Attack());
                 timeUntilFire = 0;
             }
 
@@ -32,6 +31,7 @@ public class LawyerStudent : Turret
     }
 
     private void Debuff(GameObject[] targets) {
+        
         foreach (GameObject target in targets) {
             EnemyInfo enemyInfo = target.GetComponent<EnemyInfo>();
             enemyInfo.Debuff((1f/bps) * 0.8f);
@@ -39,5 +39,16 @@ public class LawyerStudent : Turret
         }
     }
 
-    
+    private IEnumerator Attack() {
+        yield return new WaitForSeconds(0.35f);
+        GameObject Attack = Instantiate(aoe, transform.position, Quaternion.identity);
+        StartCoroutine(despawnAoe(Attack));
+        GameObject[] targets = FindTargets();
+        Debuff(targets);
+    }
+
+    private IEnumerator despawnAoe(GameObject aoe) {
+        yield return new WaitForSeconds(0.48f);
+        Destroy(aoe);
+    }
 }

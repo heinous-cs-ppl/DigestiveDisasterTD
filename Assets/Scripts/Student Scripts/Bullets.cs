@@ -19,6 +19,8 @@ public class Bullets : MonoBehaviour
 
     private Vector2 direction;
 
+    public AudioClip sfx;
+
     public void SetAttributes(float speed, int damage, float distance, Vector2 studentPos)
     {
         bulletSpeed = speed;

@@ -602,7 +602,7 @@ MonoBehaviour:
   purifyBar: {fileID: 314002872493191786}
   spawnPointIndex: 2
   damage: 50
-  speed: 5
+  speed: 3.333333
   attackRadius: 0.55
   moneyDrop: 5
   buffs: []

@@ -10,6 +10,7 @@ public class EngineerBullet : Bullets
     {
         // Changes to desired prefab for aoe
         Instantiate(explosion, transform.position, transform.rotation);
+        PlaySound.instance.SFX(sfx);
         Destroy(gameObject);
     }
 }

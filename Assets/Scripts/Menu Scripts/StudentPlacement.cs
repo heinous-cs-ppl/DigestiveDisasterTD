@@ -31,6 +31,8 @@ public class StudentPlacement : MonoBehaviour
     private static SpriteRenderer circle;
     public Sprite circleSprite;
 
+    public AudioClip placeSound;
+
     void Start()
     {
         // Bounds of the map
@@ -109,6 +111,7 @@ public class StudentPlacement : MonoBehaviour
                 }
                 else
                 { // Student was placed, now exit placement mode
+                    PlaySound.instance.SFX(placeSound);
                     MoneyManager.instance.TakeMoney(student.GetComponent<StudentInfo>().cost);
                     UIManager.instance.UpdateMoney();
                     studentPlacedOnPlot = false;

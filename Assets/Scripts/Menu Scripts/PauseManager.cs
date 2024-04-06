@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
+    public static PauseManager instance;
     private float prevSpeed;
-    public static bool paused = false;
+    public bool paused = false;
     public GameObject pauseMenu;
     private Button[] allButtons;
+
+    public void Awake()
+    {
+        instance = this;
+    }
 
     public void Start()
     {

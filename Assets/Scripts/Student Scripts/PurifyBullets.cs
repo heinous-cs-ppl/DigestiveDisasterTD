@@ -10,9 +10,9 @@ public class PurifyBullet : Bullets
     {
         // Take health from Enemy
         Instantiate(explosion, transform.position, transform.rotation);
+        PlaySound.instance.SFX(sfx);
 
         // Destroy the bullet regardless of the collided object
         Destroy(gameObject);
-
     }
 }
