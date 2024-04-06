@@ -544,6 +544,7 @@ MonoBehaviour:
   rotateBullet: 0
   anim: {fileID: 1700172236882340006}
   aoe: {fileID: 8208342251038316243, guid: 4866c87307b5613458678cbca0549aea, type: 3}
+  lawyerSound: {fileID: 8300000, guid: bbeb85f4b90077443a6557be3d7da71a, type: 3}
 --- !u!1 &6416164920234304673
 GameObject:
   m_ObjectHideFlags: 0

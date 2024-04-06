@@ -4,7 +4,7 @@ using System.Collections;
 public class LawyerStudent : Turret
 {
     public GameObject aoe;
-    
+    public AudioClip lawyerSound;
     private new void Update() {
         timeUntilFire += Time.deltaTime;
         if (timeUntilFire >= 1f / bps) {
@@ -40,7 +40,8 @@ public class LawyerStudent : Turret
     }
 
     private IEnumerator Attack() {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.25f);
+        PlaySound.instance.SFX(lawyerSound);
         GameObject Attack = Instantiate(aoe, transform.position, Quaternion.identity);
         StartCoroutine(despawnAoe(Attack));
         GameObject[] targets = FindTargets();

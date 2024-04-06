@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5760139248048277314}
+  sfx: {fileID: 8300000, guid: c07bfddd14eeadc41b1a9daa91decf3f, type: 3}

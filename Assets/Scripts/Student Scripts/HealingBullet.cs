@@ -16,6 +16,7 @@ public class HealingBullet : Bullets
             // Changes to explosion prefab
             Instantiate(healingAoe, transform.position, transform.rotation);
 
+            PlaySound.instance.SFX(sfx);
             // Destroy the bullet regardless of the collided object
             Destroy(gameObject);
         }
