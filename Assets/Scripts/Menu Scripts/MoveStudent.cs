@@ -12,6 +12,7 @@ public class MoveStudent : MonoBehaviour
     [HideInInspector]
     public GameObject studentPreview;
     private GameObject student;
+    private StudentInfo studentInfo;
     private Sprite studentSprite;
     public LayerMask studentLayer;
 
@@ -23,6 +24,11 @@ public class MoveStudent : MonoBehaviour
     private int numberOfFlashes = 2;
     private Image moneyImage;
 
+    // stuff for range circle
+    private static GameObject rangeCircle;
+    private static SpriteRenderer circle;
+    public Sprite circleSprite;
+
     public AudioClip placeSound;
 
     void Start()
@@ -32,6 +38,13 @@ public class MoveStudent : MonoBehaviour
         SpriteRenderer mapSprite = map.GetComponent<SpriteRenderer>();
         mapBounds = mapSprite.bounds;
         moneyImage = GameObject.Find("Money Icon").GetComponent<Image>();
+
+        rangeCircle = new GameObject("Move Range Circle");
+        circle = rangeCircle.AddComponent<SpriteRenderer>();
+        circle.sprite = circleSprite;
+        Color chyme = new Color(0f, 0f, 0f, 0.25f);
+        circle.color = chyme;
+        rangeCircle.transform.localScale = Vector2.zero;
     }
 
     // Called when button is clicked
@@ -40,8 +53,12 @@ public class MoveStudent : MonoBehaviour
         if (MoneyManager.instance.GetMoneyCount() >= moveCost || Spawner.instance.waveEnd)
         {
             student = StudentManager.selected;
+            studentInfo = student.GetComponent<StudentInfo>();
             oldPlot = StudentManager.plotOfSelected.GetComponent<Plot>();
             studentSprite = student.GetComponentInChildren<SpriteRenderer>().sprite;
+
+            float range = studentInfo.range;
+            rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
 
             StudentManager.moving = true;
         }
@@ -61,6 +78,7 @@ public class MoveStudent : MonoBehaviour
                 StudentManager.moving = false;
                 if (studentPreview)
                     Destroy(studentPreview);
+                    rangeCircle.transform.localScale = Vector2.zero;
                 return;
             }
 
@@ -90,9 +108,16 @@ public class MoveStudent : MonoBehaviour
                     Color preview = studentPreview.GetComponent<SpriteRenderer>().color;
                     preview.a = 0.5f; // Set alpha value to 50% opacity
                     studentPreview.GetComponent<SpriteRenderer>().color = preview;
+
+                    // range circle stuff
                 }
                 // set the position of the student preview to the cursor's position
                 studentPreview.transform.position = cursorPosition;
+
+                // set range circle position to cursor's position
+                float range = studentInfo.range;
+                rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
+                rangeCircle.transform.position = new Vector2(cursorPosition.x, cursorPosition.y);
             }
             else
             {
@@ -102,8 +127,10 @@ public class MoveStudent : MonoBehaviour
                     // disable moving
                     StudentManager.moving = false;
                     // destroy the preview if it exists
-                    if (studentPreview)
+                    if (studentPreview) {
                         Destroy(studentPreview);
+                        rangeCircle.transform.localScale = Vector2.zero;
+                    }
                 }
             }
         }
@@ -238,6 +265,7 @@ public class MoveStudent : MonoBehaviour
 
         // destroy the preview
         Destroy(studentPreview);
+        rangeCircle.transform.localScale = Vector2.zero;
 
         // "reselect" the selected student to redraw the range circle (I'm lazy)
         StudentManager.Select(StudentManager.selected);
