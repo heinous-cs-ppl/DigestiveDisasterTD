@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     private GameObject fireButton;
     private RectTransform moveButton;
 
-    private TextMeshProUGUI gameOver;
+    public GameObject gameOverUI;
 
     private TextMeshProUGUI studentsDeadText;
     private TextMeshProUGUI roundText;
@@ -85,9 +85,6 @@ public class UIManager : MonoBehaviour
         studentHireUIDescription = GameObject.Find("Description").GetComponent<TextMeshProUGUI>();
 
         HideStudentHiringUI();
-
-        gameOver = GameObject.Find("Game Over").GetComponent<TextMeshProUGUI>();
-        HideGameOverUI();
 
         // get students dead text
         studentsDeadText = GameObject.Find("Students Dead").GetComponent<TextMeshProUGUI>();
@@ -175,16 +172,6 @@ public class UIManager : MonoBehaviour
         studentHireUIStudentBPS.value = studentHireUIStudentInfo.bps;
 
         studentHireUIDescription.text = studentHireUIStudentInfo.description;
-    }
-
-    public void ShowGameOverUI()
-    {
-        gameOver.text = "Game Over!";
-    }
-
-    public void HideGameOverUI()
-    {
-        gameOver.text = "";
     }
 
     public void UpdateSelectedBars(StudentInfo info)

@@ -231,7 +231,7 @@ public class LevelManager : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOver = true;
-            UIManager.instance.ShowGameOverUI();
+            UIManager.instance.gameOverUI.SetActive(true);
         }
     }
 }
