@@ -11,7 +11,7 @@ public class NextWave : MonoBehaviour
         // Call NewWave in Spawner to check if the wave is current wave is done spawning
         Spawner.instance.NewWave();
 
-        UIManager.UpdateRound();
-        UIManager.UpdateMove(MoveStudent.moveCost);
+        UIManager.instance.UpdateRound();
+        UIManager.instance.UpdateMove(MoveStudent.moveCost);
     }
 }

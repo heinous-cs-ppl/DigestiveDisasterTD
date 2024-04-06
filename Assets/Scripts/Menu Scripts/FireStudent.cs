@@ -24,7 +24,7 @@ public class FireStudent : MonoBehaviour
                 MoneyManager.instance.AddMoney((int)(selected.GetComponent<StudentInfo>().cost));
             }
 
-            UIManager.UpdateMoney();
+            UIManager.instance.UpdateMoney();
 
             Destroy(selected);
             Plot plotOfFired = StudentManager.plotOfSelected.GetComponent<Plot>();

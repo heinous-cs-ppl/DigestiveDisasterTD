@@ -43,10 +43,19 @@ public class PauseManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("Start Menu");
     }
 
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("UI Scene");
+    }
+
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if (LevelManager.instance.gameOver)
+            {
+                return;
+            }
             if (paused)
             {
                 Resume();

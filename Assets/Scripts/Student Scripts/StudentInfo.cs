@@ -89,7 +89,7 @@ public class StudentInfo : MonoBehaviour
         healthBar.setValue(newHp);
 
         if (StudentManager.selected == gameObject)
-            UIManager.UpdateSelectedBars(this);
+            UIManager.instance.UpdateSelectedBars(this);
     }
 
     public void Heal(int heal)
@@ -107,7 +107,7 @@ public class StudentInfo : MonoBehaviour
         }
 
         if (StudentManager.selected == gameObject)
-            UIManager.UpdateSelectedBars(this);
+            UIManager.instance.UpdateSelectedBars(this);
     }
 
     public void StudentDeath()
@@ -125,7 +125,7 @@ public class StudentInfo : MonoBehaviour
         plot.student = null;
 
         LevelManager.instance.studentsDead += 1;
-        UIManager.UpdateStudentsDeadText();
+        UIManager.instance.UpdateStudentsDeadText();
         if (LevelManager.instance.studentsDead >= LevelManager.instance.deathLimit)
         {
             LevelManager.instance.GameOver();
@@ -143,7 +143,7 @@ public class StudentInfo : MonoBehaviour
         if (commerce == true)
         {
             MoneyManager.instance.AddMoney(commerceMoneyGain);
-            UIManager.UpdateMoney();
+            UIManager.instance.UpdateMoney();
         }
 
         if (buffed)
@@ -171,7 +171,7 @@ public class StudentInfo : MonoBehaviour
             // delay
             timerOn = StartCoroutine(BuffTimer());
         }
-        UIManager.UpdateSelectedBars(this);
+        UIManager.instance.UpdateSelectedBars(this);
         Debug.Log("Buffed student");
     }
 
