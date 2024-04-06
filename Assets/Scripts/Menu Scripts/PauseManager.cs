@@ -10,6 +10,8 @@ public class PauseManager : MonoBehaviour
     public bool paused = false;
     public GameObject pauseMenu;
     private Button[] allButtons;
+    public Button slow;
+    public Button fast;
 
     public void Awake()
     {
@@ -40,6 +42,12 @@ public class PauseManager : MonoBehaviour
         foreach (Button button in allButtons)
         {
             button.interactable = true;
+        }
+
+        if (prevSpeed == 0.5f) {
+            slow.interactable = false;
+        } else if (prevSpeed == 2f) {
+            fast.interactable = false;
         }
         pauseMenu.SetActive(false);
     }
