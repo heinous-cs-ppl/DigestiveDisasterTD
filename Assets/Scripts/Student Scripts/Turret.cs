@@ -9,7 +9,7 @@ public class Turret : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform turretRotationPoint;
     [SerializeField] protected LayerMask enemyMask;
-    [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] public GameObject bulletPrefab;
 
     [SerializeField] private Transform firingPoint;
 

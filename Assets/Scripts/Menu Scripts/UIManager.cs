@@ -184,6 +184,16 @@ public class UIManager : MonoBehaviour
         studentHireUIStudentBPS.value = studentHireUIStudentInfo.bps;
 
         studentHireUIDescription.text = studentHireUIStudentInfo.description;
+        if (studentHireUIStudentInfo.healer) {
+            studentHireUIStudentDamage.GetComponent<DamageBarUpdate>().SetHeal();
+        } else if (studentHireUIStudentInfo.purify) {
+            studentHireUIStudentDamage.GetComponent<DamageBarUpdate>().SetPurify();
+        } else if (studentHireUIStudentInfo.slow) {
+            studentHireUIStudentDamage.GetComponent<DamageBarUpdate>().SetSlow();
+            studentHireUIStudentDamage.value = ((SlowBullet) studentHireUIStudentInfo.GetComponent<Turret>().bulletPrefab.GetComponent<Bullets>()).slow;
+        } else {
+            studentHireUIStudentDamage.GetComponent<DamageBarUpdate>().SetDamage();
+        }
     }
 
     public void UpdateSelectedBars(StudentInfo info)
@@ -193,6 +203,17 @@ public class UIManager : MonoBehaviour
         studentSelectUIStudentDamage.value = info.damage;
         studentSelectUIStudentRange.value = info.range;
         studentSelectUIStudentBPS.value = info.bps;
+
+        if (info.healer) {
+            studentSelectUIStudentDamage.GetComponent<DamageBarUpdate>().SetHeal();
+        } else if (info.purify) {
+            studentSelectUIStudentDamage.GetComponent<DamageBarUpdate>().SetPurify();
+        } else if (info.slow) {
+            studentSelectUIStudentDamage.GetComponent<DamageBarUpdate>().SetSlow();
+            studentSelectUIStudentDamage.value = ((SlowBullet) info.GetComponent<Turret>().bulletPrefab.GetComponent<Bullets>()).slow;
+        } else {
+            studentSelectUIStudentDamage.GetComponent<DamageBarUpdate>().SetDamage();
+        }
     }
 
     public void UpdateStudentsDeadText()

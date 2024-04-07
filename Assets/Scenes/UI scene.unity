@@ -3496,6 +3496,7 @@ MonoBehaviour:
   spawnObjTransforms: []
   studentsDead: 0
   deathLimit: 15
+  vacuousAlive: 0
   disableGameOver: 0
   gameOver: 0
   inputLayerMask:
@@ -17221,6 +17222,7 @@ GameObject:
   - component: {fileID: 1351519923}
   - component: {fileID: 1351519925}
   - component: {fileID: 1351519924}
+  - component: {fileID: 1351519926}
   m_Layer: 5
   m_Name: Damage bar S
   m_TagString: Untagged
@@ -17311,6 +17313,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351519922}
   m_CullTransparentMesh: 1
+--- !u!114 &1351519926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351519922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8487af42b4f17994d9fd7355fc19fc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 481944435}
+  text: {fileID: 292382229}
+  fill: {fileID: 2044259075}
+  damageIcon: {fileID: 21300000, guid: 77f8e60099b477c4081b8c8cc5d7eed4, type: 3}
+  damageText: {fileID: 21300000, guid: e2a1ba14cee80194998622efc31dffbe, type: 3}
+  damageFill: {fileID: 21300000, guid: ec8e7b803fbe7144abe7fd81b93ac153, type: 3}
+  healIcon: {fileID: 21300000, guid: f30a217de8a51834ba98c03f99a343ab, type: 3}
+  healText: {fileID: 21300000, guid: 819608f45d6642b44953fd1fb3c7bc39, type: 3}
+  healFill: {fileID: 21300000, guid: d5d8d9a2630cf054c9c3f150391eee08, type: 3}
+  purifyIcon: {fileID: 21300000, guid: c6c37782a64924b4290564c2aadaacda, type: 3}
+  purifyText: {fileID: 21300000, guid: c996b817e16742246a6144287be45b26, type: 3}
+  purifyFill: {fileID: 21300000, guid: 8ec0fdd8bc69847b08db5fbf3f34c629, type: 3}
+  slowIcon: {fileID: 21300000, guid: af6e5a2480151eb4f9548e40de08546a, type: 3}
+  slowText: {fileID: 21300000, guid: 999f847d00f614341812fb6d82f8c03e, type: 3}
+  slowFill: {fileID: 21300000, guid: 7613ad80fa92a634ebebdd8abfef66bb, type: 3}
 --- !u!1001 &1354790926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17902,6 +17931,7 @@ GameObject:
   - component: {fileID: 1422162883}
   - component: {fileID: 1422162885}
   - component: {fileID: 1422162884}
+  - component: {fileID: 1422162886}
   m_Layer: 5
   m_Name: Damage bar
   m_TagString: Untagged
@@ -17992,6 +18022,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422162882}
   m_CullTransparentMesh: 1
+--- !u!114 &1422162886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422162882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8487af42b4f17994d9fd7355fc19fc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2042959572}
+  text: {fileID: 1692686133}
+  fill: {fileID: 624480327}
+  damageIcon: {fileID: 21300000, guid: 77f8e60099b477c4081b8c8cc5d7eed4, type: 3}
+  damageText: {fileID: 21300000, guid: e2a1ba14cee80194998622efc31dffbe, type: 3}
+  damageFill: {fileID: 21300000, guid: ec8e7b803fbe7144abe7fd81b93ac153, type: 3}
+  healIcon: {fileID: 21300000, guid: f30a217de8a51834ba98c03f99a343ab, type: 3}
+  healText: {fileID: 21300000, guid: 819608f45d6642b44953fd1fb3c7bc39, type: 3}
+  healFill: {fileID: 21300000, guid: d5d8d9a2630cf054c9c3f150391eee08, type: 3}
+  purifyIcon: {fileID: 21300000, guid: c6c37782a64924b4290564c2aadaacda, type: 3}
+  purifyText: {fileID: 21300000, guid: c996b817e16742246a6144287be45b26, type: 3}
+  purifyFill: {fileID: 21300000, guid: 8ec0fdd8bc69847b08db5fbf3f34c629, type: 3}
+  slowIcon: {fileID: 21300000, guid: af6e5a2480151eb4f9548e40de08546a, type: 3}
+  slowText: {fileID: 21300000, guid: 999f847d00f614341812fb6d82f8c03e, type: 3}
+  slowFill: {fileID: 21300000, guid: 7613ad80fa92a634ebebdd8abfef66bb, type: 3}
 --- !u!4 &1425657168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 126917083961848099, guid: 3f85c3460aefd9e4eaee830989749072, type: 3}
