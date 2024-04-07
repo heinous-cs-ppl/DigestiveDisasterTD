@@ -64,4 +64,4 @@ MonoBehaviour:
     oneTimeDelay: 5
     enemy: {fileID: 7999120131923227785, guid: 13f77efa2bfb9a245844f9959dddc6f0, type: 3}
     spawnDelay: 0
-    repeats: 30
+    repeats: 45

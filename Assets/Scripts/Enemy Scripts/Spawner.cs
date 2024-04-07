@@ -107,6 +107,9 @@ public class Spawner : MonoBehaviour
                 StartCoroutine(SpawnerThread0());
                 StartCoroutine(SpawnerThread1());
                 StartCoroutine(SpawnerThread2());
+                if (MusicManager.instance.isBossMusicPlaying) {
+                    MusicManager.instance.PlayMainMusic();
+                }
             }
             else
             {
@@ -147,6 +150,9 @@ public class Spawner : MonoBehaviour
                     bossSpawnerThreads[2] = enemy2.enemy.tag;
                     StartCoroutine(BossWaveSpawner(enemy2));
                 }
+                if (!MusicManager.instance.isBossMusicPlaying) {
+                    MusicManager.instance.PlayBossMusic();
+                }
             }
         }
         Debug.Log("Wave " + waveIdx);
@@ -174,8 +180,8 @@ public class Spawner : MonoBehaviour
         chymousInfo.purifyBar.setMaxValue(chymousInfo.maxPurifyHp);
         // don't need to set purify bar value since it starts at 0
 
-        // halve the speed of the boss
-        chymousInfo.speed /= 2f;
+        // divide the speed of the boss by 3
+        chymousInfo.speed /= 3f;
 
         // double the scale of the boss
         chymousDisaster.transform.localScale *= 2f;

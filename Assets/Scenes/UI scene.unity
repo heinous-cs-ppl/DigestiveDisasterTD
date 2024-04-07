@@ -7026,6 +7026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 551720938}
   - component: {fileID: 551720937}
+  - component: {fileID: 551720939}
   m_Layer: 0
   m_Name: Music Source
   m_TagString: Untagged
@@ -7144,6 +7145,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &551720939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551720936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2627f7ba1dab64e91c037662bd291f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 551720937}
+  mainMusic: {fileID: 8300000, guid: a1b78b74478faf34a9520206163a25e2, type: 3}
+  bossMusic: {fileID: 8300000, guid: 1d9d77c87ceb3854095df01cd704b932, type: 3}
+  isBossMusicPlaying: 0
 --- !u!1001 &556117912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12338,7 +12355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &917921324
 RectTransform:
   m_ObjectHideFlags: 0
