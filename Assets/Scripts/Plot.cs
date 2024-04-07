@@ -169,6 +169,7 @@ public class Plot : MonoBehaviour
             {
                 StudentManager.moving = false;
                 Destroy(MoveStudent.instance.studentPreview);
+                MoveStudent.instance.rangeCircle.transform.localScale = Vector2.zero;
             }
             else if (plotDraggedOver == null)   // Do the move if released over a plot
             {
