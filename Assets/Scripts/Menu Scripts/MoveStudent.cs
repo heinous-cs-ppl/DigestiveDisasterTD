@@ -116,8 +116,8 @@ public class MoveStudent : MonoBehaviour
 
                 // set range circle position to cursor's position
                 float range = studentInfo.range;
-                rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
                 rangeCircle.transform.position = new Vector2(cursorPosition.x, cursorPosition.y);
+                rangeCircle.transform.localScale = new Vector2(range * 2, range * 2);
             }
             else
             {

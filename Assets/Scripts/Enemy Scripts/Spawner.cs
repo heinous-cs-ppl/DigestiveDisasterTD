@@ -435,7 +435,9 @@ public class Spawner : MonoBehaviour
             // reset boss related fields
             isBossWave = false;
             bossSpawnerThreads = new string[3];
-            bossEnemyCount = new int[3];
+            bossEnemyCount[0] = 0;
+            bossEnemyCount[1] = 0;
+            bossEnemyCount[2] = 0;
         }
     }
 
@@ -451,7 +453,14 @@ public class Spawner : MonoBehaviour
     void ShowPath()
     {
         // get next wave
-        GameObject wave = LevelManager.instance.waves[waveIdx + 1];
+        int next = waveIdx + 1;
+        if (next >= waves)
+        {
+            // if there are no more waves
+            UIManager.instance.Win();
+            return;
+        }
+        GameObject wave = LevelManager.instance.waves[next];
         Wave.WavePart[] spawner0 = wave.GetComponent<Wave>().Spawner0WaveEnc;
         Wave.WavePart[] spawner1 = wave.GetComponent<Wave>().Spawner1WaveEnc;
         Wave.WavePart[] spawner2 = wave.GetComponent<Wave>().Spawner2WaveEnc;

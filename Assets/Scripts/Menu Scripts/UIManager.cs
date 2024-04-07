@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     private RectTransform moveButton;
 
     public GameObject gameOverUI;
+    public GameObject winUI;
 
     private TextMeshProUGUI studentsDeadText;
     private TextMeshProUGUI roundText;
@@ -111,6 +112,15 @@ public class UIManager : MonoBehaviour
     public void GameOver()
     {
         gameOverUI.SetActive(true);
+        Time.timeScale = 0;
+        foreach (Button button in allButtons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    public void Win() {
+        winUI.SetActive(true);
         Time.timeScale = 0;
         foreach (Button button in allButtons)
         {
