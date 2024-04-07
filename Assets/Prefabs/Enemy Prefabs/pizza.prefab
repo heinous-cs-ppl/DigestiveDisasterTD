@@ -604,7 +604,7 @@ MonoBehaviour:
   damage: 50
   speed: 3.333333
   attackRadius: 0.55
-  moneyDrop: 4
+  moneyDrop: 3
   buffs: []
   isBoss: 0
   LawyerDebuff: 0

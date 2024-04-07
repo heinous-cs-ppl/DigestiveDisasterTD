@@ -53,12 +53,12 @@ MonoBehaviour:
   Spawner1WaveEnc:
   - oneTimeDelay: 0.3
     enemy: {fileID: 7999120131923227785, guid: 3822bbadfc467b145b974347bbc77945, type: 3}
-    spawnDelay: 0.8
+    spawnDelay: 1
     repeats: 10
   Spawner2WaveEnc:
   - oneTimeDelay: 0
     enemy: {fileID: 7999120131923227785, guid: 28e3ac70dcc8f2942aa7f6ca90a6d239, type: 3}
-    spawnDelay: 0.4
+    spawnDelay: 0.5
     repeats: 15
   boss:
     oneTimeDelay: 5
