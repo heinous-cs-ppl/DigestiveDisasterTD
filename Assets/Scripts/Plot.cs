@@ -220,6 +220,7 @@ public class Plot : MonoBehaviour
         StudentManager.moving = false;
         StudentManager.Deselect();
         Destroy(MoveStudent.instance.studentPreview);  
+        MoveStudent.instance.rangeCircle.transform.localScale = Vector2.zero;
     }
 
     // Start is called before the first frame update

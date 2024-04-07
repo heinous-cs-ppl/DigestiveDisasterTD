@@ -25,8 +25,8 @@ public class MoveStudent : MonoBehaviour
     private Image moneyImage;
 
     // stuff for range circle
-    private static GameObject rangeCircle;
-    private static SpriteRenderer circle;
+    public GameObject rangeCircle;
+    private SpriteRenderer circle;
     public Sprite circleSprite;
 
     public AudioClip placeSound;
@@ -144,6 +144,7 @@ public class MoveStudent : MonoBehaviour
 
         // play sound effect for placing student
         PlaySound.instance.SFX(placeSound);
+        rangeCircle.transform.localScale = Vector2.zero;
     }
 
     IEnumerator FlashSprite()
