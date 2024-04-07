@@ -23880,7 +23880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   student: {fileID: 2436313744661315829, guid: 1d0a302d570a9f443a0ac7ab46589fc4, type: 3}
-  studentSprite: {fileID: 920362317, guid: c339fa89f390abf44b0065b6cbe5c286, type: 3}
+  studentSprite: {fileID: 21300000, guid: c339fa89f390abf44b0065b6cbe5c286, type: 3}
   studentLayer:
     serializedVersion: 2
     m_Bits: 256
