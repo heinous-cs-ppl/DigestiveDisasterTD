@@ -3651,6 +3651,12 @@ MonoBehaviour:
   speedButton: {fileID: 2057407473}
   slowKey: 113
   speedKey: 101
+  fastOn: {fileID: 592058746, guid: 0cc118ed4419afe4394290d22aa363be, type: 3}
+  fastOff: {fileID: -94068376, guid: 0cc118ed4419afe4394290d22aa363be, type: 3}
+  slowOn: {fileID: -845421445, guid: 0cc118ed4419afe4394290d22aa363be, type: 3}
+  slowOff: {fileID: 790440523, guid: 0cc118ed4419afe4394290d22aa363be, type: 3}
+  fastImage: {fileID: 2057407474}
+  slowImage: {fileID: 850638786}
 --- !u!114 &240840218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10810,7 +10816,7 @@ Camera:
     x: 0
     y: 0
     width: 1
-    height: 0.9998609
+    height: 0.9998905
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -11534,7 +11540,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 1, g: 0, b: 0.003921569, a: 1}
@@ -11547,7 +11553,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: -845421445, guid: 0cc118ed4419afe4394290d22aa363be, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -26846,7 +26852,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 0.19215688, g: 1, b: 0, a: 1}
     m_HighlightedColor: {r: 0.19215688, g: 1, b: 0, a: 1}
@@ -26870,19 +26876,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2057407474}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: speedup, Assembly-CSharp
-        m_MethodName: SpeedUp
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2057407474
 MonoBehaviour:
   m_ObjectHideFlags: 0

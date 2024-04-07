@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeedManager : MonoBehaviour
 {
@@ -8,6 +9,13 @@ public class SpeedManager : MonoBehaviour
 
     public KeyCode slowKey = KeyCode.Q;
     public KeyCode speedKey = KeyCode.E;
+
+    public Sprite fastOn;
+    public Sprite fastOff;
+    public Sprite slowOn;
+    public Sprite slowOff;
+    public Image fastImage;
+    public Image slowImage;
 
     public void Awake()
     {
@@ -63,8 +71,8 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
-            speedButton.interactable = true;
-            slowButton.interactable = true;
+            fastImage.sprite = fastOff;
+            slowImage.sprite = slowOff;
             Time.timeScale = 1;
         }
     }
@@ -73,8 +81,8 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
-            speedButton.interactable = true;
-            slowButton.interactable = false;
+            fastImage.sprite = fastOff;
+            slowImage.sprite = slowOn;
             Time.timeScale = 0.5f;
         }
     }
@@ -83,15 +91,15 @@ public class SpeedManager : MonoBehaviour
     {
         if (!LevelManager.instance.gameOver)
         {
-            speedButton.interactable = false;
-            slowButton.interactable = true;
+            fastImage.sprite = fastOn;
+            slowImage.sprite = slowOff;
             Time.timeScale = 2;
         }
     }
 
     public void ToggleSlowDown()
     {
-        speedButton.interactable = true;
+        fastImage.sprite = fastOff;
         if (LevelManager.instance.gameOver)
         {
             return;
@@ -99,18 +107,18 @@ public class SpeedManager : MonoBehaviour
         if (Time.timeScale == 0.5f)
         {
             Time.timeScale = 1;
-            slowButton.interactable = true;
+            slowImage.sprite = slowOff;
         }
         else
         {
             Time.timeScale = 0.5f;
-            slowButton.interactable = false;
+            slowImage.sprite = slowOn;
         }
     }
 
     public void ToggleSpeedUp()
     {
-        slowButton.interactable = true;
+        slowImage.sprite = slowOff;
         if (LevelManager.instance.gameOver)
         {
             return;
@@ -118,12 +126,12 @@ public class SpeedManager : MonoBehaviour
         if (Time.timeScale == 2)
         {
             Time.timeScale = 1;
-            speedButton.interactable = true;
+            fastImage.sprite = fastOff;
         }
         else
         {
             Time.timeScale = 2;
-            speedButton.interactable = false;
+            fastImage.sprite = fastOn;
         }
     }
 }
