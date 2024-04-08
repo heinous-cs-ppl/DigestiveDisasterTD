@@ -237,7 +237,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRound()
     {
-        roundText.text = "Round: " + Spawner.instance.GetRound();
+        roundText.text = "Round: " + Spawner.instance.GetRound() + "/20";
     }
 
     public void UpdateMove(int val)

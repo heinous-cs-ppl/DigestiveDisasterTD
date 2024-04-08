@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int studentsDead = 0;
     public int deathLimit = 10;
-    [SerializeField] private const int VACUOUS_STUDENT_LIMIT = 20;
+    [SerializeField] private const int VACUOUS_STUDENT_LIMIT = 15;
     public int vacuousAlive = 0;
 
     public bool disableGameOver = false;
