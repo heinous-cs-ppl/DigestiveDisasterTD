@@ -1,9 +1,9 @@
-const cacheName = "heinous cs ppl-Digestive Disaster-1";
+const cacheName = "heinous cs ppl-Digestive Disaster-0.0.284";
 const contentToCache = [
-    "Build/digestive-disaster-pwa.loader.js",
-    "Build/digestive-disaster-pwa.framework.js.br",
-    "Build/digestive-disaster-pwa.data.br",
-    "Build/digestive-disaster-pwa.wasm.br",
+    "Build/WebGL.loader.js",
+    "Build/WebGL.framework.js.br",
+    "Build/WebGL.data.br",
+    "Build/WebGL.wasm.br",
     "TemplateData/style.css"
 
 ];
