@@ -1,0 +1,71 @@
+name: Build and Push
+permissions:
+  contents: write
+
+on: [push]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout main branch
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: main
+          lfs: true
+      # Checkout deploy branch
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: deployment
+          path: deploy
+
+      # Cache
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+          projectPath: main
+          buildsPath: build
+
+      - name: Configure git
+        run: |
+          git config --global user.email '120120964+yangavin@users.noreply.github.com'
+          git config --global user.name 'GitHub Actions'
+
+      - name: Commit new build
+        run: |
+          cd deploy
+          # Remove existing build
+          git rm -rf .
+          git clean -fxd
+          # Copy new build
+          cp -r ../build/WebGL/WebGL/* .
+          # Add netlify.toml
+          wget https://raw.githubusercontent.com/heinous-cs-ppl/DigestiveDisasterTD/deployment/netlify.toml
+          # Push new build
+          git add .
+          git commit -m "Deploy new build"
+
+      - name: Push new build
+        run: |
+          cd deploy
+          git push
