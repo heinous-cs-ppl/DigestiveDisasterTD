@@ -1,4 +1,4 @@
-const cacheName = "heinous cs ppl-Digestive Disaster-0.0.284";
+const cacheName = "heinous cs ppl-Digestive Disaster-0.0.285";
 const contentToCache = [
     "Build/WebGL.loader.js",
     "Build/WebGL.framework.js.br",
